@@ -24,7 +24,9 @@ All rules, constraints, phase definitions, and operational procedures are define
 - **Runnable Scripts:** `SRC\` only
 - **Outputs:** `OUTPUTS\phase_XX\run_MM-DD-YYYY_HHMMSS\`
 - **Entry Point:** `SRC\run.ps1`
-- **Config:** `project_config.json`
+- **Config:** `project_config.json` (defines scan roots and quarantine destination)
+- **Scan Roots:** `C:\RH\INBOX` and `C:\RH\OPS` only
+- **Quarantine:** `C:\RH\TEMPORARY` (never scanned)
 
 ---
 

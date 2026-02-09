@@ -130,10 +130,13 @@ pwsh -NoProfile -ExecutionPolicy Bypass -File "SRC\run.ps1" -Phase 04 -Mode Exec
 - Generate plan files for review
 - Require explicit approval before execution
 
-### 3. Allowed Roots Only
-**Scan these:**
+### 3. Scan Roots vs Quarantine
+**Scan these (defined in project_config.json allowlist_roots):**
 - `C:\RH\INBOX` (Downloads, Desktop, incoming)
 - `C:\RH\OPS` (Operations, projects, research)
+
+**Quarantine destination only (NEVER scanned):**
+- `C:\RH\TEMPORARY` (low-confidence files)
 
 **NEVER touch:**
 - `C:\RH\VAULT` (credentials)

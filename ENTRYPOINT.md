@@ -8,7 +8,8 @@ Read and obey, in this order:
 Hard rules (non-negotiable):
 - No deletes, no overwrites
 - DryRun default
-- Allowed roots only: C:\RH\INBOX, C:\RH\OPS
+- Scan roots (see project_config.json allowlist_roots): C:\RH\INBOX, C:\RH\OPS
+- Quarantine destination (never scanned): C:\RH\TEMPORARY
 - Excluded roots: C:\RH\VAULT, C:\RH\LIFE, C:\LEGACY, C:\Windows, C:\Program Files, C:\Users
 - Outputs only to: OUTPUTS\phase_0X\run_MM-DD-YYYY_HHMMSS\
 - No moves/renames without a reviewed plan.csv

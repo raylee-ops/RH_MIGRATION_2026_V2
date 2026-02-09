@@ -62,11 +62,13 @@ C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\
 - Generate plan files showing what will happen
 - Require explicit approval before execution
 
-### 3. Allowed Roots Only (No Full C:\ Scans)
-**Allowed:**
+### 3. Scan Roots vs Quarantine (No Full C:\ Scans)
+**Scan these only (defined in project_config.json allowlist_roots):**
 - `C:\RH\INBOX` (Downloads, Desktop sweeps, incoming files)
 - `C:\RH\OPS` (Operations, projects, proof packs, research)
-- C:\RH\TEMPORARY (trash, unsoreted)
+
+**Quarantine destination only (NEVER scanned):**
+- `C:\RH\TEMPORARY` (low-confidence files, trash, unsorted)
 
 **FORBIDDEN (Never Touch):**
 - `C:\RH\VAULT` (sensitive credentials)
@@ -298,6 +300,11 @@ Examples:
 ---
 
 ## project_config.json Structure
+
+**IMPORTANT:** All scan/quarantine configuration defers to `project_config.json`.
+- `allowlist_roots`: Only these directories are scanned (exactly `["C:\\RH\\INBOX", "C:\\RH\\OPS"]`)
+- `quarantine_root`: Destination for low-confidence files (`"C:\\RH\\TEMPORARY"`)
+- C:\RH\TEMPORARY must NEVER appear in allowlist_roots (never scanned, only written to)
 
 ```json
 {
