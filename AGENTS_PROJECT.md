@@ -1,384 +1,197 @@
-# AGENTS_PROJECT.md — RH_MIGRATION_2026_V2
+# RH_MIGRATION_2026_V2 — Unified Agent Contract (Single Source of Truth)
 
-**Location:** `C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\AGENTS_PROJECT.md`
-**Purpose:** Single source of truth for all AI agents working on this project
-**Last Updated:** 2026-02-08
-
----
-
-## Identity & Context
-
-You are assisting **Raylee Hawkins** with **RH_MIGRATION_2026_V2** — a systematic, phased filesystem reorganization using deterministic classification + Tier 2.5 semantic enhancement.
-
-**Operator Profile:**
-- 23yo factory supervisor → cybersecurity career transition (SOC analyst target)
-- Learning style: "controlled chaos" — rapid iteration, pattern recognition
-- September 2026 employment deadline (Huntsville AL preferred)
-
-**Project Status:** Phase 00 (Baseline) completed. Phases 01-08 pending.
+**Date:** 02-09-2026  
+**Scope:** This contract governs *all* agent work (Claude Code, Codex, manual runs) for this project.  
+**If anything else contradicts this file:** this file wins.
 
 ---
 
-## Project Structure (MEMORIZE THIS)
+## 0) Stop the “wrong folder” disaster (V1 is archived)
 
+### ✅ You are in the right place ONLY if:
+
+- Your current working directory is:
+  - `C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2`
+- AND this file exists:
+  - `RH_MIGRATION_2026_V2.SENTINEL`
+
+### 🚫 If you see this path anywhere, STOP:
+
+- `C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026`  
+That is **V1**. It is **abandoned**. Agents writing there is how you get “it worked” while your real repo stays empty.
+
+**Required pre-step (humans + agents):**
+- Run: `Get-Location`
+- If it’s not the V2 path above, you **must** `cd` into V2 before doing anything else.
+
+---
+
+## 1) Canonical paths and invariants (the rules you keep tripping over)
+
+### 1.1 Scan roots (INPUTS)
+Agents may scan/read **ONLY**:
+
+- `C:\RH\INBOX`
+- `C:\RH\OPS`
+
+### 1.2 Quarantine (DESTINATION-ONLY)
+Agents may write/move into **ONLY**:
+
+- `C:\RH\TEMPORARY`
+
+**TEMPORARY is NEVER scanned.** It is **destination-only**.
+
+### 1.3 Excluded roots (absolute “no touch”)
+At minimum, all agents must treat these families as excluded unless a phase explicitly says otherwise:
+
+- `C:\RH\VAULT`
+- `C:\RH\LIFE`
+- `C:\RH\VAULT_NEVER_SYNC`
+- `C:\RH\ARCHIVE`
+- `C:\LEGACY`
+- `C:\Windows`
+- `C:\Program Files`
+- `C:\Users`
+
+### 1.4 “No deletes, no overwrites” (non-negotiable safety)
+- **NO deletes** (ever).
+- **NO overwrites** (ever).
+- Collisions must be handled via **suffix policy** or **quarantine**, never overwrite.
+
+---
+
+## 2) Two-lane artifact model (this is why OUTPUTS is ignored by git)
+
+### Lane A: `OUTPUTS/` = messy, generated, untrusted, **NEVER committed**
+- All runs write to:
+  - `OUTPUTS\phase_XX\run_MM-DD-YYYY_HHMMSS\`
+- Run folder must contain the **audit spine** (see §3).
+- `OUTPUTS/` is in `.gitignore` by design.
+
+### Lane B: `PROOF_PACK/` = curated, recruiter-safe, **always committed**
+- Only *promoted* artifacts live here.
+- Promotion is **copy-only** (OUTPUTS is read-only source).
+
+✅ Tool: `tools\promote_to_proof_pack.ps1`  
+✅ Index: `PROOF_PACK\INDEX.md` tracks promotions
+
+**Rule:** if it matters to a recruiter (scope control, safety, determinism, reproducibility), it must be promoted.
+
+---
+
+## 3) What “a phase is DONE” actually means (no more vibes)
+
+A phase is **NOT complete** unless all of the following are true:
+
+### 3.1 Audit spine exists in OUTPUTS run folder
+Every phase run folder MUST contain:
+
+- `plan.csv`
+- `runlog.txt`
+- `metrics.json`
+- `rollback.ps1` (no-op allowed for read-only phases)
+- `summary_MM-DD-YYYY.md` (or equivalent `summary_*.md`)
+- `evidence\` (must contain required phase evidence; see §3.2)
+
+### 3.2 Phase evidence requirements are satisfied
+Phase-specific evidence requirements are defined in:
+
+- `CONTRACTS\phase_requirements.json`
+
+### 3.3 Curated proof exists in PROOF_PACK
+At minimum, promote (per phase run):
+
+- `plan.csv`
+- `metrics.json`
+- `summary_*.md`
+
+…and whatever phase-specific evidence proves your gates passed.
+
+### 3.4 Verification is objective
+You don’t “feel” done. You run:
+
+- `tools\preflight.ps1`
+- `tools\audit_phase.ps1 -Phase XX`
+- `tools\status.ps1`
+
+---
+
+## 4) Required operator workflow (the boring part that prevents disasters)
+
+### Step 0 — Preflight (every time)
+```powershell
+cd C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2
+pwsh -NoProfile -ExecutionPolicy Bypass -File "tools\preflight.ps1"
 ```
-C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\
-├── SRC\                    ← Runnable scripts/modules ONLY
-│   ├── run.ps1             ← Single gatekeeper entry point
-│   ├── modules\            ← Modular components (classifier, planner, mover, etc.)
-│   ├── rules\              ← Classification/rename/dedup rules (YAML)
-│   └── templates\          ← Output templates
-├── OUTPUTS\                ← All run artifacts (NEVER mix with SRC)
-│   └── phase_XX\
-│       └── run_MM-DD-YYYY_HHMMSS\
-│           ├── plan.csv
-│           ├── runlog.txt
-│           ├── summary_MM-DD-YYYY.md
-│           ├── metrics.json
-│           ├── rollback.ps1
-│           └── evidence\
-├── PROOF_PACK\             ← Curated recruiter-ready output
-│   ├── evidence\
-│   ├── results\
-│   └── code_excerpt\
-└── agent_assets\           ← Prompts, policies, notes for agents
-    ├── prompts\
-    ├── policies\
-    └── notes\
+
+### Step 1 — Run the phase (DryRun first)
+If you have a runner, it must write to `OUTPUTS\phase_XX\run_*`.  
+If you don’t have a runner yet, agents must still create a compliant run folder + audit spine.
+
+### Step 2 — Audit the phase
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -File "tools\audit_phase.ps1" -Phase 01
 ```
 
----
-
-## Artifact Lanes (OUTPUTS vs PROOF_PACK)
-
-**Two-lane model for generated artifacts:**
-
-### OUTPUTS/ — Messy Generated Lane
-- **Purpose:** All phase run artifacts (generated, timestamped, verbose)
-- **Location:** `OUTPUTS\phase_XX\run_MM-DD-YYYY_HHMMSS\`
-- **Contents:** plan.csv, runlog.txt, metrics.json, rollback.ps1, evidence\*
-- **Git status:** NEVER committed (must remain in .gitignore)
-- **Usage:** Execution outputs only, NOT treated as inputs for planning
-
-### PROOF_PACK/ — Curated Recruiter-Safe Lane
-- **Purpose:** Polished, curated artifacts for recruiters/portfolio
-- **Location:** `PROOF_PACK\phase_XX\run_<run_id>\`
-- **Contents:** Selected files promoted from OUTPUTS
-- **Git status:** ALWAYS committed (this is what recruiters see)
-- **Usage:** Repo is PROOF_PACK-first; root README points here
-
-### Promotion Rule
-**Only curated artifacts are copied from OUTPUTS → PROOF_PACK**
-- Use `tools/promote_to_proof_pack.ps1` to promote artifacts
-- OUTPUTS remains read-only during promotion (no modifications)
-- PROOF_PACK contains only intentionally selected evidence
-
-### Precedence
-**If documentation conflicts:** AGENTS_PROJECT.md + project_config.json win.
-
----
-
-## NON-NEGOTIABLE RULES (Enforce Strictly)
-
-### 1. NO DELETES. NO OVERWRITES.
-- **NEVER** delete files permanently
-- **NEVER** overwrite existing files without backup
-- Collision policy: suffix `_01`, `_02`, etc.
-- Quarantine uncertain files to `C:\RH\TEMPORARY`
-
-### 2. DryRun First (Always)
-- **Every** move/rename/dedup operation must run in DryRun mode first
-- Generate plan files showing what will happen
-- Require explicit approval before execution
-
-### 3. Scan Roots vs Quarantine (No Full C:\ Scans)
-**Scan these only (defined in project_config.json allowlist_roots):**
-- `C:\RH\INBOX` (Downloads, Desktop sweeps, incoming files)
-- `C:\RH\OPS` (Operations, projects, proof packs, research)
-
-**Quarantine destination only (NEVER scanned):**
-- `C:\RH\TEMPORARY` (low-confidence files, trash, unsorted)
-
-**FORBIDDEN (Never Touch):**
-- `C:\RH\VAULT` (sensitive credentials)
-- `C:\RH\LIFE` (personal files)
-- `C:\LEGACY` (legacy system backups)
-- `C:\Windows` (system files)
-- `C:\Program Files` (installed applications)
-- `C:\Users\Raylee\AppData` (user profile data)
-
-### 4. All Outputs Go to OUTPUTS Only
-- **NEVER** write artifacts to `SRC\`
-- **NEVER** write artifacts to project root
-- **ALWAYS** write to: `OUTPUTS\phase_XX\run_MM-DD-YYYY_HHMMSS\`
-
-### 5. Runnability Rule
-- Scripts are run **ONLY** from `SRC\` directory
-- Runner validates it's being invoked from correct location
-- Runner checks for duplicate canonical scripts (refuse if duplicates exist)
-
-### 6. Low Confidence Goes to Review Queue
-- Auto-move threshold: confidence >= 0.85
-- Review queue: confidence 0.60 - 0.84
-- Quarantine: confidence < 0.60
-- **NEVER** auto-move low-confidence classifications
-
-### 7. Rollback Required for Every Mutating Phase
-- Phases 06-07 (moves/renames) **MUST** generate `rollback.ps1`
-- Rollback script must be tested in DryRun before execution
-- Log every action to enable reversal
-
----
-
-## Phase Model (00-08)
-
-### Universal Audit Spine (Every Run Must Have)
-
-Every `run_MM-DD-YYYY_HHMMSS` folder contains exactly:
-1. `plan.csv` - What will happen (or happened)
-2. `runlog.txt` - Execution log with timestamps
-3. `summary_MM-DD-YYYY.md` - Human-readable summary
-4. `metrics.json` - Machine-readable metrics
-5. `rollback.ps1` - Undo script (or no-op if read-only)
-6. `evidence\` - Phase-specific proof artifacts
-
----
-
-### Phase 00 — Baseline Snapshot (Read-Only)
-
-**Purpose:** "Before" anchor. No changes, no moves.
-
-**Evidence:**
-- `rh_tree_folders_only.txt` - Directory structure
-- `rh_inventory.csv` - Full file inventory with metadata
-- `script_files_list.csv` - All .ps1, .py, .sh, .bat, .cmd files
-- `rules_and_config_list.csv` - All config/rules files
-- `duplicate_filenames_top.csv` - Top duplicate filename groups
-
-**Success Definition:** Can prove what existed and where, without memory.
-
----
-
-### Phase 01 — Contract Freeze (Foundation Rules)
-
-**Purpose:** Lock down directory structure, naming conventions, and safety contracts.
-
-**Evidence:**
-- `directory_contract.md` - Canonical directory structure rules
-- `naming_contract.md` - `name_MM-DD-YYYY` format enforcement
-- `no_delete_contract.md` - No-delete policy
-- `scope_allowlist.md` - Allowed/forbidden roots
-- `execution_doorway_rules.md` - Runner validation rules
-- `ops_tree_after.txt` - OPS directory structure snapshot
-
-**Success Definition:** Contract written once, never re-negotiated mid-run.
-
----
-
-### Phase 02 — Inventory + Canonicalization
-
-**Purpose:** Identify canonical scripts and eliminate "which file is real" ambiguity.
-
-**Evidence:**
-- `state_tree_before.txt` - Pre-canonicalization state
-- `script_inventory.csv` - All scripts with hashes
-- `script_hashes.csv` - SHA256 hashes for integrity
-- `duplicate_scripts_report.csv` - Script duplicates analysis
-- `canonical_script_manifest.csv` - Authoritative script registry
-- `rules_inventory.csv` - All rules/config files
-
-**Success Definition:** "Which file is real" is no longer a question.
-
----
-
-### Phase 03 — Runner + Config + Dry-Run Validation
-
-**Purpose:** Build gatekeeper runner with config-driven design.
-
-**Evidence:**
-- `project_config.json` - Runtime configuration (no hardcoded paths)
-- `run.ps1` - Gatekeeper runner script
-- `run_interface.md` - How to run (usage documentation)
-- `dryrun_validation_checklist.md` - DryRun test results
-- `canonical_paths_proof.txt` - Runner prints/logs canonical paths
-
-**Success Definition:** DryRun produces all spine outputs and writes only to OUTPUTS.
-
----
-
-### Phase 04 — Classification v1 (Deterministic Label-Only)
-
-**Purpose:** Label files with destination buckets (no moves yet).
-
-**Evidence:**
-- `classification_rules_v1.yaml` - Deterministic classification rules
-- `rules_version.json` - Rule version for reproducibility
-- `classification_results.csv` - All files with labels + confidence
-- `misclass_queue.csv` - Low-confidence items for review
-- `bucket_taxonomy.md` - Bucket definitions and criteria
-
-**Success Definition:** Outputs include "reason + confidence" and low-confidence queued.
-
----
-
-### Phase 05 — Routing Plan (Still No Moves)
-
-**Purpose:** Generate move plan with collision detection.
-
-**Evidence:**
-- `move_plan.csv` - Source, destination, action for every file
-- `collisions.csv` - Files that would collide (require suffix)
-- `exclusions_applied.txt` - Files excluded from moves (and why)
-- `planned_changes_summary.md` - Human-readable plan overview
-
-**Success Definition:** Can review plan and predict outcomes before execution.
-
----
-
-### Phase 06 — Execute Moves (Rollback Required)
-
-**Purpose:** Perform file moves based on Phase 05 plan.
-
-**Evidence:**
-- `moves_executed.csv` - Every file moved (source → destination)
-- `errors.csv` - Any failures or warnings
-- `state_tree_after_moves.txt` - Post-move directory structure
-
-**Success Definition:** Can undo it and can prove what moved.
-
----
-
-### Phase 07 — Rename Engine (MM-DD-YYYY Enforcement)
-
-**Purpose:** Enforce `name_MM-DD-YYYY` naming convention.
-
-**Evidence:**
-- `rename_rules_v1.yaml` - Rename pattern rules
-- `rename_plan.csv` - Old name, new name, reason
-- `rename_executed.csv` - Actual renames performed
-- `rename_collisions.csv` - Conflicts requiring suffix
-- `rename_examples.md` - Before/after examples
-
-**Success Definition:** Naming convention enforced deterministically without overwrites.
-
----
-
-### Phase 08 — Tier 2.5 Semantic Labeling (Label-Only Enhancement)
-
-**Purpose:** Use semantic/AI-assisted classification to improve confidence/coverage.
-
-**Evidence:**
-- `training_examples_manifest.csv` - Examples used for semantic model
-- `semantic_labels.csv` - AI-generated labels with confidence
-- `merge_logic.md` - How deterministic + semantic rules merge
-- `semantic_misclass_queue.csv` - Low-confidence semantic labels
-- `classification_rules_v2.yaml` - (Optional) Promoted semantic rules
-- `evaluation_notes.md` - Wins/failures analysis
-
-**Success Definition:** Semantic improves confidence/coverage but never moves files directly.
-
----
-
-## Runner Behavior (SRC\run.ps1)
-
-### Gatekeeper Validation (Runner Must Check)
-
-**Before executing, runner MUST:**
-1. Verify invoked from correct directory (`SRC\` or project root)
-2. Check `project_config.json` exists and is valid
-3. Verify allowlist roots are defined
-4. Check for duplicate canonical scripts (refuse if found)
-5. Validate output root is correct (`OUTPUTS\`)
-6. Create timestamped run directory: `run_MM-DD-YYYY_HHMMSS`
-7. Generate audit spine files before any work
-
-**Runner refuses to run if:**
-- Launched from wrong directory
-- Allowlist missing or invalid
-- Config missing or malformed
-- Duplicate canonical scripts detected
-- Output root invalid or missing
-
----
-
-## Filename Conventions
-
-### Run Directories
-Format: `run_MM-DD-YYYY_HHMMSS`
-
-Example: `run_02-08-2026_140111`
-
-### Summary Files
-Format: `name_MM-DD-YYYY.md`
-
-Example: `summary_02-08-2026.md`
-
-### General Files
-Format: `descriptive-name_MM-DD-YYYY.ext`
-
-Examples:
-- `classification_results_02-08-2026.csv`
-- `move_plan_02-08-2026.csv`
-- `rollback_02-08-2026.ps1`
-
-**NEVER use:**
-- ISO dates (2026-02-08) — WRONG
-- Year-first dates (2026_02_08) — WRONG
-- No dates on versioned files — WRONG
-
----
-
-## project_config.json Structure
-
-**IMPORTANT:** All scan/quarantine configuration defers to `project_config.json`.
-- `allowlist_roots`: Only these directories are scanned (exactly `["C:\\RH\\INBOX", "C:\\RH\\OPS"]`)
-- `quarantine_root`: Destination for low-confidence files (`"C:\\RH\\TEMPORARY"`)
-- C:\RH\TEMPORARY must NEVER appear in allowlist_roots (never scanned, only written to)
-
-```json
-{
-  "project_root": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2",
-  "outputs_root": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2\\OUTPUTS",
-  "inbox_root": "C:\\RH\\INBOX",
-  "quarantine_root": "C:\\RH\\TEMPORARY",
-  "allowlist_roots": [
-    "C:\\RH\\INBOX",
-    "C:\\RH\\OPS"
-  ],
-  "exclude_roots": [
-    "C:\\RH\\VAULT",
-    "C:\\RH\\LIFE",
-    "C:\\LEGACY",
-    "C:\\Windows",
-    "C:\\Program Files",
-    "C:\\Program Files (x86)",
-    "C:\\Users\\Raylee\\AppData"
-  ],
-  "confidence_thresholds": {
-    "auto_move": 0.85,
-    "review_queue": 0.60,
-    "quarantine": 0.60
-  },
-  "naming_format": "name_MM-DD-YYYY",
-  "collision_policy": {
-    "suffix_pattern": "_{:02d}",
-    "max_attempts": 99
-  },
-  "log_level": "info"
-}
+### Step 3 — Promote to PROOF_PACK
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -File "tools\promote_to_proof_pack.ps1" -Phase 01
+```
+
+### Step 4 — Commit ONLY proof pack + source
+```powershell
+git status
+git add PROOF_PACK docs tools SRC project_config.json AGENTS_PROJECT.md
+git commit -m "proof: phase 01 promoted artifacts"
+git push
 ```
 
 ---
 
-## Communication Style
+## 5) Agent behavior contract (Claude Code + Codex)
 
-- **Direct** - Skip preamble, provide executable commands
-- **Safety-focused** - Always mention DryRun, verification, rollback
-- **Evidence-driven** - Show proof, not assertions
-- **Absolute paths** - Never use relative paths in commands
+### 5.1 Before doing anything, agents MUST:
+- Confirm `Get-Location` is V2 path
+- Confirm `RH_MIGRATION_2026_V2.SENTINEL` exists
+- Read:
+  - `AGENTS_PROJECT.md` (this file)
+  - `project_config.json`
+  - `CONTRACTS\phase_requirements.json`
+
+### 5.2 Agents MUST NOT:
+- Write to: `C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026` (V1)
+- Commit `OUTPUTS/`
+- Scan TEMPORARY
+- Touch excluded roots
+- Delete or overwrite
+
+### 5.3 If anything conflicts:
+- **This file** + `project_config.json` win.
+- Everything else is documentation or generated guidance.
 
 ---
 
-## End of AGENTS_PROJECT.md
+## 6) “Important clarification” (what NOT to do yet)
 
-**This is the canonical truth. All other agent instructions defer to this file.**
+- Do **NOT** attempt Phase 06 or 07 Execute until:
+  - Phase 05 plan exists, is reviewed, and has an approval record
+  - Rollback DryRun is PASS
+- Do **NOT** “clean up” old attempts by deleting anything.
+- Do **NOT** change scan roots to include TEMPORARY “for convenience”.
+  That is literally how quarantines become trash fires.
+
+---
+
+## Appendices
+
+### A) Paste block for agents
+See: `CONTRACTS\agent_paste_block.md`
+
+### B) Operator playbook
+See: `CONTRACTS\operator_playbook.md`
+
+### C) Phase gate definitions (02–08)
+See: `CONTRACTS\phase_gates.md`
+
+### D) Canonical trees
+See: `CONTRACTS\expected_final_tree.md`

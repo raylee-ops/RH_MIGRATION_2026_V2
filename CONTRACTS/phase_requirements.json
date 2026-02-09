@@ -1,0 +1,101 @@
+{
+  "audit_spine": {
+    "required_files": [
+      "plan.csv",
+      "runlog.txt",
+      "metrics.json",
+      "rollback.ps1"
+    ],
+    "required_globs": [
+      "summary_*.md"
+    ],
+    "required_dirs": [
+      "evidence"
+    ]
+  },
+  "phases": {
+    "00": {
+      "required_evidence_globs": [
+        "evidence/*.txt",
+        "evidence/*.csv",
+        "evidence/*.md"
+      ],
+      "min_evidence_files": 1
+    },
+    "01": {
+      "required_evidence_globs": [
+        "evidence/*"
+      ],
+      "min_evidence_files": 1
+    },
+    "02": {
+      "required_evidence_globs": [
+        "evidence/state_tree_before_*.txt",
+        "evidence/script_inventory_*.csv",
+        "evidence/script_hashes_*.csv",
+        "evidence/duplicate_scripts_report_*.csv",
+        "evidence/canonical_script_manifest_*.csv",
+        "evidence/rules_inventory_*.csv",
+        "evidence/phase01_contracts_status_*.md"
+      ],
+      "min_evidence_files": 7
+    },
+    "03": {
+      "required_evidence_globs": [
+        "evidence/run_interface_*.md",
+        "evidence/dryrun_validation_checklist_*.md",
+        "evidence/canonical_paths_proof_*.txt",
+        "evidence/runner_used_runps1_hash_*.txt",
+        "evidence/runner_used_config_hash_*.txt"
+      ],
+      "min_evidence_files": 5
+    },
+    "04": {
+      "required_evidence_globs": [
+        "evidence/classification_results_*.csv",
+        "evidence/misclass_queue_*.csv",
+        "evidence/bucket_taxonomy_*.md",
+        "evidence/rules_version_*.json"
+      ],
+      "min_evidence_files": 4
+    },
+    "05": {
+      "required_evidence_globs": [
+        "evidence/move_plan_*.csv",
+        "evidence/collisions_*.csv",
+        "evidence/exclusions_applied_*.txt",
+        "evidence/planned_changes_summary_*.md"
+      ],
+      "min_evidence_files": 4
+    },
+    "06": {
+      "required_evidence_globs": [
+        "evidence/moves_executed_*.csv",
+        "evidence/errors_*.csv",
+        "evidence/state_tree_after_moves_*.txt",
+        "evidence/rollback_dryrun_report_*.md"
+      ],
+      "min_evidence_files": 4
+    },
+    "07": {
+      "required_evidence_globs": [
+        "evidence/rename_plan_*.csv",
+        "evidence/rename_executed_*.csv",
+        "evidence/rename_collisions_*.csv",
+        "evidence/rename_examples_*.md",
+        "evidence/rollback_dryrun_report_*.md"
+      ],
+      "min_evidence_files": 5
+    },
+    "08": {
+      "required_evidence_globs": [
+        "evidence/training_examples_manifest_*.csv",
+        "evidence/semantic_labels_*.csv",
+        "evidence/semantic_misclass_queue_*.csv",
+        "evidence/merge_logic_*.md",
+        "evidence/evaluation_notes_*.md"
+      ],
+      "min_evidence_files": 5
+    }
+  }
+}
