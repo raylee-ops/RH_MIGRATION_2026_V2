@@ -49,6 +49,35 @@ C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\
 
 ---
 
+## Artifact Lanes (OUTPUTS vs PROOF_PACK)
+
+**Two-lane model for generated artifacts:**
+
+### OUTPUTS/ — Messy Generated Lane
+- **Purpose:** All phase run artifacts (generated, timestamped, verbose)
+- **Location:** `OUTPUTS\phase_XX\run_MM-DD-YYYY_HHMMSS\`
+- **Contents:** plan.csv, runlog.txt, metrics.json, rollback.ps1, evidence\*
+- **Git status:** NEVER committed (must remain in .gitignore)
+- **Usage:** Execution outputs only, NOT treated as inputs for planning
+
+### PROOF_PACK/ — Curated Recruiter-Safe Lane
+- **Purpose:** Polished, curated artifacts for recruiters/portfolio
+- **Location:** `PROOF_PACK\phase_XX\run_<run_id>\`
+- **Contents:** Selected files promoted from OUTPUTS
+- **Git status:** ALWAYS committed (this is what recruiters see)
+- **Usage:** Repo is PROOF_PACK-first; root README points here
+
+### Promotion Rule
+**Only curated artifacts are copied from OUTPUTS → PROOF_PACK**
+- Use `tools/promote_to_proof_pack.ps1` to promote artifacts
+- OUTPUTS remains read-only during promotion (no modifications)
+- PROOF_PACK contains only intentionally selected evidence
+
+### Precedence
+**If documentation conflicts:** AGENTS_PROJECT.md + project_config.json win.
+
+---
+
 ## NON-NEGOTIABLE RULES (Enforce Strictly)
 
 ### 1. NO DELETES. NO OVERWRITES.

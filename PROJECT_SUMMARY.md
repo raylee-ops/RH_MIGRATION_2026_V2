@@ -118,6 +118,65 @@ pwsh -NoProfile -ExecutionPolicy Bypass -File "SRC\run.ps1" -Phase 04 -Mode Exec
 
 ---
 
+## Workflow — Canonical Sequence
+
+**Standard workflow for every phase:**
+
+### Step 1: Pre-Flight
+```powershell
+# Verify environment is ready
+pwsh -NoProfile -ExecutionPolicy Bypass -File "tools\preflight.ps1"
+```
+
+**Pre-flight checks:**
+- ✅ Confirms repo root (project_config.json + AGENTS_PROJECT.md)
+- ✅ Validates config (runs tools/validate_config.ps1)
+- ✅ Verifies OUTPUTS is in .gitignore
+- ✅ Prints artifact lane contract
+
+### Step 2: Run Phase Tool
+```powershell
+# DryRun first (always)
+pwsh -NoProfile -ExecutionPolicy Bypass -File "SRC\run.ps1" -Phase 04 -Mode DryRun
+
+# Review outputs in OUTPUTS\phase_04\run_MM-DD-YYYY_HHMMSS\
+
+# Execute (after review)
+pwsh -NoProfile -ExecutionPolicy Bypass -File "SRC\run.ps1" -Phase 04 -Mode Execute
+```
+
+**Outputs go to:** `OUTPUTS\phase_XX\run_MM-DD-YYYY_HHMMSS\`
+
+### Step 3: Promote to PROOF_PACK
+```powershell
+# Promote default artifacts (plan.csv, metrics.json, summary_*.md)
+pwsh -NoProfile -ExecutionPolicy Bypass -File "tools\promote_to_proof_pack.ps1" -Phase 04
+
+# Or promote specific files
+pwsh -NoProfile -ExecutionPolicy Bypass -File "tools\promote_to_proof_pack.ps1" -Phase 04 -PromoteList @('plan.csv', 'metrics.json', 'evidence\key_file.txt')
+```
+
+**Promoted artifacts go to:** `PROOF_PACK\phase_XX\run_<run_id>\`
+
+### Step 4: Commit PROOF_PACK
+```powershell
+# Review promoted artifacts
+git status
+
+# Commit to git (PROOF_PACK only, OUTPUTS never committed)
+git add PROOF_PACK
+git commit -m "proof: Phase 04 artifacts"
+git push
+```
+
+### Two-Lane Model
+- **OUTPUTS/** — Messy generated lane (NOT committed, execution outputs only)
+- **PROOF_PACK/** — Curated recruiter-safe lane (committed to git, promoted artifacts only)
+
+**Promotion rule:** Only curated artifacts are copied from OUTPUTS → PROOF_PACK.
+
+---
+
 ## Core Contracts (DO NOT VIOLATE)
 
 ### 1. No Deletes, No Overwrites
