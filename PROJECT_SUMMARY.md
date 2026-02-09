@@ -257,4 +257,26 @@ foreach ($dir in $required) {
 
 ---
 
+## Phase 01 Audit
+
+To verify Phase 01 run artifacts are complete:
+
+```powershell
+# Run Phase 01 audit (read-only)
+pwsh -NoProfile -ExecutionPolicy Bypass -File "tools\audit_phase01.ps1"
+```
+
+The audit script will:
+- Find the newest run_* folder in OUTPUTS\phase_01\
+- Verify required files exist and are non-empty (plan.csv, runlog.txt, metrics.json, rollback.ps1)
+- Check evidence\ directory contains at least 1 file
+- Report PASS or UNKNOWN status with details
+
+**Exit codes:**
+- 0 = PASS (all artifacts present)
+- 1 = UNKNOWN (missing or empty items)
+- 2 = No phase_01 runs found
+
+---
+
 **For detailed agent instructions, read `AGENTS_PROJECT.md`.**
