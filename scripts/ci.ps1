@@ -8,12 +8,15 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot "..")).Path
 $outputDir = Join-Path $repoRoot "OUTPUTS"
+$testsPath = Join-Path $repoRoot "tests"
+$gitleaksConfigPath = Join-Path $repoRoot ".gitleaks.toml"
+$trivyConfigPath = Join-Path $repoRoot "trivy.yaml"
 
-$gitleaksReport = Join-Path $outputDir "gitleaks.json"
-$trivyReport = Join-Path $outputDir "trivy.txt"
-$pesterReport = Join-Path $outputDir "pester.xml"
-$summaryReport = Join-Path $outputDir "scan_summary.md"
-$screenshotsChecklist = Join-Path $outputDir "screenshots_checklist.md"
+$scanSummaryPath = Join-Path $outputDir "scan_summary.md"
+$trivyReportPath = Join-Path $outputDir "trivy.txt"
+$gitleaksReportPath = Join-Path $outputDir "gitleaks.json"
+$pesterReportPath = Join-Path $outputDir "pester.xml"
+$screenshotsChecklistPath = Join-Path $outputDir "screenshots_checklist.md"
 
 $toolVersions = [ordered]@{
     Gitleaks = "8.24.2"
@@ -21,7 +24,7 @@ $toolVersions = [ordered]@{
     Pester   = "5.6.1"
 }
 
-$checkStatus = [ordered]@{
+$status = [ordered]@{
     Gitleaks  = "NOT_RUN"
     Trivy     = "NOT_RUN"
     Pester    = "NOT_RUN"
@@ -41,32 +44,41 @@ function Test-Tool {
     return $null -ne (Get-Command -Name $Name -ErrorAction SilentlyContinue)
 }
 
-function Ensure-PesterVersion {
+function Ensure-Pester {
     param(
-        [string]$Version,
+        [string]$RequiredVersion,
         [switch]$AutoInstall
     )
 
-    $required = [version]$Version
+    $required = [version]$RequiredVersion
     $installed = Get-Module -ListAvailable -Name Pester | Where-Object { $_.Version -eq $required } | Select-Object -First 1
 
     if (-not $installed) {
         if (-not $AutoInstall) {
-            throw "Pester v$Version is required. Re-run with -InstallMissingTools or install manually."
+            throw "Pester v$RequiredVersion is required. Re-run with -InstallMissingTools."
         }
 
-        Write-Step "Installing Pester v$Version (CurrentUser scope)"
-        Install-Module -Name Pester -RequiredVersion $Version -Scope CurrentUser -Force -SkipPublisherCheck -AllowClobber
+        Write-Step "Installing Pester v$RequiredVersion (CurrentUser)"
+        Install-Module -Name Pester -RequiredVersion $RequiredVersion -Scope CurrentUser -Force -SkipPublisherCheck -AllowClobber
     }
 
-    Import-Module -Name Pester -RequiredVersion $Version -Force
+    Import-Module -Name Pester -RequiredVersion $RequiredVersion -Force
 }
 
 New-Item -ItemType Directory -Path $outputDir -Force | Out-Null
-@($gitleaksReport, $trivyReport, $pesterReport, $summaryReport, $screenshotsChecklist) | ForEach-Object {
-    if (Test-Path -LiteralPath $_) {
-        Remove-Item -LiteralPath $_ -Force
+
+foreach ($p in @($scanSummaryPath, $trivyReportPath, $gitleaksReportPath, $pesterReportPath, $screenshotsChecklistPath)) {
+    if (Test-Path -LiteralPath $p) {
+        Remove-Item -LiteralPath $p -Force
     }
+}
+
+if (-not (Test-Path -LiteralPath $gitleaksConfigPath)) {
+    throw "Missing required file: $gitleaksConfigPath"
+}
+
+if (-not (Test-Path -LiteralPath $trivyConfigPath)) {
+    throw "Missing required file: $trivyConfigPath"
 }
 
 Write-Step "Repository root: $repoRoot"
@@ -75,7 +87,7 @@ Write-Step "Running gitleaks"
 if (Test-Tool -Name "gitleaks") {
     Push-Location -Path $repoRoot
     try {
-        & gitleaks detect --no-banner --redact --source $repoRoot --report-format json --report-path $gitleaksReport --exit-code 1
+        & gitleaks detect --no-banner --redact --source $repoRoot --config $gitleaksConfigPath --report-format json --report-path $gitleaksReportPath --exit-code 1
         $gitleaksExit = $LASTEXITCODE
     }
     finally {
@@ -83,24 +95,24 @@ if (Test-Tool -Name "gitleaks") {
     }
 
     if ($gitleaksExit -eq 0) {
-        $checkStatus.Gitleaks = "PASS"
+        $status.Gitleaks = "PASS"
     }
     else {
-        $checkStatus.Gitleaks = "FAIL"
+        $status.Gitleaks = "FAIL"
         $overallFail = $true
     }
 }
 else {
-    Set-Content -LiteralPath $gitleaksReport -Value "[]" -Encoding utf8
-    $checkStatus.Gitleaks = "ERROR_MISSING_TOOL"
+    Set-Content -LiteralPath $gitleaksReportPath -Value "[]" -Encoding utf8
+    $status.Gitleaks = "ERROR_MISSING_TOOL"
     $overallFail = $true
 }
 
-Write-Step "Running trivy filesystem scan"
+Write-Step "Running trivy"
 if (Test-Tool -Name "trivy") {
     Push-Location -Path $repoRoot
     try {
-        & trivy fs $repoRoot --scanners vuln,misconfig,secret --severity HIGH,CRITICAL --ignore-unfixed --no-progress --format table --output $trivyReport --exit-code 1
+        & trivy fs $repoRoot --config $trivyConfigPath --output $trivyReportPath --exit-code 1
         $trivyExit = $LASTEXITCODE
     }
     finally {
@@ -108,69 +120,70 @@ if (Test-Tool -Name "trivy") {
     }
 
     if ($trivyExit -eq 0) {
-        $checkStatus.Trivy = "PASS"
+        $status.Trivy = "PASS"
     }
     else {
-        $checkStatus.Trivy = "FAIL"
+        $status.Trivy = "FAIL"
         $overallFail = $true
     }
 }
 else {
-    Set-Content -LiteralPath $trivyReport -Value "trivy is not installed. Install v$($toolVersions.Trivy)." -Encoding utf8
-    $checkStatus.Trivy = "ERROR_MISSING_TOOL"
+    Set-Content -LiteralPath $trivyReportPath -Value "trivy is not installed. Install v$($toolVersions.Trivy)." -Encoding utf8
+    $status.Trivy = "ERROR_MISSING_TOOL"
     $overallFail = $true
 }
 
-Write-Step "Running Pester tests"
+Write-Step "Running pester"
 try {
-    Ensure-PesterVersion -Version $toolVersions.Pester -AutoInstall:$InstallMissingTools
+    Ensure-Pester -RequiredVersion $toolVersions.Pester -AutoInstall:$InstallMissingTools
 
-    $testsPath = Join-Path $repoRoot "tests"
-    $config = New-PesterConfiguration
-    $config.Run.Path = @($testsPath)
-    $config.Run.PassThru = $true
-    $config.Output.Verbosity = "Detailed"
-    $config.TestResult.Enabled = $true
-    $config.TestResult.OutputFormat = "NUnitXml"
-    $config.TestResult.OutputPath = $pesterReport
+    if (-not (Test-Path -LiteralPath $testsPath)) {
+        New-Item -ItemType Directory -Path $testsPath -Force | Out-Null
+    }
 
-    $pesterResult = Invoke-Pester -Configuration $config
+    $cfg = New-PesterConfiguration
+    $cfg.Run.Path = @($testsPath)
+    $cfg.Run.PassThru = $true
+    $cfg.Output.Verbosity = "Detailed"
+    $cfg.TestResult.Enabled = $true
+    $cfg.TestResult.OutputFormat = "NUnitXml"
+    $cfg.TestResult.OutputPath = $pesterReportPath
+
+    $pesterResult = Invoke-Pester -Configuration $cfg
     if ($pesterResult.FailedCount -gt 0) {
-        $checkStatus.Pester = "FAIL"
+        $status.Pester = "FAIL"
         $overallFail = $true
     }
     else {
-        $checkStatus.Pester = "PASS"
+        $status.Pester = "PASS"
     }
 }
 catch {
-    Set-Content -LiteralPath $pesterReport -Value "<testsuites></testsuites>" -Encoding utf8
-    $checkStatus.Pester = "ERROR"
+    Set-Content -LiteralPath $pesterReportPath -Value "<testsuites></testsuites>" -Encoding utf8
+    $status.Pester = "ERROR"
     $overallFail = $true
 }
 
 $gitleaksFindings = 0
-if (Test-Path -LiteralPath $gitleaksReport) {
-    try {
-        $payload = Get-Content -LiteralPath $gitleaksReport -Raw | ConvertFrom-Json
-        if ($null -eq $payload) {
-            $gitleaksFindings = 0
-        }
-        elseif ($payload -is [array]) {
-            $gitleaksFindings = $payload.Count
-        }
-        else {
-            $gitleaksFindings = 1
-        }
+try {
+    $payload = Get-Content -LiteralPath $gitleaksReportPath -Raw | ConvertFrom-Json
+    if ($null -eq $payload) {
+        $gitleaksFindings = 0
     }
-    catch {
-        $gitleaksFindings = -1
+    elseif ($payload -is [array]) {
+        $gitleaksFindings = $payload.Count
     }
+    else {
+        $gitleaksFindings = 1
+    }
+}
+catch {
+    $gitleaksFindings = -1
 }
 
 $trivyHighCriticalHits = 0
-if (Test-Path -LiteralPath $trivyReport) {
-    $trivyHighCriticalHits = @(Select-String -LiteralPath $trivyReport -Pattern "\bHIGH\b|\bCRITICAL\b").Count
+if (Test-Path -LiteralPath $trivyReportPath) {
+    $trivyHighCriticalHits = @(Select-String -LiteralPath $trivyReportPath -Pattern "\bHIGH\b|\bCRITICAL\b").Count
 }
 
 $runTime = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss zzz")
@@ -188,11 +201,11 @@ $summary = @(
     "## Status"
     "| Check | Status |"
     "| --- | --- |"
-    "| Gitleaks | $($checkStatus["Gitleaks"]) |"
-    "| Trivy | $($checkStatus["Trivy"]) |"
-    "| Pester | $($checkStatus["Pester"]) |"
-    "| CodeQL | $($checkStatus["CodeQL"]) |"
-    "| Scorecard | $($checkStatus["Scorecard"]) |"
+    "| Gitleaks | $($status["Gitleaks"]) |"
+    "| Trivy | $($status["Trivy"]) |"
+    "| Pester | $($status["Pester"]) |"
+    "| CodeQL | $($status["CodeQL"]) |"
+    "| Scorecard | $($status["Scorecard"]) |"
     ""
     "## Findings Snapshot"
     "- Gitleaks findings: $gitleaksFindings"
@@ -205,27 +218,24 @@ $summary = @(
     "- OUTPUTS\pester.xml"
     "- OUTPUTS\screenshots_checklist.md"
 ) -join "`n"
-Set-Content -LiteralPath $summaryReport -Value $summary -Encoding utf8
+Set-Content -LiteralPath $scanSummaryPath -Value $summary -Encoding utf8
 
 $checklist = @(
     "# Recruiter Proof Screenshots Checklist"
     ""
-    "- [ ] GitHub Actions run summary (gitleaks workflow)"
-    "- [ ] GitHub Actions run summary (trivy workflow)"
+    "- [ ] Checks page with all required checks green"
+    "- [ ] security-local-parity workflow run summary"
+    "- [ ] Evidence artifact contents (OUTPUTS/*)"
     "- [ ] Code scanning alerts page (CodeQL + Scorecard)"
-    "- [ ] OUTPUTS\scan_summary.md visible in repo"
-    "- [ ] OUTPUTS\gitleaks.json artifact sample"
-    "- [ ] OUTPUTS\trivy.txt artifact sample"
-    "- [ ] OUTPUTS\pester.xml test result sample"
-    "- [ ] Portfolio page showing security automation section"
+    "- [ ] Workflow file view with SHA-pinned actions"
 ) -join "`n"
-Set-Content -LiteralPath $screenshotsChecklist -Value $checklist -Encoding utf8
+Set-Content -LiteralPath $screenshotsChecklistPath -Value $checklist -Encoding utf8
 
-Write-Step "Wrote $summaryReport"
-Write-Step "Wrote $trivyReport"
-Write-Step "Wrote $gitleaksReport"
-Write-Step "Wrote $pesterReport"
-Write-Step "Wrote $screenshotsChecklist"
+Write-Step "Wrote $scanSummaryPath"
+Write-Step "Wrote $trivyReportPath"
+Write-Step "Wrote $gitleaksReportPath"
+Write-Step "Wrote $pesterReportPath"
+Write-Step "Wrote $screenshotsChecklistPath"
 
 if ($overallFail) {
     Write-Step "Completed with failures."

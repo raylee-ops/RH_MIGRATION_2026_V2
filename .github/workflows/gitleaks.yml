@@ -2,7 +2,9 @@ name: gitleaks
 
 on:
   push:
+    branches: ["main"]
   pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -13,7 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           fetch-depth: 0
 
@@ -22,9 +24,11 @@ jobs:
         run: |
           set -euo pipefail
           VERSION="8.24.2"
-          curl -sSL "https://github.com/gitleaks/gitleaks/releases/download/v${VERSION}/gitleaks_${VERSION}_linux_x64.tar.gz" -o gitleaks.tgz
-          tar -xzf gitleaks.tgz gitleaks
-          sudo install -m 0755 gitleaks /usr/local/bin/gitleaks
+          mkdir -p "$RUNNER_TEMP/bin"
+          curl -sSL "https://github.com/gitleaks/gitleaks/releases/download/v${VERSION}/gitleaks_${VERSION}_linux_x64.tar.gz" -o "$RUNNER_TEMP/gitleaks.tgz"
+          tar -xzf "$RUNNER_TEMP/gitleaks.tgz" -C "$RUNNER_TEMP/bin" gitleaks
+          chmod +x "$RUNNER_TEMP/bin/gitleaks"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
           gitleaks version
 
       - name: Run gitleaks (fail on findings)
@@ -36,13 +40,14 @@ jobs:
             --no-banner \
             --redact \
             --source . \
+            --config .gitleaks.toml \
             --report-format json \
             --report-path OUTPUTS/gitleaks.json \
             --exit-code 1
 
       - name: Upload gitleaks artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: gitleaks-output
           path: OUTPUTS/gitleaks.json
