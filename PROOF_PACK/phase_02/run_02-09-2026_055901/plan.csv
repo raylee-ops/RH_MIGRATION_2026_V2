@@ -1,0 +1,2 @@
+phase,objective,inputs,outputs,notes
+02,"Generate required Phase 02 audit artifacts and evidence inventory outputs","project_config.json, CONTRACTS/phase_requirements.json","plan.csv, runlog.txt, metrics.json, rollback.ps1, summary_*.md, evidence/*","Evidence-only repair run created to satisfy contract spine + evidence gates."
