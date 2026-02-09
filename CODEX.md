@@ -1,19 +1,21 @@
-# CODEX.md
+# Codex Entry (RH_MIGRATION_2026_V2)
 
-## ⚠️ STOP — Read This First
+Codex: you only get one job: **don’t write to the wrong folder**.
 
-**DO NOT proceed without reading:**
+## Hard requirements
+- Working directory MUST be: `C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2`
+- File MUST exist: `RH_MIGRATION_2026_V2.SENTINEL`
+- Read and obey: `AGENTS_PROJECT.md` + `project_config.json`
 
-```
-C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\AGENTS_PROJECT.md
-```
+## Forbidden (archived V1)
+- `C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026`
+If you see this path, stop and refuse.
 
-`AGENTS_PROJECT.md` is the **single source of truth** for this project.
+## Outputs contract
+- Generated run artifacts → `OUTPUTS\phase_XX\run_MM-DD-YYYY_HHMMSS\` (ignored by git)
+- Curated artifacts → `PROOF_PACK/` (committed)
 
-All rules, constraints, phase definitions, and operational procedures are defined there.
-
-**This file exists only to ensure you don't miss the instructions.**
-
----
-
-**Read `AGENTS_PROJECT.md` now.**
+Verification tools:
+- `tools\preflight.ps1`
+- `tools\audit_phase.ps1 -Phase XX`
+- `tools\status.ps1`

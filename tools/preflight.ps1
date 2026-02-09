@@ -59,6 +59,35 @@ $checksFailed = $false
 Write-InfoMessage "Checking repo root..."
 
 $configPath = Join-Path $ProjectRoot "project_config.json"
+
+# --- V2 Root Tripwire ---
+$here = (Get-Location).Path
+$sentinel = Join-Path $here "RH_MIGRATION_2026_V2.SENTINEL"
+if (!(Test-Path $sentinel)) {
+  Write-Host "FAIL ❌ Missing sentinel: $sentinel" -ForegroundColor Red
+  Write-Host "You are probably in the WRONG folder (common failure: V1 system migrations path)." -ForegroundColor Yellow
+  exit 1
+}
+if ($here -like "*\OPS\SYSTEM\migrations\RH_MIGRATION_2026*") {
+  Write-Host "FAIL ❌ You are in archived V1 path: $here" -ForegroundColor Red
+  Write-Host "CD into: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2" -ForegroundColor Yellow
+  exit 1
+}
+
+# Verify project_root in config matches actual working directory (prevents ghost runs)
+try {
+  $cfg = Get-Content $configPath -Raw | ConvertFrom-Json
+  if ($cfg.project_root -and ($cfg.project_root -ne $here)) {
+    Write-Host "FAIL ❌ project_config.json project_root mismatch" -ForegroundColor Red
+    Write-Host "  Config project_root: $($cfg.project_root)" -ForegroundColor Yellow
+    Write-Host "  Current directory : $here" -ForegroundColor Yellow
+    Write-Host "Fix by running from the configured project_root OR updating project_config.json.project_root." -ForegroundColor Yellow
+    exit 1
+  }
+} catch {
+  # config validation later will catch parse issues; we don't double-fail here
+}
+# --- End V2 Root Tripwire ---
 $agentsPath = Join-Path $ProjectRoot "AGENTS_PROJECT.md"
 
 if ((Test-Path -LiteralPath $configPath) -and (Test-Path -LiteralPath $agentsPath)) {

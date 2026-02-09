@@ -1,0 +1,49 @@
+name: gitleaks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks v8.24.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="8.24.2"
+          curl -sSL "https://github.com/gitleaks/gitleaks/releases/download/v${VERSION}/gitleaks_${VERSION}_linux_x64.tar.gz" -o gitleaks.tgz
+          tar -xzf gitleaks.tgz gitleaks
+          sudo install -m 0755 gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Run gitleaks (fail on findings)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p OUTPUTS
+          gitleaks detect \
+            --no-banner \
+            --redact \
+            --source . \
+            --report-format json \
+            --report-path OUTPUTS/gitleaks.json \
+            --exit-code 1
+
+      - name: Upload gitleaks artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-output
+          path: OUTPUTS/gitleaks.json
+          if-no-files-found: error

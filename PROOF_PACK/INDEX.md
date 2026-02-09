@@ -11,6 +11,7 @@
 | Phase | Run ID | Promoted On | Source Path | Promoted Files |
 |-------|--------|-------------|-------------|----------------|
 | 01 | run_02-08-2026_153039 | 02-09-2026 01:54:00 | OUTPUTS\phase_01\run_02-08-2026_153039 | plan.csv, metrics.json, summary_02-08-2026.md |
+| 01 | run_02-08-2026_153039 | 02-09-2026 03:44:10 | OUTPUTS\phase_01\run_02-08-2026_153039 | plan.csv, metrics.json, summary_02-08-2026.md |
 
 ---
 
