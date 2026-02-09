@@ -1,0 +1,5 @@
+step_id,action,target,notes,status
+01,CREATE_RUN_FOLDER,C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_01\run_02-08-2026_153039,"Create Phase 01 run folder (no overwrite).",DONE
+02,CREATE_AUDIT_SPINE,C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_01\run_02-08-2026_153039,"plan.csv, runlog.txt, summary_*.md, metrics.json, rollback.ps1, evidence\.",DONE
+03,WRITE_CONTRACTS,C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_01\run_02-08-2026_153039\evidence,"Write Phase 01 contract files (plain English, no contradictions).",DONE
+04,VERIFY_TREE,C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_01\run_02-08-2026_153039,"Print tree of new run folder.",DONE
