@@ -1,0 +1,16 @@
+{
+  "phase": "00",
+  "run_id": "run_02-08-2026_140111",
+  "start_time": "2026-02-08T14:01:11",
+  "end_time": "2026-02-08T14:01:42",
+  "status": "completed",
+  "metrics": {
+    "total_directories": null,
+    "total_files": 9883,
+    "total_scripts": 643,
+    "total_configs": 88,
+    "duplicate_groups": 50
+  },
+  "errors": [],
+  "warnings": []
+}
