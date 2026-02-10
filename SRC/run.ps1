@@ -25,11 +25,11 @@ if ($repoRoot.Path -match [regex]::Escape('C:\RH\OPS\SYSTEM\migrations\RH_MIGRAT
 & pwsh -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot 'tools\preflight.ps1')
 if ($LASTEXITCODE -ne 0) { Fail "FAIL: preflight.ps1 failed" 3 }
 
-$phaseDir = Join-Path $repoRoot ("OUTPUTS\phase_{0}" -f $Phase)
+$phaseDir = Join-Path $repoRoot "OUTPUTS\phase_$Phase"
 if (!(Test-Path -LiteralPath $phaseDir)) { New-Item -ItemType Directory -Force -Path $phaseDir | Out-Null }
 
 if ([string]::IsNullOrWhiteSpace($RunId)) {
-  $RunId = "run_{0}" -f (Get-Date -Format "MM-dd-yyyy_HHmmss")
+  $RunId = "run_$(Get-Date -Format 'MM-dd-yyyy_HHmmss')"
 }
 
 $runRoot = Join-Path $phaseDir $RunId
@@ -41,7 +41,7 @@ $plan     = Join-Path $runRoot 'plan.csv'
 $runlog   = Join-Path $runRoot 'runlog.txt'
 $metrics  = Join-Path $runRoot 'metrics.json'
 $rollback = Join-Path $runRoot 'rollback.ps1'
-$summary  = Join-Path $runRoot ("summary_{0}.md" -f (Get-Date -Format "MM-dd-yyyy"))
+$summary  = Join-Path $runRoot "summary_$(Get-Date -Format 'MM-dd-yyyy').md"
 
 if (!(Test-Path -LiteralPath $plan))     { "action_id,op,src_path,dst_path,notes" | Out-File -LiteralPath $plan -Encoding utf8 -NoNewline }
 if (!(Test-Path -LiteralPath $runlog))   { "" | Out-File -LiteralPath $runlog -Encoding utf8 -NoNewline }
@@ -66,13 +66,13 @@ if (!(Test-Path -LiteralPath $rollback)) { "# rollback placeholder (Phase $Phase
 - Started: $((Get-Date).ToString("MM-dd-yyyy HH:mm:ss"))
 "@ | Out-File -LiteralPath $summary -Encoding utf8 -NoNewline
 
-Add-Content -LiteralPath $runlog ("START {0} Phase={1} Mode={2} RunId={3}" -f (Get-Date), $Phase, $Mode, $RunId)
+Add-Content -LiteralPath $runlog "START $(Get-Date) Phase=$Phase Mode=$Mode RunId=$RunId"
 
-$phaseScript = Join-Path $repoRoot ("SRC\phases\phase_{0}.ps1" -f $Phase)
+$phaseScript = Join-Path $repoRoot "SRC\phases\phase_$Phase.ps1"
 if (!(Test-Path -LiteralPath $phaseScript)) { Fail "FAIL: Missing phase script: $phaseScript" 4 }
 
 & pwsh -NoProfile -ExecutionPolicy Bypass -File $phaseScript -RepoRoot $repoRoot.Path -RunRoot $runRoot -EvidenceDir $evidenceDir -Mode $Mode
 if ($LASTEXITCODE -ne 0) { Fail "FAIL: phase script failed ($LASTEXITCODE)" $LASTEXITCODE }
 
-Add-Content -LiteralPath $runlog ("END {0} OK" -f (Get-Date))
+Add-Content -LiteralPath $runlog "END $(Get-Date) OK"
 exit 0

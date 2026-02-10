@@ -10,7 +10,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 function Fail([string]$Message, [int]$Code = 1) {
-  Write-Error $Message
+  Write-Host "FAIL: $Message" -ForegroundColor Red
   exit $Code
 }
 
@@ -23,363 +23,394 @@ function Get-NormalizedPath([string]$Path) {
   }
 }
 
-function Test-PathStartsWith([string]$Path, [string]$Root) {
+function Test-IsUnderRoot([string]$Path, [string]$Root) {
   $pathNorm = Get-NormalizedPath -Path $Path
   $rootNorm = Get-NormalizedPath -Path $Root
   if ([string]::IsNullOrWhiteSpace($pathNorm) -or [string]::IsNullOrWhiteSpace($rootNorm)) {
     return $false
   }
-  return $pathNorm.StartsWith($rootNorm, [System.StringComparison]::OrdinalIgnoreCase)
+
+  $rootWithSlash = $rootNorm
+  if (-not $rootWithSlash.EndsWith('\')) {
+    $rootWithSlash = "$rootWithSlash\"
+  }
+
+  return (
+    $pathNorm.Equals($rootNorm, [System.StringComparison]::OrdinalIgnoreCase) -or
+    $pathNorm.StartsWith($rootWithSlash, [System.StringComparison]::OrdinalIgnoreCase)
+  )
 }
 
-function To-Double([string]$Value) {
+function Convert-ToDouble([object]$Value, [double]$DefaultValue = 0.0) {
+  if ($null -eq $Value) { return $DefaultValue }
   $parsed = 0.0
-  if ([double]::TryParse($Value, [System.Globalization.NumberStyles]::Float, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$parsed)) {
+  $text = [string]$Value
+  if ([double]::TryParse($text, [System.Globalization.NumberStyles]::Float, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$parsed)) {
     return $parsed
   }
-  return 0.0
+  return $DefaultValue
 }
 
-function Write-CsvOrHeader {
+function Resolve-ColumnName([string[]]$Headers, [string[]]$Candidates) {
+  foreach ($candidate in $Candidates) {
+    $match = $Headers | Where-Object { $_ -ieq $candidate } | Select-Object -First 1
+    if ($match) { return [string]$match }
+  }
+  return $null
+}
+
+function Export-RowsOrHeader {
   param(
     [Parameter(Mandatory)][string]$LiteralPath,
-    [Parameter(Mandatory)][array]$Rows,
-    [Parameter(Mandatory)][string]$Header
+    [Parameter(Mandatory)][System.Collections.ArrayList]$Rows,
+    [Parameter(Mandatory)][string]$HeaderLine
   )
 
   if ($Rows.Count -gt 0) {
-    $Rows | Export-Csv -LiteralPath $LiteralPath -NoTypeInformation -Encoding utf8
+    $Rows | ForEach-Object { [pscustomobject]$_ } | Export-Csv -LiteralPath $LiteralPath -NoTypeInformation -Encoding utf8
   } else {
-    Set-Content -LiteralPath $LiteralPath -Encoding utf8 -NoNewline -Value $Header
+    Set-Content -LiteralPath $LiteralPath -Encoding utf8 -NoNewline -Value $HeaderLine
   }
 }
 
 $today = Get-Date -Format 'MM-dd-yyyy'
-$stamp = Get-Date -Format 'MM-dd-yyyy_HHmmss'
+$timestamp = Get-Date -Format 'MM-dd-yyyy_HHmmss'
 
-$configPath = Join-Path $RepoRoot 'project_config.json'
-if (!(Test-Path -LiteralPath $configPath)) {
-  Fail "FAIL: Missing config: $configPath" 2
+$allowedRoots = @(
+  'C:\RH\OPS',
+  'C:\RH\INBOX',
+  'C:\RH\TEMPORARY'
+)
+
+$excludedRoots = @(
+  'C:\RH\VAULT',
+  'C:\RH\LIFE',
+  'C:\LEGACY',
+  'C:\Windows',
+  'C:\Program Files',
+  'C:\Users'
+)
+
+$routingRulesPath = Join-Path $RepoRoot 'SRC\rules\routing_rules_v1.json'
+if (!(Test-Path -LiteralPath $routingRulesPath)) {
+  Fail "Missing routing rules file: $routingRulesPath" 2
 }
 
-$config = Get-Content -LiteralPath $configPath -Raw -Encoding utf8 | ConvertFrom-Json
+$routingRules = Get-Content -LiteralPath $routingRulesPath -Raw -Encoding utf8 | ConvertFrom-Json
+$requiredRuleProps = @(
+  'version',
+  'destination_base',
+  'label_to_relative_dest',
+  'low_confidence_threshold',
+  'default_low_confidence_bucket'
+)
 
-$phase04Dir = Join-Path $RepoRoot 'OUTPUTS\phase_04'
-if (!(Test-Path -LiteralPath $phase04Dir)) {
-  Fail "FAIL: Missing Phase 04 outputs: $phase04Dir" 3
-}
-
-$phase04Runs = @(Get-ChildItem -LiteralPath $phase04Dir -Directory -Filter 'run_*' | Sort-Object LastWriteTime -Descending)
-if ($phase04Runs.Count -eq 0) {
-  Fail "FAIL: No Phase 04 run folders found in $phase04Dir" 4
-}
-
-$sourceRun = $null
-foreach ($candidate in $phase04Runs) {
-  $candidateCsv = Join-Path $candidate.FullName 'classification_results.csv'
-  if (Test-Path -LiteralPath $candidateCsv) {
-    $sourceRun = $candidate
-    break
+foreach ($propName in $requiredRuleProps) {
+  if (-not $routingRules.PSObject.Properties.Name.Contains($propName)) {
+    Fail "routing_rules_v1.json missing required key: $propName" 3
   }
 }
 
-if ($null -eq $sourceRun) {
-  Fail "FAIL: No usable Phase 04 run with classification_results.csv found" 5
+$labelMap = @{}
+foreach ($p in $routingRules.label_to_relative_dest.PSObject.Properties) {
+  $labelMap[$p.Name.ToUpperInvariant()] = [string]$p.Value
 }
 
-$classificationCsv = Join-Path $sourceRun.FullName 'classification_results.csv'
-$rows = @(Import-Csv -LiteralPath $classificationCsv)
-if ($rows.Count -eq 0) {
-  Fail "FAIL: Phase 04 classification_results.csv is empty: $classificationCsv" 6
+$destinationBase = [string]$routingRules.destination_base
+$lowConfidenceThreshold = Convert-ToDouble -Value $routingRules.low_confidence_threshold -DefaultValue 0.8
+$defaultLowConfidenceBucket = [string]$routingRules.default_low_confidence_bucket
+
+$phase04Dir = Join-Path $RepoRoot 'OUTPUTS\phase_04'
+if (!(Test-Path -LiteralPath $phase04Dir)) {
+  Fail "Missing Phase 04 directory: $phase04Dir" 4
 }
+
+$latestPhase04Run = Get-ChildItem -LiteralPath $phase04Dir -Directory -Filter 'run_*' |
+  Sort-Object LastWriteTime -Descending |
+  Select-Object -First 1
+
+if ($null -eq $latestPhase04Run) {
+  Fail "No Phase 04 run_* folders found in $phase04Dir" 5
+}
+
+$classificationCsv = Join-Path $latestPhase04Run.FullName 'classification_results.csv'
+if (!(Test-Path -LiteralPath $classificationCsv)) {
+  Fail "Missing classification_results.csv in latest Phase 04 run: $classificationCsv" 6
+}
+
+$phase04Rows = @(Import-Csv -LiteralPath $classificationCsv)
+if ($phase04Rows.Count -eq 0) {
+  Fail "classification_results.csv is empty: $classificationCsv" 7
+}
+
+$headers = @($phase04Rows[0].PSObject.Properties.Name)
+$sourceColumn = Resolve-ColumnName -Headers $headers -Candidates @('SourcePath')
+$labelColumn = Resolve-ColumnName -Headers $headers -Candidates @('Label')
+$legacyColumnsUsed = $false
+
+if ([string]::IsNullOrWhiteSpace($sourceColumn) -or [string]::IsNullOrWhiteSpace($labelColumn)) {
+  # Explicit compatibility for older Phase 04 outputs.
+  $sourceColumn = Resolve-ColumnName -Headers $headers -Candidates @('source_path')
+  $labelColumn = Resolve-ColumnName -Headers $headers -Candidates @('bucket')
+  if (-not [string]::IsNullOrWhiteSpace($sourceColumn) -and -not [string]::IsNullOrWhiteSpace($labelColumn)) {
+    $legacyColumnsUsed = $true
+  } else {
+    $headerList = ($headers -join ', ')
+    Fail "Required columns missing. Need SourcePath and Label. Found headers: $headerList" 8
+  }
+}
+
+$confidenceColumn = Resolve-ColumnName -Headers $headers -Candidates @('Confidence', 'confidence')
 
 $movePlanPath = Join-Path $RunRoot 'move_plan.csv'
 $collisionsPath = Join-Path $RunRoot 'collisions.csv'
 $exclusionsPath = Join-Path $RunRoot 'exclusions_applied.txt'
-$summaryPath = Join-Path $RunRoot ("planned_changes_summary_{0}.md" -f $today)
+$plannedSummaryPath = Join-Path $RunRoot "planned_changes_summary_$today.md"
 $planPath = Join-Path $RunRoot 'plan.csv'
-$metricsPath = Join-Path $RunRoot 'metrics.json'
 $runLogPath = Join-Path $RunRoot 'runlog.txt'
+$metricsPath = Join-Path $RunRoot 'metrics.json'
 
-$evidenceMovePlanPath = Join-Path $EvidenceDir ("move_plan_{0}.csv" -f $stamp)
-$evidenceCollisionsPath = Join-Path $EvidenceDir ("collisions_{0}.csv" -f $stamp)
-$evidenceExclusionsPath = Join-Path $EvidenceDir ("exclusions_applied_{0}.txt" -f $stamp)
-$evidenceSummaryPath = Join-Path $EvidenceDir ("planned_changes_summary_{0}.md" -f $stamp)
+$evidenceMovePlanPath = Join-Path $EvidenceDir "move_plan_$timestamp.csv"
+$evidenceCollisionsPath = Join-Path $EvidenceDir "collisions_$timestamp.csv"
+$evidenceExclusionsPath = Join-Path $EvidenceDir "exclusions_applied_$timestamp.txt"
+$evidenceSummaryPath = Join-Path $EvidenceDir "planned_changes_summary_$timestamp.md"
 
-$legacyBlockedRoots = @(
-  'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026',
-  'C:\RH\OPS\PROJECTS\oldrh_migration_attempt2'
-)
+$movePlanRows = [System.Collections.ArrayList]::new()
+$collisionRows = [System.Collections.ArrayList]::new()
+$exclusionLines = [System.Collections.ArrayList]::new()
+$collisionActionIds = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 
-$excludeRoots = @()
-$excludeRoots += @($config.exclude_roots)
-$excludeRoots += $legacyBlockedRoots
-$excludeRoots += @(
-  $RepoRoot,
-  (Join-Path $RepoRoot 'OUTPUTS')
-)
-$excludeRoots = @($excludeRoots | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique)
+$sequence = 1
+foreach ($row in $phase04Rows) {
+  $sourcePath = [string]$row.$sourceColumn
+  if ([string]::IsNullOrWhiteSpace($sourcePath)) { continue }
 
-$quarantineRoot = [string]$config.quarantine_root
-if ([string]::IsNullOrWhiteSpace($quarantineRoot)) {
-  $quarantineRoot = 'C:\RH\TEMPORARY'
-}
+  $label = [string]$row.$labelColumn
+  if ([string]::IsNullOrWhiteSpace($label)) { $label = 'UNKNOWN' }
+  $labelKey = $label.ToUpperInvariant()
 
-$routeMap = @{
-  'PROJECT'  = 'C:\RH\OPS\PROJECTS'
-  'NOTES'    = 'C:\RH\OPS'
-  'EVIDENCE' = 'C:\RH\OPS\SYSTEM\DATA\runs'
-  'MEDIA'    = 'C:\RH\INBOX\DESKTOP_SWEEP'
-  'ARCHIVE'  = 'C:\RH\ARCHIVE'
-  'UNKNOWN'  = $quarantineRoot
-}
-
-$autoMove = To-Double -Value ([string]$config.confidence_thresholds.auto_move)
-$reviewMin = To-Double -Value ([string]$config.confidence_thresholds.review_queue_min)
-$reviewMax = To-Double -Value ([string]$config.confidence_thresholds.review_queue_max)
-$quarantineMax = To-Double -Value ([string]$config.confidence_thresholds.quarantine_max)
-
-$planRows = New-Object System.Collections.Generic.List[object]
-$collisionCandidates = New-Object System.Collections.Generic.List[object]
-$collisionRows = New-Object System.Collections.Generic.List[object]
-$spineRows = New-Object System.Collections.Generic.List[object]
-$exclusionsLog = New-Object System.Collections.Generic.List[string]
-
-$counts = @{
-  total = 0
-  excluded = 0
-  plan_move = 0
-  review_required = 0
-  review_quarantine = 0
-}
-
-$actionIndex = 1
-foreach ($row in $rows) {
-  $counts.total++
-
-  $src = [string]$row.source_path
-  if ([string]::IsNullOrWhiteSpace($src)) {
-    continue
+  $confidence = 0.0
+  if (-not [string]::IsNullOrWhiteSpace($confidenceColumn)) {
+    $confidence = Convert-ToDouble -Value $row.$confidenceColumn -DefaultValue 0.0
   }
 
-  $bucket = [string]$row.bucket
-  if ([string]::IsNullOrWhiteSpace($bucket)) {
-    $bucket = 'UNKNOWN'
-  }
-  $bucketUpper = $bucket.ToUpperInvariant()
-  if (-not $routeMap.ContainsKey($bucketUpper)) {
-    $bucketUpper = 'UNKNOWN'
-  }
+  $actionId = "P05_$($sequence.ToString('000000'))"
+  $sequence++
 
-  $confidence = To-Double -Value ([string]$row.confidence)
+  $op = ''
+  $dstPath = ''
+  $reason = ''
+  $notes = ''
 
-  $isExcluded = $false
-  $excludeReason = ''
-
-  foreach ($root in $excludeRoots) {
-    if (Test-PathStartsWith -Path $src -Root $root) {
-      $isExcluded = $true
-      $excludeReason = "excluded_root:$root"
-      break
-    }
+  if ($legacyColumnsUsed) {
+    $notes = 'legacy_header_compatibility_mode'
   }
 
-  if (-not $isExcluded -and $src -match '\\OUTPUTS\\') {
-    $isExcluded = $true
-    $excludeReason = 'excluded_outputs_path'
-  }
-
-  if (-not $isExcluded) {
-    if (!(Test-Path -LiteralPath $src)) {
-      $isExcluded = $true
-      $excludeReason = 'missing_source_at_plan_time'
-    }
-  }
-
-  $destPath = ''
-  $decision = ''
-  $note = ''
-
-  if ($isExcluded) {
-    $decision = 'EXCLUDED'
-    $note = $excludeReason
-    $counts.excluded++
-    $exclusionsLog.Add("{0}`t{1}" -f $src, $excludeReason) | Out-Null
+  $firstExcluded = $excludedRoots | Where-Object { Test-IsUnderRoot -Path $sourcePath -Root $_ } | Select-Object -First 1
+  if ($firstExcluded) {
+    $op = 'EXCLUDED'
+    $reason = "excluded_root:$firstExcluded"
   } else {
-    $leafName = Split-Path -Path $src -Leaf
-    if ([string]::IsNullOrWhiteSpace($leafName)) {
-      $leafName = 'unnamed_item'
-    }
-
-    $destRoot = [string]$routeMap[$bucketUpper]
-    $destPath = Join-Path $destRoot $leafName
-
-    if ($bucketUpper -eq 'UNKNOWN' -or $confidence -le $quarantineMax) {
-      $decision = 'REVIEW_QUARANTINE'
-      $counts.review_quarantine++
-      if ($bucketUpper -eq 'UNKNOWN') {
-        $note = 'bucket_unknown'
-      } else {
-        $note = "confidence_le_quarantine_max:$quarantineMax"
+    $isAllowed = $false
+    foreach ($root in $allowedRoots) {
+      if (Test-IsUnderRoot -Path $sourcePath -Root $root) {
+        $isAllowed = $true
+        break
       }
-    } elseif ($confidence -ge $autoMove) {
-      $decision = 'PLAN_MOVE'
-      $counts.plan_move++
-    } elseif ($confidence -ge $reviewMin -and $confidence -le $reviewMax) {
-      $decision = 'REVIEW_REQUIRED'
-      $counts.review_required++
-      $note = "confidence_review_band:$reviewMin-$reviewMax"
-    } else {
-      $decision = 'REVIEW_REQUIRED'
-      $counts.review_required++
-      $note = "confidence_between_review_max_and_auto_move:$reviewMax-$autoMove"
     }
 
-    $collisionCandidates.Add([pscustomobject]@{
-      source_path = $src
-      dst_path = $destPath
-      bucket = $bucketUpper
-      decision = $decision
-    }) | Out-Null
+    if (-not $isAllowed) {
+      $op = 'EXCLUDED'
+      $reason = 'outside_allowed_roots'
+    } elseif ($sourcePath -match '\\OUTPUTS\\') {
+      $op = 'EXCLUDED'
+      $reason = 'outputs_source_disallowed'
+    } else {
+      $leafName = Split-Path -Path $sourcePath -Leaf
+      if ([string]::IsNullOrWhiteSpace($leafName)) { $leafName = 'unnamed_item' }
+
+      $relativeDest = ''
+      $isLowConfidence = $confidence -lt $lowConfidenceThreshold
+      if ($labelMap.ContainsKey($labelKey) -and -not $isLowConfidence) {
+        $relativeDest = [string]$labelMap[$labelKey]
+        $op = 'MOVE_PLAN'
+        $reason = 'mapped_label'
+      } else {
+        $relativeDest = $defaultLowConfidenceBucket
+        $op = 'QUARANTINE_PLAN'
+        if (-not $labelMap.ContainsKey($labelKey)) {
+          $reason = 'label_unmapped'
+        } else {
+          $reason = "confidence_below_threshold:$lowConfidenceThreshold"
+        }
+      }
+
+      $relativeDest = $relativeDest.TrimStart('\')
+      $destDir = Join-Path $destinationBase $relativeDest
+      $dstPath = Join-Path $destDir $leafName
+    }
   }
 
-  $actionId = "P05-{0:d6}" -f $actionIndex
-  $actionIndex++
+  if ($op -eq 'EXCLUDED') {
+    $null = $exclusionLines.Add("$sourcePath`t$reason")
+  }
 
-  $planRows.Add([pscustomobject]@{
+  $null = $movePlanRows.Add([ordered]@{
     action_id = $actionId
-    decision = $decision
-    source_path = $src
-    proposed_destination = $destPath
-    bucket = $bucketUpper
-    confidence = [math]::Round($confidence, 2)
-    rule_id = [string]$row.rule_id
-    reason = [string]$row.reason
-    notes = $note
-  }) | Out-Null
-
-  $spineRows.Add([pscustomobject]@{
-    action_id = $actionId
-    op = $decision
-    src_path = $src
-    dst_path = $destPath
-    notes = $note
-  }) | Out-Null
+    op = $op
+    src_path = $sourcePath
+    dst_path = $dstPath
+    label = $label
+    confidence = [math]::Round($confidence, 4)
+    reason = $reason
+    notes = $notes
+  })
 }
 
 $collisionId = 1
-$groupedByDestination = $collisionCandidates | Where-Object { -not [string]::IsNullOrWhiteSpace($_.dst_path) } | Group-Object -Property dst_path
-foreach ($group in $groupedByDestination) {
-  $destination = [string]$group.Name
-  $existingDestination = Test-Path -LiteralPath $destination
-  $sourceCount = $group.Count
+$collisionCandidates = $movePlanRows | Where-Object { -not [string]::IsNullOrWhiteSpace($_.dst_path) }
+$collisionGroups = $collisionCandidates | Group-Object -Property dst_path
 
-  if ($sourceCount -gt 1 -or $existingDestination) {
-    $collisionType = if ($sourceCount -gt 1 -and $existingDestination) {
-      'MULTI_SOURCE_AND_DESTINATION_EXISTS'
-    } elseif ($sourceCount -gt 1) {
-      'MULTI_SOURCE'
+foreach ($group in $collisionGroups) {
+  $dst = [string]$group.Name
+  $destinationExists = Test-Path -LiteralPath $dst
+  $hasMultipleSources = $group.Count -gt 1
+
+  if ($destinationExists -or $hasMultipleSources) {
+    $collisionType = ''
+    if ($destinationExists -and $hasMultipleSources) {
+      $collisionType = 'MULTI_SOURCE_AND_DESTINATION_EXISTS'
+    } elseif ($hasMultipleSources) {
+      $collisionType = 'MULTI_SOURCE'
     } else {
-      'DESTINATION_EXISTS'
+      $collisionType = 'DESTINATION_EXISTS'
     }
 
-    foreach ($item in $group.Group) {
-      $collisionRows.Add([pscustomobject]@{
-        collision_id = "COL-{0:d5}" -f $collisionId
-        dst_path = $destination
+    foreach ($entry in $group.Group) {
+      $null = $collisionActionIds.Add([string]$entry.action_id)
+      $null = $collisionRows.Add([ordered]@{
+        collision_id = "COL_$($collisionId.ToString('00000'))"
+        action_id = [string]$entry.action_id
+        dst_path = $dst
         collision_type = $collisionType
-        source_path = $item.source_path
-        bucket = $item.bucket
-        decision = $item.decision
-        resolution = 'suffix_policy__01_to__99_or_manual_review'
-      }) | Out-Null
+        src_path = [string]$entry.src_path
+        prior_op = [string]$entry.op
+        resolution = 'manual_review_required_no_overwrite'
+      })
     }
 
     $collisionId++
   }
 }
 
-Write-CsvOrHeader -LiteralPath $movePlanPath -Rows $planRows -Header 'action_id,decision,source_path,proposed_destination,bucket,confidence,rule_id,reason,notes'
-Write-CsvOrHeader -LiteralPath $collisionsPath -Rows $collisionRows -Header 'collision_id,dst_path,collision_type,source_path,bucket,decision,resolution'
-Write-CsvOrHeader -LiteralPath $planPath -Rows $spineRows -Header 'action_id,op,src_path,dst_path,notes'
+foreach ($row in $movePlanRows) {
+  if ($collisionActionIds.Contains([string]$row.action_id)) {
+    $row.op = 'REVIEW_COLLISION'
+    if ([string]::IsNullOrWhiteSpace([string]$row.reason)) {
+      $row.reason = 'collision_detected'
+    } else {
+      $row.reason = "$($row.reason);collision_detected"
+    }
+  }
+}
 
-$exclusionLines = @(
+$planRows = [System.Collections.ArrayList]::new()
+foreach ($row in $movePlanRows) {
+  $null = $planRows.Add([ordered]@{
+    action_id = [string]$row.action_id
+    op = [string]$row.op
+    src_path = [string]$row.src_path
+    dst_path = [string]$row.dst_path
+    notes = [string]$row.reason
+  })
+}
+
+Export-RowsOrHeader -LiteralPath $movePlanPath -Rows $movePlanRows -HeaderLine 'action_id,op,src_path,dst_path,label,confidence,reason,notes'
+Export-RowsOrHeader -LiteralPath $collisionsPath -Rows $collisionRows -HeaderLine 'collision_id,action_id,dst_path,collision_type,src_path,prior_op,resolution'
+Export-RowsOrHeader -LiteralPath $planPath -Rows $planRows -HeaderLine 'action_id,op,src_path,dst_path,notes'
+
+$excludedCount = @($movePlanRows | Where-Object { $_.op -eq 'EXCLUDED' }).Count
+$moveCount = @($movePlanRows | Where-Object { $_.op -eq 'MOVE_PLAN' }).Count
+$quarantineCount = @($movePlanRows | Where-Object { $_.op -eq 'QUARANTINE_PLAN' }).Count
+$collisionReviewCount = @($movePlanRows | Where-Object { $_.op -eq 'REVIEW_COLLISION' }).Count
+
+$exclusionsText = @(
   "Phase: 05"
   "Mode: $Mode"
   "Generated: $(Get-Date -Format 'MM-dd-yyyy HH:mm:ss')"
-  "Source Phase 04 Run: $($sourceRun.Name)"
-  "Source CSV: $classificationCsv"
-  ""
-  "Hard-excluded roots:"
-) + ($excludeRoots | ForEach-Object { "  - $_" }) + @(
-  ""
-  "Excluded records ($($counts.excluded)):"
-) + ($exclusionsLog | ForEach-Object { $_ })
+  "Latest Phase 04 run: $($latestPhase04Run.Name)"
+  "Classification CSV: $classificationCsv"
+  "Headers used: Source=$sourceColumn Label=$labelColumn Confidence=$confidenceColumn"
+  "Legacy header compatibility: $legacyColumnsUsed"
+  ''
+  'Allowed roots:'
+) + ($allowedRoots | ForEach-Object { "  - $_" }) + @(
+  ''
+  'Excluded roots:'
+) + ($excludedRoots | ForEach-Object { "  - $_" }) + @(
+  ''
+  "Excluded records ($excludedCount):"
+) + ($exclusionLines | ForEach-Object { $_ })
 
-Set-Content -LiteralPath $exclusionsPath -Encoding utf8 -NoNewline -Value ($exclusionLines -join [Environment]::NewLine)
+Set-Content -LiteralPath $exclusionsPath -Encoding utf8 -NoNewline -Value ($exclusionsText -join [Environment]::NewLine)
 
-$summaryLines = @(
+$plannedSummary = @(
   "# Phase 05 Planned Changes Summary"
   ""
   "- Date: $today"
   "- Mode: $Mode"
-  "- Source Phase 04 run: $($sourceRun.Name)"
-  "- Source rows scanned: $($counts.total)"
-  "- Planned move rows: $($counts.plan_move)"
-  "- Review-required rows: $($counts.review_required)"
-  "- Quarantine-review rows: $($counts.review_quarantine)"
-  "- Excluded rows: $($counts.excluded)"
-  "- Collision rows: $($collisionRows.Count)"
+  "- Latest Phase 04 run: $($latestPhase04Run.Name)"
+  "- Input rows: $($movePlanRows.Count)"
+  "- MOVE_PLAN rows: $moveCount"
+  "- QUARANTINE_PLAN rows: $quarantineCount"
+  "- REVIEW_COLLISION rows: $collisionReviewCount"
+  "- EXCLUDED rows: $excludedCount"
+  "- Collisions listed: $($collisionRows.Count)"
+  "- Legacy header compatibility used: $legacyColumnsUsed"
   ""
-  "## Outputs"
-  "- $movePlanPath"
-  "- $collisionsPath"
-  "- $exclusionsPath"
+  "## Routing Rule File"
+  "- $routingRulesPath"
   ""
-  "## Notes"
-  "- Plan-only phase: no file moves are executed."
-  "- Legacy paths are hard-excluded by prefix match before filesystem checks."
+  "## Guarantees"
+  "- Plan-only phase: no user files moved or renamed."
+  "- Collision rows are never left as MOVE_PLAN."
 )
 
-Set-Content -LiteralPath $summaryPath -Encoding utf8 -NoNewline -Value ($summaryLines -join [Environment]::NewLine)
+Set-Content -LiteralPath $plannedSummaryPath -Encoding utf8 -NoNewline -Value ($plannedSummary -join [Environment]::NewLine)
 
 Copy-Item -LiteralPath $movePlanPath -Destination $evidenceMovePlanPath -Force
 Copy-Item -LiteralPath $collisionsPath -Destination $evidenceCollisionsPath -Force
 Copy-Item -LiteralPath $exclusionsPath -Destination $evidenceExclusionsPath -Force
-Copy-Item -LiteralPath $summaryPath -Destination $evidenceSummaryPath -Force
+Copy-Item -LiteralPath $plannedSummaryPath -Destination $evidenceSummaryPath -Force
 
-$metrics = @{}
+$metricsData = @{}
 if (Test-Path -LiteralPath $metricsPath) {
   try {
-    $existingMetrics = Get-Content -LiteralPath $metricsPath -Raw -Encoding utf8 | ConvertFrom-Json
-    foreach ($prop in $existingMetrics.PSObject.Properties) {
-      $metrics[$prop.Name] = $prop.Value
+    $existing = Get-Content -LiteralPath $metricsPath -Raw -Encoding utf8 | ConvertFrom-Json
+    foreach ($prop in $existing.PSObject.Properties) {
+      $metricsData[$prop.Name] = $prop.Value
     }
   } catch {
-    $metrics = @{}
+    $metricsData = @{}
   }
 }
 
-$metrics.phase05 = @{
-  source_phase04_run = $sourceRun.Name
-  source_csv = $classificationCsv
-  total_rows = $counts.total
-  planned_move_rows = $counts.plan_move
-  review_required_rows = $counts.review_required
-  review_quarantine_rows = $counts.review_quarantine
-  excluded_rows = $counts.excluded
-  collision_rows = $collisionRows.Count
-  thresholds = @{
-    auto_move = $autoMove
-    review_queue_min = $reviewMin
-    review_queue_max = $reviewMax
-    quarantine_max = $quarantineMax
-  }
-  generated_at = (Get-Date).ToUniversalTime().ToString('o')
+$metricsData.phase05 = @{
+  latest_phase04_run = $latestPhase04Run.Name
+  classification_csv = $classificationCsv
+  rows_total = $movePlanRows.Count
+  rows_move_plan = $moveCount
+  rows_quarantine_plan = $quarantineCount
+  rows_review_collision = $collisionReviewCount
+  rows_excluded = $excludedCount
+  collisions = $collisionRows.Count
+  low_confidence_threshold = $lowConfidenceThreshold
+  legacy_header_compatibility = $legacyColumnsUsed
+  generated_utc = (Get-Date).ToUniversalTime().ToString('o')
 }
 
-$metrics | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $metricsPath -Encoding utf8 -NoNewline
+$metricsData | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $metricsPath -Encoding utf8 -NoNewline
 
-Add-Content -LiteralPath $runLogPath -Encoding utf8 -Value ("PHASE05 source_phase04_run={0} rows={1} plan_move={2} review={3} quarantine={4} excluded={5} collisions={6}" -f $sourceRun.Name, $counts.total, $counts.plan_move, $counts.review_required, $counts.review_quarantine, $counts.excluded, $collisionRows.Count)
+Add-Content -LiteralPath $runLogPath -Encoding utf8 -Value "PHASE05 latest_phase04_run=$($latestPhase04Run.Name) rows=$($movePlanRows.Count) move=$moveCount quarantine=$quarantineCount collision_review=$collisionReviewCount excluded=$excludedCount"
 
 exit 0

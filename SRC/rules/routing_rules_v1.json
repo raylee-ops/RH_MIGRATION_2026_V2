@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "destination_base": "C:\\RH",
+  "label_to_relative_dest": {
+    "PROJECT": "OPS\\PROJECTS",
+    "NOTES": "OPS",
+    "EVIDENCE": "OPS\\SYSTEM\\DATA\\runs",
+    "MEDIA": "INBOX\\DESKTOP_SWEEP",
+    "ARCHIVE": "ARCHIVE"
+  },
+  "low_confidence_threshold": 0.8,
+  "default_low_confidence_bucket": "TEMPORARY\\phase05_low_confidence"
+}

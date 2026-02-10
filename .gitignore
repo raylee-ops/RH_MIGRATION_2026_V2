@@ -26,3 +26,4 @@ OUTPUTS/
 *.key
 *.pem
 *.env
+PACKAGES/
