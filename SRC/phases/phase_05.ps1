@@ -62,7 +62,7 @@ function Resolve-ColumnName([string[]]$Headers, [string[]]$Candidates) {
 function Export-RowsOrHeader {
   param(
     [Parameter(Mandatory)][string]$LiteralPath,
-    [Parameter(Mandatory)][System.Collections.ArrayList]$Rows,
+    [Parameter(Mandatory)][AllowEmptyCollection()][System.Collections.ArrayList]$Rows,
     [Parameter(Mandatory)][string]$HeaderLine
   )
 
@@ -206,48 +206,77 @@ foreach ($row in $phase04Rows) {
     $notes = 'legacy_header_compatibility_mode'
   }
 
-  $firstExcluded = $excludedRoots | Where-Object { Test-IsUnderRoot -Path $sourcePath -Root $_ } | Select-Object -First 1
-  if ($firstExcluded) {
+  # Exclude .git internals (directories and files inside .git)
+  if ($sourcePath -like '*\.git\*') {
     $op = 'EXCLUDED'
-    $reason = "excluded_root:$firstExcluded"
+    $reason = 'Excluded: .git internals'
   } else {
-    $isAllowed = $false
-    foreach ($root in $allowedRoots) {
-      if (Test-IsUnderRoot -Path $sourcePath -Root $root) {
-        $isAllowed = $true
-        break
-      }
-    }
-
-    if (-not $isAllowed) {
+    $firstExcluded = $excludedRoots | Where-Object { Test-IsUnderRoot -Path $sourcePath -Root $_ } | Select-Object -First 1
+    if ($firstExcluded) {
       $op = 'EXCLUDED'
-      $reason = 'outside_allowed_roots'
-    } elseif ($sourcePath -match '\\OUTPUTS\\') {
-      $op = 'EXCLUDED'
-      $reason = 'outputs_source_disallowed'
+      $reason = "excluded_root:$firstExcluded"
     } else {
-      $leafName = Split-Path -Path $sourcePath -Leaf
-      if ([string]::IsNullOrWhiteSpace($leafName)) { $leafName = 'unnamed_item' }
-
-      $relativeDest = ''
-      $isLowConfidence = $confidence -lt $lowConfidenceThreshold
-      if ($labelMap.ContainsKey($labelKey) -and -not $isLowConfidence) {
-        $relativeDest = [string]$labelMap[$labelKey]
-        $op = 'MOVE_PLAN'
-        $reason = 'mapped_label'
-      } else {
-        $relativeDest = $defaultLowConfidenceBucket
-        $op = 'QUARANTINE_PLAN'
-        if (-not $labelMap.ContainsKey($labelKey)) {
-          $reason = 'label_unmapped'
-        } else {
-          $reason = "confidence_below_threshold:$lowConfidenceThreshold"
+      $isAllowed = $false
+      foreach ($root in $allowedRoots) {
+        if (Test-IsUnderRoot -Path $sourcePath -Root $root) {
+          $isAllowed = $true
+          break
         }
       }
 
-      $relativeDest = $relativeDest.TrimStart('\')
-      $destDir = Join-Path $destinationBase $relativeDest
-      $dstPath = Join-Path $destDir $leafName
+      if (-not $isAllowed) {
+        $op = 'EXCLUDED'
+        $reason = 'outside_allowed_roots'
+      } elseif ($sourcePath -match '\\OUTPUTS\\') {
+        $op = 'EXCLUDED'
+        $reason = 'outputs_source_disallowed'
+      } else {
+        $leafName = Split-Path -Path $sourcePath -Leaf
+        if ([string]::IsNullOrWhiteSpace($leafName)) { $leafName = 'unnamed_item' }
+
+        # Determine which allowed root the source is under and compute relative path
+        $matchedRoot = ''
+        foreach ($root in $allowedRoots) {
+          if (Test-IsUnderRoot -Path $sourcePath -Root $root) {
+            $matchedRoot = Get-NormalizedPath -Path $root
+            break
+          }
+        }
+        $normalizedSrc = Get-NormalizedPath -Path $sourcePath
+        $relFromRoot = ''
+        if (-not [string]::IsNullOrWhiteSpace($matchedRoot)) {
+          $rootPrefix = $matchedRoot
+          if (-not $rootPrefix.EndsWith('\')) { $rootPrefix = "$rootPrefix\" }
+          if ($normalizedSrc.StartsWith($rootPrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $relFromRoot = $normalizedSrc.Substring($rootPrefix.Length)
+          }
+        }
+
+        $relativeDest = ''
+        $isLowConfidence = $confidence -lt $lowConfidenceThreshold
+        if ($labelMap.ContainsKey($labelKey) -and -not $isLowConfidence) {
+          $relativeDest = [string]$labelMap[$labelKey]
+          $op = 'MOVE_PLAN'
+          $reason = 'mapped_label'
+        } else {
+          $relativeDest = $defaultLowConfidenceBucket
+          $op = 'QUARANTINE_PLAN'
+          if (-not $labelMap.ContainsKey($labelKey)) {
+            $reason = 'label_unmapped'
+          } else {
+            $reason = "confidence_below_threshold:$lowConfidenceThreshold"
+          }
+        }
+
+        $relativeDest = $relativeDest.TrimStart('\')
+        $destDir = Join-Path $destinationBase $relativeDest
+        # Preserve relative parent directories from source to prevent collisions
+        $relParent = Split-Path $relFromRoot -Parent
+        if (-not [string]::IsNullOrWhiteSpace($relParent)) {
+          $destDir = Join-Path $destDir $relParent
+        }
+        $dstPath = Join-Path $destDir $leafName
+      }
     }
   }
 
@@ -268,13 +297,21 @@ foreach ($row in $phase04Rows) {
 }
 
 $collisionId = 1
-$collisionCandidates = $movePlanRows | Where-Object { -not [string]::IsNullOrWhiteSpace($_.dst_path) }
-$collisionGroups = $collisionCandidates | Group-Object -Property dst_path
+$collisionCandidates = $movePlanRows | Where-Object { -not [string]::IsNullOrWhiteSpace($_['dst_path']) }
+$collisionGroups = $collisionCandidates | Group-Object -Property { [string]$_['dst_path'] }
 
 foreach ($group in $collisionGroups) {
   $dst = [string]$group.Name
-  $destinationExists = Test-Path -LiteralPath $dst
+  $destinationExists = Test-Path -LiteralPath $dst -PathType Leaf
   $hasMultipleSources = $group.Count -gt 1
+
+  # Skip self-mapping: single source that IS the destination file is not a collision
+  if (-not $hasMultipleSources -and $destinationExists) {
+    $srcOfSingle = [string]$group.Group[0]['src_path']
+    if ($srcOfSingle.Equals($dst, [System.StringComparison]::OrdinalIgnoreCase)) {
+      continue
+    }
+  }
 
   if ($destinationExists -or $hasMultipleSources) {
     $collisionType = ''
@@ -287,14 +324,14 @@ foreach ($group in $collisionGroups) {
     }
 
     foreach ($entry in $group.Group) {
-      $null = $collisionActionIds.Add([string]$entry.action_id)
+      $null = $collisionActionIds.Add([string]$entry['action_id'])
       $null = $collisionRows.Add([ordered]@{
         collision_id = "COL_$($collisionId.ToString('00000'))"
-        action_id = [string]$entry.action_id
+        action_id = [string]$entry['action_id']
         dst_path = $dst
         collision_type = $collisionType
-        src_path = [string]$entry.src_path
-        prior_op = [string]$entry.op
+        src_path = [string]$entry['src_path']
+        prior_op = [string]$entry['op']
         resolution = 'manual_review_required_no_overwrite'
       })
     }
@@ -304,12 +341,12 @@ foreach ($group in $collisionGroups) {
 }
 
 foreach ($row in $movePlanRows) {
-  if ($collisionActionIds.Contains([string]$row.action_id)) {
-    $row.op = 'REVIEW_COLLISION'
-    if ([string]::IsNullOrWhiteSpace([string]$row.reason)) {
-      $row.reason = 'collision_detected'
+  if ($collisionActionIds.Contains([string]$row['action_id'])) {
+    $row['op'] = 'REVIEW_COLLISION'
+    if ([string]::IsNullOrWhiteSpace([string]$row['reason'])) {
+      $row['reason'] = 'collision_detected'
     } else {
-      $row.reason = "$($row.reason);collision_detected"
+      $row['reason'] = "$($row['reason']);collision_detected"
     }
   }
 }
@@ -317,11 +354,11 @@ foreach ($row in $movePlanRows) {
 $planRows = [System.Collections.ArrayList]::new()
 foreach ($row in $movePlanRows) {
   $null = $planRows.Add([ordered]@{
-    action_id = [string]$row.action_id
-    op = [string]$row.op
-    src_path = [string]$row.src_path
-    dst_path = [string]$row.dst_path
-    notes = [string]$row.reason
+    action_id = [string]$row['action_id']
+    op = [string]$row['op']
+    src_path = [string]$row['src_path']
+    dst_path = [string]$row['dst_path']
+    notes = [string]$row['reason']
   })
 }
 
@@ -329,10 +366,10 @@ Export-RowsOrHeader -LiteralPath $movePlanPath -Rows $movePlanRows -HeaderLine '
 Export-RowsOrHeader -LiteralPath $collisionsPath -Rows $collisionRows -HeaderLine 'collision_id,action_id,dst_path,collision_type,src_path,prior_op,resolution'
 Export-RowsOrHeader -LiteralPath $planPath -Rows $planRows -HeaderLine 'action_id,op,src_path,dst_path,notes'
 
-$excludedCount = @($movePlanRows | Where-Object { $_.op -eq 'EXCLUDED' }).Count
-$moveCount = @($movePlanRows | Where-Object { $_.op -eq 'MOVE_PLAN' }).Count
-$quarantineCount = @($movePlanRows | Where-Object { $_.op -eq 'QUARANTINE_PLAN' }).Count
-$collisionReviewCount = @($movePlanRows | Where-Object { $_.op -eq 'REVIEW_COLLISION' }).Count
+$excludedCount = @($movePlanRows | Where-Object { $_['op'] -eq 'EXCLUDED' }).Count
+$moveCount = @($movePlanRows | Where-Object { $_['op'] -eq 'MOVE_PLAN' }).Count
+$quarantineCount = @($movePlanRows | Where-Object { $_['op'] -eq 'QUARANTINE_PLAN' }).Count
+$collisionReviewCount = @($movePlanRows | Where-Object { $_['op'] -eq 'REVIEW_COLLISION' }).Count
 
 $exclusionsText = @(
   "Phase: 05"
