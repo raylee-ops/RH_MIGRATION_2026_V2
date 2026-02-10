@@ -1,0 +1,5 @@
+step,action,scope,notes
+1,scan,read-only,Roots: C:\RH\OPS; C:\RH\INBOX; C:\RH\TEMPORARY
+2,classify,read-only,Rules v1 applied to paths/extensions
+3,write_outputs,outputs-only,CSV/YAML/MD/JSON emitted into run folder
+4,queue_review,outputs-only,Low-confidence written to misclass_queue.csv

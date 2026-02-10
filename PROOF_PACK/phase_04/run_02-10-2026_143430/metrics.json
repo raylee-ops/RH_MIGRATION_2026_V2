@@ -1,0 +1,12 @@
+{
+  "item_count": 9685,
+  "low_conf_count": 3068,
+  "generated_at": "2026-02-10T14:34:33",
+  "phase": 4,
+  "low_conf_threshold": 0.8,
+  "roots": [
+    "C:\\RH\\OPS",
+    "C:\\RH\\INBOX",
+    "C:\\RH\\TEMPORARY"
+  ]
+}
