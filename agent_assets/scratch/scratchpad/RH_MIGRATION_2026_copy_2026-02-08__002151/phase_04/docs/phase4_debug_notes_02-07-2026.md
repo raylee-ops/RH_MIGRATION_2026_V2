@@ -1,0 +1,203 @@
+You don’t have a “clustering problem.” You have a **string-matching bug in your rules** that *forces* big, obvious buckets (LIFE) to miss the LIFE classifier and fall into **SCRATCH_INTAKE**, inflating triage.
+
+The good news: the **smallest safe YAML change** drops triage under 30% without touching Tier1 anchors. Humans accidentally invent problems all the time. 🤝
+
+---
+
+## 1) Smallest safe YAML change to get triage < 30%
+
+### What’s happening
+
+Your biggest triage buckets are:
+
+| RootGroup (triage unit) | Members | What it is                           |
+| ----------------------- | ------: | ------------------------------------ |
+| `ROOT_MISC\_INBOX`      |     900 | screenshots/downloads dumping ground |
+| `LIFE\Personal`         |     515 | iCloud photos + personal media       |
+| `LIFE\Admin`            |      69 | PS modules/configs/scripts           |
+| `OPS\RESEARCH`          |      54 | notes/docs                           |
+| `ROOT_MISC\.obsidian`   |      54 | Obsidian vault config                |
+
+Your current `LIFE_PERSONAL` rule checks `source_root_contains: ['\\FROM_2026\\LIFE\\']`, but **the classifier matches against `Unit.RootGroup`** (e.g. `LIFE\Personal`), not the full `SourcePath`. So it never hits. That’s why 613 LIFE files become SCRATCH.
+
+### Guaranteed impact
+
+If we correctly classify **all LIFE*** buckets, triage drops from:
+
+* **1827 / 5025 = 36.36%**
+  to
+* **(1827 − 613) / 5025 = 24.16%** ✅
+
+This aligns with your migration map of LIFE destinations. 
+
+---
+
+## 2) Concrete YAML edits (diff style)
+
+### **Required (the one change that fixes the FAIL)**
+
+```diff
+--- a/phase4_rules_FIXED.yml
++++ b/phase4_rules_FIXED.yml
+@@
+ classification_rules:
+   - type: LIFE_PERSONAL
+     priority: 5
+     destination_template: 'C:\RH\LIFE\{original_subfolder}'
+     unit_prefix: LIFE
+     create_scaffold: false
+     conditions:
+-      source_root_contains: ['\FROM_2026\LIFE\']
++      # NOTE: classifier matches against Unit.RootGroup (e.g., "LIFE\Personal"),
++      # not full SourcePath. Keep this broad but still scoped to LIFE only.
++      source_root_contains: ['LIFE\']
+```
+
+That’s it. No Tier1 anchor loosening, no “match everything,” no script changes.
+
+---
+
+### Optional (safe add-ons mapped to other top triage causes)
+
+These are **not needed** to hit <30%, but they clean up the remaining obvious buckets and match your plan’s intent for `_INBOX` and dotfolders.  
+
+```diff
+--- a/phase4_rules_FIXED.yml
++++ b/phase4_rules_FIXED.yml
+@@
+ classification_rules:
++  - type: OPS_INBOX_SWEEP
++    priority: 6
++    destination_template: 'C:\RH\INBOX\imports\{date_slug}\{topic_slug}'
++    unit_prefix: INBOX
++    create_scaffold: false
++    conditions:
++      source_root_contains: ['ROOT_MISC\_INBOX']
++
++  - type: OPS_SYSTEM_CONFIGS
++    priority: 7
++    destination_template: 'C:\RH\OPS\SYSTEM\configs\imports\{date_slug}\{topic_slug}'
++    unit_prefix: SYS
++    create_scaffold: false
++    conditions:
++      source_root_contains: ['ROOT_MISC\.obsidian', 'ROOT_MISC\.claude']
++
++  - type: OPS_RESEARCH_IMPORT
++    priority: 8
++    destination_template: 'C:\RH\OPS\RESEARCH\imports\{date_slug}\{topic_slug}'
++    unit_prefix: RSRCH
++    create_scaffold: false
++    conditions:
++      source_root_contains: ['OPS\RESEARCH']
+```
+
+> Why these are “safe”: they **reclassify already-existing triage units** (they don’t create new clusters), and they follow your own destination policy for `_INBOX` + config storage.  
+
+---
+
+## 3) Top 5 triage causes (from CSVs) → rule change mapping
+
+### Cause 1: LIFE buckets never match LIFE rule (RootGroup mismatch)
+
+* **Bucket**: `LIFE\Personal` (515), `LIFE\Admin` (69), `LIFE\MIND` (20+)
+* **Extensions**: mostly `.jpg/.png/.mjs` (Personal), `.ps1/.psd1/.ini` (Admin)
+* **Common tokens**: `life`, `personal`, `pictures`, `icloud`, `powershell`, `modules`
+* **Fix**: **Required diff** above (`source_root_contains: ['LIFE\']`)
+
+### Cause 2: `_INBOX` screenshot pile (mostly images)
+
+* **Bucket**: `ROOT_MISC\_INBOX` (900)
+* **Extensions**: `.png` dominates (747), plus `.md/.txt/.pdf/.zip`
+* **Tokens**: `screenshots`, `screenshot`, `windows`, `downloads`, duplicate markers
+* **Fix**: optional `OPS_INBOX_SWEEP` rule (routes it where it belongs)
+
+### Cause 3: Obsidian vault config stranded at root_misc
+
+* **Bucket**: `ROOT_MISC\.obsidian` (54)
+* **Extensions**: `.json/.css/.js`
+* **Tokens**: `obsidian`, `plugins`, `manifest`, `snippets`
+* **Fix**: optional `OPS_SYSTEM_CONFIGS` rule (gets dotfolder junk out of triage, matches dotfolder policy) 
+
+### Cause 4: Research notes/documents orphaned as a unit
+
+* **Bucket**: `OPS\RESEARCH` (54)
+* **Extensions**: mostly `.md` (40), then `.txt/.pdf`
+* **Tokens**: `research`, `market`, `job`, `facts`, `template`
+* **Fix**: optional `OPS_RESEARCH_IMPORT` rule (maps to your RESEARCH destination) 
+
+### Cause 5: “Admin tools” living under LIFE\Admin (should still be LIFE)
+
+* This is mostly solved by Cause 1 fix, but worth calling out:
+* **Extensions**: `.ps1/.psd1/.psm1/.sh/.xml/.dll`
+* **Tokens**: `powershell`, `modules`, `psreadline`, `helpers`
+* **Fix**: same as Cause 1 (classify to `C:\RH\LIFE\Admin\...`), which matches your destination spec 
+
+---
+
+## 4) Short validation plan (rerun + acceptance metrics)
+
+### Exact rerun command (same as your Random 5000 dry-run)
+
+```powershell
+pwsh -File .\Execute-Phase4_FIXED.ps1 `
+  -QuarantinePath 'C:\RH\OPS\QUARANTINE\FROM_2026' `
+  -RulesPath '.\phase4_rules_FIXED.yml' `
+  -SampleMode Random `
+  -MaxFiles 5000
+```
+
+### Acceptance metrics
+
+* **TRIAGE (SCRATCH_INTAKE + TRIAGE_LOWCONF) < 30%** ✅ target
+* **Expect**: triage drops to ~**24%** just from LIFE fix
+* **LIFE_PERSONAL move rows** should jump from **47 → ~613+**
+* **Tier1 anchors** remain ~**436** (should not spike)
+* **Secrets routed** should stay ~**51** and still be “flag-only” behavior 
+
+---
+
+## Patch checklist (exact YAML keys/sections)
+
+Touch only these, in order:
+
+1. `classification_rules`
+
+   * `type: LIFE_PERSONAL`
+
+     * `conditions.source_root_contains`  ✅ **required**
+
+2. (Optional) `classification_rules`
+
+   * add `type: OPS_INBOX_SWEEP`
+   * add `type: OPS_SYSTEM_CONFIGS`
+   * add `type: OPS_RESEARCH_IMPORT`
+
+Nothing else. Leave `anchors:` alone to avoid Tier1 anchor blast radius.
+
+---
+
+## Redaction / secrets safety notes
+
+* **Do not** add any rule that auto-moves suspected credentials into normal destinations.
+* Keep secrets handling as **FLAG ONLY**; manual review to `C:\RH\VAULT\_SECRETS_TRIAGE\...` is explicitly the policy. 
+* When sharing logs/CSVs/screenshots as “evidence,” **redact**:
+
+  * tokens, API keys, SSH config contents, `.env`, browser exports
+  * file bodies of anything secrets-flagged (paths + metadata only is fine)
+
+---
+
+### Important clarification
+
+* **Do not** loosen Tier1 filename patterns or required features to “catch more.” That’s how you get anchors that match everything and ruin clustering.
+* **Do not** refactor scripts. This is a rules mismatch, not a code architecture crisis.
+
+If you apply only the LIFE rule fix, your triage % stops failing immediately. The rest is cleanup for a world where humans insist on having 900 screenshots of… something. 📸
+
+
+Change Log
+- Date/Time: 2026-02-07 19:13:40
+- Change: INBOX canonical root moved from OPS to RH root
+- Why: aligns with Phase 6 + long-term guardrails
+
+

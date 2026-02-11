@@ -1,0 +1,719 @@
+
+█████     ███    █     █  █        ██████   ██████
+█    █   █   █    █   █   █        █        █
+█████   █     █    ███    █        █████    █████
+█  █    ███████     █     █        █        █
+█   █   █     █     █     █        █        █
+█    █  █     █     █     ██████   ██████   ██████
+
+ CONTROL TERMINAL v1.0
+------------------------------------------------------------------------
+╭────────────────────────────────────────────────────────╮
+│ SYSTEM STATUS                                          │
+├────────────────────────────────────────────────────────┤
+│ CPU    │ AMD Ryzen 9 6900HX with Radeon Graphics       │
+│ RAM    │ 91.74 GB (Free: 72.54 GB)                     │
+│ DISK   │ C:\  343.62 / 475.85 GB                       │
+│ GPU    │ AMD Radeon(TM) Graphics                       │
+│ OS     │ Microsoft Windows 11 Enterprise (Build 26200) │
+│ HOST   │ HO-WE-01                                      │
+╰────────────────────────────────────────────────────────╯
+
+Loading personal and system profiles took 1459ms.
+PS C:\RH> tree C:\RH /A > RH_TREE_FOLDERS_ONLY.txt
+PS C:\RH> tree C:\RH /A > "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\RH_TREE_FOLDERS_ONLY.txt"
+PS C:\RH> C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS: The term 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH> cd "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-ChildItem *.ps1 | Unblock-File
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026.csv
+Read-Phase4Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1:47
+Line |
+  47 |  $rules = Read-Phase4Rules -RulesPath $RulesPath
+     |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $RulesPath = "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Item $RulesPath | Format-List FullName,Length,LastWriteTime
+
+FullName      : C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Length        : 6425
+LastWriteTime : 2/6/2026 3:57:04 PM
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Content $RulesPath -TotalCount 20
+# Phase 4 Rules (FIXED - v2 schema additions)
+# - Two-tier anchors (tier 1 creates units, tier 2 signals only)
+# - Folder seed anchors supported via seed_mode: folder + folder_name_patterns
+# - Secrets destination root centralized (file-level override in move plan)
+#
+# NOTE: This file intentionally avoids fancy YAML constructs. The parser is minimal.
+
+secrets_destination:
+  root: 'C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE'
+
+ignore_folder_patterns:
+  - '(?i)\\node_modules\\'
+  - '(?i)\\__pycache__\\'
+  - '(?i)\\\.venv\\'
+  - '(?i)\\\.mypy_cache\\'
+  - '(?i)\\\.pytest_cache\\'
+  - '(?i)\\\.terraform\\'
+  - '(?i)\\\.obsidian\\'
+  - '(?i)\\\.cache\\'
+  # Keep .git in inventory, but never treat it as anchor/signal
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Content $RulesPath -Raw | Measure-Object -Character
+
+Lines Words Characters Property
+----- ----- ---------- --------
+                  6425
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Read-Phase4Rules -All | Format-List Name,CommandType,Source,Definition
+Get-Command: The term 'Read-Phase4Rules' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Unblock-File .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Read-Phase4Rules -All | Format-List Name,CommandType,Source,Definition
+
+Name        : Read-Phase4Rules
+CommandType : Function
+Source      :
+Definition  :
+                  param(
+                      [Parameter(Mandatory)][string]$RulesPath
+                  )
+                  if (-not (Test-Path $RulesPath)) {
+                      throw "Rules file not found: $RulesPath"
+                  }
+
+                  $lines = Get-Content $RulesPath -Encoding UTF8
+
+                  $rules = [ordered]@{
+                      Anchors = @{}
+                      ClassificationRules = @()
+                      SecretsPatterns = @{
+                          filename = @()
+                          content  = @()
+                      }
+                      GarbagePatterns = @()
+                      Features = @{}
+                      Clustering = @{}
+                      Performance = @{}
+                      IgnoreFolderPatterns = @()
+                      TokenStopwords = @()
+                      SecretsDestinationRoot = 'C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE'
+                  }
+
+                  # ---------------- Anchors ----------------
+                  $anchorLines = Get-YamlSectionLines -Lines $lines -SectionName 'anchors'
+                  if ($anchorLines.Count -gt 0) {
+                      $i = 0
+                      while ($i -lt $anchorLines.Count) {
+                          $line = $anchorLines[$i]
+                          if ($line -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*$') {
+                              $name = $Matches[1]
+                              $block = New-Object System.Collections.Generic.List[string]
+                              $i++
+                              while ($i -lt $anchorLines.Count -and $anchorLines[$i] -notmatch '^\s{2}[A-Za-z_][A-Za-z0-9_]*\s*:\s*$') {
+                                  $block.Add($anchorLines[$i])
+                                  $i++
+                              }
+
+                              $def = [ordered]@{
+                                  name = $name
+                                  tier = 2
+                                  seed_mode = 'file' # file|folder
+                                  priority = 99
+                                  extensions = @()
+                                  filename_patterns = @()
+                                  folder_patterns = @()
+                                  folder_name_patterns = @()
+                                  tokens = @()
+                                  require_any_features = @()
+                                  exclude_folder_patterns = @()
+                              }
+
+                              for ($k=0; $k -lt $block.Count; $k++) {
+                                  $b = $block[$k].TrimEnd()
+                                  if ($b -match '^\s{4}tier\s*:\s*(.+?)\s*(#.*)?$') { $def.tier = [int](Parse-YamlScalar $Matches[1]); continue }
+                                  if ($b -match '^\s{4}seed_mode\s*:\s*(.+?)\s*(#.*)?$') { $def.seed_mode = (Parse-YamlScalar $Matches[1]); continue }
+                                  if ($b -match '^\s{4}priority\s*:\s*(\d+)\s*(#.*)?$') { $def.priority = [int]$Matches[1]; continue }
+
+                                  if ($b -match '^\s{4}extensions\s*:\s*(\[[^\]]*\])') { $def.extensions = (Parse-YamlInlineList $Matches[1]) | ForEach-Object { $_.ToLowerInvariant() }; continue }
+
+                                  if ($b -match '^\s{4}(filename_patterns|folder_patterns|folder_name_patterns|tokens|require_any_features|exclude_folder_patterns)\s*:\s*(\[[^\]]*\])') {
+                                      $key = $Matches[1]
+                                      $vals = Parse-YamlInlineList $Matches[2]
+                                      $def[$key] = $vals
+                                      continue
+                                  }
+
+                                  if ($b -match '^\s{4}(filename_patterns|folder_patterns|folder_name_patterns|tokens|require_any_features|exclude_folder_patterns)\s*:\s*$') {
+                                      $key = $Matches[1]
+                                      $vals = New-Object System.Collections.Generic.List[string]
+                                      $k++
+                                      while ($k -lt $block.Count -and $block[$k] -match '^\s*-\s*(.+?)\s*(#.*)?$') {
+                                          $vals.Add((Parse-YamlScalar $Matches[1]))
+                                          $k++
+                                      }
+                                      $k--  # adjust because loop advances once too far
+                                      $def[$key] = $vals.ToArray()
+                                      continue
+                                  }
+                              }
+
+                              # Normalize arrays
+                              $def.extensions = @($def.extensions | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+                              $def.filename_patterns = @($def.filename_patterns | Where-Object { $_ })
+                              $def.folder_patterns = @($def.folder_patterns | Where-Object { $_ })
+                              $def.folder_name_patterns = @($def.folder_name_patterns | Where-Object { $_ })
+                              $def.tokens = @($def.tokens | ForEach-Object { $_.ToLowerInvariant() } | Where-Object { $_ })
+                              $def.require_any_features = @($def.require_any_features | Where-Object { $_ })
+                              $def.exclude_folder_patterns = @($def.exclude_folder_patterns | Where-Object { $_ })
+
+                              $rules.Anchors[$name] = [PSCustomObject]$def
+                              continue
+                          }
+                          $i++
+                      }
+                  }
+
+                  # ---------------- Classification Rules ----------------
+                  $crLines = Get-YamlSectionLines -Lines $lines -SectionName 'classification_rules'
+                  if ($crLines.Count -gt 0) {
+                      $i = 0
+                      while ($i -lt $crLines.Count) {
+                          $line = $crLines[$i]
+                          if ($line -match '^\s{2}-\s*type\s*:\s*(.+?)\s*$') {
+                              $type = Parse-YamlScalar $Matches[1]
+                              $block = New-Object System.Collections.Generic.List[string]
+                              $i++
+                              while ($i -lt $crLines.Count -and $crLines[$i] -notmatch '^\s{2}-\s*type\s*:') {
+                                  $block.Add($crLines[$i])
+                                  $i++
+                              }
+
+                              $rule = [ordered]@{
+                                  type = $type
+                                  priority = 99
+                                  destination_template = ''
+                                  unit_prefix = ''
+                                  create_scaffold = $false
+                                  conditions = @{}
+                              }
+
+                              # Parse scalars and conditions
+                              for ($k=0; $k -lt $block.Count; $k++) {
+                                  $b = $block[$k].TrimEnd()
+                                  if ($b -match '^\s{4}priority\s*:\s*(\d+)') { $rule.priority = [int]$Matches[1]; continue }
+                                  if ($b -match '^\s{4}destination_template\s*:\s*(.+?)\s*$') { $rule.destination_template = Parse-YamlScalar $Matches[1]; continue }
+                                  if ($b -match '^\s{4}unit_prefix\s*:\s*(.+?)\s*$') { $rule.unit_prefix = Parse-YamlScalar $Matches[1]; continue }
+                                  if ($b -match '^\s{4}create_scaffold\s*:\s*(true|false)') { $rule.create_scaffold = [bool]::Parse($Matches[1]); continue }
+
+                                  if ($b -match '^\s{4}conditions\s*:\s*$') {
+                                      $k++
+                                      while ($k -lt $block.Count -and $block[$k] -match '^\s{6}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.+?)\s*$') {
+                                          $ck = $Matches[1]
+                                          $cvRaw = $Matches[2]
+                                          if ($cvRaw.TrimStart().StartsWith('[')) {
+                                              $rule.conditions[$ck] = Parse-YamlInlineList $cvRaw
+                                          } else {
+                                              $rule.conditions[$ck] = Parse-YamlScalar $cvRaw
+                                          }
+                                          $k++
+                                      }
+                                      $k--  # adjust
+                                  }
+                              }
+
+                              $rules.ClassificationRules += [PSCustomObject]$rule
+                              continue
+                          }
+                          $i++
+                      }
+                  }
+
+                  # ---------------- Secrets Patterns ----------------
+                  $spLines = Get-YamlSectionLines -Lines $lines -SectionName 'secrets_patterns'
+                  if ($spLines.Count -gt 0) {
+                      $i = 0
+                      while ($i -lt $spLines.Count) {
+                          $line = $spLines[$i]
+                          if ($line -match '^\s{2}(filename|content)\s*:\s*$') {
+                              $key = $Matches[1]
+                              $vals = New-Object System.Collections.Generic.List[string]
+                              $i++
+                              while ($i -lt $spLines.Count -and $spLines[$i] -match '^\s{4}-\s*(.+?)\s*$') {
+                                  $vals.Add((Parse-YamlScalar $Matches[1]))
+                                  $i++
+                              }
+                              $rules.SecretsPatterns[$key] = $vals.ToArray()
+                              continue
+                          }
+                          $i++
+                      }
+                  }
+
+                  # Optional: secrets destination root
+                  $sdrLines = Get-YamlSectionLines -Lines $lines -SectionName 'secrets_destination'
+                  if ($sdrLines.Count -gt 0) {
+                      foreach ($l in $sdrLines) {
+                          if ($l -match '^\s{2}root\s*:\s*(.+?)\s*$') {
+                              $rules.SecretsDestinationRoot = Parse-YamlScalar $Matches[1]
+                          }
+                      }
+                  }
+
+                  # ---------------- Garbage Patterns ----------------
+                  $gpLines = Get-YamlSectionLines -Lines $lines -SectionName 'garbage_patterns'
+                  if ($gpLines.Count -gt 0) {
+                      foreach ($l in $gpLines) {
+                          if ($l -match '^\s{2}-\s*(.+?)\s*$') {
+                              $rules.GarbagePatterns += (Parse-YamlScalar $Matches[1])
+                          }
+                      }
+                  }
+
+                  # ---------------- Ignore Folder Patterns ----------------
+                  $ipLines = Get-YamlSectionLines -Lines $lines -SectionName 'ignore_folder_patterns'
+                  if ($ipLines.Count -gt 0) {
+                      foreach ($l in $ipLines) {
+                          if ($l -match '^\s{2}-\s*(.+?)\s*$') {
+                              $rules.IgnoreFolderPatterns += (Parse-YamlScalar $Matches[1])
+                          }
+                      }
+                  }
+
+                  # ---------------- Token Stopwords ----------------
+                  $tsLines = Get-YamlSectionLines -Lines $lines -SectionName 'token_stopwords'
+                  if ($tsLines.Count -gt 0) {
+                      foreach ($l in $tsLines) {
+                          if ($l -match '^\s{2}-\s*(.+?)\s*$') {
+                              $rules.TokenStopwords += (Parse-YamlScalar $Matches[1]).ToLowerInvariant()
+                          }
+                      }
+                  }
+
+                  # ---------------- Clustering Settings ----------------
+                  $clLines = Get-YamlSectionLines -Lines $lines -SectionName 'clustering'
+                  if ($clLines.Count -gt 0) {
+                      foreach ($l in $clLines) {
+                          if ($l -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.+?)\s*$') {
+                              $rules.Clustering[$Matches[1]] = Parse-YamlScalar $Matches[2]
+                          }
+                      }
+                  }
+
+                  # ---------------- Feature Patterns ----------------
+                  $featLines = Get-YamlSectionLines -Lines $lines -SectionName 'features'
+                  if ($featLines.Count -gt 0) {
+                      $i = 0
+                      while ($i -lt $featLines.Count) {
+                          $line = $featLines[$i]
+                          if ($line -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*$') {
+                              $featName = $Matches[1]
+                              $vals = New-Object System.Collections.Generic.List[string]
+                              $i++
+                              while ($i -lt $featLines.Count -and $featLines[$i] -match '^\s{4}-\s*(.+?)\s*$') {
+                                  $vals.Add((Parse-YamlScalar $Matches[1]))
+                                  $i++
+                              }
+                              $rules.Features[$featName] = $vals.ToArray()
+                              continue
+                          }
+                          $i++
+                      }
+                  }
+
+                  # ---------------- Performance ----------------
+                  $perfLines = Get-YamlSectionLines -Lines $lines -SectionName 'performance'
+                  if ($perfLines.Count -gt 0) {
+                      foreach ($l in $perfLines) {
+                          if ($l -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.+?)\s*$') {
+                              $rules.Performance[$Matches[1]] = Parse-YamlScalar $Matches[2]
+                          }
+                      }
+                  }
+
+                  return [PSCustomObject]$rules
+
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Read-Phase4Rules).Parameters.Keys
+RulesPath
+Verbose
+Debug
+ErrorAction
+WarningAction
+InformationAction
+ProgressAction
+ErrorVariable
+WarningVariable
+InformationVariable
+OutVariable
+OutBuffer
+PipelineVariable
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Get-YamlSectionLines -All | Format-List Name,CommandType,Source,Definition
+
+Name        : Get-YamlSectionLines
+CommandType : Function
+Source      :
+Definition  :
+                  param(
+                      [Parameter(Mandatory)][string[]]$Lines,
+                      [Parameter(Mandatory)][string]$SectionName
+                  )
+
+                  $start = $null
+                  for ($i = 0; $i -lt $Lines.Count; $i++) {
+                      if ($Lines[$i] -match "^\s*$([regex]::Escape($SectionName))\s*:\s*$") {
+                          $start = $i + 1
+                          break
+                      }
+                  }
+                  if ($null -eq $start) { return @() }
+
+                  $out = New-Object System.Collections.Generic.List[string]
+                  for ($j = $start; $j -lt $Lines.Count; $j++) {
+                      $line = $Lines[$j]
+                      # Stop at the next top-level key (non-indented "word:")
+                      if ($line -match '^[A-Za-z_][A-Za-z0-9_]*\s*:\s*$' -and $line -notmatch '^\s') {
+                          break
+                      }
+                      $out.Add($line)
+                  }
+                  return $out.ToArray()
+
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Get-YamlSectionLines).Definition
+
+    param(
+        [Parameter(Mandatory)][string[]]$Lines,
+        [Parameter(Mandatory)][string]$SectionName
+    )
+
+    $start = $null
+    for ($i = 0; $i -lt $Lines.Count; $i++) {
+        if ($Lines[$i] -match "^\s*$([regex]::Escape($SectionName))\s*:\s*$") {
+            $start = $i + 1
+            break
+        }
+    }
+    if ($null -eq $start) { return @() }
+
+    $out = New-Object System.Collections.Generic.List[string]
+    for ($j = $start; $j -lt $Lines.Count; $j++) {
+        $line = $Lines[$j]
+        # Stop at the next top-level key (non-indented "word:")
+        if ($line -match '^[A-Za-z_][A-Za-z0-9_]*\s*:\s*$' -and $line -notmatch '^\s') {
+            break
+        }
+        $out.Add($line)
+    }
+    return $out.ToArray()
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = Get-Content $RulesPath -Encoding UTF8
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content $RulesPath -Encoding UTF8)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($lines.Count -eq 0 -or ($lines.Count -eq 1 -and [string]::IsNullOrWhiteSpace($lines[0]))) {
+>>     throw "Rules file loaded as empty lines: $RulesPath"
+>> }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r = Read-Phase4Rules -RulesPath ".\phase4_rules_FIXED.yml" -Verbose
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:166
+Line |
+ 166 |      $anchorLines = Get-YamlSectionLines -Lines $lines -SectionName 'a …
+     |                                                 ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:167
+Line |
+ 167 |      if ($anchorLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:240
+Line |
+ 240 |      $crLines = Get-YamlSectionLines -Lines $lines -SectionName 'class …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:241
+Line |
+ 241 |      if ($crLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:295
+Line |
+ 295 |      $spLines = Get-YamlSectionLines -Lines $lines -SectionName 'secre …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:296
+Line |
+ 296 |      if ($spLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:316
+Line |
+ 316 |      $sdrLines = Get-YamlSectionLines -Lines $lines -SectionName 'secr …
+     |                                              ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:317
+Line |
+ 317 |      if ($sdrLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:326
+Line |
+ 326 |      $gpLines = Get-YamlSectionLines -Lines $lines -SectionName 'garba …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:327
+Line |
+ 327 |      if ($gpLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:336
+Line |
+ 336 |      $ipLines = Get-YamlSectionLines -Lines $lines -SectionName 'ignor …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:337
+Line |
+ 337 |      if ($ipLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:346
+Line |
+ 346 |      $tsLines = Get-YamlSectionLines -Lines $lines -SectionName 'token …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:347
+Line |
+ 347 |      if ($tsLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:356
+Line |
+ 356 |      $clLines = Get-YamlSectionLines -Lines $lines -SectionName 'clust …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:357
+Line |
+ 357 |      if ($clLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:366
+Line |
+ 366 |      $featLines = Get-YamlSectionLines -Lines $lines -SectionName 'fea …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:367
+Line |
+ 367 |      if ($featLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:387
+Line |
+ 387 |      $perfLines = Get-YamlSectionLines -Lines $lines -SectionName 'per …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:388
+Line |
+ 388 |      if ($perfLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r | Format-List
+
+Anchors                : {}
+ClassificationRules    : {}
+SecretsPatterns        : {[filename, System.Object[]], [content, System.Object[]]}
+GarbagePatterns        : {}
+Features               : {}
+Clustering             : {}
+Performance            : {}
+IgnoreFolderPatterns   : {}
+TokenStopwords         : {}
+SecretsDestinationRoot : C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Get-YamlSectionLines -All | Format-List Name,CommandType,Source
+
+Name        : Get-YamlSectionLines
+CommandType : Function
+Source      :
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Get-YamlSectionLines).Definition
+
+    param(
+        [Parameter(Mandatory)][string[]]$Lines,
+        [Parameter(Mandatory)][string]$SectionName
+    )
+
+    $start = $null
+    for ($i = 0; $i -lt $Lines.Count; $i++) {
+        if ($Lines[$i] -match "^\s*$([regex]::Escape($SectionName))\s*:\s*$") {
+            $start = $i + 1
+            break
+        }
+    }
+    if ($null -eq $start) { return @() }
+
+    $out = New-Object System.Collections.Generic.List[string]
+    for ($j = $start; $j -lt $Lines.Count; $j++) {
+        $line = $Lines[$j]
+        # Stop at the next top-level key (non-indented "word:")
+        if ($line -match '^[A-Za-z_][A-Za-z0-9_]*\s*:\s*$' -and $line -notmatch '^\s') {
+            break
+        }
+        $out.Add($line)
+    }
+    return $out.ToArray()
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> . .\Phase4_Common.ps1; Read-Phase4Rules -RulesPath ".\phase4_rules_FIXED.yml" -Verbose | Out-String
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:166
+Line |
+ 166 |      $anchorLines = Get-YamlSectionLines -Lines $lines -SectionName 'a …
+     |                                                 ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:167
+Line |
+ 167 |      if ($anchorLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:240
+Line |
+ 240 |      $crLines = Get-YamlSectionLines -Lines $lines -SectionName 'class …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:241
+Line |
+ 241 |      if ($crLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:295
+Line |
+ 295 |      $spLines = Get-YamlSectionLines -Lines $lines -SectionName 'secre …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:296
+Line |
+ 296 |      if ($spLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:316
+Line |
+ 316 |      $sdrLines = Get-YamlSectionLines -Lines $lines -SectionName 'secr …
+     |                                              ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:317
+Line |
+ 317 |      if ($sdrLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:326
+Line |
+ 326 |      $gpLines = Get-YamlSectionLines -Lines $lines -SectionName 'garba …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:327
+Line |
+ 327 |      if ($gpLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:336
+Line |
+ 336 |      $ipLines = Get-YamlSectionLines -Lines $lines -SectionName 'ignor …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:337
+Line |
+ 337 |      if ($ipLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:346
+Line |
+ 346 |      $tsLines = Get-YamlSectionLines -Lines $lines -SectionName 'token …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:347
+Line |
+ 347 |      if ($tsLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:356
+Line |
+ 356 |      $clLines = Get-YamlSectionLines -Lines $lines -SectionName 'clust …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:357
+Line |
+ 357 |      if ($clLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:366
+Line |
+ 366 |      $featLines = Get-YamlSectionLines -Lines $lines -SectionName 'fea …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:367
+Line |
+ 367 |      if ($featLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:387
+Line |
+ 387 |      $perfLines = Get-YamlSectionLines -Lines $lines -SectionName 'per …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:388
+Line |
+ 388 |      if ($perfLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+
+Anchors                : {}
+ClassificationRules    : {}
+SecretsPatterns        : {[filename, System.Object[]], [content, System.Object[]]}
+GarbagePatterns        : {}
+Features               : {}
+Clustering             : {}
+Performance            : {}
+IgnoreFolderPatterns   : {}
+TokenStopwords         : {}
+SecretsDestinationRoot : C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE
+
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-ChildItem -Filter *.ps1 | Unblock-File
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = Get-Content $RulesPath -Encoding UTF8
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content -LiteralPath $RulesPath -Encoding UTF8 -ErrorAction Stop)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($lines.Count -eq 0 -or ($lines.Count -eq 1 -and [string]::IsNullOrWhiteSpace($lines[0]))) {
+>>     throw "Rules file read returned no usable lines: $RulesPath"
+>> }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> .\Execute-Phase4_FIXED.ps1 `
+>>   -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" `
+>>   -MaxFiles 300 `
+>>   -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026.csv
+Read-Phase4Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1:47
+Line |
+  47 |  $rules = Read-Phase4Rules -RulesPath $RulesPath
+     |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>

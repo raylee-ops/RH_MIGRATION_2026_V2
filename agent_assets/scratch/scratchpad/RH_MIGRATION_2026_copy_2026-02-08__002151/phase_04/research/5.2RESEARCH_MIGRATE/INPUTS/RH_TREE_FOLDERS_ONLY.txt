@@ -1,0 +1,1499 @@
+Folder PATH listing for volume Windows
+Volume serial number is 72B4-B7E9
+C:\RH
++---LIFE
+|   +---.obsidian
+|   +---Admin
+|   |   +---accounts
+|   |   |   +---Cloud
+|   |   |   +---Github
+|   |   |   \---SSH
+|   |   |       +---TailScale
+|   |   |       \---Termius
+|   |   +---Documents
+|   |   |   +---PowerShell
+|   |   |   |   +---Modules
+|   |   |   |   |   +---PSFzf
+|   |   |   |   |   |   \---2.7.7
+|   |   |   |   |   |       +---en-US
+|   |   |   |   |   |       \---helpers
+|   |   |   |   |   +---PSReadLine
+|   |   |   |   |   |   \---2.4.5
+|   |   |   |   |   |       +---net6plus
+|   |   |   |   |   |       \---netstd
+|   |   |   |   |   +---Terminal-Icons
+|   |   |   |   |   |   \---0.11.0
+|   |   |   |   |   |       +---Data
+|   |   |   |   |   |       |   +---colorThemes
+|   |   |   |   |   |       |   \---iconThemes
+|   |   |   |   |   |       \---en-US
+|   |   |   |   |   \---z
+|   |   |   |   |       \---1.1.14
+|   |   |   |   |           \---.git
+|   |   |   |   |               +---hooks
+|   |   |   |   |               +---info
+|   |   |   |   |               +---logs
+|   |   |   |   |               |   \---refs
+|   |   |   |   |               |       +---heads
+|   |   |   |   |               |       \---remotes
+|   |   |   |   |               |           \---origin
+|   |   |   |   |               +---objects
+|   |   |   |   |               |   +---16
+|   |   |   |   |               |   +---44
+|   |   |   |   |               |   +---61
+|   |   |   |   |               |   +---7a
+|   |   |   |   |               |   +---84
+|   |   |   |   |               |   +---b6
+|   |   |   |   |               |   \---pack
+|   |   |   |   |               \---refs
+|   |   |   |   |                   +---heads
+|   |   |   |   |                   \---remotes
+|   |   |   |   |                       \---origin
+|   |   |   |   \---Scripts
+|   |   |   |       \---InstalledScriptInfos
+|   |   |   +---Rainmeter
+|   |   |   |   \---Skins
+|   |   |   |       +---@Vault
+|   |   |   |       |   \---Plugins
+|   |   |   |       \---illustro
+|   |   |   |           +---@Resources
+|   |   |   |           +---Clock
+|   |   |   |           +---Disk
+|   |   |   |           +---Google
+|   |   |   |           +---Network
+|   |   |   |           +---Recycle Bin
+|   |   |   |           +---System
+|   |   |   |           \---Welcome
+|   |   |   +---WindowsPowerShell
+|   |   |   \---Zoom
+|   |   +---Finances
+|   |   +---Health
+|   |   \---Misc
+|   +---Finances
+|   +---Health
+|   +---Logs
+|   |   +---Daily
+|   |   \---Weekly
+|   +---MIND
+|   |   +---Creative_Projects
+|   |   |   +---autobio
+|   |   |   +---Autobiography
+|   |   |   +---granna
+|   |   |   \---Mind_Maps
+|   |   +---Guardian
+|   |   +---Logs
+|   |   +---notes
+|   |   |   \---Daily
+|   |   |       \---_OLD
+|   |   \---Self_Reflection
+|   \---Personal
+|       +---Accounts
+|       |   \---Pictures
+|       +---custom
+|       |   +---Colored_Folder_ICO_Pack
+|       |   \---FolderIcons_2026
+|       +---Family_Friends
+|       |   \---Amirah
+|       |       \---coloring
+|       +---Pictures
+|       |   +---ai_eval_ss
+|       |   +---iCloud Photos
+|       |   |   \---Photos
+|       |   +---pics
+|       |   |   \---Pin on ????_files
+|       |   \---Screenshots
+|       \---Videos
+|           +---Captures
+|           \---Screen Recordings
++---OPS
+|   +---BUILD
+|   |   +---lab_infra
+|   |   +---scripts
+|   |   |   +---ATTEMPT1_MIGRATION02-06
+|   |   |   \---ATTEMPT2_MIGRATION02-06
+|   |   +---security_automation
+|   |   |   +---configs
+|   |   |   +---libs
+|   |   |   \---pipelines
+|   |   \---src
+|   |       \---repos
+|   +---PROOF_PACKS
+|   |   +---DETECTION_ENGINEERING
+|   |   |   \---PP-000_DRAFTS
+|   |   |       \---Detections
+|   |   |           +---configs
+|   |   |           +---pipelines
+|   |   |           +---scripts
+|   |   |           \---Sigma
+|   |   +---INCIDENT_RESPONSE
+|   |   |   \---PP-000_DRAFTS
+|   |   |       \---Incident_Reports
+|   |   +---NETWORK
+|   |   |   \---PP-000_DRAFTS
+|   |   +---SECURITY_AUTOMATION
+|   |   |   \---PP-000_DRAFTS
+|   |   +---SOC
+|   |   |   +---PP-000_DRAFTS
+|   |   |   |   +---Hunts
+|   |   |   |   \---Playbook
+|   |   |   +---PP-001_WAZUH_BASELINE
+|   |   |   |   +---AUTOMATION
+|   |   |   |   +---DETECTION
+|   |   |   |   +---EVIDENCE
+|   |   |   |   |   \---_INBOX
+|   |   |   |   +---PLAYBOOK
+|   |   |   |   \---Wazuh
+|   |   |   |       +---Configs
+|   |   |   |       +---Evidence
+|   |   |   |       +---Notes
+|   |   |   |       +---Rules
+|   |   |   |       +---Scripts
+|   |   |   |       \---WAZUH_RULES_PRIMARY
+|   |   |   +---PP-002_SPLUNK_FAILED_LOGON
+|   |   |   |   +---AUTOMATION
+|   |   |   |   +---DETECTION
+|   |   |   |   +---EVIDENCE
+|   |   |   |   |   \---_INBOX
+|   |   |   |   +---PLAYBOOK
+|   |   |   |   \---Splunk
+|   |   |   \---PP-003_ENDPOINT_TRIAGE
+|   |   |       +---AUTOMATION
+|   |   |       +---DETECTION
+|   |   |       +---EVIDENCE
+|   |   |       |   \---_INBOX
+|   |   |       \---PLAYBOOK
+|   |   \---_TEMPLATES
+|   |       +---TEMPLATE_AUTOMATION_PACK
+|   |       |   +---AUTOMATION
+|   |       |   \---EVIDENCE
+|   |       |       \---_INBOX
+|   |       +---TEMPLATE_DETECTION_PACK
+|   |       |   +---AUTOMATION
+|   |       |   +---DETECTION
+|   |       |   +---EVIDENCE
+|   |       |   |   \---_INBOX
+|   |       |   \---PLAYBOOK
+|   |       \---TEMPLATE_IR_PACK
+|   |           +---EVIDENCE
+|   |           |   \---_INBOX
+|   |           \---PLAYBOOK
+|   +---PUBLISH
+|   |   +---case_studies
+|   |   +---GITHUB
+|   |   |   \---repos
+|   |   |       +---hawkinsops-repo-upgrade
+|   |   |       |   +---.claude
+|   |   |       |   +---.github
+|   |   |       |   |   +---ISSUE_TEMPLATE
+|   |   |       |   |   \---workflows
+|   |   |       |   +---detection-rules
+|   |   |       |   |   +---sigma
+|   |   |       |   |   |   +---collection
+|   |   |       |   |   |   +---credential-access
+|   |   |       |   |   |   +---defense-evasion
+|   |   |       |   |   |   +---discovery
+|   |   |       |   |   |   +---execution
+|   |   |       |   |   |   +---exfiltration
+|   |   |       |   |   |   +---impact
+|   |   |       |   |   |   +---lateral-movement
+|   |   |       |   |   |   +---persistence
+|   |   |       |   |   |   \---privilege-escalation
+|   |   |       |   |   +---splunk
+|   |   |       |   |   \---wazuh
+|   |   |       |   |       \---rules
+|   |   |       |   +---dist
+|   |   |       |   |   \---wazuh
+|   |   |       |   +---docs
+|   |   |       |   |   \---wazuh
+|   |   |       |   +---incident-response
+|   |   |       |   |   +---incidents
+|   |   |       |   |   |   \---2026
+|   |   |       |   |   |       \---2026-01-25__howe01__rule100052__hosts-ics-modified__benign
+|   |   |       |   |   |           \---evidence
+|   |   |       |   |   \---playbooks
+|   |   |       |   +---learning-system
+|   |   |       |   +---PROOF_PACK
+|   |   |       |   |   +---DIAGRAMS
+|   |   |       |   |   +---EVIDENCE
+|   |   |       |   |   |   \---legacy
+|   |   |       |   |   +---SAMPLES
+|   |   |       |   |   \---SCREENSHOTS
+|   |   |       |   +---runbooks
+|   |   |       |   +---scripts
+|   |   |       |   +---threat-hunting
+|   |   |       |   |   +---linux
+|   |   |       |   |   \---windows
+|   |   |       |   +---tools
+|   |   |       |   |   +---import
+|   |   |       |   |   \---security-automation
+|   |   |       |   |       \---configs
+|   |   |       |   |           +---Security_Automation_Configs
+|   |   |       |   |           \---wazuh
+|   |   |       |   |               +---Wazuh_Configs
+|   |   |       |   |               \---Wazuh_Rules
+|   |   |       |   \---_archive
+|   |   |       |       \---imports
+|   |   |       |           \---soc-content
+|   |   |       |               +---detection-rules
+|   |   |       |               |   +---sigma
+|   |   |       |               |   |   +---collection
+|   |   |       |               |   |   +---credential-access
+|   |   |       |               |   |   +---defense-evasion
+|   |   |       |               |   |   +---discovery
+|   |   |       |               |   |   +---execution
+|   |   |       |               |   |   +---exfiltration
+|   |   |       |               |   |   +---impact
+|   |   |       |               |   |   +---lateral-movement
+|   |   |       |               |   |   +---persistence
+|   |   |       |               |   |   \---privilege-escalation
+|   |   |       |               |   +---splunk
+|   |   |       |               |   \---wazuh
+|   |   |       |               +---incident-response
+|   |   |       |               |   \---playbooks
+|   |   |       |               +---learning-system
+|   |   |       |               |   \---roadmap
+|   |   |       |               |       \---daily-breakdown
+|   |   |       |               +---runbooks
+|   |   |       |               |   +---.claude
+|   |   |       |               |   +---playbooks
+|   |   |       |               |   +---references
+|   |   |       |               |   \---scenarios
+|   |   |       |               \---threat-hunting
+|   |   |       |                   +---linux
+|   |   |       |                   \---windows
+|   |   |       +---hawkinsops-site
+|   |   |       |   \---hawkinsops-v2
+|   |   |       \---hawkinsops-soc-content
+|   |   |           +---detection-rules
+|   |   |           |   +---sigma
+|   |   |           |   |   +---collection
+|   |   |           |   |   +---credential-access
+|   |   |           |   |   +---defense-evasion
+|   |   |           |   |   +---discovery
+|   |   |           |   |   +---execution
+|   |   |           |   |   +---exfiltration
+|   |   |           |   |   +---impact
+|   |   |           |   |   +---lateral-movement
+|   |   |           |   |   +---persistence
+|   |   |           |   |   \---privilege-escalation
+|   |   |           |   +---splunk
+|   |   |           |   \---wazuh
+|   |   |           +---incident-response
+|   |   |           |   \---playbooks
+|   |   |           +---learning-system
+|   |   |           |   \---roadmap
+|   |   |           |       \---daily-breakdown
+|   |   |           +---runbooks
+|   |   |           |   +---.claude
+|   |   |           |   +---playbooks
+|   |   |           |   +---references
+|   |   |           |   \---scenarios
+|   |   |           \---threat-hunting
+|   |   |               +---linux
+|   |   |               \---windows
+|   |   +---portfolio_upload
+|   |   \---website
+|   +---QUARANTINE
+|   |   +---copilot_tests
+|   |   +---FROM_2026
+|   |   |   +---LIFE
+|   |   |   |   +---.obsidian
+|   |   |   |   +---Admin
+|   |   |   |   |   +---accounts
+|   |   |   |   |   |   +---Cloud
+|   |   |   |   |   |   +---Github
+|   |   |   |   |   |   \---SSH
+|   |   |   |   |   |       +---TailScale
+|   |   |   |   |   |       \---Termius
+|   |   |   |   |   +---Documents
+|   |   |   |   |   |   +---PowerShell
+|   |   |   |   |   |   |   +---Modules
+|   |   |   |   |   |   |   |   +---PSFzf
+|   |   |   |   |   |   |   |   |   \---2.7.7
+|   |   |   |   |   |   |   |   |       +---en-US
+|   |   |   |   |   |   |   |   |       \---helpers
+|   |   |   |   |   |   |   |   +---PSReadLine
+|   |   |   |   |   |   |   |   |   \---2.4.5
+|   |   |   |   |   |   |   |   |       +---net6plus
+|   |   |   |   |   |   |   |   |       \---netstd
+|   |   |   |   |   |   |   |   +---Terminal-Icons
+|   |   |   |   |   |   |   |   |   \---0.11.0
+|   |   |   |   |   |   |   |   |       +---Data
+|   |   |   |   |   |   |   |   |       |   +---colorThemes
+|   |   |   |   |   |   |   |   |       |   \---iconThemes
+|   |   |   |   |   |   |   |   |       \---en-US
+|   |   |   |   |   |   |   |   \---z
+|   |   |   |   |   |   |   |       \---1.1.14
+|   |   |   |   |   |   |   |           \---.git
+|   |   |   |   |   |   |   |               +---hooks
+|   |   |   |   |   |   |   |               +---info
+|   |   |   |   |   |   |   |               +---logs
+|   |   |   |   |   |   |   |               |   \---refs
+|   |   |   |   |   |   |   |               |       +---heads
+|   |   |   |   |   |   |   |               |       \---remotes
+|   |   |   |   |   |   |   |               |           \---origin
+|   |   |   |   |   |   |   |               +---objects
+|   |   |   |   |   |   |   |               |   +---16
+|   |   |   |   |   |   |   |               |   +---44
+|   |   |   |   |   |   |   |               |   +---61
+|   |   |   |   |   |   |   |               |   +---7a
+|   |   |   |   |   |   |   |               |   +---84
+|   |   |   |   |   |   |   |               |   +---b6
+|   |   |   |   |   |   |   |               |   \---pack
+|   |   |   |   |   |   |   |               \---refs
+|   |   |   |   |   |   |   |                   +---heads
+|   |   |   |   |   |   |   |                   \---remotes
+|   |   |   |   |   |   |   |                       \---origin
+|   |   |   |   |   |   |   \---Scripts
+|   |   |   |   |   |   |       \---InstalledScriptInfos
+|   |   |   |   |   |   +---Rainmeter
+|   |   |   |   |   |   |   \---Skins
+|   |   |   |   |   |   |       +---@Vault
+|   |   |   |   |   |   |       |   \---Plugins
+|   |   |   |   |   |   |       \---illustro
+|   |   |   |   |   |   |           +---@Resources
+|   |   |   |   |   |   |           +---Clock
+|   |   |   |   |   |   |           +---Disk
+|   |   |   |   |   |   |           +---Google
+|   |   |   |   |   |   |           +---Network
+|   |   |   |   |   |   |           +---Recycle Bin
+|   |   |   |   |   |   |           +---System
+|   |   |   |   |   |   |           \---Welcome
+|   |   |   |   |   |   +---WindowsPowerShell
+|   |   |   |   |   |   \---Zoom
+|   |   |   |   |   +---Finances
+|   |   |   |   |   +---Health
+|   |   |   |   |   \---Misc
+|   |   |   |   +---Finances
+|   |   |   |   +---Health
+|   |   |   |   +---Logs
+|   |   |   |   |   +---Daily
+|   |   |   |   |   \---Weekly
+|   |   |   |   +---MIND
+|   |   |   |   |   +---Creative_Projects
+|   |   |   |   |   |   +---autobio
+|   |   |   |   |   |   +---Autobiography
+|   |   |   |   |   |   +---granna
+|   |   |   |   |   |   \---Mind_Maps
+|   |   |   |   |   +---Guardian
+|   |   |   |   |   +---Logs
+|   |   |   |   |   +---notes
+|   |   |   |   |   |   \---Daily
+|   |   |   |   |   |       \---_OLD
+|   |   |   |   |   \---Self_Reflection
+|   |   |   |   \---Personal
+|   |   |   |       +---Accounts
+|   |   |   |       |   \---Pictures
+|   |   |   |       +---custom
+|   |   |   |       |   +---Colored_Folder_ICO_Pack
+|   |   |   |       |   \---FolderIcons_2026
+|   |   |   |       +---Family_Friends
+|   |   |   |       |   \---Amirah
+|   |   |   |       |       \---coloring
+|   |   |   |       +---Pictures
+|   |   |   |       |   +---ai_eval_ss
+|   |   |   |       |   +---iCloud Photos
+|   |   |   |       |   |   \---Photos
+|   |   |   |       |   +---pics
+|   |   |   |       |   |   \---Pin on ????_files
+|   |   |   |       |   \---Screenshots
+|   |   |   |       \---Videos
+|   |   |   |           +---Captures
+|   |   |   |           \---Screen Recordings
+|   |   |   +---OPS
+|   |   |   |   +---BUILD
+|   |   |   |   |   +---lab_infra
+|   |   |   |   |   +---scripts
+|   |   |   |   |   +---scripts_DUP_20260204-131020
+|   |   |   |   |   +---security_automation
+|   |   |   |   |   |   +---configs
+|   |   |   |   |   |   +---configs_DUP_20260204-131020
+|   |   |   |   |   |   +---libs
+|   |   |   |   |   |   +---libs_DUP_20260204-131020
+|   |   |   |   |   |   +---pipelines
+|   |   |   |   |   |   \---pipelines_DUP_20260204-131020
+|   |   |   |   |   \---src
+|   |   |   |   +---CAPTURE
+|   |   |   |   |   +---exports
+|   |   |   |   |   |   +---ai_artifacts
+|   |   |   |   |   |   \---security_automation_reports
+|   |   |   |   |   +---logs
+|   |   |   |   |   +---screenshots
+|   |   |   |   |   \---tmp
+|   |   |   |   |       +---ai_scratch
+|   |   |   |   |       \---notes_random
+|   |   |   |   +---OPS
+|   |   |   |   |   \---SYSTEM
+|   |   |   |   +---PROOF_PACKS
+|   |   |   |   |   +---DETECTION_ENGINEERING
+|   |   |   |   |   |   \---PP-000_DRAFTS
+|   |   |   |   |   |       \---Detections
+|   |   |   |   |   |           +---configs
+|   |   |   |   |   |           +---pipelines
+|   |   |   |   |   |           +---scripts
+|   |   |   |   |   |           \---Sigma
+|   |   |   |   |   +---INCIDENT_RESPONSE
+|   |   |   |   |   |   \---PP-000_DRAFTS
+|   |   |   |   |   |       \---Incident_Reports
+|   |   |   |   |   +---NETWORK
+|   |   |   |   |   |   \---PP-000_DRAFTS
+|   |   |   |   |   +---SECURITY_AUTOMATION
+|   |   |   |   |   |   \---PP-000_DRAFTS
+|   |   |   |   |   \---SOC
+|   |   |   |   |       +---PP-000_DRAFTS
+|   |   |   |   |       |   +---Hunts
+|   |   |   |   |       |   \---Playbook
+|   |   |   |   |       +---PP-001_WAZUH_BASELINE
+|   |   |   |   |       |   +---AUTOMATION
+|   |   |   |   |       |   +---DETECTION
+|   |   |   |   |       |   +---EVIDENCE
+|   |   |   |   |       |   |   \---_INBOX
+|   |   |   |   |       |   +---PLAYBOOK
+|   |   |   |   |       |   \---Wazuh
+|   |   |   |   |       |       +---Configs
+|   |   |   |   |       |       +---Evidence
+|   |   |   |   |       |       +---Notes
+|   |   |   |   |       |       +---Rules
+|   |   |   |   |       |       +---Scripts
+|   |   |   |   |       |       \---WAZUH_RULES_PRIMARY
+|   |   |   |   |       +---PP-002_SPLUNK_FAILED_LOGON
+|   |   |   |   |       |   +---AUTOMATION
+|   |   |   |   |       |   +---DETECTION
+|   |   |   |   |       |   +---EVIDENCE
+|   |   |   |   |       |   |   \---_INBOX
+|   |   |   |   |       |   +---PLAYBOOK
+|   |   |   |   |       |   \---Splunk
+|   |   |   |   |       \---PP-003_ENDPOINT_TRIAGE
+|   |   |   |   |           +---AUTOMATION
+|   |   |   |   |           +---DETECTION
+|   |   |   |   |           +---EVIDENCE
+|   |   |   |   |           |   \---_INBOX
+|   |   |   |   |           \---PLAYBOOK
+|   |   |   |   +---PUBLISH
+|   |   |   |   |   +---case_studies
+|   |   |   |   |   +---case_studies_DUP_20260204-131020
+|   |   |   |   |   |   \---Professional_Proof
+|   |   |   |   |   +---portfolio_upload
+|   |   |   |   |   +---portfolio_upload_DUP_20260204-131020
+|   |   |   |   |   |   +---DAY1_AUDIT_PACK
+|   |   |   |   |   |   |   \---OBSIDIAN_FIX
+|   |   |   |   |   |   \---PACK_v1
+|   |   |   |   |   |       +---00_INDEX
+|   |   |   |   |   |       +---01_WAZUH
+|   |   |   |   |   |       +---02_DETECTIONS
+|   |   |   |   |   |       +---03_HUNTS
+|   |   |   |   |   |       +---04_PLAYBOOKS
+|   |   |   |   |   |       +---05_AUTOMATION
+|   |   |   |   |   |       \---06_WEBSITE
+|   |   |   |   |   +---website
+|   |   |   |   |   \---website_DUP_20260204-131020
+|   |   |   |   |       \---website_pack_2025
+|   |   |   |   |           \---case_notes
+|   |   |   |   +---RESEARCH
+|   |   |   |   |   +---ai
+|   |   |   |   |   |   +---agents
+|   |   |   |   |   |   +---eval
+|   |   |   |   |   |   +---facts
+|   |   |   |   |   |   +---notes
+|   |   |   |   |   |   \---prompts
+|   |   |   |   |   +---experiments
+|   |   |   |   |   |   \---from_notes
+|   |   |   |   |   +---job_market
+|   |   |   |   |   |   \---from_notes
+|   |   |   |   |   +---notes
+|   |   |   |   |   |   +---learn
+|   |   |   |   |   |   \---research
+|   |   |   |   |   \---operators_manual
+|   |   |   |   |       \---from_notes
+|   |   |   |   +---SYSTEM
+|   |   |   |   |   +---ai_context
+|   |   |   |   |   \---obsidian
+|   |   |   |   |       \---.obsidian
+|   |   |   |   +---_ARCHIVE
+|   |   |   |   |   +---day1_audit_pack
+|   |   |   |   |   +---old_repo_snapshot
+|   |   |   |   |   |   \---OLD_REPO_SNAPSHOT
+|   |   |   |   |   +---pack_v1
+|   |   |   |   |   \---rebuild_pack
+|   |   |   |   |       \---rebuild_pack
+|   |   |   |   \---_QUARANTINE
+|   |   |   |       +---BLACKBOX
+|   |   |   |       |   +---PROOFPACK
+|   |   |   |       |   |   \---legacy_dump
+|   |   |   |       |   |       +---network
+|   |   |   |       |   |       +---system
+|   |   |   |       |   |       |   +---configs
+|   |   |   |       |   |       |   +---customization
+|   |   |   |       |   |       |   |   \---linux_cinnamon_blacksite
+|   |   |   |       |   |       |   +---docs
+|   |   |   |       |   |       |   +---scripts
+|   |   |   |       |   |       |   \---tools
+|   |   |   |       |   |       +---wazuh
+|   |   |   |       |   |       \---_automation
+|   |   |   |       |   |           +---cleanup_backups
+|   |   |   |       |   |           +---runs
+|   |   |   |       |   |           +---scripts
+|   |   |   |       |   |           \---workspace
+|   |   |   |       |   |               \---planning
+|   |   |   |       |   \---UPLOAD_PACKET
+|   |   |   |       |       \---03_PROOF_RECEIPTS_STAGING
+|   |   |   |       |           +---dashboards
+|   |   |   |       |           +---docs
+|   |   |   |       |           +---logs
+|   |   |   |       |           +---pdf_exports
+|   |   |   |       |           \---screenshots
+|   |   |   |       +---copilot_tests
+|   |   |   |       |   \---copilot
+|   |   |   |       |       \---copilot-custom-prompts
+|   |   |   |       +---github_bits
+|   |   |   |       |   +---GitHub_bit
+|   |   |   |       |   +---github_git
+|   |   |   |       |   \---GitHub_Init
+|   |   |   |       \---nested_repos
+|   |   |   |           \---_QUARANTINE_NESTED_REPOS_20260125
+|   |   |   |               +---HawkinsOperations
+|   |   |   |               |   +---.github
+|   |   |   |               |   |   \---ISSUE_TEMPLATE
+|   |   |   |               |   +---detection-rules
+|   |   |   |               |   |   +---other
+|   |   |   |               |   |   |   \---_incoming
+|   |   |   |               |   |   +---sigma
+|   |   |   |               |   |   |   \---_incoming
+|   |   |   |               |   |   +---splunk
+|   |   |   |               |   |   \---wazuh
+|   |   |   |               |   |       \---_incoming
+|   |   |   |               |   |           +---legacy_dump_wazuh
+|   |   |   |               |   |           +---Security_Automation_Configs
+|   |   |   |               |   |           +---Wazuh_Configs
+|   |   |   |               |   |           +---Wazuh_Rules
+|   |   |   |               |   |           \---WAZUH_RULES_PRIMARY
+|   |   |   |               |   +---docs
+|   |   |   |               |   |   \---wazuh
+|   |   |   |               |   +---incident-response
+|   |   |   |               |   |   +---playbooks
+|   |   |   |               |   |   \---_incoming
+|   |   |   |               |   +---learning-system
+|   |   |   |               |   +---PROOF_PACK
+|   |   |   |               |   |   +---DIAGRAMS
+|   |   |   |               |   |   +---EVIDENCE
+|   |   |   |               |   |   |   \---legacy
+|   |   |   |               |   |   +---SAMPLES
+|   |   |   |               |   |   \---SCREENSHOTS
+|   |   |   |               |   +---runbooks
+|   |   |   |               |   |   \---_incoming
+|   |   |   |               |   +---scripts
+|   |   |   |               |   +---threat-hunting
+|   |   |   |               |   |   \---_incoming
+|   |   |   |               |   \---_archive
+|   |   |   |               |       \---corrupt_imports
+|   |   |   |               |           \---legacy_dump_wazuh
+|   |   |   |               \---HawkinsOperations_BACKUP_before_v1.0.1
+|   |   |   |                   +---.git
+|   |   |   |                   |   +---hooks
+|   |   |   |                   |   +---info
+|   |   |   |                   |   +---logs
+|   |   |   |                   |   |   \---refs
+|   |   |   |                   |   |       +---heads
+|   |   |   |                   |   |       \---remotes
+|   |   |   |                   |   |           \---origin
+|   |   |   |                   |   +---objects
+|   |   |   |                   |   |   +---info
+|   |   |   |                   |   |   \---pack
+|   |   |   |                   |   \---refs
+|   |   |   |                   |       +---heads
+|   |   |   |                   |       +---remotes
+|   |   |   |                   |       |   \---origin
+|   |   |   |                   |       \---tags
+|   |   |   |                   +---detection-rules
+|   |   |   |                   |   \---wazuh
+|   |   |   |                   |       \---_incoming
+|   |   |   |                   |           +---legacy_dump_wazuh
+|   |   |   |                   |           +---Security_Automation_Configs
+|   |   |   |                   |           +---Wazuh_Configs
+|   |   |   |                   |           +---Wazuh_Rules
+|   |   |   |                   |           \---WAZUH_RULES_PRIMARY
+|   |   |   |                   +---incident-response
+|   |   |   |                   +---learning-system
+|   |   |   |                   +---PROOF_PACK
+|   |   |   |                   |   +---DIAGRAMS
+|   |   |   |                   |   +---EVIDENCE
+|   |   |   |                   |   |   \---legacy
+|   |   |   |                   |   +---SAMPLES
+|   |   |   |                   |   \---SCREENSHOTS
+|   |   |   |                   +---runbooks
+|   |   |   |                   \---threat-hunting
+|   |   |   +---OPSOLD
+|   |   |   |   +---AI
+|   |   |   |   +---GITHUB
+|   |   |   |   |   +---hawkinsops-repo-upgrade
+|   |   |   |   |   |   +---.claude
+|   |   |   |   |   |   +---.github
+|   |   |   |   |   |   |   +---ISSUE_TEMPLATE
+|   |   |   |   |   |   |   \---workflows
+|   |   |   |   |   |   +---detection-rules
+|   |   |   |   |   |   |   +---sigma
+|   |   |   |   |   |   |   |   +---collection
+|   |   |   |   |   |   |   |   +---credential-access
+|   |   |   |   |   |   |   |   +---defense-evasion
+|   |   |   |   |   |   |   |   +---discovery
+|   |   |   |   |   |   |   |   +---execution
+|   |   |   |   |   |   |   |   +---exfiltration
+|   |   |   |   |   |   |   |   +---impact
+|   |   |   |   |   |   |   |   +---lateral-movement
+|   |   |   |   |   |   |   |   +---persistence
+|   |   |   |   |   |   |   |   \---privilege-escalation
+|   |   |   |   |   |   |   +---splunk
+|   |   |   |   |   |   |   \---wazuh
+|   |   |   |   |   |   |       \---rules
+|   |   |   |   |   |   +---dist
+|   |   |   |   |   |   |   \---wazuh
+|   |   |   |   |   |   +---docs
+|   |   |   |   |   |   |   \---wazuh
+|   |   |   |   |   |   +---incident-response
+|   |   |   |   |   |   |   +---incidents
+|   |   |   |   |   |   |   |   \---2026
+|   |   |   |   |   |   |   |       \---2026-01-25__howe01__rule100052__hosts-ics-modified__benign
+|   |   |   |   |   |   |   |           \---evidence
+|   |   |   |   |   |   |   \---playbooks
+|   |   |   |   |   |   +---learning-system
+|   |   |   |   |   |   +---PROOF_PACK
+|   |   |   |   |   |   |   +---DIAGRAMS
+|   |   |   |   |   |   |   +---EVIDENCE
+|   |   |   |   |   |   |   |   \---legacy
+|   |   |   |   |   |   |   +---SAMPLES
+|   |   |   |   |   |   |   \---SCREENSHOTS
+|   |   |   |   |   |   +---runbooks
+|   |   |   |   |   |   +---scripts
+|   |   |   |   |   |   +---threat-hunting
+|   |   |   |   |   |   |   +---linux
+|   |   |   |   |   |   |   \---windows
+|   |   |   |   |   |   +---tools
+|   |   |   |   |   |   |   +---import
+|   |   |   |   |   |   |   \---security-automation
+|   |   |   |   |   |   |       \---configs
+|   |   |   |   |   |   |           +---Security_Automation_Configs
+|   |   |   |   |   |   |           \---wazuh
+|   |   |   |   |   |   |               +---Wazuh_Configs
+|   |   |   |   |   |   |               \---Wazuh_Rules
+|   |   |   |   |   |   \---_archive
+|   |   |   |   |   |       \---imports
+|   |   |   |   |   |           \---soc-content
+|   |   |   |   |   |               +---detection-rules
+|   |   |   |   |   |               |   +---sigma
+|   |   |   |   |   |               |   |   +---collection
+|   |   |   |   |   |               |   |   +---credential-access
+|   |   |   |   |   |               |   |   +---defense-evasion
+|   |   |   |   |   |               |   |   +---discovery
+|   |   |   |   |   |               |   |   +---execution
+|   |   |   |   |   |               |   |   +---exfiltration
+|   |   |   |   |   |               |   |   +---impact
+|   |   |   |   |   |               |   |   +---lateral-movement
+|   |   |   |   |   |               |   |   +---persistence
+|   |   |   |   |   |               |   |   \---privilege-escalation
+|   |   |   |   |   |               |   +---splunk
+|   |   |   |   |   |               |   \---wazuh
+|   |   |   |   |   |               +---incident-response
+|   |   |   |   |   |               |   \---playbooks
+|   |   |   |   |   |               +---learning-system
+|   |   |   |   |   |               |   \---roadmap
+|   |   |   |   |   |               |       \---daily-breakdown
+|   |   |   |   |   |               +---runbooks
+|   |   |   |   |   |               |   +---.claude
+|   |   |   |   |   |               |   +---playbooks
+|   |   |   |   |   |               |   +---references
+|   |   |   |   |   |               |   \---scenarios
+|   |   |   |   |   |               \---threat-hunting
+|   |   |   |   |   |                   +---linux
+|   |   |   |   |   |                   \---windows
+|   |   |   |   |   \---hawkinsops-soc-content
+|   |   |   |   |       +---detection-rules
+|   |   |   |   |       |   +---sigma
+|   |   |   |   |       |   |   +---collection
+|   |   |   |   |       |   |   +---credential-access
+|   |   |   |   |       |   |   +---defense-evasion
+|   |   |   |   |       |   |   +---discovery
+|   |   |   |   |       |   |   +---execution
+|   |   |   |   |       |   |   +---exfiltration
+|   |   |   |   |       |   |   +---impact
+|   |   |   |   |       |   |   +---lateral-movement
+|   |   |   |   |       |   |   +---persistence
+|   |   |   |   |       |   |   \---privilege-escalation
+|   |   |   |   |       |   +---splunk
+|   |   |   |   |       |   \---wazuh
+|   |   |   |   |       +---incident-response
+|   |   |   |   |       |   \---playbooks
+|   |   |   |   |       +---learning-system
+|   |   |   |   |       |   \---roadmap
+|   |   |   |   |       |       \---daily-breakdown
+|   |   |   |   |       +---runbooks
+|   |   |   |   |       |   +---.claude
+|   |   |   |   |       |   +---playbooks
+|   |   |   |   |       |   +---references
+|   |   |   |   |       |   \---scenarios
+|   |   |   |   |       \---threat-hunting
+|   |   |   |   |           +---linux
+|   |   |   |   |           \---windows
+|   |   |   |   +---Notes
+|   |   |   |   +---OPENCLAW
+|   |   |   |   |   +---moltbot_24h_bundles
+|   |   |   |   |   \---reports_24h
+|   |   |   |   |       +---24h_20260202_062839
+|   |   |   |   |       +---24h_20260202_063930Z
+|   |   |   |   |       \---24h_20260202_070052
+|   |   |   |   +---Portfolio
+|   |   |   |   |   \---Network
+|   |   |   |   +---Security
+|   |   |   |   |   \---ho-lm-02
+|   |   |   |   |       \---CLOUD_CLEANUPS
+|   |   |   |   |           +---hawkinsops-soc-content
+|   |   |   |   |           |   +---detection-rules
+|   |   |   |   |           |   |   +---sigma
+|   |   |   |   |           |   |   |   +---collection
+|   |   |   |   |           |   |   |   +---credential-access
+|   |   |   |   |           |   |   |   +---defense-evasion
+|   |   |   |   |           |   |   |   +---discovery
+|   |   |   |   |           |   |   |   +---execution
+|   |   |   |   |           |   |   |   +---exfiltration
+|   |   |   |   |           |   |   |   +---impact
+|   |   |   |   |           |   |   |   +---lateral-movement
+|   |   |   |   |           |   |   |   +---persistence
+|   |   |   |   |           |   |   |   \---privilege-escalation
+|   |   |   |   |           |   |   +---splunk
+|   |   |   |   |           |   |   \---wazuh
+|   |   |   |   |           |   +---incident-response
+|   |   |   |   |           |   |   \---playbooks
+|   |   |   |   |           |   +---learning-system
+|   |   |   |   |           |   |   \---roadmap
+|   |   |   |   |           |   |       \---daily-breakdown
+|   |   |   |   |           |   +---runbooks
+|   |   |   |   |           |   |   +---.claude
+|   |   |   |   |           |   |   +---playbooks
+|   |   |   |   |           |   |   +---references
+|   |   |   |   |           |   |   \---scenarios
+|   |   |   |   |           |   \---threat-hunting
+|   |   |   |   |           |       +---linux
+|   |   |   |   |           |       \---windows
+|   |   |   |   |           \---hawkins_ops
+|   |   |   |   |               \---hawkinsops-site
+|   |   |   |   |                   \---hawkinsops-v2
+|   |   |   |   +---Security_Automation
+|   |   |   |   +---SOC
+|   |   |   |   |   \---6_week_soc_build
+|   |   |   |   |       +---Daily_execuition
+|   |   |   |   |       |   \---DAY1
+|   |   |   |   |       |       \---OBSIDIAN_FIX
+|   |   |   |   |       +---GUIDELINE
+|   |   |   |   |       \---_AUDIT
+|   |   |   |   |           \---SNAPSHOTS
+|   |   |   |   \---_MIGRATE
+|   |   |   |       \---SRC
+|   |   |   |           +---legacy_dump_wazuh
+|   |   |   |           +---Security_Automation_Configs
+|   |   |   |           +---Wazuh_Configs
+|   |   |   |           +---Wazuh_Rules
+|   |   |   |           \---WAZUH_RULES_PRIMARY
+|   |   |   +---ROOT_MISC
+|   |   |   |   +---02-06RH_MIGRATION
+|   |   |   |   |   \---CLAUDE_AUDIT_02-04
+|   |   |   |   |       +---INPUT
+|   |   |   |   |       |   \---ai_context
+|   |   |   |   |       |       +---audit
+|   |   |   |   |       |       |   \---2026_audit_L2_2026-02-04_14-31-26
+|   |   |   |   |       |       |       \---CLAUDE_BUNDLE
+|   |   |   |   |       |       +---codex_ops02-04
+|   |   |   |   |       |       |   +---inventory
+|   |   |   |   |       |       |   +---logs
+|   |   |   |   |       |       |   \---reports
+|   |   |   |   |       |       \---codex_opsold02-04
+|   |   |   |   |       +---OUTPUTS
+|   |   |   |   |       +---PROMPTS
+|   |   |   |   |       \---RUNLOG
+|   |   |   |   +---MIND
+|   |   |   |   |   \---notes
+|   |   |   |   |       \---Daily
+|   |   |   |   +---proofpack_gpu_passthrough_20260203T093234Z
+|   |   |   |   |   \---gpu_test_2026-02-03
+|   |   |   |   |       \---.venv
+|   |   |   |   |           +---bin
+|   |   |   |   |           +---include
+|   |   |   |   |           |   \---python3.12
+|   |   |   |   |           \---lib
+|   |   |   |   |               \---python3.12
+|   |   |   |   |                   \---site-packages
+|   |   |   |   |                       +---cupy
+|   |   |   |   |                       |   +---.data
+|   |   |   |   |                       |   +---array_api
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---cuda
+|   |   |   |   |                       |   |   +---memory_hooks
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---exceptions
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---fft
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---lib
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---linalg
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---polynomial
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---prof
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---random
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---sparse
+|   |   |   |   |                       |   |   +---linalg
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---testing
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---typing
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_binary
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_core
+|   |   |   |   |                       |   |   +---include
+|   |   |   |   |                       |   |   |   \---cupy
+|   |   |   |   |                       |   |   |       +---complex
+|   |   |   |   |                       |   |   |       +---_cccl
+|   |   |   |   |                       |   |   |       |   +---cub
+|   |   |   |   |                       |   |   |       |   |   \---cub
+|   |   |   |   |                       |   |   |       |   |       +---agent
+|   |   |   |   |                       |   |   |       |   |       +---block
+|   |   |   |   |                       |   |   |       |   |       |   \---specializations
+|   |   |   |   |                       |   |   |       |   |       +---detail
+|   |   |   |   |                       |   |   |       |   |       |   \---launcher
+|   |   |   |   |                       |   |   |       |   |       +---device
+|   |   |   |   |                       |   |   |       |   |       |   \---dispatch
+|   |   |   |   |                       |   |   |       |   |       |       +---kernels
+|   |   |   |   |                       |   |   |       |   |       |       \---tuning
+|   |   |   |   |                       |   |   |       |   |       +---grid
+|   |   |   |   |                       |   |   |       |   |       +---host
+|   |   |   |   |                       |   |   |       |   |       +---iterator
+|   |   |   |   |                       |   |   |       |   |       +---thread
+|   |   |   |   |                       |   |   |       |   |       \---warp
+|   |   |   |   |                       |   |   |       |   |           \---specializations
+|   |   |   |   |                       |   |   |       |   +---libcudacxx
+|   |   |   |   |                       |   |   |       |   |   +---cuda
+|   |   |   |   |                       |   |   |       |   |   |   +---std
+|   |   |   |   |                       |   |   |       |   |   |   |   +---detail
+|   |   |   |   |                       |   |   |       |   |   |   |   |   \---libcxx
+|   |   |   |   |                       |   |   |       |   |   |   |   |       \---include
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__algorithm
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__atomic
+|   |   |   |   |                       |   |   |       |   |   |   |   |   +---api
+|   |   |   |   |                       |   |   |       |   |   |   |   |   +---functions
+|   |   |   |   |                       |   |   |       |   |   |   |   |   +---platform
+|   |   |   |   |                       |   |   |       |   |   |   |   |   +---types
+|   |   |   |   |                       |   |   |       |   |   |   |   |   \---wait
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__barrier
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__bit
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__cccl
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__cmath
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__complex
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__concepts
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__cstddef
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__cstdlib
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__cuda
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__exception
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__expected
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__functional
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__fwd
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__internal
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__iterator
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__latch
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__limits
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__mdspan
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__memory
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__new
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__numeric
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__ranges
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__semaphore
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__string
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__thread
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__tuple_dir
+|   |   |   |   |                       |   |   |       |   |   |   |   +---__type_traits
+|   |   |   |   |                       |   |   |       |   |   |   |   \---__utility
+|   |   |   |   |                       |   |   |       |   |   |   +---__atomic
+|   |   |   |   |                       |   |   |       |   |   |   +---__barrier
+|   |   |   |   |                       |   |   |       |   |   |   +---__cmath
+|   |   |   |   |                       |   |   |       |   |   |   +---__functional
+|   |   |   |   |                       |   |   |       |   |   |   +---__fwd
+|   |   |   |   |                       |   |   |       |   |   |   +---__latch
+|   |   |   |   |                       |   |   |       |   |   |   +---__memcpy_async
+|   |   |   |   |                       |   |   |       |   |   |   +---__memory_resource
+|   |   |   |   |                       |   |   |       |   |   |   +---__ptx
+|   |   |   |   |                       |   |   |       |   |   |   |   \---instructions
+|   |   |   |   |                       |   |   |       |   |   |   |       \---generated
+|   |   |   |   |                       |   |   |       |   |   |   +---__semaphore
+|   |   |   |   |                       |   |   |       |   |   |   \---__type_traits
+|   |   |   |   |                       |   |   |       |   |   \---nv
+|   |   |   |   |                       |   |   |       |   |       \---detail
+|   |   |   |   |                       |   |   |       |   \---thrust
+|   |   |   |   |                       |   |   |       |       \---thrust
+|   |   |   |   |                       |   |   |       |           +---async
+|   |   |   |   |                       |   |   |       |           +---detail
+|   |   |   |   |                       |   |   |       |           |   +---allocator
+|   |   |   |   |                       |   |   |       |           |   +---complex
+|   |   |   |   |                       |   |   |       |           |   +---config
+|   |   |   |   |                       |   |   |       |           |   +---functional
+|   |   |   |   |                       |   |   |       |           |   +---mpl
+|   |   |   |   |                       |   |   |       |           |   +---range
+|   |   |   |   |                       |   |   |       |           |   +---type_traits
+|   |   |   |   |                       |   |   |       |           |   |   \---iterator
+|   |   |   |   |                       |   |   |       |           |   \---util
+|   |   |   |   |                       |   |   |       |           +---iterator
+|   |   |   |   |                       |   |   |       |           |   \---detail
+|   |   |   |   |                       |   |   |       |           +---mr
+|   |   |   |   |                       |   |   |       |           +---random
+|   |   |   |   |                       |   |   |       |           |   \---detail
+|   |   |   |   |                       |   |   |       |           +---system
+|   |   |   |   |                       |   |   |       |           |   +---cpp
+|   |   |   |   |                       |   |   |       |           |   |   \---detail
+|   |   |   |   |                       |   |   |       |           |   +---cuda
+|   |   |   |   |                       |   |   |       |           |   |   \---detail
+|   |   |   |   |                       |   |   |       |           |   |       +---async
+|   |   |   |   |                       |   |   |       |           |   |       +---core
+|   |   |   |   |                       |   |   |       |           |   |       \---internal
+|   |   |   |   |                       |   |   |       |           |   +---detail
+|   |   |   |   |                       |   |   |       |           |   |   +---adl
+|   |   |   |   |                       |   |   |       |           |   |   |   \---async
+|   |   |   |   |                       |   |   |       |           |   |   +---generic
+|   |   |   |   |                       |   |   |       |           |   |   |   \---scalar
+|   |   |   |   |                       |   |   |       |           |   |   +---internal
+|   |   |   |   |                       |   |   |       |           |   |   \---sequential
+|   |   |   |   |                       |   |   |       |           |   +---omp
+|   |   |   |   |                       |   |   |       |           |   |   \---detail
+|   |   |   |   |                       |   |   |       |           |   \---tbb
+|   |   |   |   |                       |   |   |       |           |       \---detail
+|   |   |   |   |                       |   |   |       |           \---type_traits
+|   |   |   |   |                       |   |   |       +---_cuda
+|   |   |   |   |                       |   |   |       |   +---cuda-11
+|   |   |   |   |                       |   |   |       |   \---cuda-12
+|   |   |   |   |                       |   |   |       +---_dlpack
+|   |   |   |   |                       |   |   |       \---_jitify
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_creation
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_functional
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_indexing
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_io
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_logic
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_manipulation
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_math
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_misc
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_padding
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_sorting
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_statistics
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   \---__pycache__
+|   |   |   |   |                       +---cupyx
+|   |   |   |   |                       |   +---distributed
+|   |   |   |   |                       |   |   +---array
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---fallback_mode
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---jit
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---linalg
+|   |   |   |   |                       |   |   +---sparse
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---optimizing
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---profiler
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---scipy
+|   |   |   |   |                       |   |   +---fft
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---fftpack
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---interpolate
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---linalg
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---ndimage
+|   |   |   |   |                       |   |   |   +---cuda
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---signal
+|   |   |   |   |                       |   |   |   +---windows
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---sparse
+|   |   |   |   |                       |   |   |   +---csgraph
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---linalg
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---spatial
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---special
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---stats
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---_lib
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---signal
+|   |   |   |   |                       |   |   +---_acoustics
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---_convolution
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---_filtering
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---_radartools
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---tools
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   \---__pycache__
+|   |   |   |   |                       +---cupy_backends
+|   |   |   |   |                       |   +---cuda
+|   |   |   |   |                       |   |   +---api
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---libs
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   \---__pycache__
+|   |   |   |   |                       +---cupy_cuda12x-13.6.0.dist-info
+|   |   |   |   |                       |   \---licenses
+|   |   |   |   |                       |       \---docs
+|   |   |   |   |                       |           \---source
+|   |   |   |   |                       +---fastrlock
+|   |   |   |   |                       |   \---__pycache__
+|   |   |   |   |                       +---fastrlock-0.8.3.dist-info
+|   |   |   |   |                       +---numpy
+|   |   |   |   |                       |   +---char
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---core
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---ctypeslib
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---doc
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---f2py
+|   |   |   |   |                       |   |   +---src
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   +---src
+|   |   |   |   |                       |   |   |   |   +---abstract_interface
+|   |   |   |   |                       |   |   |   |   +---array_from_pyobj
+|   |   |   |   |                       |   |   |   |   +---assumed_shape
+|   |   |   |   |                       |   |   |   |   +---block_docstring
+|   |   |   |   |                       |   |   |   |   +---callback
+|   |   |   |   |                       |   |   |   |   +---cli
+|   |   |   |   |                       |   |   |   |   +---common
+|   |   |   |   |                       |   |   |   |   +---crackfortran
+|   |   |   |   |                       |   |   |   |   +---f2cmap
+|   |   |   |   |                       |   |   |   |   +---isocintrin
+|   |   |   |   |                       |   |   |   |   +---kind
+|   |   |   |   |                       |   |   |   |   +---mixed
+|   |   |   |   |                       |   |   |   |   +---modules
+|   |   |   |   |                       |   |   |   |   |   +---gh25337
+|   |   |   |   |                       |   |   |   |   |   \---gh26920
+|   |   |   |   |                       |   |   |   |   +---negative_bounds
+|   |   |   |   |                       |   |   |   |   +---parameter
+|   |   |   |   |                       |   |   |   |   +---quoted_character
+|   |   |   |   |                       |   |   |   |   +---regression
+|   |   |   |   |                       |   |   |   |   +---return_character
+|   |   |   |   |                       |   |   |   |   +---return_complex
+|   |   |   |   |                       |   |   |   |   +---return_integer
+|   |   |   |   |                       |   |   |   |   +---return_logical
+|   |   |   |   |                       |   |   |   |   +---return_real
+|   |   |   |   |                       |   |   |   |   +---routines
+|   |   |   |   |                       |   |   |   |   +---size
+|   |   |   |   |                       |   |   |   |   +---string
+|   |   |   |   |                       |   |   |   |   \---value_attrspec
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---_backends
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---fft
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---lib
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   +---data
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---linalg
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---ma
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---matrixlib
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---polynomial
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---random
+|   |   |   |   |                       |   |   +---lib
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   +---data
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---_examples
+|   |   |   |   |                       |   |   |   +---cffi
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---cython
+|   |   |   |   |                       |   |   |   \---numba
+|   |   |   |   |                       |   |   |       \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---rec
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---strings
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---testing
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---_private
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---tests
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---typing
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   +---data
+|   |   |   |   |                       |   |   |   |   +---fail
+|   |   |   |   |                       |   |   |   |   +---misc
+|   |   |   |   |                       |   |   |   |   +---pass
+|   |   |   |   |                       |   |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   |   \---reveal
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_core
+|   |   |   |   |                       |   |   +---include
+|   |   |   |   |                       |   |   |   \---numpy
+|   |   |   |   |                       |   |   |       \---random
+|   |   |   |   |                       |   |   +---lib
+|   |   |   |   |                       |   |   |   +---npy-pkg-config
+|   |   |   |   |                       |   |   |   \---pkgconfig
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   +---data
+|   |   |   |   |                       |   |   |   +---examples
+|   |   |   |   |                       |   |   |   |   +---cython
+|   |   |   |   |                       |   |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   |   \---limited_api
+|   |   |   |   |                       |   |   |   |       \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_pyinstaller
+|   |   |   |   |                       |   |   +---tests
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_typing
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_utils
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   \---__pycache__
+|   |   |   |   |                       +---numpy-2.4.2.dist-info
+|   |   |   |   |                       |   \---licenses
+|   |   |   |   |                       |       \---numpy
+|   |   |   |   |                       |           +---fft
+|   |   |   |   |                       |           |   \---pocketfft
+|   |   |   |   |                       |           +---linalg
+|   |   |   |   |                       |           |   \---lapack_lite
+|   |   |   |   |                       |           +---ma
+|   |   |   |   |                       |           +---random
+|   |   |   |   |                       |           |   \---src
+|   |   |   |   |                       |           |       +---distributions
+|   |   |   |   |                       |           |       +---mt19937
+|   |   |   |   |                       |           |       +---pcg64
+|   |   |   |   |                       |           |       +---philox
+|   |   |   |   |                       |           |       +---sfc64
+|   |   |   |   |                       |           |       \---splitmix64
+|   |   |   |   |                       |           \---_core
+|   |   |   |   |                       |               +---include
+|   |   |   |   |                       |               |   \---numpy
+|   |   |   |   |                       |               |       \---libdivide
+|   |   |   |   |                       |               \---src
+|   |   |   |   |                       |                   +---common
+|   |   |   |   |                       |                   |   \---pythoncapi-compat
+|   |   |   |   |                       |                   +---highway
+|   |   |   |   |                       |                   +---multiarray
+|   |   |   |   |                       |                   +---npysort
+|   |   |   |   |                       |                   |   \---x86-simd-sort
+|   |   |   |   |                       |                   \---umath
+|   |   |   |   |                       |                       \---svml
+|   |   |   |   |                       +---numpy.libs
+|   |   |   |   |                       +---nvidia
+|   |   |   |   |                       |   +---cublas
+|   |   |   |   |                       |   |   +---include
+|   |   |   |   |                       |   |   \---lib
+|   |   |   |   |                       |   +---cuda_nvrtc
+|   |   |   |   |                       |   |   +---include
+|   |   |   |   |                       |   |   \---lib
+|   |   |   |   |                       |   +---cuda_runtime
+|   |   |   |   |                       |   |   +---include
+|   |   |   |   |                       |   |   |   \---cooperative_groups
+|   |   |   |   |                       |   |   |       \---details
+|   |   |   |   |                       |   |   \---lib
+|   |   |   |   |                       |   +---curand
+|   |   |   |   |                       |   |   +---include
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---lib
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   \---__pycache__
+|   |   |   |   |                       +---nvidia_cublas_cu12-12.9.1.4.dist-info
+|   |   |   |   |                       |   \---licenses
+|   |   |   |   |                       +---nvidia_cuda_nvrtc_cu12-12.9.86.dist-info
+|   |   |   |   |                       |   \---licenses
+|   |   |   |   |                       +---nvidia_cuda_runtime_cu12-12.9.79.dist-info
+|   |   |   |   |                       |   \---licenses
+|   |   |   |   |                       +---nvidia_curand_cu12-10.3.10.19.dist-info
+|   |   |   |   |                       +---pip
+|   |   |   |   |                       |   +---_internal
+|   |   |   |   |                       |   |   +---cli
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---commands
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---distributions
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---index
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---locations
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---metadata
+|   |   |   |   |                       |   |   |   +---importlib
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---models
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---network
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---operations
+|   |   |   |   |                       |   |   |   +---build
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---install
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---req
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---resolution
+|   |   |   |   |                       |   |   |   +---legacy
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---resolvelib
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---utils
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---vcs
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   +---_vendor
+|   |   |   |   |                       |   |   +---cachecontrol
+|   |   |   |   |                       |   |   |   +---caches
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---certifi
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---dependency_groups
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---distlib
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---distro
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---idna
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---msgpack
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---packaging
+|   |   |   |   |                       |   |   |   +---licenses
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---pkg_resources
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---platformdirs
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---pygments
+|   |   |   |   |                       |   |   |   +---filters
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---formatters
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---lexers
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---styles
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---pyproject_hooks
+|   |   |   |   |                       |   |   |   +---_in_process
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---requests
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---resolvelib
+|   |   |   |   |                       |   |   |   +---resolvers
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---rich
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---tomli
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---tomli_w
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---truststore
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   +---urllib3
+|   |   |   |   |                       |   |   |   +---contrib
+|   |   |   |   |                       |   |   |   |   +---_securetransport
+|   |   |   |   |                       |   |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---packages
+|   |   |   |   |                       |   |   |   |   +---backports
+|   |   |   |   |                       |   |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   +---util
+|   |   |   |   |                       |   |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   |   \---__pycache__
+|   |   |   |   |                       |   |   \---__pycache__
+|   |   |   |   |                       |   \---__pycache__
+|   |   |   |   |                       \---pip-26.0.dist-info
+|   |   |   |   |                           \---licenses
+|   |   |   |   |                               \---src
+|   |   |   |   |                                   \---pip
+|   |   |   |   |                                       \---_vendor
+|   |   |   |   |                                           +---cachecontrol
+|   |   |   |   |                                           +---certifi
+|   |   |   |   |                                           +---dependency_groups
+|   |   |   |   |                                           +---distlib
+|   |   |   |   |                                           +---distro
+|   |   |   |   |                                           +---idna
+|   |   |   |   |                                           +---msgpack
+|   |   |   |   |                                           +---packaging
+|   |   |   |   |                                           +---pkg_resources
+|   |   |   |   |                                           +---platformdirs
+|   |   |   |   |                                           +---pygments
+|   |   |   |   |                                           +---pyproject_hooks
+|   |   |   |   |                                           +---requests
+|   |   |   |   |                                           +---resolvelib
+|   |   |   |   |                                           +---rich
+|   |   |   |   |                                           +---tomli
+|   |   |   |   |                                           +---tomli_w
+|   |   |   |   |                                           +---truststore
+|   |   |   |   |                                           \---urllib3
+|   |   |   |   +---SYSTEM
+|   |   |   |   |   +---AI_Buffer
+|   |   |   |   |   +---Automation
+|   |   |   |   |   +---Cloud
+|   |   |   |   |   |   +---Drive
+|   |   |   |   |   |   +---Dropbox
+|   |   |   |   |   |   \---iCloud
+|   |   |   |   |   +---Codex
+|   |   |   |   |   +---Data
+|   |   |   |   |   |   +---AI_Logs
+|   |   |   |   |   |   +---Logs
+|   |   |   |   |   |   |   +---LLM_Router
+|   |   |   |   |   |   |   \---TreeAudit
+|   |   |   |   |   |   +---Other
+|   |   |   |   |   |   +---Reports
+|   |   |   |   |   |   |   \---OBSIDIAN_RESTORE_20260114_165110
+|   |   |   |   |   |   +---Security_Logs
+|   |   |   |   |   |   \---System_Logs
+|   |   |   |   |   |       +---linux
+|   |   |   |   |   |       \---linux_daily
+|   |   |   |   |   |           +---20251116_0300
+|   |   |   |   |   |           +---20251117_0300
+|   |   |   |   |   |           +---20251118_0300
+|   |   |   |   |   |           +---20251119_0300
+|   |   |   |   |   |           +---20251120_0300
+|   |   |   |   |   |           +---20251121_0300
+|   |   |   |   |   |           \---20251122_0300
+|   |   |   |   |   +---Obsidian
+|   |   |   |   |   |   +---Plugin
+|   |   |   |   |   |   +---Plugins
+|   |   |   |   |   |   +---Receipts
+|   |   |   |   |   |   +---Reports
+|   |   |   |   |   |   +---Templates
+|   |   |   |   |   |   \---Vault
+|   |   |   |   |   |       \---VAULT
+|   |   |   |   |   +---RayleeOps_FolderIcons_Pack (1)
+|   |   |   |   |   |   \---RayleeOps_FolderIcons
+|   |   |   |   |   +---Receipts
+|   |   |   |   |   +---Reports
+|   |   |   |   |   +---Scripts
+|   |   |   |   |   +---Templates
+|   |   |   |   |   |   +---Imported_2026
+|   |   |   |   |   |   \---PDF
+|   |   |   |   |   \---tools
+|   |   |   |   |       +---Claude
+|   |   |   |   |       +---Codex
+|   |   |   |   |       \---ObsidianOps
+|   |   |   |   \---_INBOX
+|   |   |   |       +---AI_Buffer
+|   |   |   |       |   \---codex_outputs
+|   |   |   |       +---Downloads
+|   |   |   |       |   +---%userprofile%
+|   |   |   |       |   |   \---OneDrive
+|   |   |   |       |   \---Dropbox
+|   |   |   |       +---Temp_Sort
+|   |   |   |       |   \---jan25github_merge
+|   |   |   |       \---Windows
+|   |   |   |           +---Screenshots
+|   |   |   |           \---Windows_Screenshots
+|   |   |   \---VAULT
+|   |   |       \---SSH
+|   |   |           \---keys
+|   |   +---github_bits
+|   |   \---nested_repos
+|   +---RESEARCH
+|   |   +---ai
+|   |   |   +---agents
+|   |   |   +---eval
+|   |   |   +---facts
+|   |   |   +---notes
+|   |   |   \---prompts
+|   |   +---experiments
+|   |   |   \---from_notes
+|   |   +---job_market
+|   |   |   \---from_notes
+|   |   +---notes
+|   |   |   +---learn
+|   |   |   \---research
+|   |   \---operators_manual
+|   |       \---from_notes
+|   +---SYSTEM
+|   |   +---ai_context
+|   |   +---configs
+|   |   +---DATA
+|   |   |   +---audits
+|   |   |   +---inventories
+|   |   |   +---logs
+|   |   |   +---reports
+|   |   |   \---runs
+|   |   +---migrations
+|   |   |   \---RH_MIGRATION_2026
+|   |   |       +---5.2RESEARCH_MIGRATE
+|   |   |       \---logs
+|   |   +---obsidian
+|   |   |   \---.obsidian
+|   |   \---templates
+|   \---_INBOX
+|       +---downloads
+|       +---exports
+|       +---imports
+|       +---scratchpad
+|       +---screenshots
+|       \---temp_sort
+\---VAULT
+    +---SSH
+    |   \---keys
+    +---_DO_NOT_SYNC
+    \---_SECRETS_TRIAGE

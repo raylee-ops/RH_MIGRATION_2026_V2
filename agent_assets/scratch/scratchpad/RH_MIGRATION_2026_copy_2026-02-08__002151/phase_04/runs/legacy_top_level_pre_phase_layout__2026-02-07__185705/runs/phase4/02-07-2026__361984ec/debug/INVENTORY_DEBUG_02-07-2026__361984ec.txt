@@ -1,0 +1,1 @@
+SENSITIVE: C:\RH\OPS\QUARANTINE\FROM_2026\VAULT\claude code mcp GitHub token.txt  Reason=filename_pattern

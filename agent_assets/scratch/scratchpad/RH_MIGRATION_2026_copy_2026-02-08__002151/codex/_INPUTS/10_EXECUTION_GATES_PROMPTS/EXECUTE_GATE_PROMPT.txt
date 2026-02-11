@@ -1,0 +1,5 @@
+EXECUTE GATE MODE
+- Confirm explicit user approval string was provided.
+- Run pre-check counts.
+- Execute approved operations only.
+- Run post-check counts and write results artifact.

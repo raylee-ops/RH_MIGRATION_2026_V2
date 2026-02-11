@@ -1,0 +1,44 @@
+# Known Folder Key Dump
+RunId=2026-02-07__195533
+
+## BEFORE
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|Desktop|exists=True|type=ExpandString|value=%USERPROFILE%\Desktop|expanded=C:\Users\Raylee\Desktop
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|Desktop|exists=True|type=String|value=C:\Users\Raylee\Desktop|expanded=C:\Users\Raylee\Desktop
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|Personal|exists=False|type=|value=|expanded=
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|Personal|exists=True|type=String|value=C:\Users\Raylee\Documents|expanded=C:\Users\Raylee\Documents
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|My Pictures|exists=True|type=String|value=C:\2026\LIFE\Personal\Pictures|expanded=C:\2026\LIFE\Personal\Pictures
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|My Pictures|exists=True|type=String|value=C:\Users\Raylee\Pictures|expanded=C:\Users\Raylee\Pictures
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|My Video|exists=False|type=|value=|expanded=
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|My Video|exists=True|type=String|value=C:\Users\Raylee\Videos|expanded=C:\Users\Raylee\Videos
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|{374DE290-123F-4565-9164-39C4925E467B}|exists=True|type=String|value=C:\2026\_INBOX\Downloads|expanded=C:\2026\_INBOX\Downloads
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|{374DE290-123F-4565-9164-39C4925E467B}|exists=True|type=String|value=C:\Users\Raylee\Downloads|expanded=C:\Users\Raylee\Downloads
+
+## AFTER
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|Desktop|exists=True|type=ExpandString|value=C:\RH\INBOX\DESKTOP_SWEEP|expanded=C:\RH\INBOX\DESKTOP_SWEEP
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|Desktop|exists=True|type=String|value=C:\RH\INBOX\DESKTOP_SWEEP|expanded=C:\RH\INBOX\DESKTOP_SWEEP
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|Personal|exists=True|type=ExpandString|value=C:\RH\LIFE\DOCS|expanded=C:\RH\LIFE\DOCS
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|Personal|exists=True|type=String|value=C:\RH\LIFE\DOCS|expanded=C:\RH\LIFE\DOCS
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|My Pictures|exists=True|type=ExpandString|value=C:\RH\LIFE\MEDIA\PHOTOS|expanded=C:\RH\LIFE\MEDIA\PHOTOS
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|My Pictures|exists=True|type=String|value=C:\RH\LIFE\MEDIA\PHOTOS|expanded=C:\RH\LIFE\MEDIA\PHOTOS
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|My Video|exists=True|type=ExpandString|value=C:\RH\LIFE\MEDIA\VIDEOS|expanded=C:\RH\LIFE\MEDIA\VIDEOS
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|My Video|exists=True|type=String|value=C:\RH\LIFE\MEDIA\VIDEOS|expanded=C:\RH\LIFE\MEDIA\VIDEOS
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders|{374DE290-123F-4565-9164-39C4925E467B}|exists=True|type=ExpandString|value=C:\RH\INBOX\DOWNLOADS|expanded=C:\RH\INBOX\DOWNLOADS
+HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders|{374DE290-123F-4565-9164-39C4925E467B}|exists=True|type=String|value=C:\RH\INBOX\DOWNLOADS|expanded=C:\RH\INBOX\DOWNLOADS
+
+## OneDrive/GPO Signals
+FOUND_KEY|HKCU:\Software\Microsoft\OneDrive
+  LastKnownODSInfo=13413406277381,28024
+  DownloadURSFromOneDriveLauncherSafe=1
+  OneDriveTrigger=C:\Program Files\Microsoft OneDrive\OneDrive.exe
+  LastRunOneDriveVersion=26.007.0112.0002
+  UserFolder=C:\Users\Raylee\OneDrive
+  OneDriveFRECompleted=1
+  LastOneDriveLauncherRunTime=1770334139
+FOUND_KEY|HKCU:\Software\Microsoft\OneDrive\Accounts\Personal
+  UserFolder=C:\Users\Raylee\OneDrive
+  OneDriveDeviceId=95179df8-7081-7010-45f6-4896edf91327
+  LastKnownCloudFilesEnabled=1
+  LastKnownSubscriptionState=1
+  LastPerFolderMigrationScanResult={"Camera Roll":1,"Desktop":1,"Documents":1,"Music":1,"Pictures":50,"Playlists":1,"Screenshots":1,"Videos":1}
+  KFMCampaignToast=1678
+FOUND_KEY|HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer

@@ -1,0 +1,1990 @@
+
+█████     ███    █     █  █        ██████   ██████
+█    █   █   █    █   █   █        █        █
+█████   █     █    ███    █        █████    █████
+█  █    ███████     █     █        █        █
+█   █   █     █     █     █        █        █
+█    █  █     █     █     ██████   ██████   ██████
+
+ CONTROL TERMINAL v1.0
+------------------------------------------------------------------------
+╭────────────────────────────────────────────────────────╮
+│ SYSTEM STATUS                                          │
+├────────────────────────────────────────────────────────┤
+│ CPU    │ AMD Ryzen 9 6900HX with Radeon Graphics       │
+│ RAM    │ 91.74 GB (Free: 72.54 GB)                     │
+│ DISK   │ C:\  343.62 / 475.85 GB                       │
+│ GPU    │ AMD Radeon(TM) Graphics                       │
+│ OS     │ Microsoft Windows 11 Enterprise (Build 26200) │
+│ HOST   │ HO-WE-01                                      │
+╰────────────────────────────────────────────────────────╯
+
+Loading personal and system profiles took 1459ms.
+PS C:\RH> tree C:\RH /A > RH_TREE_FOLDERS_ONLY.txt
+PS C:\RH> tree C:\RH /A > "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\RH_TREE_FOLDERS_ONLY.txt"
+PS C:\RH> C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS: The term 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH> cd "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-ChildItem *.ps1 | Unblock-File
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026.csv
+Read-Phase4Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1:47
+Line |
+  47 |  $rules = Read-Phase4Rules -RulesPath $RulesPath
+     |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $RulesPath = "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Item $RulesPath | Format-List FullName,Length,LastWriteTime
+
+FullName      : C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Length        : 6425
+LastWriteTime : 2/6/2026 3:57:04 PM
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Content $RulesPath -TotalCount 20
+# Phase 4 Rules (FIXED - v2 schema additions)
+# - Two-tier anchors (tier 1 creates units, tier 2 signals only)
+# - Folder seed anchors supported via seed_mode: folder + folder_name_patterns
+# - Secrets destination root centralized (file-level override in move plan)
+#
+# NOTE: This file intentionally avoids fancy YAML constructs. The parser is minimal.
+
+secrets_destination:
+  root: 'C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE'
+
+ignore_folder_patterns:
+  - '(?i)\\node_modules\\'
+  - '(?i)\\__pycache__\\'
+  - '(?i)\\\.venv\\'
+  - '(?i)\\\.mypy_cache\\'
+  - '(?i)\\\.pytest_cache\\'
+  - '(?i)\\\.terraform\\'
+  - '(?i)\\\.obsidian\\'
+  - '(?i)\\\.cache\\'
+  # Keep .git in inventory, but never treat it as anchor/signal
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Content $RulesPath -Raw | Measure-Object -Character
+
+Lines Words Characters Property
+----- ----- ---------- --------
+                  6425
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Read-Phase4Rules -All | Format-List Name,CommandType,Source,Definition
+Get-Command: The term 'Read-Phase4Rules' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Unblock-File .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Read-Phase4Rules -All | Format-List Name,CommandType,Source,Definition
+
+Name        : Read-Phase4Rules
+CommandType : Function
+Source      :
+Definition  :
+                  param(
+                      [Parameter(Mandatory)][string]$RulesPath
+                  )
+                  if (-not (Test-Path $RulesPath)) {
+                      throw "Rules file not found: $RulesPath"
+                  }
+
+                  $lines = Get-Content $RulesPath -Encoding UTF8
+
+                  $rules = [ordered]@{
+                      Anchors = @{}
+                      ClassificationRules = @()
+                      SecretsPatterns = @{
+                          filename = @()
+                          content  = @()
+                      }
+                      GarbagePatterns = @()
+                      Features = @{}
+                      Clustering = @{}
+                      Performance = @{}
+                      IgnoreFolderPatterns = @()
+                      TokenStopwords = @()
+                      SecretsDestinationRoot = 'C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE'
+                  }
+
+                  # ---------------- Anchors ----------------
+                  $anchorLines = Get-YamlSectionLines -Lines $lines -SectionName 'anchors'
+                  if ($anchorLines.Count -gt 0) {
+                      $i = 0
+                      while ($i -lt $anchorLines.Count) {
+                          $line = $anchorLines[$i]
+                          if ($line -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*$') {
+                              $name = $Matches[1]
+                              $block = New-Object System.Collections.Generic.List[string]
+                              $i++
+                              while ($i -lt $anchorLines.Count -and $anchorLines[$i] -notmatch '^\s{2}[A-Za-z_][A-Za-z0-9_]*\s*:\s*$') {
+                                  $block.Add($anchorLines[$i])
+                                  $i++
+                              }
+
+                              $def = [ordered]@{
+                                  name = $name
+                                  tier = 2
+                                  seed_mode = 'file' # file|folder
+                                  priority = 99
+                                  extensions = @()
+                                  filename_patterns = @()
+                                  folder_patterns = @()
+                                  folder_name_patterns = @()
+                                  tokens = @()
+                                  require_any_features = @()
+                                  exclude_folder_patterns = @()
+                              }
+
+                              for ($k=0; $k -lt $block.Count; $k++) {
+                                  $b = $block[$k].TrimEnd()
+                                  if ($b -match '^\s{4}tier\s*:\s*(.+?)\s*(#.*)?$') { $def.tier = [int](Parse-YamlScalar $Matches[1]); continue }
+                                  if ($b -match '^\s{4}seed_mode\s*:\s*(.+?)\s*(#.*)?$') { $def.seed_mode = (Parse-YamlScalar $Matches[1]); continue }
+                                  if ($b -match '^\s{4}priority\s*:\s*(\d+)\s*(#.*)?$') { $def.priority = [int]$Matches[1]; continue }
+
+                                  if ($b -match '^\s{4}extensions\s*:\s*(\[[^\]]*\])') { $def.extensions = (Parse-YamlInlineList $Matches[1]) | ForEach-Object { $_.ToLowerInvariant() }; continue }
+
+                                  if ($b -match '^\s{4}(filename_patterns|folder_patterns|folder_name_patterns|tokens|require_any_features|exclude_folder_patterns)\s*:\s*(\[[^\]]*\])') {
+                                      $key = $Matches[1]
+                                      $vals = Parse-YamlInlineList $Matches[2]
+                                      $def[$key] = $vals
+                                      continue
+                                  }
+
+                                  if ($b -match '^\s{4}(filename_patterns|folder_patterns|folder_name_patterns|tokens|require_any_features|exclude_folder_patterns)\s*:\s*$') {
+                                      $key = $Matches[1]
+                                      $vals = New-Object System.Collections.Generic.List[string]
+                                      $k++
+                                      while ($k -lt $block.Count -and $block[$k] -match '^\s*-\s*(.+?)\s*(#.*)?$') {
+                                          $vals.Add((Parse-YamlScalar $Matches[1]))
+                                          $k++
+                                      }
+                                      $k--  # adjust because loop advances once too far
+                                      $def[$key] = $vals.ToArray()
+                                      continue
+                                  }
+                              }
+
+                              # Normalize arrays
+                              $def.extensions = @($def.extensions | ForEach-Object { $_.Trim() } | Where-Object { $_ })
+                              $def.filename_patterns = @($def.filename_patterns | Where-Object { $_ })
+                              $def.folder_patterns = @($def.folder_patterns | Where-Object { $_ })
+                              $def.folder_name_patterns = @($def.folder_name_patterns | Where-Object { $_ })
+                              $def.tokens = @($def.tokens | ForEach-Object { $_.ToLowerInvariant() } | Where-Object { $_ })
+                              $def.require_any_features = @($def.require_any_features | Where-Object { $_ })
+                              $def.exclude_folder_patterns = @($def.exclude_folder_patterns | Where-Object { $_ })
+
+                              $rules.Anchors[$name] = [PSCustomObject]$def
+                              continue
+                          }
+                          $i++
+                      }
+                  }
+
+                  # ---------------- Classification Rules ----------------
+                  $crLines = Get-YamlSectionLines -Lines $lines -SectionName 'classification_rules'
+                  if ($crLines.Count -gt 0) {
+                      $i = 0
+                      while ($i -lt $crLines.Count) {
+                          $line = $crLines[$i]
+                          if ($line -match '^\s{2}-\s*type\s*:\s*(.+?)\s*$') {
+                              $type = Parse-YamlScalar $Matches[1]
+                              $block = New-Object System.Collections.Generic.List[string]
+                              $i++
+                              while ($i -lt $crLines.Count -and $crLines[$i] -notmatch '^\s{2}-\s*type\s*:') {
+                                  $block.Add($crLines[$i])
+                                  $i++
+                              }
+
+                              $rule = [ordered]@{
+                                  type = $type
+                                  priority = 99
+                                  destination_template = ''
+                                  unit_prefix = ''
+                                  create_scaffold = $false
+                                  conditions = @{}
+                              }
+
+                              # Parse scalars and conditions
+                              for ($k=0; $k -lt $block.Count; $k++) {
+                                  $b = $block[$k].TrimEnd()
+                                  if ($b -match '^\s{4}priority\s*:\s*(\d+)') { $rule.priority = [int]$Matches[1]; continue }
+                                  if ($b -match '^\s{4}destination_template\s*:\s*(.+?)\s*$') { $rule.destination_template = Parse-YamlScalar $Matches[1]; continue }
+                                  if ($b -match '^\s{4}unit_prefix\s*:\s*(.+?)\s*$') { $rule.unit_prefix = Parse-YamlScalar $Matches[1]; continue }
+                                  if ($b -match '^\s{4}create_scaffold\s*:\s*(true|false)') { $rule.create_scaffold = [bool]::Parse($Matches[1]); continue }
+
+                                  if ($b -match '^\s{4}conditions\s*:\s*$') {
+                                      $k++
+                                      while ($k -lt $block.Count -and $block[$k] -match '^\s{6}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.+?)\s*$') {
+                                          $ck = $Matches[1]
+                                          $cvRaw = $Matches[2]
+                                          if ($cvRaw.TrimStart().StartsWith('[')) {
+                                              $rule.conditions[$ck] = Parse-YamlInlineList $cvRaw
+                                          } else {
+                                              $rule.conditions[$ck] = Parse-YamlScalar $cvRaw
+                                          }
+                                          $k++
+                                      }
+                                      $k--  # adjust
+                                  }
+                              }
+
+                              $rules.ClassificationRules += [PSCustomObject]$rule
+                              continue
+                          }
+                          $i++
+                      }
+                  }
+
+                  # ---------------- Secrets Patterns ----------------
+                  $spLines = Get-YamlSectionLines -Lines $lines -SectionName 'secrets_patterns'
+                  if ($spLines.Count -gt 0) {
+                      $i = 0
+                      while ($i -lt $spLines.Count) {
+                          $line = $spLines[$i]
+                          if ($line -match '^\s{2}(filename|content)\s*:\s*$') {
+                              $key = $Matches[1]
+                              $vals = New-Object System.Collections.Generic.List[string]
+                              $i++
+                              while ($i -lt $spLines.Count -and $spLines[$i] -match '^\s{4}-\s*(.+?)\s*$') {
+                                  $vals.Add((Parse-YamlScalar $Matches[1]))
+                                  $i++
+                              }
+                              $rules.SecretsPatterns[$key] = $vals.ToArray()
+                              continue
+                          }
+                          $i++
+                      }
+                  }
+
+                  # Optional: secrets destination root
+                  $sdrLines = Get-YamlSectionLines -Lines $lines -SectionName 'secrets_destination'
+                  if ($sdrLines.Count -gt 0) {
+                      foreach ($l in $sdrLines) {
+                          if ($l -match '^\s{2}root\s*:\s*(.+?)\s*$') {
+                              $rules.SecretsDestinationRoot = Parse-YamlScalar $Matches[1]
+                          }
+                      }
+                  }
+
+                  # ---------------- Garbage Patterns ----------------
+                  $gpLines = Get-YamlSectionLines -Lines $lines -SectionName 'garbage_patterns'
+                  if ($gpLines.Count -gt 0) {
+                      foreach ($l in $gpLines) {
+                          if ($l -match '^\s{2}-\s*(.+?)\s*$') {
+                              $rules.GarbagePatterns += (Parse-YamlScalar $Matches[1])
+                          }
+                      }
+                  }
+
+                  # ---------------- Ignore Folder Patterns ----------------
+                  $ipLines = Get-YamlSectionLines -Lines $lines -SectionName 'ignore_folder_patterns'
+                  if ($ipLines.Count -gt 0) {
+                      foreach ($l in $ipLines) {
+                          if ($l -match '^\s{2}-\s*(.+?)\s*$') {
+                              $rules.IgnoreFolderPatterns += (Parse-YamlScalar $Matches[1])
+                          }
+                      }
+                  }
+
+                  # ---------------- Token Stopwords ----------------
+                  $tsLines = Get-YamlSectionLines -Lines $lines -SectionName 'token_stopwords'
+                  if ($tsLines.Count -gt 0) {
+                      foreach ($l in $tsLines) {
+                          if ($l -match '^\s{2}-\s*(.+?)\s*$') {
+                              $rules.TokenStopwords += (Parse-YamlScalar $Matches[1]).ToLowerInvariant()
+                          }
+                      }
+                  }
+
+                  # ---------------- Clustering Settings ----------------
+                  $clLines = Get-YamlSectionLines -Lines $lines -SectionName 'clustering'
+                  if ($clLines.Count -gt 0) {
+                      foreach ($l in $clLines) {
+                          if ($l -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.+?)\s*$') {
+                              $rules.Clustering[$Matches[1]] = Parse-YamlScalar $Matches[2]
+                          }
+                      }
+                  }
+
+                  # ---------------- Feature Patterns ----------------
+                  $featLines = Get-YamlSectionLines -Lines $lines -SectionName 'features'
+                  if ($featLines.Count -gt 0) {
+                      $i = 0
+                      while ($i -lt $featLines.Count) {
+                          $line = $featLines[$i]
+                          if ($line -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*$') {
+                              $featName = $Matches[1]
+                              $vals = New-Object System.Collections.Generic.List[string]
+                              $i++
+                              while ($i -lt $featLines.Count -and $featLines[$i] -match '^\s{4}-\s*(.+?)\s*$') {
+                                  $vals.Add((Parse-YamlScalar $Matches[1]))
+                                  $i++
+                              }
+                              $rules.Features[$featName] = $vals.ToArray()
+                              continue
+                          }
+                          $i++
+                      }
+                  }
+
+                  # ---------------- Performance ----------------
+                  $perfLines = Get-YamlSectionLines -Lines $lines -SectionName 'performance'
+                  if ($perfLines.Count -gt 0) {
+                      foreach ($l in $perfLines) {
+                          if ($l -match '^\s{2}([A-Za-z_][A-Za-z0-9_]*)\s*:\s*(.+?)\s*$') {
+                              $rules.Performance[$Matches[1]] = Parse-YamlScalar $Matches[2]
+                          }
+                      }
+                  }
+
+                  return [PSCustomObject]$rules
+
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Read-Phase4Rules).Parameters.Keys
+RulesPath
+Verbose
+Debug
+ErrorAction
+WarningAction
+InformationAction
+ProgressAction
+ErrorVariable
+WarningVariable
+InformationVariable
+OutVariable
+OutBuffer
+PipelineVariable
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Get-YamlSectionLines -All | Format-List Name,CommandType,Source,Definition
+
+Name        : Get-YamlSectionLines
+CommandType : Function
+Source      :
+Definition  :
+                  param(
+                      [Parameter(Mandatory)][string[]]$Lines,
+                      [Parameter(Mandatory)][string]$SectionName
+                  )
+
+                  $start = $null
+                  for ($i = 0; $i -lt $Lines.Count; $i++) {
+                      if ($Lines[$i] -match "^\s*$([regex]::Escape($SectionName))\s*:\s*$") {
+                          $start = $i + 1
+                          break
+                      }
+                  }
+                  if ($null -eq $start) { return @() }
+
+                  $out = New-Object System.Collections.Generic.List[string]
+                  for ($j = $start; $j -lt $Lines.Count; $j++) {
+                      $line = $Lines[$j]
+                      # Stop at the next top-level key (non-indented "word:")
+                      if ($line -match '^[A-Za-z_][A-Za-z0-9_]*\s*:\s*$' -and $line -notmatch '^\s') {
+                          break
+                      }
+                      $out.Add($line)
+                  }
+                  return $out.ToArray()
+
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Get-YamlSectionLines).Definition
+
+    param(
+        [Parameter(Mandatory)][string[]]$Lines,
+        [Parameter(Mandatory)][string]$SectionName
+    )
+
+    $start = $null
+    for ($i = 0; $i -lt $Lines.Count; $i++) {
+        if ($Lines[$i] -match "^\s*$([regex]::Escape($SectionName))\s*:\s*$") {
+            $start = $i + 1
+            break
+        }
+    }
+    if ($null -eq $start) { return @() }
+
+    $out = New-Object System.Collections.Generic.List[string]
+    for ($j = $start; $j -lt $Lines.Count; $j++) {
+        $line = $Lines[$j]
+        # Stop at the next top-level key (non-indented "word:")
+        if ($line -match '^[A-Za-z_][A-Za-z0-9_]*\s*:\s*$' -and $line -notmatch '^\s') {
+            break
+        }
+        $out.Add($line)
+    }
+    return $out.ToArray()
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = Get-Content $RulesPath -Encoding UTF8
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content $RulesPath -Encoding UTF8)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($lines.Count -eq 0 -or ($lines.Count -eq 1 -and [string]::IsNullOrWhiteSpace($lines[0]))) {
+>>     throw "Rules file loaded as empty lines: $RulesPath"
+>> }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r = Read-Phase4Rules -RulesPath ".\phase4_rules_FIXED.yml" -Verbose
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:166
+Line |
+ 166 |      $anchorLines = Get-YamlSectionLines -Lines $lines -SectionName 'a …
+     |                                                 ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:167
+Line |
+ 167 |      if ($anchorLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:240
+Line |
+ 240 |      $crLines = Get-YamlSectionLines -Lines $lines -SectionName 'class …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:241
+Line |
+ 241 |      if ($crLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:295
+Line |
+ 295 |      $spLines = Get-YamlSectionLines -Lines $lines -SectionName 'secre …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:296
+Line |
+ 296 |      if ($spLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:316
+Line |
+ 316 |      $sdrLines = Get-YamlSectionLines -Lines $lines -SectionName 'secr …
+     |                                              ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:317
+Line |
+ 317 |      if ($sdrLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:326
+Line |
+ 326 |      $gpLines = Get-YamlSectionLines -Lines $lines -SectionName 'garba …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:327
+Line |
+ 327 |      if ($gpLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:336
+Line |
+ 336 |      $ipLines = Get-YamlSectionLines -Lines $lines -SectionName 'ignor …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:337
+Line |
+ 337 |      if ($ipLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:346
+Line |
+ 346 |      $tsLines = Get-YamlSectionLines -Lines $lines -SectionName 'token …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:347
+Line |
+ 347 |      if ($tsLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:356
+Line |
+ 356 |      $clLines = Get-YamlSectionLines -Lines $lines -SectionName 'clust …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:357
+Line |
+ 357 |      if ($clLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:366
+Line |
+ 366 |      $featLines = Get-YamlSectionLines -Lines $lines -SectionName 'fea …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:367
+Line |
+ 367 |      if ($featLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:387
+Line |
+ 387 |      $perfLines = Get-YamlSectionLines -Lines $lines -SectionName 'per …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:388
+Line |
+ 388 |      if ($perfLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r | Format-List
+
+Anchors                : {}
+ClassificationRules    : {}
+SecretsPatterns        : {[filename, System.Object[]], [content, System.Object[]]}
+GarbagePatterns        : {}
+Features               : {}
+Clustering             : {}
+Performance            : {}
+IgnoreFolderPatterns   : {}
+TokenStopwords         : {}
+SecretsDestinationRoot : C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Get-YamlSectionLines -All | Format-List Name,CommandType,Source
+
+Name        : Get-YamlSectionLines
+CommandType : Function
+Source      :
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Get-YamlSectionLines).Definition
+
+    param(
+        [Parameter(Mandatory)][string[]]$Lines,
+        [Parameter(Mandatory)][string]$SectionName
+    )
+
+    $start = $null
+    for ($i = 0; $i -lt $Lines.Count; $i++) {
+        if ($Lines[$i] -match "^\s*$([regex]::Escape($SectionName))\s*:\s*$") {
+            $start = $i + 1
+            break
+        }
+    }
+    if ($null -eq $start) { return @() }
+
+    $out = New-Object System.Collections.Generic.List[string]
+    for ($j = $start; $j -lt $Lines.Count; $j++) {
+        $line = $Lines[$j]
+        # Stop at the next top-level key (non-indented "word:")
+        if ($line -match '^[A-Za-z_][A-Za-z0-9_]*\s*:\s*$' -and $line -notmatch '^\s') {
+            break
+        }
+        $out.Add($line)
+    }
+    return $out.ToArray()
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> . .\Phase4_Common.ps1; Read-Phase4Rules -RulesPath ".\phase4_rules_FIXED.yml" -Verbose | Out-String
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:166
+Line |
+ 166 |      $anchorLines = Get-YamlSectionLines -Lines $lines -SectionName 'a …
+     |                                                 ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:167
+Line |
+ 167 |      if ($anchorLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:240
+Line |
+ 240 |      $crLines = Get-YamlSectionLines -Lines $lines -SectionName 'class …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:241
+Line |
+ 241 |      if ($crLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:295
+Line |
+ 295 |      $spLines = Get-YamlSectionLines -Lines $lines -SectionName 'secre …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:296
+Line |
+ 296 |      if ($spLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:316
+Line |
+ 316 |      $sdrLines = Get-YamlSectionLines -Lines $lines -SectionName 'secr …
+     |                                              ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:317
+Line |
+ 317 |      if ($sdrLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:326
+Line |
+ 326 |      $gpLines = Get-YamlSectionLines -Lines $lines -SectionName 'garba …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:327
+Line |
+ 327 |      if ($gpLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:336
+Line |
+ 336 |      $ipLines = Get-YamlSectionLines -Lines $lines -SectionName 'ignor …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:337
+Line |
+ 337 |      if ($ipLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:346
+Line |
+ 346 |      $tsLines = Get-YamlSectionLines -Lines $lines -SectionName 'token …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:347
+Line |
+ 347 |      if ($tsLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:356
+Line |
+ 356 |      $clLines = Get-YamlSectionLines -Lines $lines -SectionName 'clust …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:357
+Line |
+ 357 |      if ($clLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:366
+Line |
+ 366 |      $featLines = Get-YamlSectionLines -Lines $lines -SectionName 'fea …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:367
+Line |
+ 367 |      if ($featLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:387
+Line |
+ 387 |      $perfLines = Get-YamlSectionLines -Lines $lines -SectionName 'per …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:388
+Line |
+ 388 |      if ($perfLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+
+Anchors                : {}
+ClassificationRules    : {}
+SecretsPatterns        : {[filename, System.Object[]], [content, System.Object[]]}
+GarbagePatterns        : {}
+Features               : {}
+Clustering             : {}
+Performance            : {}
+IgnoreFolderPatterns   : {}
+TokenStopwords         : {}
+SecretsDestinationRoot : C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE
+
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-ChildItem -Filter *.ps1 | Unblock-File
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = Get-Content $RulesPath -Encoding UTF8
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content -LiteralPath $RulesPath -Encoding UTF8 -ErrorAction Stop)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($lines.Count -eq 0 -or ($lines.Count -eq 1 -and [string]::IsNullOrWhiteSpace($lines[0]))) {
+>>     throw "Rules file read returned no usable lines: $RulesPath"
+>> }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> .\Execute-Phase4_FIXED.ps1 `
+>>   -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" `
+>>   -MaxFiles 300 `
+>>   -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026.csv
+Read-Phase4Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1:47
+Line |
+  47 |  $rules = Read-Phase4Rules -RulesPath $RulesPath
+     |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content -LiteralPath $RulesPath -Encoding UTF8 -ErrorAction Stop)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($lines.Count -eq 0 -or ($lines.Count -eq 1 -and [string]::IsNullOrWhiteSpace($lines[0]))) {
+>>     throw "Rules file read returned no usable lines: $RulesPath"
+>> }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($null -eq $Lines) {return @() }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> # If some caller passeda single string instead of string[], normalize it.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($Lines -is [string]) {
+>>     if ([string]::IsNullOrWhiteSpace($Lines)) { return @() }
+>>     $Lines = @($Lines)
+>> }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $perfLines = Get-YamlSectionLines -Lines $lines -SectionName 'performance'
+Get-YamlSectionLines: Cannot bind argument to parameter 'Lines' because it is an empty string.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($perfLines.Count -gt 0) { ... }
+InvalidOperation: The variable '$perfLines' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content $RulesPath -Encoding UTF8)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content $RulesPath -Encoding UTF8)
+Get-Content: Cannot find path 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml' because it does not exist.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content $RulesPath -Encoding UTF8)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-ChildItem *.ps1 | Unblock-File
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Remove-Module * -ErrorAction SilentlyContinue
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Read-Phase4Rules
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Read-Phase4Rules
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Get-YamlSectionLines
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Get-YamlSectionLines
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r = Read-Phase4Rules -RulesPath ".\phase4_rules_FIXED.yml"
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:166
+Line |
+ 166 |      $anchorLines = Get-YamlSectionLines -Lines $lines -SectionName 'a …
+     |                                                 ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:167
+Line |
+ 167 |      if ($anchorLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:240
+Line |
+ 240 |      $crLines = Get-YamlSectionLines -Lines $lines -SectionName 'class …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:241
+Line |
+ 241 |      if ($crLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:295
+Line |
+ 295 |      $spLines = Get-YamlSectionLines -Lines $lines -SectionName 'secre …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:296
+Line |
+ 296 |      if ($spLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:316
+Line |
+ 316 |      $sdrLines = Get-YamlSectionLines -Lines $lines -SectionName 'secr …
+     |                                              ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:317
+Line |
+ 317 |      if ($sdrLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:326
+Line |
+ 326 |      $gpLines = Get-YamlSectionLines -Lines $lines -SectionName 'garba …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:327
+Line |
+ 327 |      if ($gpLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:336
+Line |
+ 336 |      $ipLines = Get-YamlSectionLines -Lines $lines -SectionName 'ignor …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:337
+Line |
+ 337 |      if ($ipLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:346
+Line |
+ 346 |      $tsLines = Get-YamlSectionLines -Lines $lines -SectionName 'token …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:347
+Line |
+ 347 |      if ($tsLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:356
+Line |
+ 356 |      $clLines = Get-YamlSectionLines -Lines $lines -SectionName 'clust …
+     |                                             ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:357
+Line |
+ 357 |      if ($clLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:366
+Line |
+ 366 |      $featLines = Get-YamlSectionLines -Lines $lines -SectionName 'fea …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:367
+Line |
+ 367 |      if ($featLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+Get-YamlSectionLines: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:387
+Line |
+ 387 |      $perfLines = Get-YamlSectionLines -Lines $lines -SectionName 'per …
+     |                                               ~~~~~~
+     | Cannot bind argument to parameter 'Lines' because it is an empty string.
+PropertyNotFoundException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:388
+Line |
+ 388 |      if ($perfLines.Count -gt 0) {
+     |          ~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r.SecretsDestinationRoot
+C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r.IgnoreFolderPatterns.Count
+0
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r.Anchors.Keys.Count
+0
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Item ".\phase4_rules_FIXED.yml").Length
+6425
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Content -LiteralPath ".\phase4_rules_FIXED.yml" -Raw).Length
+6425
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> # Kill old function definitions (they survive "Remove-Module" because they’re not a module)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Remove-Item function:Read-Phase4Rules -ErrorAction SilentlyContinue
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Remove-Item function:Get-YamlSectionLines -ErrorAction SilentlyContinue
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> # Reload from disk
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> # Confirm they exist (and are coming from the right file)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Read-Phase4Rules
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Read-Phase4Rules
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Command Get-YamlSectionLines
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Get-YamlSectionLines
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Read-Phase4Rules).Definition | Select-String -Pattern "Get-Content.*-Raw" -SimpleMatch
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r = Read-Phase4Rules -RulesPath ".\phase4_rules_FIXED.yml"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r.Anchors.Keys.Count
+7
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $r.IgnoreFolderPatterns.Count
+9
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Read-Phase4Rules).ScriptBlock.File
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (Get-Command Get-YamlSectionLines).ScriptBlock.File
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Select-String -Path .\*.ps1 -Pattern 'function\s+Get-YamlSectionLines' -List |
+>>   Select-Object Path,LineNumber
+>>
+
+Path                                                                                        LineNumber
+----                                                                                        ----------
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1        112
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $ErrorActionPreference = 'Stop'
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> try {
+>>   .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+>> } catch {
+>>   $_ | Format-List * -Force
+>>   "`n--- Invocation ---"
+>>   $_.InvocationInfo | Format-List * -Force
+>> }
+>>
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026.csv
+Sampling enabled: 300 files (mode: Newest)
+
+PSMessageDetails      :
+Exception             : System.Management.Automation.PropertyNotFoundException: The property 'Count' cannot be found on this object. Verify that the property exists.
+                           at System.Management.Automation.ExceptionHandlingOps.CheckActionPreference(FunctionContext funcContext, Exception exception)
+                           at System.Management.Automation.Interpreter.ActionCallInstruction`2.Run(InterpretedFrame frame)
+                           at System.Management.Automation.Interpreter.EnterTryCatchFinallyInstruction.Run(InterpretedFrame frame)
+                           at System.Management.Automation.Interpreter.EnterTryCatchFinallyInstruction.Run(InterpretedFrame frame)
+TargetObject          :
+CategoryInfo          : NotSpecified: (:) [], PropertyNotFoundException
+FullyQualifiedErrorId : PropertyNotFoundStrict
+ErrorDetails          :
+InvocationInfo        : System.Management.Automation.InvocationInfo
+ScriptStackTrace      : at <ScriptBlock>, C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1: line 216
+                        at <ScriptBlock>, C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1: line 62
+                        at <ScriptBlock>, <No file>: line 2
+PipelineIterationInfo : {}
+
+
+--- Invocation ---
+
+MyCommand             :
+BoundParameters       : {}
+UnboundArguments      : {}
+ScriptLineNumber      : 216
+OffsetInLine          : 75
+HistoryId             : 71
+ScriptName            : C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1
+Line                  : Write-Host "Files: $($files.Count)  Small: $($smallFiles.Count)  Large: $($largeFiles.Count)  LargeDupeCandidates: $($largeDupeCandidates.Count)"
+
+Statement             : $largeFiles.Count
+PositionMessage       : At C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1:216 char:75
+                        + … unt)  Small: $($smallFiles.Count)  Large: $($largeFiles.Count)  Large …
+                        +                                               ~~~~~~~~~~~~~~~~~
+PSScriptRoot          : C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+PSCommandPath         : C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1
+InvocationName        :
+PipelineLength        : 0
+PipelinePosition      : 0
+ExpectingInput        : False
+CommandOrigin         : Internal
+DisplayScriptPosition :
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Write-Host "DEBUG Get-YamlSectionLines Section='$SectionName' LinesType='$($Lines.GetType().FullName)' LinesIsNull='$($null -eq $Lines)' LinesIsString='$($Lines -is [string])' LinesLen='$($Lines.Length)'" -ForegroundColor Yellow
+InvalidOperation: The variable '$SectionName' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $ErrorActionPreference='Stop'
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026.txt
+ParentContainsErrorRecordException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1:57
+Line |
+  57 |      if ($files -and $files.Count -gt 0) { return $files[0].FullName }
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> (2 lines, deterministic)
+ParserError:
+Line |
+   1 |  (2 lines, deterministic)
+     |     ~~~~~
+     | Unexpected token 'lines' in expression or statement.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Open Execute-Phase4_FIXED.ps1 and find the block around line 57.
+Open: The term 'Open' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Replace this:
+No files found - this:
+No files replaced
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($files -and $files.Count -gt 0) { return $files[0].FullName }
+InvalidOperation: The variable '$files' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> With this:
+With: The term 'With' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $files = @($files)   # force array
+InvalidOperation: The variable '$files' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($files.Count -gt 0){ return $files[0].FullName }
+InvalidOperation: The variable '$files' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Or if you want to be extra allergic to bugs:
+Or: The term 'Or' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if (@($files).Count -gt0) { return @($files)[0].FullName }
+InvalidOperation: The variable '$files' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> That’s it. No philosophy degree required.
+>>
+>>
+>>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $ErrorActionPreference = 'Stop'
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__f92e46a7.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__f92e46a7.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026__9089dd73.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__f92e46a7.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 0
+Folder seed roots found:  0
+Repo roots found:         5
+ParentContainsErrorRecordException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1:343
+Line |
+ 343 |      $anchorCount = ($g.Group | Where-Object { $_.SeedKind -eq 'file'  …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $ts = Get-Date -Format "yyyyMMdd_HHmmss"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $root = "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $bak  = "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_$ts"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> New-Item -ItemType Directory -Force -Path $bak | Out-Null
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Copy-Item "$root\Phase4_Common.ps1"         $bak -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Copy-Item "$root\Build-QuarantineInventory.ps1" $bak -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Copy-Item "$root\Find-WorkUnits_FIXED.ps1"  $bak -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Copy-Item "$root\Execute-Phase4_FIXED.ps1"  $bak -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Copy-Item "$root\Classify-Units_FIXED.ps1"  $bak -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Copy-Item "$root\Build-MovePlan_FIXED.ps1"  $bak -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> cd $bak
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> git init | Out-Null
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> git add .
+warning: in the working copy of 'Build-MovePlan_FIXED.ps1', LF will be replaced by CRLF the next timeGit touches it
+warning: in the working copy of 'Build-QuarantineInventory.ps1', LF will be replaced by CRLF the nexttime Git touches it
+warning: in the working copy of 'Classify-Units_FIXED.ps1', LF will be replaced by CRLF the next timeGit touches it
+warning: in the working copy of 'Execute-Phase4_FIXED.ps1', LF will be replaced by CRLF the next timeGit touches it
+warning: in the working copy of 'Find-WorkUnits_FIXED.ps1', LF will be replaced by CRLF the next timeGit touches it
+warning: in the working copy of 'Phase4_Common.ps1', LF will be replaced by CRLF the next time Git touches it
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> git commit -m"backup before type-hardening" | Out-Null
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> # Copy the edited versions over the backup folder so git can diff them
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Copy-Item "$root\Phase4_Common.ps1"               . -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Copy-Item "$root\Build-QuarantineInventory.ps1"   . -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Copy-Item "$root\Find-WorkUnits_FIXED.ps1"        . -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Copy-Item "$root\Execute-Phase4_FIXED.ps1"        . -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Copy-Item "$root\Classify-Units_FIXED.ps1"        . -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Copy-Item "$root\Build-MovePlan_FIXED.ps1"        . -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> git diff > "PHASE4_typehardening.patch"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> notepad "PHASE4_typehardening.patch"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Get-Command As-Array -ErrorAction SilentlyContinue
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> . "$PSScriptRoot\Phase4_Common.ps1"
+.: The term '\Phase4_Common.ps1' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> $root = "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Select-String-Path "$root\*.ps1" -Pattern "\)\.Count|\]\s*\[0\]|\)\s*\[0\]" |
+>>   Select Path, LineNumber, Line
+>>
+
+Path     LineNumber Line
+----     ---------- ----
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1           190     Write-Host "Sampling enabled: $((As-Array $files).Count) files (mode: $SampleMode)"
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1           204     $sizeCounts[$len] = [int](As-Array $g.Group).Count
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1           223   ((As-Array $files).Count), ((As-Array $smallFiles).Count), ((As-Array $largeFiles).Coun…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1             60 if ((As-Array $rulesPreflight.IgnoreFolderPatterns).Count -le 0) {
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1             65     $hasGate = (As-Array $a.extensions).Count -gt 0 -or
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1             66         (As-Array $a.filename_patterns).Count -gt 0 -or
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1             67         (As-Array $a.folder_patterns).Count -gt 0 -or
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1             68         (As-Array $a.folder_name_patterns).Count -gt 0 -or
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1             69         (As-Array $a.tokens).Count -gt 0
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1            128 $triage = (As-Array ($planArr | Where-Object { $_.ProposedType -match '^TRIAGE' -or $_.Pr…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.PATCHED.ps1        343     $anchorCount = ($g.Group | Where-Object { $_.SeedKind -eq 'file' }).Count
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.PATCHED.ps1        458             ContainsSensitive = ($og.Group | Where-Object { [bool]$_.SensitiveFlag }).Cou…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            120     if ($Def.extensions -and (As-Array $Def.extensions).Count -gt 0) {
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            125     if ($Def.folder_patterns -and (As-Array $Def.folder_patterns).Count -gt 0) {
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            136         if (-not $Def.filename_patterns -or (As-Array $Def.filename_patterns).Count -eq 0…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            144         if ($Def.require_any_features -and (As-Array $Def.require_any_features).Count-gt…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            155         if ($Def.filename_patterns -and (As-Array $Def.filename_patterns).Count -gt 0) {
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            161         } elseif ($Def.tokens -and (As-Array $Def.tokens).Count -gt 0) {
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            189         if ($Def.folder_patterns -and (As-Array $Def.folder_patterns).Count -gt 0) {
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            220 Write-Host ("Anchor defs: Tier1(file)={0}  Tier2(file)={1}  FolderSeeds={2}" -f (As-Array…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            275 Write-Host ("Tier1 file anchors found: {0}" -f (As-Array $fileAnchors).Count)
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            276 Write-Host ("Folder seed roots found:  {0}" -f (As-Array $folderSeeds).Count)
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            277 Write-Host ("Repo roots found:         {0}" -f (As-Array $repoSeeds).Count)
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            344     $anchorCount = (As-Array ($groupItems | Where-Object { $_.SeedKind -eq 'file' })).Cou…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            386         MemberCount = (As-Array $unitRows).Count
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            426 if ((As-Array $orphans).Count -gt 0) {
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            427     Write-Host ("Orphans detected: {0} (grouping into TRIAGE buckets)" -f (As-Array $orph…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            458             MemberCount = (As-Array $og.Group).Count
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1            459             ContainsSensitive = (As-Array ($og.Group | Where-Object { [bool]$_.SensitiveF…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1             30     return (As-Array $InputObject).Count
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1            177     if (-not $lines -or (As-Array ($lines | Where-Object { -not [string]::IsNullOrWhiteSp…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1            436     if (-not $Patterns -or (As-Array $Patterns).Count -eq 0) { return $false }
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1             58 $secretsCount = ($plan | Where-Object { $_.ProposedType -eq 'SECRETS_TRIAGE' }).Count
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1             59 $triageCount = ($plan | Where-Object { $_.ProposedType -match '^TRIAGE' -or $_.ProposedTy…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1             61 $ppHighConf = ($plan | Where-Object { $_.ProposedType -match '^PROOF_PACK' -and [double]$…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1             62 $projHighConf = ($plan | Where-Object { $_.ProposedType -match '^PROJECT' -and [double]$_…
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1             69 $proofPackUnits = ($class | Where-Object { $_.ProposedType -match '^PROOF_PACK' }).Count
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1             70 $triageUnits = ($class | Where-Object { $_.ProposedType -match '^TRIAGE' -or $_.ProposedT…
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> $g.Group | ...
+InvalidOperation: The variable '$g' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> $groupItems =As-Array $g.Group
+InvalidOperation: The variable '$g' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> $groupItems |...
+InvalidOperation: The variable '$groupItems' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> $candsArr = As-Array (Import-Csv ...)
+Import-Csv: Could not find a part of the path 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612\'.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> $candsArr.Count
+InvalidOperation: The variable '$candsArr' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> $candsArr[0]
+InvalidOperation: The variable '$candsArr' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> $root="C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> Select-String-Path "$root\Execute-Phase4_FIXED.ps1" -Pattern "Find-WorkUnits" | Select LineNumber, Line
+
+LineNumber Line
+---------- ----
+        94 & (Join-Path $PSScriptRoot 'Find-WorkUnits_FIXED.ps1') -InventoryCsv $invCsv -RulesPath $RulesPath -RegistryPath (Join-Path $OutputDir 'UNIT_REGISTRY.json') -OutputDir $OutputDir
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\_PATCH_BACKUPS\phase4_20260206_231612> cd "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> pwsh -NoProfile -ExecutionPolicy Bypass -File .\Execute-Phase4_FIXED.ps1 -MaxFiles 300 -SampleMode Random
+Execute-Phase4_FIXED.ps1: Cannot validate argument on parameter 'SampleMode'. The argument "Random" does not belong to the set "Newest,Path" specified by the ValidateSet attribute. Supply an argument that is in the set and then try the command again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> # Pretend inventory rows
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $fake = @(
+>>   [pscustomobject]@{ UnitId="A"; SeedKind="file"; AnchorType="rule" }
+>>   [pscustomobject]@{ UnitId="A"; SeedKind="signal"; AnchorType="note" }
+>> )
+>>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $g = ($fake | Group-Object UnitId)[0]
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $groupItems = As-Array $g.Group
+As-Array: The term 'As-Array' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $anchorCount = (As-Array ($groupItems | Where-Object { $_.SeedKind -eq 'file' })).Count
+InvalidOperation: The variable '$groupItems' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $anchorCount
+InvalidOperation: The variable '$anchorCount' cannot be retrieved because it has not been set.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = Get-Content $RulesPath -Encoding UTF8
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = @(Get-Content -LiteralPath $RulesPath -Encoding UTF8 -ErrorAction Stop)
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $lines = $lines | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> if ($lines.Count -eq 0){ throw "Rules file read returned no usable lines: $RulesPath" }
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $root="C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Select-String -Path "$root\Execute-Phase4_FIXED.ps1" -Pattern "Find-WorkUnits" | Select LineNumber, Line
+
+LineNumber Line
+---------- ----
+        94 & (Join-Path $PSScriptRoot 'Find-WorkUnits_FIXED.ps1') -InventoryCsv $invCsv -RulesPath $RulesPath -RegistryPath (Join-Path $OutputDir 'UNIT_REGISTRY.json') -OutputDir $OutputDir
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $root="C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Copy-Item "$root\Find-WorkUnits_FIXED.PATCHED.ps1" "$root\Find-WorkUnits_FIXED.ps1" -Force
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Select-String -Path "$root\Execute-Phase4_FIXED.ps1" -Pattern "Find-WorkUnits" | Select LineNumber, Line
+
+LineNumber Line
+---------- ----
+        94 & (Join-Path $PSScriptRoot 'Find-WorkUnits_FIXED.ps1') -InventoryCsv $invCsv -RulesPath $RulesPath -RegistryPath (Join-Path $OutputDir 'UNIT_REGISTRY.json') -OutputDir $OutputDir
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> pwsh -NoProfile -ExecutionPolicy Bypass -File "$root\Execute-Phase4_FIXED.ps1" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+ParentContainsErrorRecordException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1:65
+Line |
+  65 |      $hasGate = (As-Array $a.extensions).Count -gt 0 -or
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> . (Join-Path $PSScriptRoot 'Phase4_Common.ps1')
+Join-Path: Cannot bind argument to parameter 'Path' because it is an empty string.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Get-ChildItem *.ps1 |Unblock-File
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Get-Command As-Array,Safe-Count
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        As-Array
+Function        Safe-Count
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   $r = Read-Phase4Rules-RulesPath ".\phase4_rules_FIXED.yml"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   $r.SecretsDestinationRoot
+C:\RH\VAULT_NEVER_SYNC\_SECRETS_TRIAGE
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   $r.IgnoreFolderPatterns.Count
+9
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   $r.Anchors.Keys.Count
+7
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>  .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+ParentContainsErrorRecordException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1:71
+Line |
+  71 |      $hasGate = ($ext.Count -gt 0) -or ($fn.Count -gt 0) -or ($fp.Coun …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__752935f4.csv
+Sampling enabled: 300 files (mode: Newest)
+ParentContainsErrorRecordException: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1:204
+Line |
+ 204 |      $sizeCounts[$len] = [int](As-Array $g.Group).Count
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__1cc81d72.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__1cc81d72.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026__3cf10b3b.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__1cc81d72.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Test-PathMatchesAny: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1:118
+Line |
+ 118 |  … terns -and (Test-PathMatchesAny -Path $path -Patterns $Def.exclude_fo …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__ce1c7517.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__ce1c7517.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026__2b9ac75e.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__ce1c7517.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Test-AnchorMatch: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1:227
+Line |
+ 227 |          if (Test-AnchorMatch -Row $row -Def $def) {
+     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The property 'Count' cannot be found on this object. Verify that the property exists.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-06-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__668b2ee9.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__668b2ee9.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026__fee91386.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__668b2ee9.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+As-Array: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:36
+Line |
+  36 |      return @(As-Array $x).Count
+     |               ~~~~~~~~~~~
+     | Argument types do not match
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   $r = Read-Phase4Rules-RulesPath ".\phase4_rules_FIXED.yml"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   $r.IgnoreFolderPatterns.Count
+9
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   $r.Anchors.Keys.Count
+7
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>  .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+OperationStopped: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1:38
+Line |
+  38 |  …   if ($x -is [System.Collections.IEnumerable]) { return @($x).Count }
+     |                                                            ~~~~~~~~~~~
+     | Argument types do not match
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   . .\Phase4_Common.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__9bf5f83c.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__9bf5f83c.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__f19c9788.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__9bf5f83c.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 0
+Folder seed roots found:  0
+Repo roots found:         5
+Orphans detected: 295 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 0
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026.csv
+Triage rows: 294/300 (98%)
+Exception: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1:135
+Line |
+ 135 |      throw "ABORT: triage percentage too high ($pct% > $AbortIfTriageP …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | ABORT: triage percentage too high (98% > 50%). Fix anchors/membership before continuing.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest -AbortIfTriagePctGreaterThan 99
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__1d2b2adb.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__1d2b2adb.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__c272c699.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__1d2b2adb.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 0
+Folder seed roots found:  0
+Repo roots found:         5
+Orphans detected: 295 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__cae16076.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__e528cd59.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 0
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__cae16076.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__e528cd59.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__f80fb710.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__f80fb710.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__e528cd59.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__3e7d08fb.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__ac64d579.csv
+Triage rows: 294/300 (98%)
+STEP 5/6: Summary
+ParserError: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1:103
+Line |
+ 103 |  … ($anchors -ge 50 -and $anchors -le 500) { 'PASS' } else { 'FAIL' })))
+     |                                                                         ~
+     | Missing ')' in method call.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Execute-Phase4_FIXED.ps1 -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" -MaxFiles 300 -SampleMode Newest -AbortIfTriagePctGreaterThan 99
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__ac0490cd.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__ac0490cd.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__d6839bd3.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__ac0490cd.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 0
+Folder seed roots found:  0
+Repo roots found:         5
+Orphans detected: 295 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__6a46c71d.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__8590d6dd.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 0
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__6a46c71d.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__8590d6dd.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__e5ac300c.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__e5ac300c.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__8590d6dd.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__794a8fdc.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__2317c77d.csv
+Triage rows: 294/300 (98%)
+STEP 5/6: Summary
+Wrote summary: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026.txt
+STEP 6/6: Execute (optional)
+Dry-run mode: move plan generated, nothing moved.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> $root="C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> "=== ORCHESTRATOR ==="
+=== ORCHESTRATOR ===
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Item "$root\Execute-Phase4_FIXED.ps1" | Select FullName, LastWriteTime
+
+FullName                                                                                           LastWriteTime
+--------                                                                                           -------------
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1 2/7/2026 12:07:09 AM
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> "=== COMMON ==="
+=== COMMON ===
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Get-Item "$root\Phase4_Common.ps1" | Select FullName, LastWriteTime
+
+FullName                                                                                    LastWriteTime
+--------                                                                                    -------------
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1 2/7/2026 12:00:20 PM
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> "=== CALLED SCRIPTS (from orchestrator) ==="
+=== CALLED SCRIPTS (from orchestrator) ===
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Select-String -Path "$root\Execute-Phase4_FIXED.ps1" -Pattern "Build-QuarantineInventory|Find-WorkUnits|Classify-Units|Build-MovePlan|Write-Phase4Summary" |
+>>   Select LineNumber, Line
+>>
+
+LineNumber Line
+---------- ----
+        90 & (Join-Path $PSScriptRoot 'Build-QuarantineInventory.ps1') -QuarantinePath $QuarantinePath -OutputDir $OutputDir -RulesPath $RulesPath -MaxFiles $MaxFiles -SampleMode $SampleMode
+        96 & (Join-Path $PSScriptRoot 'Find-WorkUnits_FIXED.ps1') -InventoryCsv $invCsv -RulesPath $RulesPath -RegistryPath (Join-Path $OutputDir 'UNIT_REGISTRY.json') -OutputDir $OutputDir
+       115 & (Join-Path $PSScriptRoot 'Classify-Units_FIXED.ps1') -CandidatesCsv $candCsv -MembersCsv$memCsv -RulesPath $RulesPath -OutputDir $OutputDir
+       121 & (Join-Path $PSScriptRoot 'Build-MovePlan_FIXED.ps1') -ClassifiedCsv $clsCsv -MembersCsv $memCsv -RulesPath $RulesPath -OutputDir $OutputDir
+       139 & (Join-Path $PSScriptRoot 'Write-Phase4Summary.ps1') -InventoryCsv $invCsv -CandidatesCsv$candCsv -MembersCsv $memCsv -ClassifiedCsv $clsCsv -MovePlanCsv $planCsv -OutputDir $OutputDir
+
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Remove-Item "$root\Find-WorkUnits_FIXED.PATCHED.ps1" -ErrorAction SilentlyContinue
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> pwsh -NoProfile -ExecutionPolicy Bypass -File "$root\Execute-Phase4_FIXED.ps1" -MaxFiles 300 -SampleMode Newest
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__b223a0b1.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__b223a0b1.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__361984ec.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__b223a0b1.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 0
+Folder seed roots found:  0
+Repo roots found:         5
+Orphans detected: 295 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__32b647f5.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__02eacab4.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 0
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__32b647f5.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__02eacab4.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__f424b72f.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__f424b72f.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__02eacab4.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__5573d3ed.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__1520f700.csv
+Triage rows: 294/300 (98%)
+Exception: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1:135
+Line |
+ 135 |      throw "ABORT: triage percentage too high ($pct% > $AbortIfTriageP …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | ABORT: triage percentage too high (98% > 50%). Fix anchors/membership before continuing.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Cleanup-Outputs.ps1
+
+Cleanup report
+==============
+Kept files (19):
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-MovePlan_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__f424b72f.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Classify-Units_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Cleanup-Outputs.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-MovePlan.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__b223a0b1.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__361984ec.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__5573d3ed.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__1520f700.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__02eacab4.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__32b647f5.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1
+
+Moved files (34):
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__e5ac300c.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__f80fb710.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__1cc81d72.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__668b2ee9.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__ce1c7517.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026__f92e46a7.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-06-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__1d2b2adb.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__9bf5f83c.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__ac0490cd.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026__2b9ac75e.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026__3cf10b3b.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026__9089dd73.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026__fee91386.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-06-2026.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__c272c699.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__d6839bd3.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__f19c9788.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__3e7d08fb.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__794a8fdc.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_PATCH_BUNDLE_V2.zip
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__2317c77d.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__ac64d579.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__8590d6dd.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__e528cd59.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__6a46c71d.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__cae16076.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026.csv
+
+Skipped files (0):
+
+Total size moved: 1,615,758 bytes
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> pwsh -NoProfile -ExecutionPolicy Bypass -File "$root\Execute-Phase4_FIXED.ps1" `
+>>   -MaxFiles 300 -SampleMode Newest -AbortIfTriagePctGreaterThan 99
+>>
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026.csv
+Sampling enabled: 300 files (mode: Newest)
+Files: 300  Small: 300  Large: 0  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 0
+Folder seed roots found:  0
+Repo roots found:         5
+Orphans detected: 295 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 0
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026.csv
+Triage rows: 294/300 (98%)
+STEP 5/6: Summary
+Wrote summary: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026__36439d40.txt
+STEP 6/6: Execute (optional)
+Dry-run mode: move plan generated, nothing moved.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1" `
+>>     -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" `
+>>     -MaxFiles 5000 `
+>>     -SampleMode Random `
+>>     -AbortIfTriagePctGreaterThan 100
+>>
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Build-QuarantineInventory.ps1: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1:90
+Line |
+  90 |  … Dir -RulesPath $RulesPath -MaxFiles $MaxFiles -SampleMode $SampleMode
+     |                                                              ~~~~~~~~~~~
+     | Cannot validate argument on parameter 'SampleMode'. The argument "Random" does not belong to the set "Newest,Path" specified by the ValidateSet attribute. Supply an argument that is in the set andthen
+     | try the command again.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1" `
+>>     -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" `
+>>     -MaxFiles 5000 `
+>>     -SampleMode Random `
+>>     -AbortIfTriagePctGreaterThan 100
+>>
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__9b938465.csv
+Sampling enabled: 5000 files (mode: Random)
+Files: 5000  Small: 4998  Large: 2  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__9b938465.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__2cac59ae.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__9b938465.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 436
+Folder seed roots found:  3
+Repo roots found:         7
+Orphans detected: 1828 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__482a0b48.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__ad05bb0e.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 436
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__482a0b48.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__ad05bb0e.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__797253bf.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__797253bf.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__ad05bb0e.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__e5efe19c.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__61c1b4dc.csv
+Triage rows: 1827/5025 (36.36%)
+STEP 5/6: Summary
+Wrote summary: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026__ceaae1e5.txt
+STEP 6/6: Execute (optional)
+Dry-run mode: move plan generated, nothing moved.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Build-Phase4ResearchBundle.ps1
+
+Research bundle created
+=======================
+Zip: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\RESEARCH_BUNDLE\Phase4_ResearchBundle_20260207_123601.zip
+Total files: 34
+Total size: 7,795,446 bytes
+
+Included files:
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-MovePlan_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__797253bf.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__f424b72f.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Classify-Units_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-MovePlan.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__9b938465.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__b223a0b1.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__2cac59ae.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__361984ec.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__5573d3ed.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__e5efe19c.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026__36439d40.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026__ceaae1e5.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__1520f700.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__61c1b4dc.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__02eacab4.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__ad05bb0e.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__32b647f5.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__482a0b48.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1" `
+>>     -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" `
+>>     -MaxFiles 5000 `
+>>     -SampleMode Random `
+>>     -AbortIfTriagePctGreaterThan 100
+>>
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__bd23eacb.csv
+Sampling enabled: 5000 files (mode: Random)
+Files: 5000  Small: 4998  Large: 2  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__bd23eacb.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__35881b9b.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__bd23eacb.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 436
+Folder seed roots found:  3
+Repo roots found:         7
+Orphans detected: 1828 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__9279cf0d.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__dff6ab85.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 436
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__9279cf0d.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__dff6ab85.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__a99cef40.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__a99cef40.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__dff6ab85.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__6ede6678.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__e121a8c2.csv
+Triage rows: 1214/5025 (24.16%)
+STEP 5/6: Summary
+Wrote summary: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026__ba341236.txt
+STEP 6/6: Execute (optional)
+Dry-run mode: move plan generated, nothing moved.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1" `
+>>     -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" `
+>>     -MaxFiles 5000 `
+>>     -SampleMode Random `
+>>     -AbortIfTriagePctGreaterThan 100
+>>
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__630dd58d.csv
+Sampling enabled: 5000 files (mode: Random)
+Files: 5000  Small: 4998  Large: 2  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__630dd58d.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__67c072ac.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__630dd58d.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 436
+Folder seed roots found:  3
+Repo roots found:         7
+Orphans detected: 1828 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__a27720c2.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__5a75c840.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 436
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__a27720c2.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__5a75c840.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__07c3540f.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__07c3540f.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__5a75c840.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__4f9d94ba.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__f7c68117.csv
+Triage rows: 204/5025 (4.06%)
+STEP 5/6: Summary
+Wrote summary: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026.txt
+STEP 6/6: Execute (optional)
+Dry-run mode: move plan generated, nothing moved.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   Set-Location "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS"
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   .\Build-Phase4ResearchBundle.ps1
+
+Research bundle created
+=======================
+Zip: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\RESEARCH_BUNDLE\Phase4_ResearchBundle_20260207_140918.zip
+Total files: 18
+Total size: 7,092,956 bytes
+
+Included files:
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-MovePlan_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__07c3540f.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Classify-Units_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-MovePlan.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__630dd58d.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__67c072ac.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__4f9d94ba.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026__ba341236.txt
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__f7c68117.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__5a75c840.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__a27720c2.csv
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>   pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1" `
+>>     -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" `
+>>     -SampleMode Random `
+>>     -MaxFiles 0 `
+>>     -AbortIfTriagePctGreaterThan 100
+>>
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       DRY-RUN (plan only)
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__6ebbef07.csv
+Files: 5265  Small: 5263  Large: 2  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__6ebbef07.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__9df29122.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__6ebbef07.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 436
+Folder seed roots found:  3
+Repo roots found:         7
+Orphans detected: 2093 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__153b0acb.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__db3556a0.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 436
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__153b0acb.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__db3556a0.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__b0a29f80.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__b0a29f80.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__db3556a0.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__03c2d4b0.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__d9f42d2b.csv
+Triage rows: 468/5290 (8.85%)
+STEP 5/6: Summary
+Wrote summary: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026__a2936e97.txt
+STEP 6/6: Execute (optional)
+Dry-run mode: move plan generated, nothing moved.
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS> pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1" `
+>>   -QuarantinePath "C:\RH\OPS\QUARANTINE\FROM_2026" `
+>>   -SampleMode Random `
+>>   -MaxFiles 0 `
+>>   -AbortIfTriagePctGreaterThan 30 `
+>>   -Execute
+>>
+PHASE 4 RUNDATE: 02-07-2026
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules:      C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+OutputDir:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS
+Mode:       EXECUTE
+
+STEP 1/6: Inventory
+Building inventory from: C:\RH\OPS\QUARANTINE\FROM_2026
+Rules: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__c199bf03.csv
+Files: 5265  Small: 5263  Large: 2  LargeDupeCandidates: 0
+Inventory complete: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__c199bf03.csv
+Debug log: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\INVENTORY_DEBUG_02-07-2026__9d1fa9f7.txt
+STEP 2/6: Work unit reconstruction
+Loading inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\FULL_INVENTORY_02-07-2026__c199bf03.csv
+Anchor defs: Tier1(file)=3  Tier2(file)=2  FolderSeeds=2
+Tier1 file anchors found: 436
+Folder seed roots found:  3
+Repo roots found:         7
+Orphans detected: 2093 (grouping into TRIAGE buckets)
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__f7c90ffa.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__eac5d632.csv
+Updated registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_REGISTRY.json
+Tier1 file anchors (sum): 436
+STEP 3/6: Classification
+Loading candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\WORK_UNIT_CANDIDATES_02-07-2026__f7c90ffa.csv
+Loading members: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__eac5d632.csv
+Wrote: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__15541365.csv
+STEP 4/6: Move plan + rollback
+Loading classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\CLASSIFIED_UNITS_02-07-2026__15541365.csv
+Loading members:    C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\UNIT_MEMBERS_02-07-2026__eac5d632.csv
+Wrote move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__9b7881ed.csv
+Wrote rollback:  C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\ROLLBACK_PLAN_02-07-2026__7975dc40.csv
+Triage rows: 520/5290 (9.83%)
+Non-triage rows: 4770/5290 (90.17%)
+Non-triage >= 60%? (info): PASS
+STEP 5/6: Summary
+Wrote summary: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_SUMMARY_02-07-2026__96efc448.txt
+STEP 6/6: Execute (optional)
+Move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\PHASE4_MOVE_PLAN_02-07-2026__9b7881ed.csv
+Mode: EXECUTE
+Manifest: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\MOVE_MANIFEST_02-07-2026.csv
+Errors:   C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS\MOVE_ERRORS_02-07-2026.log
+Done. Rows: 5290  Errors: 30
+PS C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\5.2RESEARCH_MIGRATE\OUTPUTS>

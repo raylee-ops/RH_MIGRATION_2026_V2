@@ -1,0 +1,791 @@
+￼
+
+Got it. I’ve updated the task accordingly.
+
+ChatGPT Pro 5.2 Expected Outputs — Phase 02-08 Governance & Architecture
+
+Purpose: This template structures the deliverables expected from ChatGPT Pro 5.2
+Instructions: Fill in each section with detailed, actionable, testable specifications
+Date: 02-08-2026
+
+⸻
+
+Part 1: Phase-by-Phase Gate Definitions
+
+For each phase (02-08), provide:
+
+Phase 02 — Inventory + Canonicalization
+
+Entry Gates (Pre-flight Checks)
+Prerequisites:
+	•	project_config.json exists, is parseable JSON, and contains: project_root, outputs_root, allowlist_roots, exclude_roots, modules, rules, collision_policy, confidence_thresholds.
+	•	allowlist_roots (scan roots) is exactly {C:\RH\INBOX, C:\RH\OPS} (order-insensitive). No other scan roots permitted.
+	•	quarantine_root is exactly C:\RH\TEMPORARY, exists, is writable, and is NOT present in allowlist_roots (TEMPORARY is destination-only, never a scan root).
+
+Validation Checks:
+	•	outputs_root exists (or can be created) under project_root and is writable; computed run folder path matches: OUTPUTS\phase_02\run_MM-DD-YYYY_HHMMSS\.
+	•	exclude_roots is non-empty and contains (at minimum) the forbidden families: C:\RH\VAULT, C:\RH\LIFE, C:\LEGACY, C:\Windows, C:\Program Files, and C:\Users (including more specific subpaths is acceptable).
+	•	All configured script/rule paths in project_config.json (runner/modules/rules) resolve to files under C:\RH\OPS and are readable for hashing (read-only access is sufficient).
+
+Blocking Conditions (When Phase MUST Refuse to Run):
+	•	allowlist_roots is missing, contains anything other than C:\RH\INBOX and C:\RH\OPS, or includes C:\RH\TEMPORARY.
+	•	outputs_root is missing/unwritable OR is outside project_root (prevents “write artifacts somewhere random”).
+	•	Any required runnable component cannot be read and hashed: runner (SRC\run.ps1 if present) OR any module path in project_config.json.modules OR any rule path in project_config.json.rules (Phase 02 cannot certify canon without hashes).
+
+Exit Gates (Post-flight Verification)
+Success Criteria:
+	•	canonical_script_manifest_02-08-2026.csv exists, is non-empty, and contains a single canonical path + sha256 for every runnable component referenced by project_config.json (run.ps1, each module, each rules file).
+	•	script_hashes_02-08-2026.csv exists, is non-empty, and contains real sha256 values (no placeholders) for every row in script_inventory_02-08-2026.csv.
+	•	duplicate_scripts_report_02-08-2026.csv exists and enumerates duplicate groups by (a) filename and (b) sha256, including group sizes and member paths.
+
+Verification Checks:
+	•	Count integrity: script_inventory rowcount == script_hashes rowcount; every script_inventory.path has exactly one matching script_hashes.path.
+	•	Canon integrity: every canonical_script_manifest.component_path exists at runtime and sha256 matches the computed hash in script_hashes.
+	•	Scope integrity: every path recorded in Phase 02 evidence begins with C:\RH\INBOX or C:\RH\OPS (TEMPORARY must not appear as a scanned source).
+
+Evidence Completeness:
+	•	evidence\state_tree_before_02-08-2026.txt
+	•	evidence\script_inventory_02-08-2026.csv
+	•	evidence\script_hashes_02-08-2026.csv
+	•	evidence\duplicate_scripts_report_02-08-2026.csv
+	•	evidence\canonical_script_manifest_02-08-2026.csv
+	•	evidence\rules_inventory_02-08-2026.csv
+	•	evidence\phase01_contracts_status_02-08-2026.md (must explicitly state Phase 01 status as UNKNOWN unless verified by a completed Phase 01 run folder + metrics)
+
+Rollback Test:
+	•	Phase 02 is read-only: rollback.ps1 must be a no-op and the runlog must contain zero MOVE/RENAME operations; verify by checking metrics.json.operations.mutating_count == 0.
+
+Stop Conditions (Mid-flight Abort Triggers)
+Error Thresholds:
+	•	Abort if any configured runnable component (runner/modules/rules from config) cannot be hashed (required for canonicalization).
+	•	Abort if >5% of discovered scripts fail hashing (non-required scripts), recorded in metrics.json.errors.hash_fail_rate.
+
+Resource Exhaustion:
+	•	Abort if outputs_root volume becomes unwritable during run (I/O errors) and audit spine cannot be completed.
+	•	Abort if free space on outputs_root volume drops below 1% (prevents incomplete spine/evidence writes).
+
+Phase-Specific Artifacts
+Required Files in evidence\:
+	1.	state_tree_before_02-08-2026.txt: folder-only snapshot (INBOX + OPS) used as the “before” anchor for later verification
+	2.	script_inventory_02-08-2026.csv: discovered scripts with metadata + inferred role (runner/module/rule/other)
+	3.	script_hashes_02-08-2026.csv: sha256 per script path (no placeholders)
+	4.	duplicate_scripts_report_02-08-2026.csv: duplicate groups (by name and by hash)
+	5.	canonical_script_manifest_02-08-2026.csv: authoritative registry for runnable components referenced by config
+	6.	rules_inventory_02-08-2026.csv: inventory + sha256 for rule/config files (classification/rename/dedup/semantic policies)
+	7.	phase01_contracts_status_02-08-2026.md: Phase 01 contract presence + verification status (UNKNOWN unless proven complete)
+
+CSV Schemas:
+	•	script_inventory_02-08-2026.csv:
+	•	path (string), scan_root (enum: INBOX|OPS), relative_path (string), filename (string), ext (string), size_bytes (int), last_write_time (string), inferred_role (enum: runner|module|rule|template|other|unknown), role_basis (string)
+	•	script_hashes_02-08-2026.csv:
+	•	path (string), sha256 (string), size_bytes (int), hash_timestamp (string), hash_status (enum: OK|ERROR), error_message (string)
+	•	duplicate_scripts_report_02-08-2026.csv:
+	•	duplicate_type (enum: filename|sha256|both), group_id (string), filename (string), sha256 (string), member_path (string), group_size (int), canonical_candidate_path (string), disposition (enum: canonical|duplicate|review)
+	•	canonical_script_manifest_02-08-2026.csv:
+	•	component_type (enum: runner|module|rule), component_key (string), expected_path (string), actual_path (string), sha256 (string), status (enum: OK|MISSING|HASH_MISMATCH|DUPLICATE_FOUND), duplicate_count (int), selection_rule (string)
+	•	rules_inventory_02-08-2026.csv:
+	•	path (string), sha256 (string), rule_type (enum: classification|rename|dedup|semantic|unknown), referenced_by (string)
+
+Markdown Report Sections:
+	•	summary_MM-DD-YYYY.md must include: Scope (scan roots + excludes), Phase 01 status (UNKNOWN unless proven), Script counts + hash coverage, Canonical manifest status, Duplicate summary, Stop/abort conditions (if any), Gate outcomes (entry/exit pass-fail).
+
+⸻
+
+Phase 03 — Runner + Config + Validation
+
+Entry Gates (Pre-flight Checks)
+Prerequisites:
+	•	Phase 02 has at least one valid run folder with a complete audit spine AND canonical_script_manifest_02-08-2026.csv containing sha256 for runner/modules/rules referenced by config.
+	•	SRC\run.ps1 exists under project_root and all module/rule paths referenced in project_config.json exist and are readable.
+
+Validation Checks:
+	•	Runner invocation location is compliant: working directory is either ...\project_root\SRC\ or ...\project_root\ AND runner verifies its own canonical location under ...\SRC\.
+	•	Runner creates run folder OUTPUTS\phase_03\run_MM-DD-YYYY_HHMMSS\ and writes the full audit spine before executing any phase logic.
+
+Blocking Conditions:
+	•	Canonical ambiguity exists for runnable components: runner/modules/rules hashes do not match Phase 02 canonical manifest OR duplicates exist for any canonical component path.
+	•	project_config.json.allowlist_roots is not exactly {C:\RH\INBOX, C:\RH\OPS} OR quarantine_root is not exactly C:\RH\TEMPORARY OR TEMPORARY appears as a scan root.
+
+Exit Gates (Post-flight Verification)
+Success Criteria:
+	•	DryRun for Phase 03 produces a valid run folder with audit spine and required Phase 03 evidence, and metrics.json.operations.mutating_count == 0.
+	•	Runner logs the “Four facts” checkpoint into summary_MM-DD-YYYY.md and runlog.txt: canonical runner path + sha256, config path + sha256, run folder path, allowlist + excluded roots.
+
+Verification Checks:
+	•	Output containment: all newly created artifacts exist only under OUTPUTS\phase_03\run_MM-DD-YYYY_HHMMSS\ (no writes to SRC\ or project root).
+	•	Gate enforcement: metrics.json.gates.entry and metrics.json.gates.exit explicitly record pass/fail for each required check.
+
+Evidence Completeness:
+	•	evidence\run_interface_02-08-2026.md
+	•	evidence\dryrun_validation_checklist_02-08-2026.md
+	•	evidence\canonical_paths_proof_02-08-2026.txt
+	•	evidence\runner_used_runps1_hash_02-08-2026.txt (must include sha256 of SRC\run.ps1)
+	•	evidence\runner_used_config_hash_02-08-2026.txt (must include sha256 of project_config.json)
+
+Rollback Test:
+	•	Phase 03 is non-mutating: rollback.ps1 must be no-op; verify via metrics.json.operations.mutating_count == 0 and absence of MOVE/RENAME log events.
+
+Stop Conditions (Mid-flight Abort Triggers)
+Error Thresholds:
+	•	Abort immediately if runner detects any attempted access to excluded roots or any path outside {C:\RH\INBOX, C:\RH\OPS} for scanning.
+
+Resource Exhaustion:
+	•	Abort if audit spine cannot be fully written (missing/writable failure for any spine component).
+
+Phase-Specific Artifacts
+Required Files:
+	1.	evidence\run_interface_02-08-2026.md: declarative interface spec (phases, modes, required inputs/outputs, no command examples)
+	2.	evidence\dryrun_validation_checklist_02-08-2026.md: PASS/FAIL checklist proving gates work and writes are OUTPUTS-only
+	3.	evidence\canonical_paths_proof_02-08-2026.txt: runner-recorded canonical paths (runner/config/outputs/allowlist/exclude/quarantine)
+
+⸻
+
+Phase 04 — Classification v1 (Deterministic Label-Only)
+
+Entry Gates (Pre-flight Checks)
+Prerequisites:
+	•	Phase 03 runner validation completed (a valid Phase 03 run folder exists with dryrun_validation_checklist marked PASS in its summary/metrics).
+	•	SRC\rules\classification_rules_v1.yaml exists, is readable, and its sha256 is recorded into Phase 04 metrics.json.inputs.rules_hashes.classification_rules.
+
+Validation Checks:
+	•	Classification scope is restricted to scan roots {C:\RH\INBOX, C:\RH\OPS} and honors exclude_roots + exclude_patterns from config (no TEMPORARY scanning).
+	•	Classification is label-only: runner enforces metrics.json.operations.mutating_count == 0 and modules are forbidden from MOVE/RENAME actions in Phase 04.
+
+Blocking Conditions:
+	•	Rules file missing/unparseable OR rules hash cannot be computed (reproducibility failure).
+	•	Any evidence of scope violation: attempted access to excluded roots OR scanning TEMPORARY.
+
+Exit Gates (Post-flight Verification)
+Success Criteria:
+	•	classification_results_02-08-2026.csv exists and contains one row per in-scope file (excluding excluded patterns), with label, confidence, and reason populated.
+	•	misclass_queue_02-08-2026.csv exists and contains every file with confidence < 0.85, with a queue_bucket of review (0.60–0.84) or quarantine (<0.60).
+
+Verification Checks:
+	•	Confidence distribution check: FAIL the phase if low_confidence_ratio (confidence < 0.60) is >0.40, recorded in metrics.json.classification.low_confidence_ratio.
+	•	No-move check: metrics.json.operations.mutating_count == 0 and runlog.txt contains zero MOVE/RENAME events.
+
+Evidence Completeness:
+	•	evidence\classification_results_02-08-2026.csv
+	•	evidence\misclass_queue_02-08-2026.csv
+	•	evidence\bucket_taxonomy_02-08-2026.md
+	•	evidence\rules_version_02-08-2026.json (must include sha256 of classification_rules_v1.yaml + an explicit ruleset_name field)
+
+Rollback Test:
+	•	N/A (read-only phase)
+
+Stop Conditions (Mid-flight Abort Triggers)
+Confidence Thresholds:
+	•	Abort mid-run if running low_confidence_ratio exceeds 0.40 at any checkpoint boundary recorded in metrics.json.checkpoints.
+
+Error Thresholds:
+	•	Abort if >5% of files error during scan/classify (read errors, parse errors), recorded in metrics.json.errors.scan_fail_rate.
+
+Phase-Specific Artifacts
+Required Files:
+	1.	classification_results_02-08-2026.csv: path, label, confidence, reason — all files with classifications
+	2.	misclass_queue_02-08-2026.csv: path, label, confidence, reason, queue_bucket — low-confidence items for review/quarantine
+	3.	bucket_taxonomy_02-08-2026.md: definitions of destination buckets + what qualifies (deterministic, context-based)
+
+⸻
+
+Phase 05 — Routing Plan (Still No Moves)
+
+Entry Gates (Pre-flight Checks)
+Prerequisites:
+	•	Phase 04 completed successfully: valid Phase 04 run folder exists with classification_results_02-08-2026.csv and misclass_queue_02-08-2026.csv present and non-empty.
+	•	Phase 01 contract status is recorded as UNKNOWN or VERIFIED_SIGNED; if UNKNOWN, Phase 05 is still allowed but outputs must be explicitly labeled “plan-only, not approved for execution” in summary/metrics.
+
+Validation Checks:
+	•	Planned routing uses only allowed destinations: destination roots must be within C:\RH\OPS (canonical structure) OR C:\RH\TEMPORARY (quarantine destination-only). No other destination roots allowed.
+	•	Collision detection is performed before any execution phase: planner enumerates predicted destination collisions and records them in collisions_02-08-2026.csv.
+
+Blocking Conditions:
+	•	Missing or unreadable Phase 04 inputs (classification results) OR classification rules hash cannot be traced via Phase 04 metrics (reproducibility break).
+	•	Any planned move would overwrite an existing destination (allow_overwrite is false) or would target an excluded root.
+
+Exit Gates (Post-flight Verification)
+Success Criteria:
+	•	move_plan_02-08-2026.csv exists, is non-empty, and covers all in-scope files except explicitly excluded ones (captured in exclusions_applied_02-08-2026.txt).
+	•	collisions_02-08-2026.csv exists and documents every predicted collision with the planned suffix-based resolution.
+
+Verification Checks:
+	•	All collisions documented: every duplicate (destination_path) appearing more than once in move_plan must have a matching entry in collisions.
+	•	Exclusions applied: every excluded file has an explicit reason and source pattern recorded in exclusions_applied_02-08-2026.txt.
+
+Evidence Completeness:
+	•	evidence\move_plan_02-08-2026.csv
+	•	evidence\collisions_02-08-2026.csv
+	•	evidence\exclusions_applied_02-08-2026.txt
+	•	evidence\planned_changes_summary_02-08-2026.md
+
+Rollback Test:
+	•	N/A (read-only phase)
+
+Stop Conditions (Mid-flight Abort Triggers)
+Collision Thresholds:
+	•	Abort if predicted collision rate (collision_count / planned_move_count) exceeds 0.10, recorded in metrics.json.planning.collision_rate.
+
+Error Thresholds:
+	•	Abort if planner cannot produce destinations for >5% of in-scope files, recorded in metrics.json.errors.unroutable_rate.
+
+Phase-Specific Artifacts
+Required Files:
+	1.	move_plan_02-08-2026.csv: source, destination, action, reason, confidence — move plan for all files (plan-only)
+	2.	collisions_02-08-2026.csv: destination, conflicting_sources, resolution — predicted collisions + suffix resolution
+	3.	planned_changes_summary_02-08-2026.md: human-readable plan overview (counts by bucket, collision summary, exclusions summary)
+
+⸻
+
+Phase 06 — Execute Moves (Rollback Required)
+
+Entry Gates (Pre-flight Checks)
+Prerequisites:
+	•	Phase 01 contracts are VERIFIED_SIGNED (if Phase 01 is UNKNOWN, Phase 06 must refuse Execute; DryRun simulation is allowed).
+	•	Phase 05 plan exists and is explicitly approved: an evidence\approval_record_02-08-2026.json exists in the Phase 05 run folder and includes approved=true, plan_sha256, config_hash, and approver (human).
+	•	Phase 06 must operate from a reviewed plan.csv: Phase 06 plan.csv must be byte-identical to the approved Phase 05 plan.csv (or include a sha256 reference proving identity).
+
+Validation Checks:
+	•	Config drift check: metrics.json.inputs.config_hash for Phase 06 matches the approved plan’s config_hash (refuse if mismatched).
+	•	Disk space check: required bytes (sum of planned move size_bytes by destination volume) is computed and free space must meet 20% headroom (refuse if not).
+	•	Permission check: runner confirms read access to sources and write access to all destination directories (OPS + TEMPORARY) via non-destructive tests.
+
+Blocking Conditions:
+	•	Phase 01 not verified signed-off (Execute blocked).
+	•	Approved plan missing OR approval record does not match the plan sha256 OR config hash mismatch (Execute blocked).
+	•	Dirty state detected from a prior incomplete Phase 06 Execute: latest Phase 06 run has metrics.json.state.dirty_state_detected == true and has not been resolved by (a) verified rollback completion or (b) approved resume.
+
+Exit Gates (Post-flight Verification)
+Success Criteria:
+	•	All planned moves executed (or explicitly marked skipped with reason): moves_executed_02-08-2026.csv rowcount equals Phase 06 plan.csv move-action rowcount, and metrics.json.moves.success_rate >= 0.95.
+	•	No integrity regressions: for every successful move, hash_before == hash_after.
+
+Verification Checks:
+	•	Hash verification: source_hash == destination_hash for all successful moves; any mismatch is recorded in errors.csv and triggers phase failure.
+	•	Count verification: files_moved_success + files_moved_skipped + files_moved_failed == plan_count and failures are <=5%.
+
+Evidence Completeness:
+	•	evidence\moves_executed_02-08-2026.csv
+	•	evidence\errors_02-08-2026.csv
+	•	evidence\state_tree_after_moves_02-08-2026.txt
+	•	evidence\rollback_dryrun_report_02-08-2026.md (must be PASS before Execute is permitted on real data)
+
+Rollback Test:
+	•	Before executing real moves, rollback must be validated in DryRun: rollback_dryrun_report_02-08-2026.md must assert (a) rollback actions are exact inverses of planned/executed actions, (b) no overwrites will occur, (c) all paths are within OPS/INBOX/TEMPORARY constraints.
+
+Stop Conditions (Mid-flight Abort Triggers)
+Error Thresholds:
+	•	Abort if >5% moves fail (any error type), computed continuously and recorded in metrics.json.moves.failure_rate.
+	•	Abort immediately if any hash mismatch detected (integrity breach).
+
+Resource Exhaustion:
+	•	Abort if free space drops below the pre-flight threshold mid-run (prevents completing remaining moves and/or rollback safely).
+
+Phase-Specific Artifacts
+Required Files:
+	1.	moves_executed_02-08-2026.csv: source, destination, timestamp, hash_before, hash_after, size_bytes, status — all executed moves
+	2.	errors_02-08-2026.csv: source, destination, error_type, error_message, timestamp — all failures/warnings (including permission/collision/hash mismatch)
+	3.	rollback.ps1: undo script (MUST be generated BEFORE any moves)
+	4.	state_tree_after_moves_02-08-2026.txt: folder-only post-move snapshot (OPS focus, but must not scan TEMPORARY)
+
+⸻
+
+Phase 07 — Rename Engine (MM-DD-YYYY Enforcement)
+
+Entry Gates (Pre-flight Checks)
+Prerequisites:
+	•	Phase 01 contracts are VERIFIED_SIGNED (if Phase 01 is UNKNOWN, Phase 07 must refuse Execute; DryRun planning is allowed).
+	•	Phase 06 completed successfully with a valid run folder and metrics.json.state.dirty_state_detected == false (no partial move state).
+
+Validation Checks:
+	•	Rename rules exist and are parseable: SRC\rules\rename_rules_v1.yaml sha256 is recorded in metrics.json.inputs.rules_hashes.rename_rules.
+	•	Rename date source is deterministic and declared in rename rules; if not declared, Phase 07 must default to last_write_time and record that default explicitly in metrics.json.rename.date_source = "last_write_time_default".
+
+Blocking Conditions:
+	•	Any proposed rename would violate naming pattern name_MM-DD-YYYY (MM-DD-YYYY enforced; no ISO/Year-first formats).
+	•	Any proposed rename would overwrite an existing file (overwrite is forbidden); only suffix collision resolution is allowed.
+
+Exit Gates (Post-flight Verification)
+Success Criteria:
+	•	Every planned rename is either executed successfully or explicitly skipped with reason: rename_executed_02-08-2026.csv + skipped count covers all rows in rename_plan_02-08-2026.csv.
+	•	Post-rename compliance: all processed files match the required pattern *_MM-DD-YYYY(_NN)? (where _NN is the collision suffix), recorded in metrics.json.rename.compliance_rate == 1.0 for processed set.
+
+Verification Checks:
+	•	Naming convention enforced: verify rename_collisions resolved only via suffix policy up to max_attempts=99, and no overwrite attempts occurred.
+	•	Collision accounting: every collision documented in rename_collisions_02-08-2026.csv has a corresponding final resolved name in rename_executed_02-08-2026.csv.
+
+Evidence Completeness:
+	•	evidence\rename_plan_02-08-2026.csv
+	•	evidence\rename_executed_02-08-2026.csv
+	•	evidence\rename_collisions_02-08-2026.csv
+	•	evidence\rename_examples_02-08-2026.md
+	•	evidence\rollback_dryrun_report_02-08-2026.md
+
+Rollback Test:
+	•	Rollback DryRun must pass before Execute: rollback preview must show inverse renames (new→old) in reverse order, with overwrite prevention validated.
+
+Stop Conditions (Mid-flight Abort Triggers)
+Collision Thresholds:
+	•	Abort if predicted or observed rename collision rate exceeds 0.15, recorded in metrics.json.rename.collision_rate.
+
+Error Thresholds:
+	•	Abort if >5% renames fail (any error type), recorded in metrics.json.rename.failure_rate.
+
+Phase-Specific Artifacts
+Required Files:
+	1.	rename_plan_02-08-2026.csv: old_path, new_path, reason, date_source, confidence — planned renames
+	2.	rename_executed_02-08-2026.csv: old_path, new_path, timestamp, status — executed renames
+	3.	rename_collisions_02-08-2026.csv: old_path, proposed_new_path, resolved_new_path, conflict_reason, suffix_used — collisions requiring suffix
+	4.	rollback.ps1: undo script
+	5.	rename_examples_02-08-2026.md: representative before/after examples (deterministic selection, e.g., first 20 by sorted path)
+
+⸻
+
+Phase 08 — Tier 2.5 Semantic Labeling (Label-Only Enhancement)
+
+Entry Gates (Pre-flight Checks)
+Prerequisites:
+	•	Phase 04 deterministic classification outputs exist and are traceable: classification_results_02-08-2026.csv and misclass_queue_02-08-2026.csv present and non-empty.
+	•	training_examples_manifest_02-08-2026.csv exists, is non-empty, and is referenced in metrics.json.inputs.training_examples_manifest_path (if missing, Phase 08 must refuse to run).
+
+Validation Checks:
+	•	Semantic policy exists and is parseable: SRC\rules\semantic_policy_v1.yaml sha256 recorded in metrics.json.inputs.rules_hashes.semantic_policy.
+	•	Label-only enforcement: Phase 08 must not produce any MOVE/RENAME actions; verify metrics.json.operations.mutating_count == 0.
+
+Blocking Conditions:
+	•	Training examples manifest missing/empty OR semantic policy missing/unparseable.
+	•	Any attempted access to excluded roots or any attempt to scan TEMPORARY as input scope.
+
+Exit Gates (Post-flight Verification)
+Success Criteria:
+	•	semantic_labels_02-08-2026.csv exists and contains semantic label suggestions for the targeted set (minimum: all items in misclass_queue), with confidence and reason populated.
+	•	merge_logic_02-08-2026.md exists and states deterministic precedence: deterministic label is authoritative; semantic labels can only supplement (increase confidence or propose alternates for review), never auto-move.
+
+Verification Checks:
+	•	Merge correctness: merge_logic explicitly defines tie-breaks and produces no contradictory “final label” that overrides deterministic without a review flag.
+	•	Low-confidence semantic queue: semantic_misclass_queue_02-08-2026.csv includes all semantic labels with confidence <0.85, bucketed using the same thresholds (review 0.60–0.84, quarantine <0.60).
+
+Evidence Completeness:
+	•	evidence\training_examples_manifest_02-08-2026.csv
+	•	evidence\semantic_labels_02-08-2026.csv
+	•	evidence\semantic_misclass_queue_02-08-2026.csv
+	•	evidence\merge_logic_02-08-2026.md
+	•	evidence\evaluation_notes_02-08-2026.md (must summarize whether confidence improved and where it failed)
+
+Rollback Test:
+	•	N/A (label-only phase, no file operations)
+
+Stop Conditions (Mid-flight Abort Triggers)
+Confidence Thresholds:
+	•	Abort if semantic low-confidence ratio (confidence <0.60) exceeds 0.40, recorded in metrics.json.semantic.low_confidence_ratio.
+
+Error Thresholds:
+	•	Abort if >5% semantic labeling attempts error, recorded in metrics.json.errors.semantic_fail_rate.
+
+Phase-Specific Artifacts
+Required Files:
+	1.	semantic_labels_02-08-2026.csv: path, semantic_label, confidence, reason, proposed_bucket — AI-generated labels
+	2.	semantic_misclass_queue_02-08-2026.csv: path, semantic_label, confidence, queue_bucket — low-confidence semantic labels
+	3.	merge_logic_02-08-2026.md: deterministic overrides + how semantic suggestions are handled
+	4.	evaluation_notes_02-08-2026.md: observed improvements/regressions (counts, confidence deltas, common failure themes)
+
+⸻
+
+Part 2: Runner Architecture (Phase 03)
+
+Runner Responsibilities (SRC\run.ps1)
+
+Validation Logic (Before Execution)
+What checks must run before phase execution?
+	1.	Verify invocation is compliant: runner file resides in ...\project_root\SRC\run.ps1 and working directory is ...\project_root\SRC\ or ...\project_root\; otherwise refuse.
+	2.	Check project_config.json exists under project_root, is parseable, and project_root inside config matches the actual project root path (block if mismatch).
+	3.	Verify scan allowlist roots are exactly {C:\RH\INBOX, C:\RH\OPS} and verify excluded roots list is present and non-empty.
+	4.	Verify quarantine root is exactly C:\RH\TEMPORARY, exists, is writable, and is never used as a scan root.
+	5.	Check for duplicate canonical scripts: for run.ps1, each module, and each rule file in config, compute sha256 and compare against Phase 02 canonical manifest; refuse if missing/ambiguous/mismatched for phases 03–08.
+	6.	Validate outputs root: must be under project_root\OUTPUTS; create phase_XX\run_MM-DD-YYYY_HHMMSS\ and write the full audit spine before phase work begins.
+	7.	Detect dirty state: if latest run for requested phase has metrics.json.state.dirty_state_detected == true, refuse Execute unless an explicit approved resume is provided; otherwise require rollback completion proof.
+
+Mode Handling (DryRun vs Execute)
+How does DryRun differ from Execute?
+	•	DryRun: creates run folder + audit spine; performs all gate checks; for non-mutating phases runs the full read-only workload; for mutating phases generates/validates plan + collisions + rollback preview and produces a rollback DryRun report, but performs zero real file moves/renames.
+	•	Execute: for non-mutating phases runs the full read-only workload; for mutating phases requires (a) prior DryRun PASS record, (b) approval record, (c) plan/config hash match, then applies actions exactly as planned and logs every action to executed ledgers, aborting on stop conditions.
+	•	DryRun-first enforcement: runner refuses Execute for phases 06–07 unless a matching DryRun PASS record exists for the same plan sha256 and config hash.
+
+Module Orchestration
+How does runner invoke modules (classifier, planner, mover, etc.)?
+	•	Deterministic sequential execution by phase number (no parallel execution): Phase 02 inventory/canonicalization → Phase 04 classifier → Phase 05 planner → Phase 06 mover → Phase 07 renamer → Phase 08 semantic labeler.
+	•	Modules receive only: (a) parsed config, (b) run context (phase, mode, run_id, paths), (c) input artifact paths from prior phases, (d) an output writer constrained to the current run folder.
+	•	Module outputs are constrained: only plan.csv, runlog.txt, summary_MM-DD-YYYY.md, metrics.json, rollback.ps1, and evidence\* are permitted.
+
+State Management
+How does runner track progress across phases?
+	•	State is tracked per-run inside metrics.json (and optionally mirrored into evidence\), never as a new top-level file outside the audit spine.
+	•	Incomplete prior run detection uses: metrics.json.status != "COMPLETED" OR metrics.json.state.dirty_state_detected == true OR (for mutating phases) plan_count != executed_count.
+	•	Resume capability (minimal): for phases 06–07 only, resume is allowed if plan sha256 + config hash match, and completed actions are derived from the executed ledger to skip already-applied actions.
+
+Error Handling
+Fail fast or graceful degradation?
+	•	Abort immediately on any safety violation: touching excluded roots, scanning outside allowlist, overwrite attempt, config/plan hash mismatch in Execute, missing audit spine, hash mismatch.
+	•	Graceful continuation is allowed only in read-only phases for per-file read errors up to thresholds; errors must be recorded in metrics and summarized in evidence.
+	•	Errors must be dual-written: human-readable summary + structured CSV (where applicable) for filtering.
+
+Logging
+What gets logged where?
+	•	runlog.txt: line-delimited entries including timestamp, severity, phase, mode, event_type, optional action_id, optional path, message.
+	•	Console output: minimal progress + gate PASS/FAIL; must not substitute for runlog.
+	•	metrics.json: aggregated counters, hashes, gate results, stop condition triggers, and dirty state markers.
+
+⸻
+
+Part 3: State Model Design
+
+STATE.json Proposal
+
+What should STATE.json contain?
+
+{
+  "schema_version": "1.0",
+  "phase": 6,
+  "mode": "Execute",
+  "run_id": "run_MM-DD-YYYY_HHMMSS",
+  "status": "COMPLETED",
+  "inputs": {
+    "config_hash_sha256": "…",
+    "rules_hashes_sha256": {
+      "classification_rules": "…",
+      "rename_rules": "…",
+      "semantic_policy": "…"
+    },
+    "allowlist_roots": ["C:\\RH\\INBOX", "C:\\RH\\OPS"],
+    "quarantine_root": "C:\\RH\\TEMPORARY",
+    "exclude_roots": ["…"]
+  },
+  "plan": {
+    "plan_csv_sha256": "…",
+    "approved": false,
+    "approval_record_path": "evidence\\approval_record_MM-DD-YYYY.json",
+    "dryrun_pass_record_path": "evidence\\dryrun_pass_record_MM-DD-YYYY.json"
+  },
+  "progress": {
+    "total_actions": 0,
+    "completed_actions": 0,
+    "last_action_id": 0,
+    "checkpoint_timestamp": "…",
+    "executed_ledger_path": "evidence\\moves_executed_MM-DD-YYYY.csv"
+  },
+  "state": {
+    "dirty_state_detected": false,
+    "dirty_reason": "",
+    "prior_run_reference": ""
+  }
+}
+
+Where does state live?
+	•	State lives inside each run folder’s metrics.json (authoritative).
+	•	Optional state mirrors (for debugging only) are permitted under evidence\ (e.g., evidence\state_snapshot_MM-DD-YYYY.json), but no new top-level STATE.json file is introduced outside the audit spine.
+
+How to detect dirty state?
+	•	Dirty if metrics.json.status is not COMPLETED, OR if metrics.json.state.dirty_state_detected == true, OR if (mutating phases) progress.completed_actions < progress.total_actions.
+	•	Dirty if plan/apply mismatch: metrics.json.plan.plan_csv_sha256 differs from approval record sha256, or config hash differs from plan hash.
+
+How to resume after failure?
+	•	Resume is allowed only for phases 06–07, only when plan sha256 + config hash match exactly, and only by skipping actions already present as successful in the executed ledger.
+	•	If resume is not permitted (hash mismatch, missing ledger, or unsafe state), the only allowed recovery path is rollback completion (verified) before attempting a new Execute.
+
+⸻
+
+Part 4: Plan/Apply Workflow Design
+
+Plan Phase
+
+What gets generated?
+	•	plan.csv (audit spine) containing one row per planned action for the phase (moves/renames are explicit action rows; read-only phases list scope + checks + outputs).
+	•	Phase-specific plan evidence:
+	•	Phase 05: move_plan_MM-DD-YYYY.csv, collisions_MM-DD-YYYY.csv, exclusions_applied_MM-DD-YYYY.txt, planned_changes_summary_MM-DD-YYYY.md
+	•	Phase 07 (DryRun): rename_plan_MM-DD-YYYY.csv, rename_collisions_MM-DD-YYYY.csv, rename_examples_MM-DD-YYYY.md
+	•	Collision detection and explicit collision resolution fields (suffix strategy) are mandatory in the plan outputs for phases 05 and 07.
+
+Review Phase
+
+How does human approval work?
+	•	Human reviews plan.csv (and the phase-specific plan evidence) and creates evidence\approval_record_MM-DD-YYYY.json containing: approved=true, approver, approved_timestamp, plan_csv_sha256, config_hash_sha256, and optional notes.
+	•	Execute is refused unless approval record exists and hashes match exactly (no “trust me” execution).
+
+Apply Phase
+
+How is plan executed?
+	•	Execute reads the approved plan.csv as the plan-of-record and applies actions in deterministic order (sorted by action_id).
+	•	Apply is idempotent for mutating phases: if destination already matches intended outcome and hash matches, action is recorded as “already compliant” and skipped without overwrite.
+	•	Apply is resumable only via executed ledger (completed actions are skipped), never by recomputing the plan mid-run.
+
+Verify Phase
+
+Post-execution checks?
+	•	Count checks: executed + skipped + failed must account for all plan actions; failure-rate thresholds enforced.
+	•	Hash checks (Phase 06): for each move, verify sha256 before == sha256 after; abort on mismatch.
+	•	Naming compliance checks (Phase 07): verify filename pattern compliance for all processed items and collision suffix correctness.
+	•	Rollback test checks (Phases 06–07): rollback DryRun report must be PASS before any real Execute is permitted.
+
+⸻
+
+Part 5: Rollback Design
+
+Generation
+
+When and how to create rollback.ps1?
+	•	Rollback must be generated as the first operation in any mutating phase (06–07) run folder, before any file operations occur.
+	•	Rollback logic must be derived from the plan and then refined to reflect actual execution using the executed ledger (for partial runs, rollback targets only actions actually executed).
+
+Format
+
+What does rollback.ps1 contain?
+	•	Inverse operations applied in reverse order:
+	•	Phase 06: MOVE destination→source for each executed move action
+	•	Phase 07: RENAME new→old for each executed rename action
+	•	Safety checks embedded into rollback behavior:
+	•	Refuse if any rollback path is outside OPS/INBOX/TEMPORARY constraints
+	•	Refuse any overwrite (must use suffix collision policy or quarantine destination)
+	•	Rollback must write structured evidence under evidence\ (e.g., rollback_executed_MM-DD-YYYY.csv and rollback_errors_MM-DD-YYYY.csv) and update metrics.json with rollback status.
+
+Example:
+	•	Omitted (no scripts/examples allowed). Rollback structure is fully specified by the Generation + Format + Testing requirements above.
+
+Testing
+
+How to validate rollback before trusting it?
+	•	Rollback DryRun must produce a evidence\rollback_dryrun_report_MM-DD-YYYY.md containing PASS/FAIL with:
+	•	action count match between executed ledger and rollback preview
+	•	explicit confirmation of “no overwrites”
+	•	explicit confirmation all paths are within allowed roots (scan roots + quarantine destination)
+	•	If rollback DryRun is FAIL, Execute must be blocked.
+
+Execution
+
+Interactive or automatic?
+	•	Rollback execution requires an explicit approval record (separate from move/rename approval) stored under evidence\ and referenced in metrics.json.plan.
+	•	Rollback actions must be logged to runlog.txt and summarized in summary_MM-DD-YYYY.md with counts + any failures.
+
+⸻
+
+Part 6: Failure-Mode Mitigations Mapped to Gates
+
+For each failure mode in failure_modes_history.md:
+
+Failure Mode #1: Duplicate Script Ambiguity
+
+Prevention Gate: Phase 02 Exit Gate (canonical manifest with sha256 for all runnable components) + Phase 03 Runner Validation Logic #5 (refuse if canonical mismatch/duplicates).
+Detection: duplicate_scripts_report_02-08-2026.csv shows duplicate groups; runner detects hash/path mismatch against canonical manifest.
+Remediation: Do not execute any phase >02 until canonical manifest is clean for runnable components; duplicates are dispositioned as duplicate|review in the manifest and may be quarantined later only via reviewed plan + approved Execute.
+
+Failure Mode #2: Low-Confidence Classification Spike
+
+Prevention Gate: Phase 04 Entry Gate (rules exist + versioned) + Phase 04 Exit Gate (fail if >40% low-confidence) + Phase 04 Stop Condition (abort mid-flight if threshold exceeded).
+Detection: metrics.json.classification.low_confidence_ratio > 0.40; large misclass_queue with queue_bucket=quarantine.
+Remediation: Stop and revise deterministic rules; re-run Phase 04; optionally add training examples manifest to enable Phase 08 (semantic) after deterministic is stable.
+
+Failure Mode #3: File Collision During Move
+
+Prevention Gate: Phase 05 Exit Gate (all collisions documented) + Phase 06 Entry Gate (collision policy validated; overwrite forbidden; collision rate threshold enforced).
+Detection: Predicted collisions in collisions_02-08-2026.csv; realized collisions logged in errors_02-08-2026.csv with error_type=collision.
+Remediation: Apply suffix policy deterministically (_01, _02, …) up to max attempts; if still unresolved, quarantine to TEMPORARY via plan-approved action, never overwrite.
+
+Failure Mode #4: Rollback Failure
+
+Prevention Gate: Phase 06 Entry Gate (rollback generated first) + Phase 06 Exit Gate (rollback DryRun PASS required) + Phase 07 Rollback Test gate (same).
+Detection: rollback_dryrun_report FAIL, rollback preview missing actions, or rollback safety checks fail (overwrite/path violations).
+Remediation: Block Execute; regenerate rollback logic based on executed ledger; re-run DryRun until PASS; never proceed with destructive operations without validated rollback.
+
+Failure Mode #5: Partial Run Completion
+
+Prevention Gate: Phase 03 State Management design (metrics-based progress + checkpoints) + Phase 06 Blocking Condition (dirty state refusal) + Phase 06 Stop Conditions (abort on thresholds and persist checkpoints).
+Detection: metrics.json.state.dirty_state_detected == true OR executed_count < plan_count; incomplete audit spine or missing evidence.
+Remediation: Either (a) approved resume using the same plan sha256 and executed ledger to skip completed actions, or (b) approved rollback for executed actions, then restart from a clean state.
+
+Failure Mode #6: Config Drift Between Phases
+
+Prevention Gate: Phase 05 Plan embeds config_hash; Phase 06 Entry Gate verifies config hash matches approved plan; runner refuses Execute on mismatch.
+Detection: metrics.json.inputs.config_hash_sha256 differs from approval_record.config_hash_sha256 or plan-referenced hash.
+Remediation: Re-run Phase 05 planning under the new config; do not Execute an old plan under a new config.
+
+Failure Mode #7: Disk Space Exhaustion
+
+Prevention Gate: Phase 06 Entry Gate calculates required bytes and enforces 20% headroom; Phase 06 Stop Condition aborts if free space drops below safe threshold.
+Detection: Pre-flight disk check FAIL; mid-flight metrics.json.resources.disk_free_bytes drops below threshold.
+Remediation: Abort before starting moves when possible; if mid-flight, stop safely, mark dirty state, and require rollback/resume decision before continuing.
+
+Failure Mode #8: Permission Errors
+
+Prevention Gate: Phase 03 runner validation includes privilege check logging; Phase 06 Entry Gate includes non-destructive permission tests; Phase 06 Stop Condition aborts if permission failures exceed 5%.
+Detection: errors_02-08-2026.csv contains error_type=permission and failure rate exceeds threshold; consistent “access denied” patterns in runlog.
+Remediation: Run with sufficient privileges, close locking processes, re-run DryRun validation, then re-run Execute only after passing entry gates.
+
+Failure Mode #9: Naming Collision After Rename
+
+Prevention Gate: Phase 07 Entry Gate generates rename plan with collision detection; Phase 07 Stop Condition aborts if collision rate >15%; Phase 07 Exit Gate verifies collisions documented and resolved.
+Detection: rename_collisions_02-08-2026.csv non-empty; collision rate exceeds 0.15.
+Remediation: Apply suffix policy (_01, _02, …) appended after date; if collisions remain after max attempts, quarantine those items to TEMPORARY via explicit plan entries (no overwrites).
+
+Failure Mode #10: Hash Mismatch After Move
+
+Prevention Gate: Phase 06 Stop Condition (abort on any hash mismatch) + Phase 06 Exit Gate hash verification required for success.
+Detection: moves_executed shows hash_before != hash_after OR errors.csv includes error_type=hash_mismatch.
+Remediation: Abort immediately; require rollback for affected actions; record integrity incident in summary/metrics and block further destructive phases until storage/AV interference risk is addressed.
+
+⸻
+
+Part 7: Minimal Viable Path (No Over-Engineering)
+
+Phase 02: Inventory + Canonicalization
+
+Minimum Scope: Produce real sha256 hashes for all runnable components referenced by config; generate canonical manifest + duplicate report + rules inventory; record Phase 01 status as UNKNOWN unless verified.
+Skip Conditions: A prior Phase 02 run folder exists with complete spine and canonical manifest whose hashes match current SRC\run.ps1, modules\*, and rules\* hashes exactly.
+Quick Wins: Removes “which script is real?” ambiguity; prevents wrong-copy execution before building anything else.
+Defer to Later: Any quarantine/move of duplicates; any dedup of non-script files.
+
+Phase 03: Runner + Config + Validation
+
+Minimum Scope: Runner creates audit spine, enforces allowlist/exclude/quarantine rules, prints/logs four facts checkpoint, supports DryRun gating, and refuses duplicates/config drift/dirty state.
+Skip Conditions: A runner already exists and produces a PASS Phase 03 dryrun checklist for the current config hash and canonical manifest hashes.
+Quick Wins: A single safe doorway that blocks unsafe state before any destructive work.
+Defer to Later: Advanced UX, parallelism, nonessential modules, rich reporting beyond required evidence.
+
+Phase 04: Classification v1
+
+Minimum Scope: Deterministic label-only classifications with confidence+reason for all in-scope files; misclass queue; bucket taxonomy; fail/abort on >40% low-confidence.
+Skip Conditions: A valid Phase 04 output exists with the same inventory scope and same classification rules hash, and confidence distribution passes thresholds.
+Quick Wins: Immediate searchable understanding of what exists and where it should go (without touching files).
+Defer to Later: Any semantic labeling, any rule v2 promotion.
+
+Phase 05: Routing Plan
+
+Minimum Scope: Move plan + collisions + exclusions + summary, with collision rate stop condition and no moves performed.
+Skip Conditions: An approved plan already exists for the current classification output + config hash and has not been invalidated by inventory drift.
+Quick Wins: Reviewable, auditable “what will happen” artifact without risk.
+Defer to Later: Batch optimization and advanced heuristics beyond suffix collision resolution.
+
+Phase 06: Execute Moves
+
+Minimum Scope: Apply approved move plan with rollback generated first, executed ledger, errors ledger, hash verification, and post-move tree snapshot; refuse Execute unless Phase 01 verified signed-off.
+Skip Conditions: Phase 01 is UNKNOWN OR no approved plan exists OR a prior Phase 06 already completed and destinations match plan.
+Quick Wins: Real structural cleanup with auditability and undo capability.
+Defer to Later: Nonessential refactors, cross-project normalization, any deletion/cleanup (forbidden anyway).
+
+Phase 07: Rename Engine
+
+Minimum Scope: Generate rename plan (DryRun) + execute renames (Execute) with collision handling and rollback; enforce MM-DD-YYYY naming; refuse Execute unless Phase 01 verified signed-off.
+Skip Conditions: All targeted files already comply with naming pattern OR Phase 01 is UNKNOWN.
+Quick Wins: Consistent retrieval and reduced collision probability long-term.
+Defer to Later: Additional naming enhancements beyond the contract pattern.
+
+Phase 08: Semantic Labeling
+
+Minimum Scope: Label-only semantic suggestions for the misclass queue, training examples manifest required, merge logic documented, no moves.
+Skip Conditions: Low-confidence rate after Phase 04 is already acceptable and operator chooses not to pursue semantic enhancement OR training examples manifest is missing/empty.
+Quick Wins: Improves classification confidence/coverage without touching files.
+Defer to Later: Automated rule v2 promotion without explicit review/approval.
+
+⸻
+
+Part 8: Answers to the 10 Critical Questions
+
+1. Entry/Exit Gates
+
+How do we ensure each phase only runs when safe and verify it succeeded?
+	•	Entry gates are explicit pre-flight prerequisites + validation checks + blocking conditions that refuse unsafe state (wrong roots, config drift, missing manifest, missing approvals, Phase 01 unknown for Execute phases).
+	•	Exit gates require measurable success criteria, verification checks (counts/hashes/compliance), explicit evidence completeness, and rollback DryRun PASS for mutating phases.
+
+2. Runner Architecture
+
+What does run.ps1 need to do (validation, orchestration, error handling)?
+	•	Enforce a single execution doorway (SRC/project-root invocation rules), validate config + roots + exclusions, refuse duplicate canonical scripts, create run folder + audit spine first, orchestrate modules sequentially by phase, enforce DryRun/Execute semantics, and implement fail-fast safety rules.
+
+3. State Tracking
+
+How do we track progress and detect partial/failed runs?
+	•	Track per-run state inside metrics.json (status, plan hash, config hash, checkpoints, executed ledger path) and detect dirty state via status and plan/executed mismatches.
+	•	Minimal resume for phases 06–07 uses executed ledger to skip completed actions when plan/config hashes match; otherwise require rollback.
+
+4. Plan/Apply Workflow
+
+How do we separate “what will happen” from “doing it”?
+	•	Plan phases generate plan.csv plus phase-specific plan evidence (move_plan/rename_plan, collisions, exclusions) with config hash recorded.
+	•	Apply phases require human approval record + DryRun PASS record and then apply the approved plan deterministically, logging actual actions in executed ledgers.
+
+5. Rollback Design
+
+How do we guarantee undo capability for destructive phases?
+	•	Generate rollback first, validate rollback in DryRun with a PASS/FAIL report, and require explicit approval for rollback execution.
+	•	Rollback uses executed ledgers to undo only what actually happened, in reverse order, without overwrites.
+
+6. Failure Mode Coverage
+
+Have we gated against all common failure modes?
+	•	Yes: each failure mode is mapped to specific entry/exit/stop gates (Phases 02–07), with explicit detection signals (metrics + evidence files) and non-destructive remediations (replan/review/quarantine/rollback).
+
+7. Classification Strategy
+
+How do we balance deterministic rules vs semantic AI assistance?
+	•	Phase 04 is deterministic-first and must pass confidence distribution gates; Phase 08 is optional label-only enhancement targeting misclass queue, with deterministic precedence and explicit merge logic.
+
+8. Collision Handling
+
+What happens when destination files already exist?
+	•	Collisions are detected in planning (Phase 05 / Phase 07), documented, and resolved via suffix policy _01.._99; overwrites are forbidden; unresolved cases are quarantined to TEMPORARY via explicit planned actions.
+
+9. Confidence Thresholds
+
+Are 0.85/0.60/0.60 the right thresholds?
+	•	They are enforced exactly as configured: auto-move boundary 0.85 (but actual moves occur only in Phase 06 with an approved plan), review 0.60–0.84, quarantine <0.60, and a hard stop/fail if low-confidence exceeds 40% in Phase 04/08.
+
+10. Proof Pack Strategy
+
+What evidence from OUTPUTS gets promoted to PROOF_PACK?
+	•	Promote the minimal set that proves safety, determinism, and rollback: canonical manifest + dryrun checklist + classification outputs + plans + executed ledgers + rollback DryRun reports + rename compliance + semantic merge logic (when used), with a recruiter-readable README/index.
+
+⸻
+
+Part 9: Proof Pack Strategy
+
+What Gets Promoted to PROOF_PACK?
+
+Selection Criteria:
+	•	Include artifacts that prove: scope control (allowlist/excludes), determinism (hashes), plan/apply separation (approved plans), safe execution (executed ledgers), rollback capability (rollback DryRun PASS + rollback structure), and measurable outcomes (before/after counts).
+	•	Minimum promotion set per milestone:
+	•	Phase 02: canonical_script_manifest + duplicate report + rules inventory
+	•	Phase 03: dryrun_validation_checklist + canonical_paths_proof + run_interface
+	•	Phase 04: classification_results + misclass_queue + bucket_taxonomy + rules_version
+	•	Phase 05: move_plan + collisions + planned_changes_summary + exclusions_applied
+	•	Phase 06: moves_executed + errors + state_tree_after_moves + rollback_dryrun_report
+	•	Phase 07: rename_plan + rename_executed + rename_collisions + rename_examples + rollback_dryrun_report
+	•	Phase 08 (if run): training_examples_manifest + semantic_labels + semantic_misclass_queue + merge_logic + evaluation_notes
+
+Curation Process:
+	•	Copy selected OUTPUTS artifacts into PROOF_PACK under stable subfolders: evidence\, results\, code_excerpt\.
+	•	Add an index file (README) that links each promoted artifact to its originating phase/run folder and states the gates passed (from summary/metrics), without altering the original evidence files.
+
+Recruiter-Ready Formatting:
+	•	PROOF_PACK README must include: project goal, non-negotiables enforced, phase timeline, key metrics (file counts, collision rates, low-confidence rates), and a “how safety was enforced” section (gates + rollback).
+	•	Provide a concise “Before vs After” snapshot using Phase 00 baseline metrics and Phase 06/07 outcomes as available, explicitly labeling any missing comparisons as UNKNOWN rather than guessing.
+
+⸻
+
+Part 10: Risks & Mitigations
+
+Identified Risks
+	1.	Phase 01 contracts not completed (directory/naming rules not frozen) leading to unsafe execution scope.
+	•	Likelihood: medium
+	•	Impact: high
+	•	Mitigation: Treat Phase 01 status as UNKNOWN unless proven; block Execute for Phases 06–07 unless Phase 01 is VERIFIED_SIGNED; allow only read-only inventory/plan phases.
+	2.	Plan/apply mismatch due to config or rules drift between planning and execution.
+	•	Likelihood: medium
+	•	Impact: high
+	•	Mitigation: Hash config and rules into metrics.json; embed/record plan sha256; require approval record with hashes; refuse Execute on any mismatch.
+	3.	Integrity risk during moves (hash mismatch / disk or antivirus interference).
+	•	Likelihood: low
+	•	Impact: high
+	•	Mitigation: Hash-before and hash-after for every move; abort on any mismatch; require rollback readiness and DryRun validation; quarantine affected items and block further destructive phases until addressed.
+
+⸻
+
+END OF TEMPLATE
+
+Instructions for 5.2: Fill in all TBD sections with detailed, actionable, testable specifications. Your response should be comprehensive enough that a developer can implement Phases 02-08 without ambiguity.

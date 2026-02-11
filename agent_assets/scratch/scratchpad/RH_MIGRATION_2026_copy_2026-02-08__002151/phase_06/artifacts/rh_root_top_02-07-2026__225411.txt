@@ -1,0 +1,15 @@
+
+Mode  LastWriteTime        Length FullName
+----  -------------        ------ --------
+d---- 2/7/2026 8:51:07 PM         C:\RH\.agents
+d---- 2/7/2026 8:51:07 PM         C:\RH\.codex
+d---- 2/7/2026 10:49:51 PM        C:\RH\ARCHIVE
+d---- 2/7/2026 7:13:52 PM         C:\RH\INBOX
+d-r-- 2/7/2026 7:13:50 PM         C:\RH\LIFE
+d-r-- 2/7/2026 8:18:34 PM         C:\RH\OPS
+d---- 2/7/2026 6:10:13 PM         C:\RH\VAULT
+d---- 2/7/2026 10:49:51 PM        C:\RH\VAULT_NEVER_SYNC
+-a--- 2/7/2026 8:50:15 PM  5704   C:\RH\AGENTS.md
+-a-hs 2/6/2026 3:57:12 AM  118    C:\RH\desktop.ini
+
+

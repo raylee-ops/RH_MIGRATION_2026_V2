@@ -1,0 +1,1 @@
+i forgot in original context too add allowed temporary folder to act as unsorted/trash bucket so remember root only allows C:RH\OPS C:RH\INBOX C:RH\TEMPORARY

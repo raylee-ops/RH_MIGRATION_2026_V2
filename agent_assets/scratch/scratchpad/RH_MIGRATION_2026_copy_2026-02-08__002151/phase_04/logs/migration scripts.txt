@@ -1,0 +1,775 @@
+PowerShell 7.5.4
+PS C:\2026> Copy-Item "C:\RH\OPS\BUILD\scripts\Build-QuarantineInventory.ps1" `
+>>   "C:\RH\OPS\BUILD\scripts\attempt 2\Build-QuarantineInventory.ps1" -Force
+PS C:\2026> cd "C:\RH\OPS\BUILD\scripts\attempt 2"
+PS C:\RH\OPS\BUILD\scripts\attempt 2> .\Execute-Phase4_FIXED.ps1
+.\Execute-Phase4_FIXED.ps1: File C:\RH\OPS\BUILD\scripts\attempt 2\Execute-Phase4_FIXED.ps1 cannot beloaded. The file C:\RH\OPS\BUILD\scripts\attempt 2\Execute-Phase4_FIXED.ps1 is not digitally signed. You cannot run this script on the current system. For more information about running scripts and setting execution policy, see about_Execution_Policies at https://go.microsoft.com/fwlink/?LinkID=135170.
+PS C:\RH\OPS\BUILD\scripts\attempt 2> Set-ExecutionPolicy -Scope Process Bypass -ForceSet-ExecutionPolicy -Scope Process Bypass -Force
+Set-ExecutionPolicy: Cannot bind parameter because parameter 'Scope' is specified more than once. To provide multiple values to parameters that can accept multiple values, use the array syntax. For example, "-parameter value1,value2,value3".
+PS C:\RH\OPS\BUILD\scripts\attempt 2> Set-ExecutionPolicy -Scope Process Bypass -Force
+PS C:\RH\OPS\BUILD\scripts\attempt 2> Get-ChildItem "C:\RH\OPS\BUILD\scripts\*.ps1" -File | Unblock-File
+PS C:\RH\OPS\BUILD\scripts\attempt 2> Get-ChildItem "C:\RH\OPS\BUILD\scripts\*.yml" -File | Unblock-File
+PS C:\RH\OPS\BUILD\scripts\attempt 2> cd "C:\RH\OPS\BUILD\scripts"
+PS C:\RH\OPS\BUILD\scripts> .\Execute-Phase4_FIXED.ps1
+
+╔═══════════════════════════════════════════════════════════════╗
+║              PHASE 4: DISCOVERY ENGINE (FIXED)                ║
+╚═══════════════════════════════════════════════════════════════╝
+
+ℹ️  DRY RUN MODE - No moves, reports only
+
+═══ STEP 1/6: Inventory ═══
+Running Build-QuarantineInventory.ps1...
+
+=== PHASE 4: Build Quarantine Inventory ===
+Quarantine: C:\RH\OPS\QUARANTINE\FROM_2026
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026
+Loading rules from: C:\RH\OPS\BUILD\scripts\phase4_rules_FIXED.yml
+Config loaded: 15 filename patterns, 10 content patterns
+
+[1/4] Scanning quarantine files...
+Found 5265 files to process
+
+[2/4] Computing file hashes (staged approach)...
+  Small files (<200 MB): 5263
+  Large files (≥200 MB): 2
+  Large dupe candidates: 0
+  Total files to hash: 5263
+Hashing complete: 5265 files processed
+
+[3/4] Extracting features and detecting secrets...
+Feature extraction complete: 5265 records
+  Sensitive files flagged: 164
+  Files with MITRE refs: 0
+  Files with rule IDs: 0
+  Files with KQL: 0
+  Files with Sigma: 0
+  Files with Wazuh: 0
+
+[4/4] Writing output files...
+  Inventory: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\FULL_INVENTORY_2026-02-06_13-52-16.csv
+
+=== Inventory Build Complete ===
+Total files processed: 5265
+Output: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\FULL_INVENTORY_2026-02-06_13-52-16.csv
+
+Next step: .\Find-WorkUnits.ps1 -InventoryPath 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\FULL_INVENTORY_2026-02-06_13-52-16.csv'
+
+═══ STEP 2/6: Find Work Units (FIXED) ═══
+
+=== PHASE 4: Find Work Units (FIXED) ===
+Loaded 106 existing units from registry
+Loaded 7 anchor types
+
+Loading inventory...
+Loaded 5265 files
+
+Detecting anchors...
+Found 5265 anchor files
+
+Clustering files...
+Created 510 work units
+
+  Candidates: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\WORK_UNIT_CANDIDATES_2026-02-06_14-09-48.csv
+  Membership: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\UNIT_MEMBERS_2026-02-06_14-09-48.csv
+  Registry: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\UNIT_REGISTRY.json
+
+=== Summary ===
+Total units: 510
+  High conf (≥0.7): 510
+  Orphans: 0
+
+Next: .\Classify-Units.ps1 -CandidatesPath 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\WORK_UNIT_CANDIDATES_2026-02-06_14-09-48.csv' -MembersPath 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\UNIT_MEMBERS_2026-02-06_14-09-48.csv' -InventoryPath 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\FULL_INVENTORY_2026-02-06_13-52-16.csv'
+
+═══ STEP 3/6: Classify Units (FIXED) ═══
+
+=== PHASE 4: Classify Units (FIXED) ===
+Loaded 0 classification rules
+
+Loading data...
+  Candidates: 510 units
+  Members: 5265 files
+
+Classifying...
+WARNING: No rule matched PP-DET-504
+WARNING: No rule matched PP-DET-305
+WARNING: No rule matched PP-DET-260
+WARNING: No rule matched PP-DET-388
+WARNING: No rule matched PP-DET-410
+WARNING: No rule matched PP-DET-258
+WARNING: No rule matched PP-DET-328
+WARNING: No rule matched PP-DET-038
+WARNING: No rule matched PP-DET-110
+WARNING: No rule matched PP-DET-196
+WARNING: No rule matched PP-DET-170
+WARNING: No rule matched PP-DET-172
+WARNING: No rule matched PP-DET-468
+WARNING: No rule matched PP-DET-199
+WARNING: No rule matched PP-DET-169
+WARNING: No rule matched PP-DET-107
+WARNING: No rule matched PP-DET-422
+WARNING: No rule matched PP-DET-157
+WARNING: No rule matched PP-DET-278
+WARNING: No rule matched PP-DET-030
+WARNING: No rule matched PP-DET-281
+WARNING: No rule matched PP-DET-420
+WARNING: No rule matched PP-DET-012
+WARNING: No rule matched PP-DET-231
+WARNING: No rule matched PP-DET-413
+WARNING: No rule matched PP-DET-111
+WARNING: No rule matched PP-DET-224
+WARNING: No rule matched PP-DET-352
+WARNING: No rule matched PP-DET-357
+WARNING: No rule matched PP-DET-235
+WARNING: No rule matched PP-DET-331
+WARNING: No rule matched PP-DET-443
+WARNING: No rule matched PP-DET-498
+WARNING: No rule matched PP-DET-094
+WARNING: No rule matched PP-DET-223
+WARNING: No rule matched PP-DET-189
+WARNING: No rule matched PP-DET-147
+WARNING: No rule matched PP-DET-367
+WARNING: No rule matched PP-DET-384
+WARNING: No rule matched PP-DET-086
+WARNING: No rule matched PP-DET-430
+WARNING: No rule matched PP-DET-073
+WARNING: No rule matched PP-DET-140
+WARNING: No rule matched PP-DET-082
+WARNING: No rule matched PP-DET-133
+WARNING: No rule matched PP-DET-488
+WARNING: No rule matched PP-DET-065
+WARNING: No rule matched PP-DET-340
+WARNING: No rule matched PP-DET-416
+WARNING: No rule matched PP-DET-005
+WARNING: No rule matched PP-DET-219
+WARNING: No rule matched PP-DET-379
+WARNING: No rule matched PP-DET-264
+WARNING: No rule matched PP-DET-481
+WARNING: No rule matched PP-DET-070
+WARNING: No rule matched PP-DET-491
+WARNING: No rule matched PP-DET-137
+WARNING: No rule matched PP-DET-494
+WARNING: No rule matched PP-DET-377
+WARNING: No rule matched PP-DET-250
+WARNING: No rule matched PP-DET-116
+WARNING: No rule matched PP-DET-191
+WARNING: No rule matched PP-DET-490
+WARNING: No rule matched PP-DET-069
+WARNING: No rule matched PP-DET-500
+WARNING: No rule matched PP-DET-007
+WARNING: No rule matched PP-DET-390
+WARNING: No rule matched PP-DET-368
+WARNING: No rule matched PP-DET-238
+WARNING: No rule matched PP-DET-323
+WARNING: No rule matched PP-DET-452
+WARNING: No rule matched PP-DET-299
+WARNING: No rule matched PP-DET-057
+WARNING: No rule matched PP-DET-489
+WARNING: No rule matched PP-DET-184
+WARNING: No rule matched PP-DET-269
+WARNING: No rule matched PP-DET-249
+WARNING: No rule matched PP-DET-359
+WARNING: No rule matched PP-DET-001
+WARNING: No rule matched PP-DET-146
+WARNING: No rule matched PP-DET-472
+WARNING: No rule matched PP-DET-418
+WARNING: No rule matched PP-DET-308
+WARNING: No rule matched PP-DET-280
+WARNING: No rule matched PP-DET-123
+WARNING: No rule matched PP-DET-333
+WARNING: No rule matched PP-DET-036
+WARNING: No rule matched PP-DET-106
+WARNING: No rule matched PP-DET-028
+WARNING: No rule matched PP-DET-072
+WARNING: No rule matched PP-DET-347
+WARNING: No rule matched PP-DET-074
+WARNING: No rule matched PP-DET-271
+WARNING: No rule matched PP-DET-307
+WARNING: No rule matched PP-DET-294
+WARNING: No rule matched PP-DET-358
+WARNING: No rule matched PP-DET-091
+WARNING: No rule matched PP-DET-048
+WARNING: No rule matched PP-DET-509
+WARNING: No rule matched PP-DET-118
+WARNING: No rule matched PP-DET-050
+WARNING: No rule matched PP-DET-112
+WARNING: No rule matched PP-DET-398
+WARNING: No rule matched PP-DET-097
+WARNING: No rule matched PP-DET-375
+WARNING: No rule matched PP-DET-033
+WARNING: No rule matched PP-DET-119
+WARNING: No rule matched PP-DET-125
+WARNING: No rule matched PP-DET-024
+WARNING: No rule matched PP-DET-126
+WARNING: No rule matched PP-DET-392
+WARNING: No rule matched PP-DET-492
+WARNING: No rule matched PP-DET-245
+WARNING: No rule matched PP-DET-113
+WARNING: No rule matched PP-DET-376
+WARNING: No rule matched PP-DET-014
+WARNING: No rule matched PP-DET-062
+WARNING: No rule matched PP-DET-385
+WARNING: No rule matched PP-DET-218
+WARNING: No rule matched PP-DET-341
+WARNING: No rule matched PP-DET-353
+WARNING: No rule matched PP-DET-187
+WARNING: No rule matched PP-DET-476
+WARNING: No rule matched PP-DET-089
+WARNING: No rule matched PP-DET-348
+WARNING: No rule matched PP-DET-382
+WARNING: No rule matched PP-DET-252
+WARNING: No rule matched PP-DET-435
+WARNING: No rule matched PP-DET-192
+WARNING: No rule matched PP-DET-129
+WARNING: No rule matched PP-DET-138
+WARNING: No rule matched PP-DET-162
+WARNING: No rule matched PP-DET-046
+WARNING: No rule matched PP-DET-208
+WARNING: No rule matched PP-DET-013
+WARNING: No rule matched PP-DET-035
+WARNING: No rule matched PP-DET-277
+WARNING: No rule matched PP-DET-134
+WARNING: No rule matched PP-DET-319
+WARNING: No rule matched PP-DET-254
+WARNING: No rule matched PP-DET-047
+WARNING: No rule matched PP-DET-318
+WARNING: No rule matched PP-DET-321
+WARNING: No rule matched PP-DET-275
+WARNING: No rule matched PP-DET-259
+WARNING: No rule matched PP-DET-174
+WARNING: No rule matched PP-DET-381
+WARNING: No rule matched PP-DET-202
+WARNING: No rule matched PP-DET-310
+WARNING: No rule matched PP-DET-439
+WARNING: No rule matched PP-DET-276
+WARNING: No rule matched PP-DET-139
+WARNING: No rule matched PP-DET-124
+WARNING: No rule matched PP-DET-025
+WARNING: No rule matched PP-DET-066
+WARNING: No rule matched PP-DET-109
+WARNING: No rule matched PP-DET-060
+WARNING: No rule matched PP-DET-120
+WARNING: No rule matched PP-DET-507
+WARNING: No rule matched PP-DET-127
+WARNING: No rule matched PP-DET-018
+WARNING: No rule matched PP-DET-142
+WARNING: No rule matched PP-DET-287
+WARNING: No rule matched PP-DET-369
+WARNING: No rule matched PP-DET-203
+WARNING: No rule matched PP-DET-197
+WARNING: No rule matched PP-DET-201
+WARNING: No rule matched PP-DET-122
+WARNING: No rule matched PP-DET-204
+WARNING: No rule matched PP-DET-289
+WARNING: No rule matched PP-DET-010
+WARNING: No rule matched PP-DET-149
+WARNING: No rule matched PP-DET-055
+WARNING: No rule matched PP-DET-311
+WARNING: No rule matched PP-DET-190
+WARNING: No rule matched PP-DET-317
+WARNING: No rule matched PP-DET-227
+WARNING: No rule matched PP-DET-262
+WARNING: No rule matched PP-DET-240
+WARNING: No rule matched PP-DET-099
+WARNING: No rule matched PP-DET-143
+WARNING: No rule matched PP-DET-306
+WARNING: No rule matched PP-DET-181
+WARNING: No rule matched PP-DET-155
+WARNING: No rule matched PP-DET-211
+WARNING: No rule matched PP-DET-486
+WARNING: No rule matched PP-DET-031
+WARNING: No rule matched PP-DET-105
+WARNING: No rule matched PP-DET-232
+WARNING: No rule matched PP-DET-121
+WARNING: No rule matched PP-DET-058
+WARNING: No rule matched PP-DET-336
+WARNING: No rule matched PP-DET-361
+WARNING: No rule matched PP-DET-021
+WARNING: No rule matched PP-DET-193
+WARNING: No rule matched PP-DET-436
+WARNING: No rule matched PP-DET-421
+WARNING: No rule matched PP-DET-026
+WARNING: No rule matched PP-DET-314
+WARNING: No rule matched PP-DET-267
+WARNING: No rule matched PP-DET-386
+WARNING: No rule matched PP-DET-343
+WARNING: No rule matched PP-DET-015
+WARNING: No rule matched PP-DET-083
+WARNING: No rule matched PP-DET-400
+WARNING: No rule matched PP-DET-510
+WARNING: No rule matched PP-DET-213
+WARNING: No rule matched PP-DET-167
+WARNING: No rule matched PP-DET-041
+WARNING: No rule matched PP-DET-027
+WARNING: No rule matched PP-DET-054
+WARNING: No rule matched PP-DET-023
+WARNING: No rule matched PP-DET-429
+WARNING: No rule matched PP-DET-068
+WARNING: No rule matched PP-DET-370
+WARNING: No rule matched PP-DET-284
+WARNING: No rule matched PP-DET-282
+WARNING: No rule matched PP-DET-412
+WARNING: No rule matched PP-DET-449
+WARNING: No rule matched PP-DET-034
+WARNING: No rule matched PP-DET-297
+WARNING: No rule matched PP-DET-501
+WARNING: No rule matched PP-DET-148
+WARNING: No rule matched PP-DET-175
+WARNING: No rule matched PP-DET-478
+WARNING: No rule matched PP-DET-325
+WARNING: No rule matched PP-DET-063
+WARNING: No rule matched PP-DET-313
+WARNING: No rule matched PP-DET-085
+WARNING: No rule matched PP-DET-256
+WARNING: No rule matched PP-DET-351
+WARNING: No rule matched PP-DET-465
+WARNING: No rule matched PP-DET-458
+WARNING: No rule matched PP-DET-101
+WARNING: No rule matched PP-DET-380
+WARNING: No rule matched PP-DET-156
+WARNING: No rule matched PP-DET-424
+WARNING: No rule matched PP-DET-200
+WARNING: No rule matched PP-DET-495
+WARNING: No rule matched PP-DET-247
+WARNING: No rule matched PP-DET-051
+WARNING: No rule matched PP-DET-463
+WARNING: No rule matched PP-DET-017
+WARNING: No rule matched PP-DET-499
+WARNING: No rule matched PP-DET-394
+WARNING: No rule matched PP-DET-104
+WARNING: No rule matched PP-DET-462
+WARNING: No rule matched PP-DET-092
+WARNING: No rule matched PP-DET-332
+WARNING: No rule matched PP-DET-020
+WARNING: No rule matched PP-DET-428
+WARNING: No rule matched PP-DET-037
+WARNING: No rule matched PP-DET-427
+WARNING: No rule matched PP-DET-095
+WARNING: No rule matched PP-DET-301
+WARNING: No rule matched PP-DET-473
+WARNING: No rule matched PP-DET-103
+WARNING: No rule matched PP-DET-329
+WARNING: No rule matched PP-DET-242
+WARNING: No rule matched PP-DET-044
+WARNING: No rule matched PP-DET-096
+WARNING: No rule matched PP-DET-354
+WARNING: No rule matched PP-DET-455
+WARNING: No rule matched PP-DET-502
+WARNING: No rule matched PP-DET-251
+WARNING: No rule matched PP-DET-378
+WARNING: No rule matched PP-DET-326
+WARNING: No rule matched PP-DET-002
+WARNING: No rule matched PP-DET-302
+WARNING: No rule matched PP-DET-437
+WARNING: No rule matched PP-DET-408
+WARNING: No rule matched PP-DET-176
+WARNING: No rule matched PP-DET-228
+WARNING: No rule matched PP-DET-362
+WARNING: No rule matched PP-DET-483
+WARNING: No rule matched PP-DET-399
+WARNING: No rule matched PP-DET-003
+WARNING: No rule matched PP-DET-114
+WARNING: No rule matched PP-DET-210
+WARNING: No rule matched PP-DET-079
+WARNING: No rule matched PP-DET-229
+WARNING: No rule matched PP-DET-295
+WARNING: No rule matched PP-DET-226
+WARNING: No rule matched PP-DET-403
+WARNING: No rule matched PP-DET-312
+WARNING: No rule matched PP-DET-136
+WARNING: No rule matched PP-DET-263
+WARNING: No rule matched PP-DET-153
+WARNING: No rule matched PP-DET-396
+WARNING: No rule matched PP-DET-423
+WARNING: No rule matched PP-DET-234
+WARNING: No rule matched PP-DET-154
+WARNING: No rule matched PP-DET-470
+WARNING: No rule matched PP-DET-145
+WARNING: No rule matched PP-DET-288
+WARNING: No rule matched PP-DET-090
+WARNING: No rule matched PP-DET-268
+WARNING: No rule matched PP-DET-466
+WARNING: No rule matched PP-DET-293
+WARNING: No rule matched PP-DET-337
+WARNING: No rule matched PP-DET-045
+WARNING: No rule matched PP-DET-071
+WARNING: No rule matched PP-DET-363
+WARNING: No rule matched PP-DET-324
+WARNING: No rule matched PP-DET-255
+WARNING: No rule matched PP-DET-243
+WARNING: No rule matched PP-DET-464
+WARNING: No rule matched PP-DET-493
+WARNING: No rule matched PP-DET-407
+WARNING: No rule matched PP-DET-461
+WARNING: No rule matched PP-DET-445
+WARNING: No rule matched PP-DET-364
+WARNING: No rule matched PP-DET-425
+WARNING: No rule matched PP-DET-366
+WARNING: No rule matched PP-DET-274
+WARNING: No rule matched PP-DET-409
+WARNING: No rule matched PP-DET-503
+WARNING: No rule matched PP-DET-016
+WARNING: No rule matched PP-DET-474
+WARNING: No rule matched PP-DET-286
+WARNING: No rule matched PP-DET-182
+WARNING: No rule matched PP-DET-077
+WARNING: No rule matched PP-DET-415
+WARNING: No rule matched PP-DET-257
+WARNING: No rule matched PP-DET-471
+WARNING: No rule matched PP-DET-304
+WARNING: No rule matched PP-DET-150
+WARNING: No rule matched PP-DET-040
+WARNING: No rule matched PP-DET-061
+WARNING: No rule matched PP-DET-389
+WARNING: No rule matched PP-DET-309
+WARNING: No rule matched PP-DET-433
+WARNING: No rule matched PP-DET-163
+WARNING: No rule matched PP-DET-102
+WARNING: No rule matched PP-DET-339
+WARNING: No rule matched PP-DET-475
+WARNING: No rule matched PP-DET-467
+WARNING: No rule matched PP-DET-356
+WARNING: No rule matched PP-DET-265
+WARNING: No rule matched PP-DET-505
+WARNING: No rule matched PP-DET-457
+WARNING: No rule matched PP-DET-342
+WARNING: No rule matched PP-DET-248
+WARNING: No rule matched PP-DET-183
+WARNING: No rule matched PP-DET-236
+WARNING: No rule matched PP-DET-303
+WARNING: No rule matched PP-DET-285
+WARNING: No rule matched PP-DET-067
+WARNING: No rule matched PP-DET-233
+WARNING: No rule matched PP-DET-453
+WARNING: No rule matched PP-DET-006
+WARNING: No rule matched PP-DET-320
+WARNING: No rule matched PP-DET-373
+WARNING: No rule matched PP-DET-330
+WARNING: No rule matched PP-DET-496
+WARNING: No rule matched PP-DET-345
+WARNING: No rule matched PP-DET-290
+WARNING: No rule matched PP-DET-419
+WARNING: No rule matched PP-DET-098
+WARNING: No rule matched PP-DET-411
+WARNING: No rule matched PP-DET-011
+WARNING: No rule matched PP-DET-215
+WARNING: No rule matched PP-DET-195
+WARNING: No rule matched PP-DET-144
+WARNING: No rule matched PP-DET-032
+WARNING: No rule matched PP-DET-316
+WARNING: No rule matched PP-DET-180
+WARNING: No rule matched PP-DET-405
+WARNING: No rule matched PP-DET-402
+WARNING: No rule matched PP-DET-115
+WARNING: No rule matched PP-DET-237
+WARNING: No rule matched PP-DET-075
+WARNING: No rule matched PP-DET-334
+WARNING: No rule matched PP-DET-451
+WARNING: No rule matched PP-DET-417
+WARNING: No rule matched PP-DET-279
+WARNING: No rule matched PP-DET-081
+WARNING: No rule matched PP-DET-270
+WARNING: No rule matched PP-DET-049
+WARNING: No rule matched PP-DET-283
+WARNING: No rule matched PP-DET-084
+WARNING: No rule matched PP-DET-469
+WARNING: No rule matched PP-DET-273
+WARNING: No rule matched PP-DET-393
+WARNING: No rule matched PP-DET-053
+WARNING: No rule matched PP-DET-484
+WARNING: No rule matched PP-DET-300
+WARNING: No rule matched PP-DET-292
+WARNING: No rule matched PP-DET-327
+WARNING: No rule matched PP-DET-128
+WARNING: No rule matched PP-DET-508
+WARNING: No rule matched PP-DET-401
+WARNING: No rule matched PP-DET-395
+WARNING: No rule matched PP-DET-442
+WARNING: No rule matched PP-DET-221
+WARNING: No rule matched PP-DET-188
+WARNING: No rule matched PP-DET-004
+WARNING: No rule matched PP-DET-266
+WARNING: No rule matched PP-DET-206
+WARNING: No rule matched PP-DET-365
+WARNING: No rule matched PP-DET-177
+WARNING: No rule matched PP-DET-185
+WARNING: No rule matched PP-DET-132
+WARNING: No rule matched PP-DET-088
+WARNING: No rule matched PP-DET-220
+WARNING: No rule matched PP-DET-460
+WARNING: No rule matched PP-DET-459
+WARNING: No rule matched PP-DET-186
+WARNING: No rule matched PP-DET-029
+WARNING: No rule matched PP-DET-272
+WARNING: No rule matched PP-DET-371
+WARNING: No rule matched PP-DET-178
+WARNING: No rule matched PP-DET-209
+WARNING: No rule matched PP-DET-207
+WARNING: No rule matched PP-DET-008
+WARNING: No rule matched PP-DET-253
+WARNING: No rule matched PP-DET-222
+WARNING: No rule matched PP-DET-506
+WARNING: No rule matched PP-DET-350
+WARNING: No rule matched PP-DET-194
+WARNING: No rule matched PP-DET-441
+WARNING: No rule matched PP-DET-298
+WARNING: No rule matched PP-DET-239
+WARNING: No rule matched PP-DET-108
+WARNING: No rule matched PP-DET-100
+WARNING: No rule matched PP-DET-355
+WARNING: No rule matched PP-DET-477
+WARNING: No rule matched PP-DET-487
+WARNING: No rule matched PP-DET-131
+WARNING: No rule matched PP-DET-161
+WARNING: No rule matched PP-DET-212
+WARNING: No rule matched PP-DET-052
+WARNING: No rule matched PP-DET-335
+WARNING: No rule matched PP-DET-151
+WARNING: No rule matched PP-DET-205
+WARNING: No rule matched PP-DET-246
+WARNING: No rule matched PP-DET-360
+WARNING: No rule matched PP-DET-450
+WARNING: No rule matched PP-DET-372
+WARNING: No rule matched PP-DET-064
+WARNING: No rule matched PP-DET-447
+WARNING: No rule matched PP-DET-141
+WARNING: No rule matched PP-DET-166
+WARNING: No rule matched PP-DET-244
+WARNING: No rule matched PP-DET-042
+WARNING: No rule matched PP-DET-158
+WARNING: No rule matched PP-DET-171
+WARNING: No rule matched PP-DET-022
+WARNING: No rule matched PP-DET-168
+WARNING: No rule matched PP-DET-198
+WARNING: No rule matched PP-DET-261
+WARNING: No rule matched PP-DET-056
+WARNING: No rule matched PP-DET-217
+WARNING: No rule matched PP-DET-387
+WARNING: No rule matched PP-DET-093
+WARNING: No rule matched PP-DET-087
+WARNING: No rule matched PP-DET-225
+WARNING: No rule matched PP-DET-444
+WARNING: No rule matched PP-DET-448
+WARNING: No rule matched PP-DET-414
+WARNING: No rule matched PP-DET-404
+WARNING: No rule matched PP-DET-497
+WARNING: No rule matched PP-DET-446
+WARNING: No rule matched PP-DET-216
+WARNING: No rule matched PP-DET-338
+WARNING: No rule matched PP-DET-485
+WARNING: No rule matched PP-DET-080
+WARNING: No rule matched PP-DET-019
+WARNING: No rule matched PP-DET-434
+WARNING: No rule matched PP-DET-160
+WARNING: No rule matched PP-DET-431
+WARNING: No rule matched PP-DET-391
+WARNING: No rule matched PP-DET-426
+WARNING: No rule matched PP-DET-039
+WARNING: No rule matched PP-DET-374
+WARNING: No rule matched PP-DET-173
+WARNING: No rule matched PP-DET-456
+WARNING: No rule matched PP-DET-164
+WARNING: No rule matched PP-DET-159
+WARNING: No rule matched PP-DET-296
+WARNING: No rule matched PP-DET-165
+WARNING: No rule matched PP-DET-322
+WARNING: No rule matched PP-DET-346
+WARNING: No rule matched PP-DET-214
+WARNING: No rule matched PP-DET-383
+WARNING: No rule matched PP-DET-344
+WARNING: No rule matched PP-DET-078
+WARNING: No rule matched PP-DET-135
+WARNING: No rule matched PP-DET-117
+WARNING: No rule matched PP-DET-152
+WARNING: No rule matched PP-DET-315
+WARNING: No rule matched PP-DET-076
+WARNING: No rule matched PP-DET-438
+WARNING: No rule matched PP-DET-009
+WARNING: No rule matched PP-DET-406
+WARNING: No rule matched PP-DET-179
+WARNING: No rule matched PP-DET-454
+WARNING: No rule matched PP-DET-440
+WARNING: No rule matched PP-DET-291
+WARNING: No rule matched PP-DET-397
+WARNING: No rule matched PP-DET-349
+WARNING: No rule matched PP-DET-482
+WARNING: No rule matched PP-DET-130
+WARNING: No rule matched PP-DET-432
+WARNING: No rule matched PP-DET-479
+WARNING: No rule matched PP-DET-059
+WARNING: No rule matched PP-DET-043
+WARNING: No rule matched PP-DET-241
+WARNING: No rule matched PP-DET-480
+WARNING: No rule matched PP-DET-230
+
+  Classified: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\CLASSIFIED_UNITS_2026-02-06_14-09-49.csv
+
+=== Summary ===
+
+Next: .\Build-MovePlan.ps1 -ClassifiedPath 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\CLASSIFIED_UNITS_2026-02-06_14-09-49.csv' -MembersPath 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\UNIT_MEMBERS_2026-02-06_14-09-48.csv'
+
+═══ STEP 4/6: Dedupe Scan ═══
+Using existing: DUPLICATES_REPORT_2026-02-06_12-57-20.csv
+
+═══ STEP 5/6: Build Move Plan (FIXED) ═══
+
+=== PHASE 4: Build Move Plan (FIXED) ===
+Loaded 0 garbage patterns
+
+Loading data...
+  Classified: 0 units
+  Members: 5265 files
+
+Building move plan...
+WARNING: Unit PP-DET-001 has no classification - skipping
+WARNING: Unit PP-DET-004 has no classification - skipping
+WARNING: Unit PP-DET-006 has no classification - skipping
+WARNING: Unit PP-DET-007 has no classification - skipping
+WARNING: Unit PP-DET-011 has no classification - skipping
+WARNING: Unit PP-DET-014 has no classification - skipping
+WARNING: Unit PP-DET-019 has no classification - skipping
+WARNING: Unit PP-DET-033 has no classification - skipping
+WARNING: Unit PP-DET-034 has no classification - skipping
+WARNING: Unit PP-DET-035 has no classification - skipping
+WARNING: Unit PP-DET-036 has no classification - skipping
+WARNING: Unit PP-DET-037 has no classification - skipping
+WARNING: Unit PP-DET-038 has no classification - skipping
+WARNING: Unit PP-DET-039 has no classification - skipping
+WARNING: Unit PP-DET-040 has no classification - skipping
+WARNING: Unit PP-DET-041 has no classification - skipping
+WARNING: Unit PP-DET-046 has no classification - skipping
+WARNING: Unit PP-DET-047 has no classification - skipping
+WARNING: Unit PP-DET-048 has no classification - skipping
+WARNING: Unit PP-DET-051 has no classification - skipping
+WARNING: Unit PP-DET-053 has no classification - skipping
+WARNING: Unit PP-DET-054 has no classification - skipping
+WARNING: Unit PP-DET-056 has no classification - skipping
+WARNING: Unit PP-DET-057 has no classification - skipping
+WARNING: Unit PP-DET-058 has no classification - skipping
+WARNING: Unit PP-DET-059 has no classification - skipping
+WARNING: Unit PP-DET-062 has no classification - skipping
+WARNING: Unit PP-DET-064 has no classification - skipping
+WARNING: Unit PP-DET-065 has no classification - skipping
+WARNING: Unit PP-DET-066 has no classification - skipping
+WARNING: Unit PP-DET-067 has no classification - skipping
+WARNING: Unit PP-DET-068 has no classification - skipping
+WARNING: Unit PP-DET-069 has no classification - skipping
+WARNING: Unit PP-DET-070 has no classification - skipping
+WARNING: Unit PP-DET-071 has no classification - skipping
+WARNING: Unit PP-DET-072 has no classification - skipping
+WARNING: Unit PP-DET-073 has no classification - skipping
+WARNING: Unit PP-DET-074 has no classification - skipping
+WARNING: Unit PP-DET-075 has no classification - skipping
+WARNING: Unit PP-DET-076 has no classification - skipping
+WARNING: Unit PP-DET-077 has no classification - skipping
+WARNING: Unit PP-DET-078 has no classification - skipping
+WARNING: Unit PP-DET-079 has no classification - skipping
+WARNING: Unit PP-DET-080 has no classification - skipping
+WARNING: Unit PP-DET-082 has no classification - skipping
+WARNING: Unit PP-DET-083 has no classification - skipping
+WARNING: Unit PP-DET-085 has no classification - skipping
+WARNING: Unit PP-DET-086 has no classification - skipping
+WARNING: Unit PP-DET-087 has no classification - skipping
+WARNING: Unit PP-DET-088 has no classification - skipping
+WARNING: Unit PP-DET-089 has no classification - skipping
+WARNING: Unit PP-DET-090 has no classification - skipping
+WARNING: Unit PP-DET-091 has no classification - skipping
+WARNING: Unit PP-DET-092 has no classification - skipping
+WARNING: Unit PP-DET-093 has no classification - skipping
+WARNING: Unit PP-DET-094 has no classification - skipping
+WARNING: Unit PP-DET-095 has no classification - skipping
+WARNING: Unit PP-DET-096 has no classification - skipping
+WARNING: Unit PP-DET-099 has no classification - skipping
+WARNING: Unit PP-DET-101 has no classification - skipping
+WARNING: Unit PP-DET-102 has no classification - skipping
+WARNING: Unit PP-DET-104 has no classification - skipping
+WARNING: Unit PP-DET-105 has no classification - skipping
+WARNING: Unit PP-DET-106 has no classification - skipping
+WARNING: Unit PP-DET-167 has no classification - skipping
+WARNING: Unit PP-DET-168 has no classification - skipping
+WARNING: Unit PP-DET-169 has no classification - skipping
+WARNING: Unit PP-DET-170 has no classification - skipping
+WARNING: Unit PP-DET-179 has no classification - skipping
+WARNING: Unit PP-DET-187 has no classification - skipping
+WARNING: Unit PP-DET-211 has no classification - skipping
+WARNING: Unit PP-DET-212 has no classification - skipping
+WARNING: Unit PP-DET-213 has no classification - skipping
+WARNING: Unit PP-DET-311 has no classification - skipping
+WARNING: Unit PP-DET-323 has no classification - skipping
+WARNING: Unit PP-DET-350 has no classification - skipping
+WARNING: Unit PP-DET-351 has no classification - skipping
+WARNING: Unit PP-DET-375 has no classification - skipping
+WARNING: Unit PP-DET-378 has no classification - skipping
+WARNING: Unit PP-DET-383 has no classification - skipping
+WARNING: Unit PP-DET-386 has no classification - skipping
+WARNING: Unit PP-DET-391 has no classification - skipping
+WARNING: Unit PP-DET-392 has no classification - skipping
+WARNING: Unit PP-DET-393 has no classification - skipping
+WARNING: Unit PP-DET-417 has no classification - skipping
+WARNING: Unit PP-DET-420 has no classification - skipping
+WARNING: Unit PP-DET-425 has no classification - skipping
+WARNING: Unit PP-DET-428 has no classification - skipping
+WARNING: Unit PP-DET-437 has no classification - skipping
+WARNING: Unit PP-DET-438 has no classification - skipping
+WARNING: Unit PP-DET-439 has no classification - skipping
+WARNING: Unit PP-DET-440 has no classification - skipping
+WARNING: Unit PP-DET-443 has no classification - skipping
+WARNING: Unit PP-DET-444 has no classification - skipping
+WARNING: Unit PP-DET-445 has no classification - skipping
+WARNING: Unit PP-DET-446 has no classification - skipping
+WARNING: Unit PP-DET-448 has no classification - skipping
+WARNING: Unit PP-DET-450 has no classification - skipping
+WARNING: Unit PP-DET-475 has no classification - skipping
+WARNING: Unit PP-DET-476 has no classification - skipping
+WARNING: Unit PP-DET-477 has no classification - skipping
+WARNING: Unit PP-DET-478 has no classification - skipping
+WARNING: Unit PP-DET-483 has no classification - skipping
+WARNING: Unit PP-DET-484 has no classification - skipping
+WARNING: Unit PP-DET-492 has no classification - skipping
+WARNING: Unit PP-DET-499 has no classification - skipping
+WARNING: Unit PP-DET-500 has no classification - skipping
+WARNING: Unit PP-DET-501 has no classification - skipping
+WARNING: Unit PP-DET-503 has no classification - skipping
+WARNING: Unit PP-DET-504 has no classification - skipping
+WARNING: Unit PP-DET-505 has no classification - skipping
+WARNING: Unit PP-DET-507 has no classification - skipping
+WARNING: Unit PP-DET-508 has no classification - skipping
+WARNING: Unit PP-DET-509 has no classification - skipping
+WARNING: Unit PP-DET-510 has no classification - skipping
+
+  Move plan: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\PHASE4_MOVE_PLAN_2026-02-06_14-09-50.csv
+  Rollback: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\ROLLBACK_PLAN_2026-02-06_14-09-50.csv
+
+=== Summary ===
+Files to move: 0
+  Keep original: 0
+  Normalize garbage: 0
+  Collision-renamed: 0
+  Sensitive: 0
+Skipped (git repos): 0
+
+Next: .\Execute-MovePlan.ps1 -MovePlanPath 'C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\PHASE4_MOVE_PLAN_2026-02-06_14-09-50.csv'
+
+═══ STEP 6/6: Execute ═══
+Skipped - Run with -Execute to perform actual moves
+
+╔═══════════════════════════════════════════════════════════════╗
+║                    PHASE 4 COMPLETE                           ║
+╚═══════════════════════════════════════════════════════════════╝
+
+Duration: 00:17:34
+Mode: DRY RUN
+
+Outputs: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026
+
+Review outputs, then run: .\Execute-Phase4_FIXED.ps1 -Execute
+PS C:\RH\OPS\BUILD\scripts> cd "C:\RH\OPS\BUILD\scripts"
+PS C:\RH\OPS\BUILD\scripts>
+PS C:\RH\OPS\BUILD\scripts> $Rules = "C:\RH\OPS\BUILD\scripts\phase4_rules_FIXED.yml"
+PS C:\RH\OPS\BUILD\scripts>
+PS C:\RH\OPS\BUILD\scripts> Set-ExecutionPolicy -Scope Process Bypass -Force
+PS C:\RH\OPS\BUILD\scripts> Unblock-File ".\*.ps1" -ErrorAction SilentlyContinue
+PS C:\RH\OPS\BUILD\scripts>
+PS C:\RH\OPS\BUILD\scripts> .\Execute-Phase4_FIXED.ps1 -RulesPath $Rules
+Execute-Phase4_FIXED.ps1: A parameter cannot be found that matches parameter name 'RulesPath'.
+PS C:\RH\OPS\BUILD\scripts>

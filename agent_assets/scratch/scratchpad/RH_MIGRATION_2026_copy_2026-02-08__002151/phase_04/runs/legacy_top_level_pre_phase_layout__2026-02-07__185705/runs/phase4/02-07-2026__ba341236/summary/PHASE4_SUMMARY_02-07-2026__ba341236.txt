@@ -1,0 +1,25 @@
+PHASE 4 SUMMARY  (02-07-2026)
+============================================================
+
+Inventory:
+  Total files inventoried: 5000
+  Git repos detected (repo roots): 7
+
+Anchors / Units:
+  Tier1 file anchors detected (sum): 436
+  Units produced: 47
+  Proof pack units: 14
+  Triage units: 20
+
+Move Plan:
+  Planned moves (rows): 5025
+  Secrets routed to VAULT triage (rows): 51
+  TRIAGE_LOWCONF + SCRATCH_INTAKE (rows): 1214 (24.16%)
+  Proof packs/projects at confidence >= 0.6 (rows): 3100 (61.69%)
+
+Acceptance checks (hard stop candidates):
+  Anchors in range 50–500?  -> PASS
+  Units in range 20–200?    -> PASS
+  TRIAGE_LOWCONF < 30%?     -> PASS
+  Assigned >= 60%?          -> PASS
+

@@ -1,0 +1,4 @@
+DRYRUN ONLY MODE
+- Do not execute system-modifying commands.
+- Generate plan/manifests/listings only.
+- Include exact execute command block gated behind explicit approval.

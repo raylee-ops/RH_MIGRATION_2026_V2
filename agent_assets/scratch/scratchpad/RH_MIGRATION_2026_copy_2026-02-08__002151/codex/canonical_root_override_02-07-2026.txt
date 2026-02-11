@@ -1,0 +1,17 @@
+CANONICAL ROOT OVERRIDE (02-07-2026)
+====================================
+
+SUMMARY
+- Single source of truth: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026
+- Allowed top-level folders: engine, runs, codex, trash
+
+DEPRECATIONS
+- Older docs/logs may mention C:\RH\OPS\BUILD\src\repos\...
+- Do not edit historical files to remove those references.
+- This file supersedes those references for current work.
+
+CURRENT LOCATIONS
+- Engine: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\engine
+- Runs: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\runs
+- Codex: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\codex
+- Trash: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash

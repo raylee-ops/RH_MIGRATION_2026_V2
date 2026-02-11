@@ -1,0 +1,7 @@
+
+Name                    LastWriteTime         FullName
+----                    -------------         --------
+hawkinsops-repo-upgrade 1/26/2026 1:48:54 PM  C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-repo-upgrade
+hawkinsops-site         1/23/2026 2:56:45 PM  C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-site
+hawkinsops-soc-content  1/24/2026 11:36:17 PM C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content
+

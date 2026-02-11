@@ -1,0 +1,29 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : Sunday, February 8, 2026 12:21:52 AM
+   Source : C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\
+     Dest : C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\
+
+    Files : *.*
+	    
+  Options : *.* /NDL /NFL /TEE /S /E /DCOPY:DAT /COPY:DAT /NP /MT:8 /R:2 /W:1 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :       729       729         1         0         0         0
+   Files :      1042      1042         0         0         0         1
+   Bytes :  155.95 m  155.95 m         0         0         0         0
+   Times :   0:00:03   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :           364,213,804 Bytes/sec.
+   Speed :            20,840.480 MegaBytes/min.
+   Ended : Sunday, February 8, 2026 12:21:52 AM
+

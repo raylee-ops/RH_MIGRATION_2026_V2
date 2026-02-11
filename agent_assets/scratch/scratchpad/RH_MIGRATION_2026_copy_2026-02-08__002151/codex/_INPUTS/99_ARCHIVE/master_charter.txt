@@ -1,0 +1,209 @@
+RH_MIGRATION_2026 — MASTER PROJECT CHARTER (PORTFOLIO + BASELINE + GOVERNANCE)
+
+SCOPE + INTENT (READ THIS AS BINDING)
+This project is not a “cute GitHub project.” The goal is to demonstrate that I can run a controlled migration + automation program with operations discipline.
+
+Core purpose: build a mini change-management system with:
+- Phase-gated work (DryRun → Execute → Verify)
+- Provenance preservation (trash policy, manifests, no delete)
+- Rollback artifacts for risky ops (e.g., registry changes)
+- Deterministic structure (phase folders + predictable paths)
+- Audit trail (timestamped run folders, diffs, manifests)
+
+Non-negotiable: Proof pack outputs must ship.
+A clean folder hierarchy without evidence is failure.
+
+PROJECT ROOTS (AUTHORITATIVE)
+PROJECT ROOT (ROOT):
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\
+
+CANONICAL SYSTEM ROOT (CANONICAL):
+C:\RH\
+
+HARD EXCLUSION (never touch, never enumerate unless I explicitly instruct it):
+C:\RH\VAULT_NEVER_SYNC\
+
+SINGLE SOURCE OF TRUTH FILES (READ FIRST, EVERY SESSION)
+Read and bind to these files before doing anything else:
+- ROOT\codex\refrence.txt
+- ROOT\codex\engine_run.txt
+- ROOT\codex\Codex_Context_02-07-2026.txt
+- ROOT\codex\MASTER_AGENT_FULL_PLAN_02-07-2026.txt
+- ROOT\codex\PHASE_STATUS.md
+- ROOT\codex\BASELINE_DECLARATION_02-07-2026.md
+- ROOT\codex\BASELINE_EVIDENCE_INDEX.md
+
+If any conflicts exist among these files or with this charter:
+- STOP
+- Quote the conflicting lines
+- Propose the smallest possible resolution
+- Do not guess, do not silently “standardize”
+
+CANONICAL DIRECTORY STRUCTURE (DO NOT DEVIATE)
+ROOT must contain ONLY:
+- phase_01\
+- phase_02\
+- phase_03\
+- phase_04\
+- phase_05\
+- phase_06\
+- phase_07\
+- phase_08\
+- phase_09\
+- phase_10\
+- phase_11\
+- codex\
+- trash\
+
+Each phase_XX must contain at minimum:
+- scripts\
+- runs\
+- docs\
+- artifacts\
+Optional, only when needed:
+- research\
+- legacy_engine\
+- patch_backups\
+
+Baseline/legacy “engine” or “runs” concepts are NOT top-level canonical.
+If legacy engine/runs exist, they are historical evidence and must remain either:
+- in trash provenance, or
+- phase-scoped legacy_* folders
+
+FILENAME STANDARD (GLOBAL)
+All created files must follow:
+name_MM-DD-YYYY.ext  (name first, date last)
+If timestamp required:
+name_MM-DD-YYYY__HHMMSS.ext
+No ISO dates. No date-first filenames.
+
+EXECUTION GOVERNANCE (GLOBAL)
+Default operating mode is DRY RUN.
+- In DRY RUN: do not execute scripts; do not run system-modifying commands.
+- Only execute when I explicitly say: “EXECUTE <phase/task>”
+- If a command would change files/registry/system state and I did not explicitly authorize execution, STOP.
+
+NO DELETE (GLOBAL, ABSOLUTE)
+Deletion is forbidden.
+- Never call delete/remove operations (e.g., Remove-Item).
+- If something must be removed from active locations:
+  MOVE it into project trash with timestamp.
+- Trash destination must be under:
+  ROOT\trash\<category>\<MM-DD-YYYY__HHMMSS>\...
+
+TRASH + DUPLICATE POLICY (DETERMINISTIC)
+- Never overwrite existing files.
+- If destination exists, append deterministic suffix:
+  (dupe-0001), (dupe-0002), etc.
+- Always produce a manifest CSV for any move/copy batch:
+  source_path, dest_path, reason, timestamp, hash(optional)
+
+BASELINE GOVERNANCE (PAUSE CORRECTLY, DO NOT REWRITE HISTORY)
+Baseline is historical truth, including wrong turns, refactors, and outdated models.
+- Do not “clean up” baseline artifacts retroactively.
+- Do not rewrite baseline docs to make them “look clean.”
+- All corrections must be additive via addenda that link to baseline evidence.
+
+If baseline anchor files are missing:
+- Create them at EXACT paths using exact template text I provide (verbatim, no paraphrase).
+- Do not reorganize baseline artifacts as part of creating baseline anchors.
+
+PHASE STATUS GOVERNANCE (NO INFERENCE)
+Phase completion is authoritative ONLY from:
+ROOT\codex\PHASE_STATUS.md
+
+Rules:
+- Do not infer completion from prose, logs, or “seems done.”
+- If PHASE_STATUS conflicts with observed evidence:
+  STOP and report the conflict. Do not “fix” silently.
+- Allowed phase states (use these exact labels):
+  - NOT STARTED
+  - IN PROGRESS
+  - COMPLETE_PENDING_PROOF
+  - COMPLETE
+  - COMPLETE (CLOSED)
+
+Retrospective proof is permitted:
+- If a phase was executed earlier but lacks PURPOSE/PROOF docs, mark:
+  COMPLETE_PENDING_PROOF
+until the required deliverables exist.
+
+PER-PHASE COMPLETION REQUIREMENTS (APPLIES TO PHASES 01–11)
+A phase is NOT COMPLETE unless it has ALL THREE:
+
+1) One-page story (docs)
+   Must exist at:
+   ROOT\phase_XX\docs\PHASE_XX_PURPOSE.md
+   Must include:
+   - What problem Phase XX solved
+   - What could have gone wrong
+   - What changed
+   - How it was verified
+   - How to roll it back (if applicable)
+   - Links to the specific run folders / manifests used
+
+2) Proof artifact (artifacts)
+   Must exist at:
+   ROOT\phase_XX\artifacts\PHASE_XX_PROOF.md
+   Must reference concrete evidence:
+   - run folder paths (exact)
+   - logs (exact filenames)
+   - manifests (plan.csv/results.csv/diff.md, etc.)
+   - screenshots/snippets if applicable (paths)
+   - rollback artifact locations (paths)
+
+3) Runnable component (scripts)
+   Must exist under:
+   ROOT\phase_XX\scripts\
+   Minimum acceptable:
+   - verify-only script OR
+   - dry-run generator OR
+   - inventory baseline generator
+   A phase is not “done” without a runnable component, even if it only verifies.
+
+PROOF PACK PIPELINE (PHASE 09-ISH, START EARLY)
+Maintain a proof-pack pipeline at:
+C:\RH\OPS\PROOF_PACKS\RH_MIGRATION_2026\
+
+Default behavior:
+- Create skeleton only unless explicitly instructed to copy artifacts.
+- Do not bulk-dump files into the proof pack.
+
+Proof pack must include:
+- README.md (what this project is, why it matters)
+- PHASE_SUMMARY.md (phase status table + links)
+- EVIDENCE\phase_XX\ (key screenshots/snippets/log excerpts)
+- SCRIPTS\ (sanitized copies)
+- TIMELINE.md (what happened when, with run IDs and paths)
+
+Sanitization rule:
+- Never include secrets/tokens/credentials.
+- Avoid personal identifiers when possible.
+- If uncertain, STOP and ask rather than copying raw data.
+
+REALITY CHECK (ROI)
+The goal is NOT to fill every phase folder with busywork.
+The goal is to ship 3–5 phases with undeniable evidence + clean packaging.
+Phase 4 + Phase 6 + Phase 7 (+ maybe Phase 3 inventory) is already portfolio-grade even if later phases remain planned.
+
+ACKNOWLEDGMENT REQUIREMENT (RESPOND IN THIS FORMAT, THEN STOP)
+After reading the source-of-truth files, acknowledge by outputting:
+
+A) Baseline:
+- Baseline cutoff date and meaning
+- Confirmation baseline artifacts will not be rewritten
+
+B) Governance:
+- Confirm no-delete + trash-only + deterministic dupe handling
+- Confirm DryRun default + explicit EXECUTE requirement
+- Confirm PHASE_STATUS is authoritative (no inference)
+
+C) Portfolio/Proof:
+- Confirm the 3 required deliverables per phase
+- Confirm proof-pack pipeline behavior (skeleton-only unless authorized)
+
+D) Current Status Snapshot (from PHASE_STATUS.md only):
+- List phases as COMPLETE / COMPLETE_PENDING_PROOF / IN PROGRESS / NOT STARTED
+- Identify the next allowed work items without executing anything
+
+Then STOP. Do not take any action.

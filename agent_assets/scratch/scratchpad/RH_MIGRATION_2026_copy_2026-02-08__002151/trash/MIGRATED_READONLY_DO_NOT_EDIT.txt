@@ -1,0 +1,6 @@
+MIGRATED_READONLY_DO_NOT_EDIT
+Trash is provenance archive.
+Canonical lives under phase folders.
+Do not execute scripts from trash.
+Canonical execution locations are only:
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\phase_XX\scripts\

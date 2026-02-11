@@ -1,0 +1,102 @@
+C:RH/OPS/
+├─ SYSTEM/
+│  ├─ obsidian/
+│  └─ ai_context/
+│
+├─ CAPTURE/                      # tired-day dump (sort later, don’t lose work)
+│  ├─ screenshots/
+│  ├─ logs/
+│  ├─ exports/
+│  └─ tmp/
+│
+├─ PROOF_PACKS/                  # recruiter-proof outputs live here
+│  ├─ SOC/
+│  │  ├─ PP-000_DRAFTS/
+│  │  ├─ PP-001_WAZUH_BASELINE/
+│  │  │  ├─ README.md
+│  │  │  ├─ DETECTION/
+│  │  │  ├─ PLAYBOOK/
+│  │  │  ├─ EVIDENCE/
+│  │  │  │  └─ _INBOX/          # quick drop if you’re exhausted
+│  │  │  └─ AUTOMATION/         # optional
+│  │  ├─ PP-002_SPLUNK_FAILED_LOGON/
+│  │  │  ├─ README.md
+│  │  │  ├─ DETECTION/
+│  │  │  ├─ PLAYBOOK/
+│  │  │  ├─ EVIDENCE/
+│  │  │  │  └─ _INBOX/
+│  │  │  └─ AUTOMATION/
+│  │  └─ PP-003_ENDPOINT_TRIAGE/
+│  │     ├─ README.md
+│  │     ├─ DETECTION/
+│  │     ├─ PLAYBOOK/
+│  │     ├─ EVIDENCE/
+│  │     │  └─ _INBOX/
+│  │     └─ AUTOMATION/
+│  │
+│  ├─ DETECTION_ENGINEERING/
+│  │  ├─ PP-000_DRAFTS/
+│  │  └─ PP-0XX_<OUTCOME>/
+│  │     ├─ README.md
+│  │     ├─ DETECTION/
+│  │     ├─ EVIDENCE/
+│  │     │  └─ _INBOX/
+│  │     └─ AUTOMATION/
+│  │
+│  ├─ INCIDENT_RESPONSE/
+│  │  ├─ PP-000_DRAFTS/
+│  │  └─ PP-0XX_<OUTCOME>/
+│  │     ├─ README.md
+│  │     ├─ PLAYBOOK/
+│  │     ├─ EVIDENCE/
+│  │     │  └─ _INBOX/
+│  │     └─ NOTES.md            # optional
+│  │
+│  ├─ SECURITY_AUTOMATION/
+│  │  ├─ PP-000_DRAFTS/
+│  │  └─ PP-0XX_<OUTCOME>/
+│  │     ├─ README.md
+│  │     ├─ AUTOMATION/
+│  │     ├─ EVIDENCE/
+│  │     │  └─ _INBOX/
+│  │     └─ RUNBOOK.md          # optional but nice
+│  │
+│  └─ NETWORK/
+│     ├─ PP-000_DRAFTS/
+│     └─ PP-0XX_<OUTCOME>/
+│        ├─ README.md
+│        ├─ DETECTION/
+│        ├─ EVIDENCE/
+│        │  └─ _INBOX/
+│        └─ AUTOMATION/
+│
+├─ BUILD/                        # tools, code, pipelines (allowed to be messy)
+│  ├─ src/
+│  ├─ scripts/
+│  ├─ security_automation/
+│  │  ├─ configs/
+│  │  ├─ pipelines/
+│  │  └─ libs/
+│  └─ lab_infra/
+│
+├─ RESEARCH/                     # thinking, learning, experiments (not proof)
+│  ├─ notes/
+│  ├─ ai/
+│  ├─ experiments/
+│  ├─ operators_manual/
+│  └─ job_market/
+│
+├─ PUBLISH/                     # publishing surfaces
+│  ├─ website/
+│  ├─ portfolio_upload/
+│  └─ case_studies/
+│
+├─ _QUARANTINE/                  # cursed / unstable / nested repos / test junk
+│  ├─ nested_repos/
+│  ├─ github_bits/
+│  └─ copilot_tests/
+│
+└─ _ARCHIVE/                     # read-only forever (snapshots, old packs)
+   ├─ old_repo_snapshot/
+   ├─ day1_audit_pack/
+   └─ pack_v1/

@@ -1,0 +1,7 @@
+C:\2026\LIFE\Admin\Documents\PowerShell\Modules\z\1.1.14\.git
+C:\2026\OPS\_QUARANTINE\nested_repos\_QUARANTINE_NESTED_REPOS_20260125\HawkinsOperations\.git
+C:\2026\OPS\_QUARANTINE\nested_repos\_QUARANTINE_NESTED_REPOS_20260125\HawkinsOperations_BACKUP_before_v1.0.1\.git
+C:\2026\OPSOLD\GITHUB\hawkinsops-repo-upgrade\.git
+C:\2026\OPSOLD\GITHUB\hawkinsops-soc-content\.git
+C:\2026\OPSOLD\Security\ho-lm-02\CLOUD_CLEANUPS\hawkinsops-soc-content\.git
+C:\2026\OPSOLD\Security\ho-lm-02\CLOUD_CLEANUPS\hawkins_ops\hawkinsops-site\.git

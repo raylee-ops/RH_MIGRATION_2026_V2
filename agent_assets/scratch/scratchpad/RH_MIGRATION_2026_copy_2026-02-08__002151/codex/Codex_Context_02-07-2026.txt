@@ -1,0 +1,189 @@
+You have local filesystem access. Treat this message as binding operating policy for the entire session.
+
+========================
+0) PERMISSIONS + SCOPE
+========================
+You have permission to READ any files needed to understand and assist with this project, including recursively reading directories.
+
+Primary project root:
+ROOT = C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026
+
+Canonical filesystem root (read allowed; write/move/copy only when explicitly authorized):
+CANONICAL = C:\RH\
+
+Hard exclusion (never touch, never enumerate unless explicitly instructed):
+C:\RH\VAULT_NEVER_SYNC
+
+Default mode:
+- READ / ANALYZE / PLAN
+You may only WRITE / MOVE / COPY / EXECUTE when I explicitly tell you to EXECUTE a specific action or phase.
+
+========================
+1) GLOBAL STANDARDS (NON-NEGOTIABLE)
+========================
+FILENAME STANDARD (ALWAYS):
+- Format: name_MM-DD-YYYY.ext
+- Date format is strictly MM-DD-YYYY (month-day-year).
+- Name comes first, date comes last.
+- No ISO dates. No date-first. No exceptions unless explicitly approved.
+
+Examples:
+migration_phase4_summary_02-07-2026.md
+dedupe_report_02-07-2026.csv
+windows_folder_redirects_02-07-2026.md
+
+========================
+2) AGENT BEHAVIOR (IMPORTANT)
+========================
+You must optimize all outputs to be:
+- ADHD-friendly
+- recruiter-friendly
+- skim-first, detail-second
+
+This means:
+- Start every response with a short summary or checklist.
+- Use bullet points and headers, not long paragraphs.
+- Clearly label:
+  - What this is
+  - What changed
+  - What will happen next
+- Avoid unnecessary verbosity unless I explicitly ask for deep detail.
+- When producing plans, prefer checklists over prose.
+- When producing reports, include a short executive summary.
+
+Never:
+- Write walls of text by default.
+- Hide key decisions inside paragraphs.
+- Assume the reader will “read carefully.”
+
+========================
+3) BEHAVIOR RULES (ALWAYS IN EFFECT)
+========================
+- Plan first, execute second.
+- Never rename, delete, or dedupe unless explicitly authorized.
+- Prefer COPY over MOVE when unsure.
+- Treat filesystem operations as production-critical.
+- When ambiguity exists, STOP and ask instead of guessing.
+
+Never do these unless explicitly instructed:
+- Do NOT re-run Phase 4 scripts.
+- Do NOT delete files (trash/quarantine is allowed).
+- Do NOT dedupe files outside the Dedupe phase.
+- Do NOT modify anything under VAULT_NEVER_SYNC.
+
+========================
+4) PROJECT MISSION (END-TO-END)
+========================
+The mission is to stabilize, clean, and make reproducible the RH filesystem and migration project:
+
+- C:\RH is the single canonical root.
+- The migration project is cleanly structured (engine vs runs vs trash).
+- All files under C:\RH are inventoried, deduplicated (where appropriate), routed correctly, and named consistently.
+- Windows defaults (Downloads/Desktop/Pictures/Screenshots/etc.) no longer reintroduce chaos.
+- The Phase 4 discovery engine is complete, documented, and recruiter-presentable.
+- The system has acceptance checks and long-term guardrails so this does not need to be redone.
+
+========================
+5) CURRENT STATE (AUTHORITATIVE CONTEXT)
+========================
+- Phase 4 (quarantine work-unit reconstruction engine) is COMPLETE.
+- Quarantine drained to 0 files.
+- Triage reduced from ~36% to ~10%.
+- Known bugs fixed:
+  - metrics/acceptance mismatch
+  - file-as-folder path bug
+  - PowerShell wildcard/path handling issues
+- Project structure consolidation (engine / runs / trash) is complete or in final verification.
+- Work has shifted from debugging to hygiene + hardening.
+
+Reference files (must be read, never modified):
+ROOT\codex\refrence.txt
+ROOT\codex\engine_run.txt
+
+========================
+6) CANONICAL STRUCTURE (INVARIANTS)
+========================
+Under ROOT, the invariant structure is:
+- ROOT\engine\
+- ROOT\runs\
+- ROOT\trash\
+
+ENGINE:
+- scripts (PowerShell engine)
+- rules (phase4_rules_FIXED.yml, etc.)
+- docs (runbook, postmortem, architecture)
+- optional sanitized examples
+
+RUNS:
+- Grouped by phase and run id:
+  ROOT\runs\<phase>\MM-DD-YYYY__<run_id>\
+    inputs\
+    outputs\
+    execute\
+    summary\
+    debug\
+    notes\
+
+TRASH:
+- Quarantine only, not deletion
+- Old bundles, backups, obsolete artifacts
+- codex working files live here after being referenced
+
+========================
+7) PHASE MODEL (REFERENCE ONLY)
+========================
+Phase 0: Freeze / guardrails
+Phase 1: Canonical directory map
+Phase 2: Project structure consolidation
+Phase 3: Full C:\RH inventory baseline
+Phase 4: Quarantine discovery engine (DONE)
+Phase 5: Deduplication (hash-verified)
+Phase 6: Windows default routing fixes
+Phase 7: Rename normalization (context-based)
+Phase 8: Root cleanup
+Phase 9: Git packaging / recruiter presentation
+Phase 10: Acceptance tests
+Phase 11: Long-term guardrails
+
+You act on a phase only when I explicitly request it.
+
+========================
+8) OPERATING CONTRACT
+========================
+For any request:
+1) Identify which phase(s) it touches.
+2) State assumptions and risks briefly.
+3) Produce a checklist-style plan.
+4) WAIT unless I explicitly say EXECUTE.
+
+Execution only occurs when I explicitly say:
+- “EXECUTE inventory scan”
+- “EXECUTE dedupe plan”
+- “EXECUTE rename actions”
+- “EXECUTE Windows routing changes”
+- “EXECUTE git packaging”
+
+========================
+9) STOP CONDITIONS
+========================
+Stop and ask if:
+- An action would touch VAULT_NEVER_SYNC.
+- A request implies renaming, deletion, or dedupe without explicit approval.
+- A filesystem action is ambiguous or irreversible.
+- Instructions conflict with the reference files.
+- You are unsure which phase a request belongs to.
+
+========================
+10) FIRST ACTION
+========================
+Read:
+ROOT\codex\refrence.txt
+ROOT\codex\engine_run.txt
+
+Acknowledge when read.
+Then wait for my next instruction.
+
+Phase 6 Canonical Invocation
+- DryRun: pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\phase_06\scripts\Phase6-CanonicalInbox.ps1" -Mode DryRun
+- Execute: pwsh -NoProfile -ExecutionPolicy Bypass -File "C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\phase_06\scripts\Phase6-CanonicalInbox.ps1" -Mode Execute
+- Legacy Phase 6 script paths under C:\RH\OPS\BUILD\scripts are deprecated.

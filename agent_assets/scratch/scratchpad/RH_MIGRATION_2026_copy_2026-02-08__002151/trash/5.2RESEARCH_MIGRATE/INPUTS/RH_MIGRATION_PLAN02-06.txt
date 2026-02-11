@@ -1,0 +1,508 @@
+THE RH MIGRATION PLAN — FINAL (DIRECTORY-FIXED)
+One Document. All Decisions. All Phases. All Fixes. (Now actually consistent.)
+
+Operator: Raylee / HawkinsOps
+Date: 2026-02-06
+Machine: HO-WE-01 (Windows 11)
+Tools: Claude Code CLI, Codex, PowerShell 7
+Scope: Everything personal on C:\ → C:\RH\ or C:\_ARCHIVE\ (backups to C:\_BACKUP\)
+
+SECTION A: THE MENTAL MODEL
+The Problem (one paragraph, no fluff)
+
+You have ~60,000 personal files scattered across 5+ competing root structures on C:. Your real work (detections, playbooks, automation, proof builds) exists as scattered artifacts instead of coherent work units. A Wazuh rule lives in one folder, the screenshot proving it fired lives in another, the playbook in a third. You can’t find, prove, or build on your own work. Every cleanup attempt generates more metadata without finishing the migration, creating a loop. This plan breaks the loop by making all decisions up front, using automated discovery to cluster files into work units, requiring human review before any move, and installing guardrails so chaos can’t regenerate.
+
+Core Principle: Work Units, Not File Types
+
+Wrong approach: “Put all .yml here, all .md there.”
+Right approach: “Everything related to my Wazuh baseline work goes into one proof pack.”
+
+A work unit = a cluster of files that belong together because they’re part of the same thing you did. Detection rule + playbook + screenshots + deployment notes = one proof pack.
+
+Operating Model for Every Phase
+
+Every destructive operation follows this cycle:
+
+PLAN → DRY RUN → HUMAN REVIEW → EXECUTE → VERIFY
+
+
+No exceptions. Models generate scripts and reports. You approve and run them. Nothing moves without a log.
+
+Claude Code / Codex Responsibilities vs Yours
+
+Claude Code does:
+
+Generate PowerShell scripts (idempotent, logged)
+
+Generate inventory scans and cluster reports
+
+Generate move plans (CSV)
+
+Generate verification scripts
+
+Help review diffs and logs
+
+You do:
+
+Approve move-plan CSVs before execution
+
+Run execution scripts
+
+Review secrets-flagged files and move to VAULT manually
+
+Resolve any git repo divergence
+
+Final acceptance sign-off
+
+SECTION B: YOUR UNIVERSE (before and after)
+What Exists Now (example reality snapshot)
+C:\
+├── 2026\                    ← Primary world. Messy.
+│   ├── OPS\                 ← newer canonical (sparse)
+│   │   └── OPS\             ← ACCIDENTAL NESTING
+│   ├── OPSOLD\              ← WHERE THE REAL WORK IS
+│   │   ├── GITHUB\          ← git repos (duplicated)
+│   │   ├── Security\        ← cloud cleanup copies (duplication)
+│   │   ├── SOC\             ← SOC build content
+│   │   ├── Security_Automation\
+│   │   ├── _MIGRATE\        ← old attempt (incomplete)
+│   │   ├── AI\, Notes\, Portfolio\  ← unknown content
+│   ├── LIFE\                ← personal/admin/modules
+│   ├── VAULT\               ← sensitive material
+│   ├── _INBOX\              ← screenshots/downloads/AI buffer
+│   ├── SYSTEM\              ← logs/templates/etc
+│   ├── MIND\                ← personal reflection
+│   ├── .obsidian\, .claude\ ← configs (currently living here)
+│   ├── nul                  ← reserved name. must die.
+│   └── loose proofpack_*    ← loose proof artifacts
+│
+├── RH\                      ← partial, earlier attempt
+├── omfg_mega_archive\       ← 55K files. DO NOT TOUCH YET.
+├── iCloudDrive\             ← syncing stuff you probably didn’t intend to sync
+├── printer-fix\             ← debris
+├── wazuh-agent              ← loose file
+├── Temp\, tmp\              ← rogue temp folders
+
+What It Looks Like After (AUTHORITATIVE)
+ONLY these top-level roots
+C:\
+├── RH\
+│   ├── OPS\
+│   ├── LIFE\
+│   └── VAULT\
+├── _ARCHIVE\
+└── _BACKUP\
+
+OPS (exact structure you locked in)
+
+No CAPTURE. No OPS\_ARCHIVE.
+Intake is _INBOX. Dumps go to _INBOX\temp_sort or _INBOX\exports.
+Repos live in BUILD\src\repos.
+
+C:\RH\OPS\
+├── _INBOX\
+│   ├── downloads\
+│   ├── screenshots\
+│   ├── exports\
+│   ├── scratchpad\
+│   ├── imports\
+│   └── temp_sort\
+│
+├── _QUARANTINE\
+│   ├── nested_repos\
+│   ├── github_bits\
+│   └── copilot_tests\
+│
+├── BUILD\
+│   ├── src\
+│   │   └── repos\
+│   ├── scripts\
+│   ├── security_automation\
+│   │   ├── configs\
+│   │   ├── pipelines\
+│   │   └── libs\
+│   └── lab_infra\
+│
+├── PROOF_PACKS\
+│   ├── _TEMPLATES\
+│   │   ├── TEMPLATE_DETECTION_PACK\
+│   │   ├── TEMPLATE_IR_PACK\
+│   │   └── TEMPLATE_AUTOMATION_PACK\
+│   ├── SOC\
+│   │   ├── PP-000_DRAFTS\
+│   │   ├── PP-001_WAZUH_BASELINE\
+│   │   ├── PP-002_SPLUNK_FAILED_LOGON\
+│   │   └── PP-003_ENDPOINT_TRIAGE\
+│   ├── DETECTION_ENGINEERING\PP-000_DRAFTS\
+│   ├── INCIDENT_RESPONSE\PP-000_DRAFTS\
+│   ├── SECURITY_AUTOMATION\PP-000_DRAFTS\
+│   └── NETWORK\PP-000_DRAFTS\
+│
+├── PUBLISH\
+│   ├── website\
+│   ├── portfolio_upload\
+│   └── case_studies\
+│
+├── RESEARCH\
+│   ├── notes\
+│   ├── ai\
+│   ├── experiments\
+│   ├── operators_manual\
+│   └── job_market\
+│
+└── SYSTEM\
+    ├── DATA\
+    │   ├── logs\
+    │   ├── audits\
+    │   ├── inventories\
+    │   ├── reports\
+    │   └── runs\
+    ├── migrations\
+    │   └── RH_MIGRATION_2026\
+    │       └── logs\
+    ├── configs\
+    └── templates\
+
+LIFE (minimal but real)
+C:\RH\LIFE\
+├── Personal\
+├── Admin\
+└── MIND\
+
+VAULT (minimal + safe)
+C:\RH\VAULT\
+├── _SECRETS_TRIAGE\
+└── _DO_NOT_SYNC\
+
+ARCHIVE + BACKUP
+C:\_ARCHIVE\        ← frozen, read-mostly
+C:\_BACKUP\         ← backup targets
+
+SECTION C: ALL DECISIONS (locked, never revisit)
+#	Decision	Answer	Rationale
+D01	Canonical root	C:\RH\	Stated, confirmed, locked.
+D02	Only top-level roots	C:\RH\, C:\_ARCHIVE\, C:\_BACKUP\	No extra junk.
+D03	Old C:\2026	Rename to C:\_ARCHIVE\2026_OLD_ROOT after migration	Frozen snapshot.
+D04	Old C:\RH attempt	Move to C:\_ARCHIVE\RH_EMOJI_ATTEMPT\	Preserve, don’t mix.
+D05	Git repos destination	C:\RH\OPS\BUILD\src\repos\	Matches canonical OPS tree.
+D06	C:\ root junk	Quarantine first, delete after burn-in	Avoid “oops.”
+D07	nul file	Delete (CMD admin)	Reserved name hazard.
+D08	_INBOX policy	2-week max residency	Loading dock, not storage.
+D09	Secrets handling	FLAG ONLY; human moves to C:\RH\VAULT\_SECRETS_TRIAGE\	Never auto-move credentials.
+D10	Screenshots handling	Sweep job → C:\RH\INBOX\screenshots\	No CAPTURE; robust approach.
+D11	omfg_mega_archive	Move to C:\_ARCHIVE\omfg_mega_archive\, audit later	Separate project.
+D12	iCloudDrive	Investigate and stop/limit	Prevent cloud leakage.
+D13	Dotfolders at RH root	NONE	Keep RH clean; configs live inside vault folders.
+Git Repo Canonical Selection Rule (deterministic)
+
+For any repo with multiple copies:
+
+Prefer the copy with a working remote AND most recent commit
+
+If remotes differ → prefer the one matching your intended GitHub account
+
+If one copy has uncommitted work → commit or stash BEFORE moving
+
+If histories diverge → DO NOT CHOOSE. Reconcile first. STOP.
+
+Repo Map (directory-correct)
+Repo	Canonical Source	Destination	Duplicates →
+hawkinsops-repo-upgrade	C:\2026\OPSOLD\GITHUB\...	C:\RH\OPS\BUILD\src\repos\	archive dupes
+hawkinsops-soc-content	C:\2026\OPSOLD\GITHUB\...	C:\RH\OPS\BUILD\src\repos\	C:\_ARCHIVE\dup_repos\
+hawkinsops-site	C:\2026\OPSOLD\Security\...	C:\RH\OPS\BUILD\src\repos\	archive dupes
+quarantined repos	wherever they are now	C:\RH\OPS\_QUARANTINE\... (temporary)	final: C:\_ARCHIVE\quarantined_repos\
+OPSOLD Subfolder Map (directory-correct)
+Subfolder	Destination	Notes
+GITHUB\	move repos to C:\RH\OPS\BUILD\src\repos\	Phase 2
+Security\	archive dup repos; remainder → discovery engine	cloud cleanup copies
+SOC\	discovery → PROOF_PACKS or RESEARCH	build content
+Security_Automation\	C:\RH\OPS\BUILD\security_automation\...	configs/pipelines/libs
+_MIGRATE\	discovery pass	old attempt
+AI\	C:\RH\OPS\RESEARCH\ai\	research
+Notes\	C:\RH\OPS\RESEARCH\notes\ or discovery	depends
+Portfolio\	C:\RH\OPS\PUBLISH\...	publishable
+Non-Canonical C:\2026\ Folder Map (directory-correct)
+Folder	Destination
+_INBOX\Screenshots	C:\RH\INBOX\screenshots\
+_INBOX\Downloads	C:\RH\INBOX\downloads\ then triage
+_INBOX\AI_Buffer	C:\RH\INBOX\exports\
+_INBOX\Temp_Sort	C:\RH\INBOX\temp_sort\
+SYSTEM\	C:\RH\OPS\SYSTEM\ (merge)
+MIND\	C:\RH\LIFE\MIND\
+OPS\OPS\ (nested junk)	C:\_ARCHIVE\scan_junk\
+loose scripts (like ops-restructure*.ps1)	C:\RH\OPS\BUILD\scripts\
+loose proofpack_*	C:\RH\OPS\PROOF_PACKS\ (or SOC\PP-000_DRAFTS\ if unknown)
+.obsidian, .claude	NOT at RH root. Move into the vault you actually use (see Phase 6).
+CLAUDE_AUDIT_02-04	C:\RH\OPS\SYSTEM\DATA\audits\
+SECTION D: THE DISCOVERY ENGINE (Phase 4 detail)
+
+This is the part that makes the plan different from “I’ll sort it later” fantasy.
+
+D1: Inventory Scan
+
+Produces FULL_INVENTORY.csv:
+
+Full path, extension, size, modified date
+
+Content type (detection/script/doc/evidence/config/media/unknown)
+
+SHA256 hash (dedup)
+
+Content preview for text files UNLESS secrets-flagged
+
+Parent folder context
+
+Git repo membership flag
+
+Outputs go to:
+C:\RH\OPS\SYSTEM\DATA\inventories\ and/or C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\
+
+D2: Deduplication Analysis
+
+Output: DEDUP_REPORT.csv
+
+D3: Work Unit Discovery (core)
+
+Clustering logic:
+
+Folder-based clusters
+
+Anchor artifacts (Wazuh/Sigma rules, playbooks, deployment summaries, proofpack names)
+
+Naming pattern matching (PP-###, prefixes, timestampsФ)
+
+Neighbor context (screenshots/log proximity)
+
+Orphan detection → C:\RH\INBOX\imports\
+
+Outputs:
+
+CLUSTER_REPORT.md
+
+CLUSTER_MOVE_PLAN.csv
+
+D4: Secret Scan (FLAG ONLY)
+
+Output: SECRETS_FLAGGED.csv (metadata only, no previews)
+
+D5: Human Review Gate
+
+You review:
+
+CLUSTER_REPORT.md
+
+CLUSTER_MOVE_PLAN.csv
+
+DEDUP_REPORT.csv
+
+SECRETS_FLAGGED.csv
+
+Then DRY RUN → EXECUTE.
+
+SECTION E: EXECUTION PHASES
+PHASE 0: SNAPSHOT + SAFETY NET (15 min)
+#	Task	Done?
+0.1	Create System Restore Point	[ ]
+0.2	Export recursive inventory of C:\2026\ to C:\_ARCHIVE\SNAPSHOTS\2026-02-06_pre_RH\	[ ]
+0.3	Verify disk space	[ ]
+0.4	If external drive: backup C:\2026\OPSOLD and C:\2026\OPS	[ ]
+0.5	Create migration ledger at C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\MIGRATION_LEDGER.md	[ ]
+PHASE 1: CREATE THE NEW WORLD (10 min)
+#	Task	Done?
+1.1	Create full C:\RH\ directory tree (per authoritative layout)	[ ]
+1.2	Create C:\_ARCHIVE\ and C:\_BACKUP\	[ ]
+1.3	Create C:\_ARCHIVE\SNAPSHOTS\2026-02-06_pre_RH\	[ ]
+1.4	Create C:\_ARCHIVE\root_quarantine\2026-02-06\	[ ]
+1.5	Move old C:\RH emoji content → C:\_ARCHIVE\RH_EMOJI_ATTEMPT\	[ ]
+1.6	Delete nul file (CMD admin: del "\\?\C:\2026\nul")	[ ]
+1.7	Ensure C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\logs\ exists	[ ]
+
+Note: No .claude at C:\RH\. If you want Claude Code policy docs, store them under C:\RH\OPS\SYSTEM\configs\ or C:\RH\OPS\SYSTEM\templates\.
+
+PHASE 2: GIT REPOS (30 min — HIGH RISK)
+
+Repos are atomic. Verify first. Move as a unit.
+
+#	Task	Done?
+2.1	For each repo: git remote -v, git status --short, git log --oneline -3	[ ]
+2.2	HARD STOP if dirty/unpushed	[ ]
+2.3	Compare git rev-parse HEAD across duplicates	[ ]
+2.4	If histories diverge: reconcile BEFORE moving	[ ]
+2.5	Apply deterministic selection rule	[ ]
+2.6	Move canonical repos to C:\RH\OPS\BUILD\src\repos\	[ ]
+2.7	Move duplicates to C:\_ARCHIVE\dup_repos\	[ ]
+2.8	Verify git status in new location	[ ]
+2.9	Log moves to MIGRATION_LEDGER	[ ]
+PHASE 3: CLEAN 1:1 MOVES (30 min — LOW RISK)
+
+Use /XJ with robocopy to avoid junction loops.
+
+#	Task	Before Count	After Count	Match?
+3.1	C:\2026\LIFE\Personal → C:\RH\LIFE\Personal\	___	___	[ ]
+3.2	C:\2026\LIFE\Admin → C:\RH\LIFE\Admin\	___	___	[ ]
+3.3	C:\2026\LIFE\MIND or root C:\2026\MIND → C:\RH\LIFE\MIND\	___	___	[ ]
+3.4	C:\2026\VAULT\* → C:\RH\VAULT\	___	___	[ ]
+3.5	C:\2026\OPS\PROOF_PACKS\* → C:\RH\OPS\PROOF_PACKS\	___	___	[ ]
+3.6	C:\2026\OPS\RESEARCH\* → C:\RH\OPS\RESEARCH\	___	___	[ ]
+3.7	C:\2026\OPS\PUBLISH\* → C:\RH\OPS\PUBLISH\	___	___	[ ]
+3.8	C:\2026\OPS\SYSTEM\* → C:\RH\OPS\SYSTEM\	___	___	[ ]
+3.9	_INBOX\Screenshots → C:\RH\INBOX\screenshots\	___	___	[ ]
+3.10	_INBOX\Downloads → C:\RH\INBOX\downloads\	___	___	[ ]
+3.11	_INBOX\AI_Buffer → C:\RH\INBOX\exports\	___	___	[ ]
+3.12	_INBOX\Temp_Sort → C:\RH\INBOX\temp_sort\	___	___	[ ]
+3.13	SYSTEM\* (at C:\2026 root) → merge into C:\RH\OPS\SYSTEM\	___	___	[ ]
+3.14	OPS\OPS nested junk → C:\_ARCHIVE\scan_junk\	___	___	[ ]
+3.15	CLAUDE_AUDIT_02-04 → C:\RH\OPS\SYSTEM\DATA\audits\	___	___	[ ]
+3.16	loose proofpack_* → C:\RH\OPS\PROOF_PACKS\	___	___	[ ]
+3.17	loose scripts (*.ps1) → C:\RH\OPS\BUILD\scripts\	___	___	[ ]
+3.18	Log ALL moves to MIGRATION_LEDGER			[ ]
+
+Dotfolders rule:
+
+No .obsidian / .claude at C:\RH\.
+
+If you use Obsidian, pick a vault folder like C:\RH\LIFE\MIND\ or C:\RH\OPS\RESEARCH\notes\ and let .obsidian live inside that vault folder.
+
+PHASE 4: DISCOVERY + SORT OF OPSOLD (1–2 hours)
+#	Task	Done?
+4.1	Inventory scan remaining OPSOLD → FULL_INVENTORY.csv	[ ]
+4.2	Dedup analysis → DEDUP_REPORT.csv	[ ]
+4.3	Work-unit clustering → CLUSTER_REPORT.md + CLUSTER_MOVE_PLAN.csv	[ ]
+4.4	Secret scan → SECRETS_FLAGGED.csv (metadata only)	[ ]
+4.5	HUMAN REVIEW: clusters + move plan + secrets	[ ]
+4.6	Adjust move plan CSV	[ ]
+4.7	DRY RUN (log only)	[ ]
+4.8	Review dry-run log	[ ]
+4.9	EXECUTE	[ ]
+4.10	VERIFY counts per cluster	[ ]
+4.11	Orphans → C:\RH\INBOX\imports\	[ ]
+4.12	Confirm OPSOLD empty/near-empty	[ ]
+4.13	Remove OPSOLD shell only if verified empty	[ ]
+4.14	Move confirmed secrets → C:\RH\VAULT\_SECRETS_TRIAGE\	[ ]
+4.15	Log to MIGRATION_LEDGER	[ ]
+
+All discovery artifacts saved to:
+C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\
+Logs to: C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\logs\ and/or C:\RH\OPS\SYSTEM\DATA\logs\
+
+PHASE 5: C:\ ROOT CLEANUP (20 min)
+
+Quarantine first. Delete later.
+
+#	Task	Done?
+5.1	Move C:\HawkinsOpsSOC → C:\_ARCHIVE\root_quarantine\2026-02-06\	[ ]
+5.2	Move C:\printer-fix → C:\_ARCHIVE\root_quarantine\2026-02-06\	[ ]
+5.3	Move C:\wazuh-agent → C:\_ARCHIVE\root_quarantine\2026-02-06\	[ ]
+5.4	Move C:\Temp → C:\_ARCHIVE\root_quarantine\2026-02-06\	[ ]
+5.5	Move C:\tmp → C:\_ARCHIVE\root_quarantine\2026-02-06\	[ ]
+5.6	Move C:\omfg_mega_archive → C:\_ARCHIVE\omfg_mega_archive\	[ ]
+5.7	Investigate C:\iCloudDrive: stop or configure properly	[ ]
+5.8	Rename C:\2026 → C:\_ARCHIVE\2026_OLD_ROOT	[ ]
+5.9	Log to MIGRATION_LEDGER	[ ]
+5.10	7 days later: review root_quarantine, delete confirmed junk	[ ]
+PHASE 6: SYSTEM CONFIGURATION (30 min)
+#	Task	Done?
+6.1	Redirect Downloads to C:\RH\INBOX\downloads\	[ ]
+6.2	Install screenshot sweep script → C:\RH\INBOX\screenshots\	[ ]
+6.3	Set Obsidian vault to C:\RH\LIFE\MIND\ (or C:\RH\OPS\RESEARCH\notes\)	[ ]
+6.4	Configure Claude Code working root to C:\RH\OPS\ (NOT C:\RH\)	[ ]
+6.5	Guardrail script: root cleanliness check	[ ]
+6.6	Guardrail script: refuse writes to C:\RH\ root	[ ]
+6.7	Cleanup script: purge stale temp in _INBOX\temp_sort	[ ]
+
+Where scripts live (since your tree is strict):
+
+Put guardrail scripts in: C:\RH\OPS\BUILD\scripts\
+
+Put policies/config templates in: C:\RH\OPS\SYSTEM\configs\ or C:\RH\OPS\SYSTEM\templates\
+
+Put logs in: C:\RH\OPS\SYSTEM\DATA\logs\
+
+Screenshot Sweep (not redirect)
+
+Windows screenshot path redirection is inconsistent. Instead, run a scheduled script that sweeps new screenshots into:
+C:\RH\INBOX\screenshots\
+
+PHASE 7: ACCEPTANCE TEST (15 min)
+Positive Tests
+#	Test	Pass?
+7.1	C:\RH\OPS exists and has content	[ ]
+7.2	C:\RH\LIFE exists and has content	[ ]
+7.3	C:\RH\VAULT exists	[ ]
+7.4	Repos exist under C:\RH\OPS\BUILD\src\repos\	[ ]
+7.5	git status works in each moved repo	[ ]
+7.6	C:\2026 no longer exists (archived)	[ ]
+7.7	C:\_ARCHIVE exists with snapshots + old roots	[ ]
+7.8	Root quarantine exists	[ ]
+7.9	_INBOX\imports bounded and documented	[ ]
+Negative Tests
+#	Test	Pass?
+7.10	Download file → lands in C:\RH\INBOX\downloads\	[ ]
+7.11	Take screenshot → sweep lands it in C:\RH\INBOX\screenshots\	[ ]
+7.12	Claude Code output stays under C:\RH\OPS\... NOT C:\RH\	[ ]
+7.13	After a day: no new random folders at C:\ root	[ ]
+Final Artifacts
+#	Artifact	Location	Done?
+7.14	TREE_AFTER CSV	C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\	[ ]
+7.15	MIGRATION_LEDGER.md	same	[ ]
+7.16	DRY RUN + EXEC + VERIFY logs	...\logs\ + SYSTEM\DATA\logs\	[ ]
+7.17	CLUSTER_REPORT + MOVE_PLAN + DEDUP + SECRETS_FLAGGED	same	[ ]
+7.18	Screenshot: C:\RH showing OPS/LIFE/VAULT	saved into PROOF_PACKS evidence inbox	[ ]
+7.19	Screenshot: git status in each repo post-move	saved into PROOF_PACKS evidence inbox	[ ]
+SECTION F: POST-MIGRATION MAINTENANCE
+Weekly Routine (15 min)
+
+Root-clean check
+
+Drain _INBOX\imports (>2 weeks gets sorted)
+
+Drain _INBOX\downloads
+
+Drain _INBOX\temp_sort
+
+Verify screenshot sweep is running
+
+When You Create New Work
+
+New work starts in PROOF_PACKS or BUILD, not Downloads.
+
+Too tired to decide? Dump into:
+
+C:\RH\INBOX\temp_sort\ (messy staging)
+
+C:\RH\INBOX\scratchpad\ (notes)
+
+C:\RH\INBOX\exports\ (AI outputs)
+
+SECTION G: CLAUDE CODE / CODEX PROMPTS (DIRECTORY-FIXED)
+Prompt 1: Phase 0–1 Setup
+
+“Create the directory structure for C:\RH\ based on this spec: [paste authoritative OPS tree]. Also create C:\_ARCHIVE\, C:\_ARCHIVE\SNAPSHOTS\2026-02-06_pre_RH\, C:\_ARCHIVE\root_quarantine\2026-02-06\, and C:\_BACKUP\. Generate a System Restore Point. Export a full recursive file listing of C:\2026\ to C:\_ARCHIVE\SNAPSHOTS\2026-02-06_pre_RH\TREE_BEFORE.csv. Create C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\ and ...\logs\. Store any policy docs under C:\RH\OPS\SYSTEM\configs\ (NOT at C:\RH\ root). Do NOT move or modify any existing files.”
+
+Prompt 2: Phase 2 Git Verification
+
+“For each git repository in these paths: [paste repo paths], run git remote -v, git status --short, git log --oneline -3, and git rev-parse HEAD. Output a summary table: repo path, has remote (y/n), clean status (y/n), pushed (y/n), HEAD hash. Do NOT move anything.”
+
+Prompt 3: Phase 4 Discovery Engine
+
+“Build and run a work-unit discovery engine for remaining files in C:\2026\OPSOLD\. The engine should: (1) inventory path/ext/size/mtime/SHA256, (2) dedup by SHA256, (3) cluster into work units based on anchors + proximity + keywords, (4) secret scan that flags without storing content previews. Output to C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\: FULL_INVENTORY.csv, DEDUP_REPORT.csv, CLUSTER_REPORT.md, CLUSTER_MOVE_PLAN.csv, SECRETS_FLAGGED.csv. Do NOT move files.”
+
+Prompt 4: Phase 4 Execution
+
+“Read approved move plan ...\CLUSTER_MOVE_PLAN.csv. First DRY RUN: write DRY_RUN_LOG.csv (no moves). Then wait for approval. On execute: move each file per plan, handle collisions by appending _from_OPSOLD, log EXEC_LOG.csv, then verify counts and write VERIFY_REPORT.csv.”
+
+Prompt 5: Phase 6 Guardrails
+
+“Create PowerShell scripts in C:\RH\OPS\BUILD\scripts\: (1) Check-RootClean.ps1 checks C:\RH\ root for unexpected items, (2) Invoke-SafeOp.ps1 refuses writes to C:\RH\ root, (3) Clean-InboxTemp.ps1 deletes files >7 days in _INBOX\temp_sort (optional), (4) Sweep-Screenshots.ps1 moves new screenshots into C:\RH\INBOX\screenshots\ (idempotent). Log runs to C:\RH\OPS\SYSTEM\DATA\logs\.”
+
+END OF PLAN (DIRECTORY-FIXED)
+
+Total estimated time: 4–6 hours focused, or split across 2 sessions (Phases 0–3 then 4–7).
+The discovery engine does the real work. Everything else is setup and safety.
+After this you have one filesystem, work organized by what-you-did (not file type), guardrails preventing relapse, and a maintenance routine that takes 15 minutes a week.
+
+Change Log
+- Date/Time: 2026-02-07 19:13:40
+- Change: INBOX canonical root moved from OPS to RH root
+- Why: aligns with Phase 6 + long-term guardrails
+

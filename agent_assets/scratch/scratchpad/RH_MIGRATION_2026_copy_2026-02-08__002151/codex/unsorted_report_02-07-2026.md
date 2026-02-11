@@ -1,0 +1,549 @@
+# Unsorted Report
+
+Generated: 2026-02-07 20:16:23
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\migrate failure 5.2 research debug.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS.zip
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\Build-MovePlan_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\Build-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\Build-QuarantineInventory.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\Classify-Units_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\DUPLICATES_REPORT_2026-02-06_12-57-20.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\Execute-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\Execute-Phase4_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\Find-WorkUnits_FIXED.PATCHED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\Find-WorkUnits_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\phase4_rules_FIXED.yml
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\QUARANTINE_INDEX_2026-02-06_06-02-25.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\README_FIXED.md
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\repo_verify_report.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\repos_found.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\RH_MIGRATION_PLAN02-06.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\RH_TREE_FOLDERS_ONLY.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\SECRETS_SWEEP_2026-02-06_06-02-31.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\INPUTS\terminal .txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Build-MovePlan_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Build-Phase4EvidencePack.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Build-Phase4ResearchBundle.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Build-QuarantineInventory.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Check-Phase4Sanity.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Classify-Units_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Cleanup-Outputs.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Execute-Phase4_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Find-WorkUnits_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Phase4_Common.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\phase4_rules_FIXED.yml
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\Write-Phase4Summary.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\PHASE4_SUMMARY_02-07-2026__36439d40.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\PHASE4_SUMMARY_02-07-2026.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\CLASSIFIED_UNITS_02-07-2026__e5ac300c.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\CLASSIFIED_UNITS_02-07-2026__f80fb710.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\CLASSIFIED_UNITS_02-07-2026.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-06-2026__1cc81d72.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-06-2026__668b2ee9.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-06-2026__ce1c7517.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-06-2026__f92e46a7.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-06-2026.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-07-2026__1d2b2adb.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-07-2026__9bf5f83c.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-07-2026__ac0490cd.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\FULL_INVENTORY_02-07-2026.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-06-2026__2b9ac75e.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-06-2026__3cf10b3b.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-06-2026__9089dd73.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-06-2026__fee91386.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-06-2026.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-07-2026__c272c699.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-07-2026__d6839bd3.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-07-2026__f19c9788.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\INVENTORY_DEBUG_02-07-2026.txt
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\PHASE4_MOVE_PLAN_02-07-2026__3e7d08fb.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\PHASE4_MOVE_PLAN_02-07-2026__794a8fdc.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\PHASE4_MOVE_PLAN_02-07-2026.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\PHASE4_PATCH_BUNDLE_V2.zip
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\ROLLBACK_PLAN_02-07-2026__2317c77d.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\ROLLBACK_PLAN_02-07-2026__ac64d579.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\ROLLBACK_PLAN_02-07-2026.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\UNIT_MEMBERS_02-07-2026__8590d6dd.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\UNIT_MEMBERS_02-07-2026__e528cd59.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\UNIT_MEMBERS_02-07-2026.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\WORK_UNIT_CANDIDATES_02-07-2026__6a46c71d.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\WORK_UNIT_CANDIDATES_02-07-2026__cae16076.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\OUTPUTS\_TRASH\cleanup_20260207_122411\WORK_UNIT_CANDIDATES_02-07-2026.csv
+  - reason: no deterministic phase match; artifact naming pattern
+  - confidence: 0.44
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\RESEARCH_BUNDLE\Phase4_ResearchBundle_20260207_124436.zip
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\5.2RESEARCH_MIGRATE\RESEARCH_BUNDLE\Phase4_ResearchBundle_20260207_140918.zip
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\ATTEMPT1_MIGRATION02-06\Build-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\ATTEMPT1_MIGRATION02-06\Build-QuarantineInventory.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\ATTEMPT1_MIGRATION02-06\Classify-Units.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\ATTEMPT1_MIGRATION02-06\Find-WorkUnits.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\ATTEMPT1_MIGRATION02-06\Invoke-DedupeScan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\ATTEMPT1_MIGRATION02-06\phase4_rules.yml
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\ATTEMPT1_MIGRATION02-06\README.md
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\docs\README_FIXED.md
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\docs\_from_ops_build\README_FIXED.md
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\rules\phase4_rules_FIXED.yml
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\rules\_from_ops_build\phase4_rules_FIXED.yml
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Build-MovePlan_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Build-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Build-Phase4EvidencePack.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Build-Phase4ResearchBundle.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Build-QuarantineInventory.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Check-Phase4Sanity.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Classify-Units_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Cleanup-Outputs.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Execute-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Execute-Phase4_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Find-WorkUnits_FIXED.PATCHED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Find-WorkUnits_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Phase4_Common.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\Write-Phase4Summary.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\_from_ops_build\Build-MovePlan_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\_from_ops_build\Build-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\_from_ops_build\Build-QuarantineInventory.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\_from_ops_build\Classify-Units_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\_from_ops_build\Execute-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\_from_ops_build\Execute-Phase4_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\_from_ops_build\Find-WorkUnits_FIXED.PATCHED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\scripts\_from_ops_build\Find-WorkUnits_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\.gitignore
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\README.md
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\docs\Postmortem.md
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\docs\Runbook.md
+  - reason: no deterministic phase match; doc extension
+  - confidence: 0.43
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\rules\phase4_rules_FIXED.yml
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Build-MovePlan_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Build-Phase4EvidencePack.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Build-Phase4ResearchBundle.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Build-QuarantineInventory.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Check-Phase4Sanity.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Classify-Units_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Cleanup-Outputs.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Execute-MovePlan.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Execute-Phase4_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Find-WorkUnits_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Phase4_Common.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\engine\src\repos\rh-migration-discovery-engine\scripts\Write-Phase4Summary.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\INBOX_move_2026-02-06_05-50-03.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\LIFE_move_excluding_icloud_2026-02-06_05-49-23.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\LIFE_move_excluding_icloud2_2026-02-06_05-50-35.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\PH3_LIFE_robocopy.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\PH3_OPS_PROOF_PACKS.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\PH3_OPS_RESEARCH.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\PH3_OPS_SYSTEM.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\PH3_VAULT_robocopy.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\phase2_cleanup_log_02-07-2026.txt
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026__INBOX_retry.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_LIFE_retry_ZB.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_LIFE.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_OPS.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_OPSOLD.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_ROOTDIR__INBOX.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_ROOTDIR_.claude.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_ROOTDIR_.obsidian.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_ROOTDIR_02-06RH_MIGRATION.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_ROOTDIR_MIND.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_ROOTDIR_proofpack_gpu_passthrough_20260203T093234Z.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_ROOTDIR_SYSTEM.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\logs\QMOVE_2026_VAULT.log
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\legacy_top_level_pre_phase_layout__2026-02-07__185705\runs\misc\reports\RH_TREE_FOLDERS_ONLY.txt
+  - reason: no deterministic phase match; run path pattern
+  - confidence: 0.46
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\Build-MovePlan_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\Build-QuarantineInventory.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\Classify-Units_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\Execute-Phase4_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\Find-WorkUnits_FIXED.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\Phase4_Common.ps1
+  - reason: no deterministic phase match; script extension
+  - confidence: 0.47
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\PHASE4_typehardening.patch
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\COMMIT_EDITMSG
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\config
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\description
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\HEAD
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\index
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\applypatch-msg.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\commit-msg.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\fsmonitor-watchman.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\post-update.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\pre-applypatch.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\pre-commit.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\pre-merge-commit.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\pre-push.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\pre-rebase.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\pre-receive.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\prepare-commit-msg.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\push-to-checkout.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\sendemail-validate.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\hooks\update.sample
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\info\exclude
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\logs\HEAD
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\logs\refs\heads\master
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\objects\0e\1acbe8de66ca7f198e72c88583bb0de427b8b0
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\objects\46\e93b0da2a850d7dcf2475a897396ec86dc60fc
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\objects\4e\d6c5709b85ec5dc4f1100c1066a10e9bdb1d09
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\objects\58\936457b838917036ff604fdab7ddbb522a9a7f
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\objects\58\d6baa51dbfd8d933fa250fcb15decd3e432db4
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\objects\6c\12317e871521fc749cba03be270580049558fe
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\objects\8e\47dc93e43298b89c0e3c73b8c341a2c7396cf4
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\objects\e5\34f1e38cd86f47ba028c3f636a5b3a0b05b733
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36
+- C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_PATCH_BACKUPS\phase4_20260206_231612\.git\refs\heads\master
+  - reason: no deterministic phase match; fallback docs bucket
+  - confidence: 0.36

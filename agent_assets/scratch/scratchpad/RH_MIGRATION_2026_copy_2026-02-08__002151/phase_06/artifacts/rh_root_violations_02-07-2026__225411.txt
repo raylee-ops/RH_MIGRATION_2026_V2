@@ -1,0 +1,10 @@
+
+Name             FullName
+----             --------
+.agents          C:\RH\.agents
+.codex           C:\RH\.codex
+ARCHIVE          C:\RH\ARCHIVE
+INBOX            C:\RH\INBOX
+VAULT_NEVER_SYNC C:\RH\VAULT_NEVER_SYNC
+
+
