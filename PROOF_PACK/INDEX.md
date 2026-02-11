@@ -21,6 +21,7 @@
 | 06 | run_02-10-2026_184748 | 02-10-2026 19:08:55 | OUTPUTS\phase_06\run_02-10-2026_184748 | plan.csv, metrics.json, summary_02-10-2026.md |
 | 05 | run_02-10-2026_184442 | 02-10-2026 22:41:31 | OUTPUTS\phase_05\run_02-10-2026_184442 | plan.csv, metrics.json, summary_02-10-2026.md |
 | 07 | run_02-10-2026_195015 | 02-10-2026 22:43:13 | OUTPUTS\phase_07\run_02-10-2026_195015 | plan.csv, metrics.json, summary_02-10-2026.md |
+| 08 | run_02-11-2026_002739 | 02-11-2026 00:27:59 | OUTPUTS\phase_08\run_02-11-2026_002739 | plan.csv, metrics.json, summary_02-11-2026.md |
 
 ---
 

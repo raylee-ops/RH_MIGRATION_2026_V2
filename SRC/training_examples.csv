@@ -1,0 +1,50 @@
+file_path,correct_bucket,reason,confidence,phase04_bucket,semantic_improvement
+"C:\RH\OPS\PROOF_PACKS\AUTOMATION\PP-001_libs_dup_20260204-131020\artifacts\scripts\agents.py",EVIDENCE,"Scripts in PROOF_PACKS are evidence artifacts",0.95,UNKNOWN,override
+"C:\RH\OPS\PROOF_PACKS\AUTOMATION\PP-001_libs_dup_20260204-131020\artifacts\scripts\alert_triage.py",EVIDENCE,"Scripts in PROOF_PACKS are evidence artifacts",0.95,UNKNOWN,override
+"C:\RH\OPS\BUILD\scripts\phase6\Phase6-CanonicalInbox.ps1",PROJECT,"Script in BUILD directory is project code",0.92,UNKNOWN,override
+"C:\RH\OPS\BUILD\scripts\phase6\README_DEPRECATED.md",NOTES,"README file is documentation",0.95,NOTES,boost
+"C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2.zip",ARCHIVE,"Zip archive of project",0.90,PROJECT,override
+"C:\RH\OPS\PROJECTS\REPOS\hawkinsops-site\artifacts\repo_hawkinsops-site\.git\config",PROJECT,"Git config in repo is project metadata",0.85,PROJECT,boost
+"C:\RH\OPS\PROJECTS\REPOS\hawkinsops-site\artifacts\repo_hawkinsops-site\hawkinsops-v2\index.html",PROJECT,"HTML in repo is project code",0.90,PROJECT,boost
+"C:\RH\OPS\PROJECTS\REPOS\hawkinsops-soc-content\artifacts\repo_hawkinsops-soc-content\00-Hunt-Matrix.md",PROJECT,"Documentation in repo is project asset",0.90,PROJECT,boost
+"C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-000_DRAFTS\Detections\01_NAMING_AND_PASTE_RULES.pdf",EVIDENCE,"PDF in PROOF_PACKS is evidence",0.95,UNKNOWN,override
+"C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-001_hawkinsoperations\artifacts\repo_hawkinsoperations\.gitignore",EVIDENCE,"Config file in PROOF_PACKS evidence",0.90,UNKNOWN,override
+"C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-001_hawkinsoperations\artifacts\repo_hawkinsoperations\LICENSE",EVIDENCE,"LICENSE in PROOF_PACKS evidence",0.92,UNKNOWN,override
+"C:\RH\OPS\imports\backup_scripts_2026-02-07.zip",ARCHIVE,"Backup prefix indicates archive",0.90,UNKNOWN,override
+"C:\RH\OPS\QUARANTINE\temp_test_file.txt",ARCHIVE,"Temp prefix indicates temporary file",0.85,UNKNOWN,override
+"C:\RH\OPS\BUILD\old_phase3_runner.ps1",ARCHIVE,"Old prefix indicates deprecated file",0.88,UNKNOWN,override
+"C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\SRC\run.ps1",PROJECT,"Script in SRC directory is project code",0.95,PROJECT,boost
+"C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\project_config.json",PROJECT,"Config file in project root",0.92,PROJECT,boost
+"C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\AGENTS_PROJECT.md",NOTES,"Documentation markdown",0.90,NOTES,boost
+"C:\RH\OPS\SYSTEM\DATA\runs\phase_06\evidence\screenshot_2026-02-07.png",EVIDENCE,"Screenshot is evidence",0.92,MEDIA,override
+"C:\RH\OPS\SYSTEM\DATA\runs\phase_06\evidence\execution.log",EVIDENCE,"Log file is evidence",0.90,UNKNOWN,override
+"C:\RH\OPS\imports\file_copy (1).txt",ARCHIVE,"Copy suffix indicates duplicate",0.85,UNKNOWN,override
+"C:\RH\OPS\imports\document DUPLICATE_01.md",ARCHIVE,"DUPLICATE marker indicates redundant file",0.88,UNKNOWN,override
+"C:\RH\OPS\PROOF_PACKS\SOC_BUILD\PP-002_6_week_soc_build\evidence\detection_rules.yml",EVIDENCE,"YAML in PROOF_PACKS evidence folder",0.93,UNKNOWN,override
+"C:\RH\OPS\DOWNLOADS\random_download.exe",UNKNOWN,"Downloads folder content uncertain",0.55,UNKNOWN,maintain
+"C:\RH\OPS\INBOX\untriaged_file.dat",UNKNOWN,"Inbox content not yet classified",0.50,UNKNOWN,maintain
+"C:\RH\OPS\scratchpad\test_scratch.txt",ARCHIVE,"Scratchpad temporary content",0.75,UNKNOWN,override
+"C:\RH\OPS\PROJECTS\REPOS\hawkinsops-site\.git\HEAD",PROJECT,"Git metadata in repo",0.80,PROJECT,boost
+"C:\RH\OPS\PROJECTS\REPOS\hawkinsops-site\README.md",NOTES,"README documentation",0.95,NOTES,boost
+"C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-009_hawkinsops-repo-upgrade\artifacts\incident_screenshot.png",EVIDENCE,"Screenshot in PROOF_PACKS is evidence",0.95,MEDIA,override
+"C:\RH\OPS\PROOF_PACKS\SOC_BUILD\PP-002_6_week_soc_build\notes\planning_notes.md",EVIDENCE,"Notes in PROOF_PACKS evidence folder",0.90,NOTES,override
+"C:\RH\OPS\BUILD\scripts\utils\helper_functions.ps1",PROJECT,"Helper script in BUILD utils",0.90,UNKNOWN,override
+"C:\RH\OPS\imports\TRIAGE_LOWCONF_2026-02-07\evidence\duplicates_deleted.log",EVIDENCE,"Log file in evidence subfolder",0.92,UNKNOWN,override
+"C:\RH\OPS\SYSTEM\migrations\backup_registry_2026-02-07.reg",ARCHIVE,"Backup registry file",0.90,UNKNOWN,override
+"C:\RH\OPS\QUARANTINE\ROOT_MISC\old_config.json",ARCHIVE,"Old prefix config in quarantine",0.85,UNKNOWN,override
+"C:\RH\OPS\PROOF_PACKS\AUTOMATION\PP-001_libs_dup_20260204-131020\artifacts\scripts\setup_infrastructure.sh",EVIDENCE,"Setup script in PROOF_PACKS artifacts",0.95,UNKNOWN,override
+"C:\RH\OPS\imports\TRIAGE_LOWCONF_2026-02-07\notes\Daily_01-28-2026.md",NOTES,"Daily note markdown",0.88,NOTES,boost
+"C:\RH\OPS\imports\TRIAGE_LOWCONF_2026-02-07\notes\migration_map_02-04-2026.md",NOTES,"Migration planning note",0.88,NOTES,boost
+"C:\RH\OPS\PROJECTS\oldrh_migration_attempt2\OUTPUTS\test.txt",PROJECT,"Test file in project OUTPUTS",0.80,PROJECT,boost
+"C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-001_hawkinsoperations\.git\index",EVIDENCE,"Git index in PROOF_PACKS repo",0.88,UNKNOWN,override
+"C:\RH\OPS\BUILD\temp_analysis_output.csv",ARCHIVE,"Temp prefix analysis file",0.85,UNKNOWN,override
+"C:\RH\OPS\scratchpad\scratch_notes_2026-02-05.md",ARCHIVE,"Scratch notes temporary",0.80,UNKNOWN,override
+"C:\RH\OPS\STAGING\test_file_before_move.txt",ARCHIVE,"Staging area temporary content",0.75,UNKNOWN,override
+"C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-009_hawkinsops-repo-upgrade\LICENSE",EVIDENCE,"LICENSE in PROOF_PACKS",0.92,UNKNOWN,override
+"C:\RH\OPS\PROOF_PACKS\SOC_BUILD\PP-002_6_week_soc_build\artifacts\config.yaml",EVIDENCE,"Config in PROOF_PACKS artifacts",0.90,UNKNOWN,override
+"C:\RH\OPS\imports\backup_phase6_knownfolders.reg",ARCHIVE,"Backup registry file",0.92,UNKNOWN,override
+"C:\RH\OPS\PROOF_PACKS\AUTOMATION\PP-001_libs_dup_20260204-131020\README.md",EVIDENCE,"README in PROOF_PACKS",0.93,NOTES,override
+"C:\RH\OPS\PROJECTS\REPOS\hawkinsops-soc-content\CHANGELOG.md",NOTES,"CHANGELOG documentation",0.93,NOTES,boost
+"C:\RH\OPS\BUILD\scripts\phase6\execute_moves_copy.ps1",ARCHIVE,"Copy suffix indicates backup",0.85,UNKNOWN,override
+"C:\RH\OPS\imports\TRIAGE_LOWCONF_2026-02-07\evidence\logs\sync_linux_to_drive_11-18-2025.log",EVIDENCE,"Log in evidence logs subfolder",0.93,UNKNOWN,override
+"C:\RH\OPS\QUARANTINE\ROOT_MISC\INBOX_MOVED_2026-02-07.txt",EVIDENCE,"Marker file documenting move operation",0.80,UNKNOWN,override

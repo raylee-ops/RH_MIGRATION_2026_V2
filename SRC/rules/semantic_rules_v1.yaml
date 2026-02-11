@@ -1,0 +1,189 @@
+version: 1
+description: "Semantic classification rules - enhance Phase 04 baseline with context awareness"
+
+# Confidence boost/penalty values
+confidence_adjustments:
+  strong_boost: 0.20      # Very confident semantic signal
+  moderate_boost: 0.15    # Clear semantic signal
+  weak_boost: 0.10        # Suggestive semantic signal
+  weak_penalty: -0.05     # Slightly uncertain
+  moderate_penalty: -0.10 # More uncertain
+
+# Merge strategy
+merge_logic:
+  override_threshold: 0.15  # If semantic boost >= this, override Phase 04 bucket
+  downgrade_threshold: -0.10 # If semantic penalty <= this, downgrade to review
+  min_confidence_for_override: 0.75  # Don't override unless semantic is this confident
+
+# Semantic pattern rules (priority order matters - first match wins)
+rules:
+  # HIGH CONFIDENCE OVERRIDES (0.95+)
+
+  - id: SEM_PROOF_PACK_SCRIPTS
+    semantic_bucket: EVIDENCE
+    confidence: 0.95
+    confidence_adjustment: strong_boost
+    priority: 100
+    match:
+      path_contains: ['\PROOF_PACKS\']
+      extension: ['.ps1', '.py', '.sh', '.bash', '.cmd', '.bat']
+    reason: "Scripts in PROOF_PACKS are recruiter-visible evidence artifacts"
+    override_phase04: true
+
+  - id: SEM_PROOF_PACK_DOCS
+    semantic_bucket: EVIDENCE
+    confidence: 0.95
+    confidence_adjustment: strong_boost
+    priority: 99
+    match:
+      path_contains: ['\PROOF_PACKS\']
+      extension: ['.pdf', '.docx', '.xlsx', '.pptx']
+    reason: "Documents in PROOF_PACKS are evidence artifacts"
+    override_phase04: true
+
+  - id: SEM_README_FILES
+    semantic_bucket: NOTES
+    confidence: 0.95
+    confidence_adjustment: strong_boost
+    priority: 98
+    match:
+      filename_patterns: ['README', 'readme', 'CHANGELOG', 'changelog', 'LICENSE', 'license']
+      extension: ['.md', '.txt', '']
+    reason: "README/LICENSE/CHANGELOG files are documentation"
+    override_phase04: false  # Boost confidence but don't override
+
+  # MODERATE CONFIDENCE BOOSTS (0.85-0.90)
+
+  - id: SEM_BACKUP_PREFIX
+    semantic_bucket: ARCHIVE
+    confidence: 0.90
+    confidence_adjustment: moderate_boost
+    priority: 90
+    match:
+      filename_starts_with: ['backup_', 'backup-', 'bak_', 'bak-', 'old_', 'old-', 'archive_']
+    reason: "Backup/archive prefix indicates archival content"
+    override_phase04: false
+
+  - id: SEM_TEMP_PREFIX
+    semantic_bucket: ARCHIVE
+    confidence: 0.85
+    confidence_adjustment: moderate_boost
+    priority: 89
+    match:
+      filename_starts_with: ['temp_', 'tmp_', 'temporary_', 'scratch_', 'test_']
+    reason: "Temporary/test prefix indicates disposable content"
+    override_phase04: false
+
+  - id: SEM_DUPLICATE_SUFFIX
+    semantic_bucket: ARCHIVE
+    confidence: 0.85
+    confidence_adjustment: moderate_boost
+    priority: 88
+    match:
+      filename_contains: ['DUPLICATE', 'duplicate', 'copy', 'Copy', '(1)', '(2)', '(3)']
+    reason: "Duplicate/copy suffix indicates redundant content"
+    override_phase04: false
+
+  - id: SEM_CONFIG_FILES
+    semantic_bucket: PROJECT
+    confidence: 0.88
+    confidence_adjustment: moderate_boost
+    priority: 87
+    match:
+      extension: ['.json', '.yaml', '.yml', '.toml', '.ini', '.conf', '.config']
+    reason: "Configuration files are project assets"
+    override_phase04: false
+
+  - id: SEM_SCRIPT_IN_SCRIPTS_DIR
+    semantic_bucket: PROJECT
+    confidence: 0.92
+    confidence_adjustment: moderate_boost
+    priority: 86
+    match:
+      path_contains: ['\scripts\', '\SRC\', '\src\', '\bin\', '\tools\']
+      extension: ['.ps1', '.py', '.sh', '.bash', '.rb', '.pl', '.js', '.ts']
+    reason: "Scripts in scripts/src/bin directories are code assets"
+    override_phase04: false
+
+  - id: SEM_SCREENSHOT_EVIDENCE
+    semantic_bucket: EVIDENCE
+    confidence: 0.90
+    confidence_adjustment: moderate_boost
+    priority: 85
+    match:
+      filename_contains: ['screenshot', 'Screenshot', 'capture', 'Capture', 'evidence']
+      extension: ['.png', '.jpg', '.jpeg', '.gif']
+    reason: "Screenshots are evidence artifacts"
+    override_phase04: false
+
+  - id: SEM_LOG_FILES
+    semantic_bucket: EVIDENCE
+    confidence: 0.88
+    confidence_adjustment: moderate_boost
+    priority: 84
+    match:
+      extension: ['.log', '.logs']
+    reason: "Log files are evidence/diagnostic artifacts"
+    override_phase04: false
+
+  # WEAK CONFIDENCE ADJUSTMENTS (0.60-0.75)
+
+  - id: SEM_GIT_METADATA
+    semantic_bucket: PROJECT
+    confidence: 0.70
+    confidence_adjustment: weak_boost
+    priority: 70
+    match:
+      path_contains: ['\.git\']
+    reason: "Git metadata is project infrastructure"
+    override_phase04: false
+
+  - id: SEM_NODE_MODULES
+    semantic_bucket: ARCHIVE
+    confidence: 0.65
+    confidence_adjustment: weak_penalty
+    priority: 69
+    match:
+      path_contains: ['\node_modules\', '\__pycache__\', '\.venv\']
+    reason: "Dependency caches should be excluded"
+    override_phase04: false
+
+  - id: SEM_DOWNLOADS_FOLDER
+    semantic_bucket: UNKNOWN
+    confidence: 0.60
+    confidence_adjustment: weak_penalty
+    priority: 68
+    match:
+      path_contains: ['\DOWNLOADS\', '\downloads\', '\Download\']
+    reason: "Downloads folder contains untriaged content"
+    override_phase04: false
+
+  - id: SEM_DESKTOP_FILES
+    semantic_bucket: UNKNOWN
+    confidence: 0.60
+    confidence_adjustment: weak_penalty
+    priority: 67
+    match:
+      path_contains: ['\Desktop\', '\desktop\']
+    reason: "Desktop contains untriaged content"
+    override_phase04: false
+
+# Context-based overrides (parent directory analysis)
+context_rules:
+  - context: proof_pack
+    path_pattern: '\PROOF_PACKS\'
+    default_boost: 0.10
+    override_to_evidence: true
+    reason: "PROOF_PACKS context elevates all content to evidence"
+
+  - context: project_workspace
+    path_pattern: '\PROJECTS\[^\\]+\(SRC|src|scripts|tools|bin)'
+    default_boost: 0.08
+    override_to_project: false
+    reason: "Project workspace context suggests working code"
+
+  - context: notes_directory
+    path_pattern: '\(notes|Notes|NOTES|docs|Docs|DOCS)\'
+    default_boost: 0.08
+    override_to_notes: false
+    reason: "Notes/docs directory suggests documentation"

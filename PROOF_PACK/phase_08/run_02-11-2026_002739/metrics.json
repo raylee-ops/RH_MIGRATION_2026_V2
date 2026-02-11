@@ -1,0 +1,15 @@
+{
+  "at": "2026-02-11T00:27:45",
+  "files_analyzed": 9685,
+  "maintained": 1072,
+  "semantic_avg_confidence": 0.9132,
+  "penalties": 43,
+  "phase": 8,
+  "boosts": 6188,
+  "mode": "DryRun",
+  "low_confidence_queue": 401,
+  "avg_confidence_delta": 0.1618,
+  "phase04_avg_confidence": 0.7577,
+  "semantic_rules_applied": 14,
+  "overrides": 2382
+}
