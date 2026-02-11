@@ -9,3 +9,9 @@ paths = [
   '''^OUTPUTS/''',
   '''^PROOF_PACK/'''
 ]
+
+[[allowlists]]
+description = "Ignore agent work artifacts (manifests contain file path references, not secrets)"
+paths = [
+  '''^agent_assets/'''
+]
