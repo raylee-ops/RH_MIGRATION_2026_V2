@@ -1,0 +1,306 @@
+=== 1. Environment Check ===
+PWD: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2
+Sentinel exists: False
+WARNING: project_config.json not found
+=== 2. Status Tool Output ===
+
+RH_MIGRATION_2026_V2 — Status
+Root: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2
+
+Audit Phase 00
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_00\run_02-08-2026_140111
+PASS ✅ Phase 00 run is contract-complete
+Audit Phase 01
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_01\run_02-08-2026_153039
+PASS ✅ Phase 01 run is contract-complete
+Audit Phase 02
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_02\run_02-09-2026_055901
+PASS ✅ Phase 02 run is contract-complete
+Audit Phase 03
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_03\run_02-09-2026_XXXXXX
+PASS ✅ Phase 03 run is contract-complete
+Audit Phase 04
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_04\run_02-10-2026_143430
+PASS ✅ Phase 04 run is contract-complete
+Audit Phase 05
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_05\run_02-10-2026_180228
+PASS ✅ Phase 05 run is contract-complete
+Audit Phase 06
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_06\run_02-10-2026_181937
+PASS ✅ Phase 06 run is contract-complete
+
+[32;1mPhase[0m[32;1m LatestRun            [0m[32;1m Status             [0m[32;1m Notes[0m
+[32;1m-----[0m [32;1m---------            [0m [32;1m------             [0m [32;1m-----[0m
+00    run_02-08-2026_140111 COMPLETE            
+01    run_02-08-2026_153039 COMPLETE            
+02    run_02-09-2026_055901 COMPLETE            
+03    run_02-09-2026_XXXXXX COMPLETE            
+04    run_02-10-2026_143430 COMPLETE            
+05    run_02-10-2026_180228 COMPLETE            
+06    run_02-10-2026_181937 RUN_OK_NOT_PROMOTED not_promoted
+07                          PENDING             no_runs
+08                          PENDING             no_runs
+
+=== 3. Phase 00 Evidence Verification ===
+Phase 00 Latest Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_00\run_02-08-2026_140111
+
+Name                         Length LastWriteTime
+----                         ------ -------------
+allowed_roots.txt                23 2/8/2026 2:42:57 PM
+duplicate_filenames_top.csv  136307 2/8/2026 2:01:42 PM
+excluded_roots.txt               71 2/8/2026 2:42:57 PM
+phase00_notes_02-09-2026.md     394 2/9/2026 3:43:24 AM
+rh_inventory.csv            3201874 2/8/2026 2:01:40 PM
+rh_tree_folders_only.txt     814596 2/8/2026 2:01:38 PM
+rules_and_config_list.csv     25392 2/8/2026 2:01:41 PM
+script_files_list.csv        200680 2/8/2026 2:01:41 PM
+
+
+{
+  "phase": "00",
+  "run_id": "run_02-08-2026_140111",
+  "start_time": "2026-02-08T14:01:11",
+  "end_time": "2026-02-08T14:01:42",
+  "status": "completed",
+  "metrics": {
+    "total_directories": null,
+    "total_files": 9883,
+    "total_scripts": 643,
+    "total_configs": 88,
+    "duplicate_groups": 50
+  },
+  "errors": [],
+  "warnings": []
+}
+=== 4. Phase 02 Canonical Manifest Verification ===
+Phase 02 Latest Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_02\run_02-09-2026_055901
+Canonical manifest rows: 2661
+
+SHA256                                                           CanonicalPath
+------                                                           -------------                                          
+0036782A15BD96819C066DC8773C0597553D05D2A412F5D347FF5423A7BA6BFF C:\RH\OPS\SYSTEM\configs\imports\2026-02-07\root_misc_…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0050905A2C2155DE362F2EA3BC17FEACDC17CCBF4EA19450416D2FE84533F03F C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+00A8FDB880B2073DD27425F43DD12BCE81709DB267A2EBF9BDC55B2B08195D15 C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_P…
+00A8FDB880B2073DD27425F43DD12BCE81709DB267A2EBF9BDC55B2B08195D15 C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_P…
+00A8FDB880B2073DD27425F43DD12BCE81709DB267A2EBF9BDC55B2B08195D15 C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_P…
+00A8FDB880B2073DD27425F43DD12BCE81709DB267A2EBF9BDC55B2B08195D15 C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_P…
+00A8FDB880B2073DD27425F43DD12BCE81709DB267A2EBF9BDC55B2B08195D15 C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_P…
+00A8FDB880B2073DD27425F43DD12BCE81709DB267A2EBF9BDC55B2B08195D15 C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026\trash\_P…
+0136DAD6597D32EFBE80A1888C9F57489CE3108E7B2C03A08CFC337A3FE6F5CA C:\RH\OPS\SYSTEM\DATA\inventories\reality_snapshot_02-…
+0175CE0ECBCC1BE41F14BEF3B3529CD9773387FC5E694FD279BFD6B80742457E C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+0175CE0ECBCC1BE41F14BEF3B3529CD9773387FC5E694FD279BFD6B80742457E C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+0175CE0ECBCC1BE41F14BEF3B3529CD9773387FC5E694FD279BFD6B80742457E C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+0175CE0ECBCC1BE41F14BEF3B3529CD9773387FC5E694FD279BFD6B80742457E C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+0175CE0ECBCC1BE41F14BEF3B3529CD9773387FC5E694FD279BFD6B80742457E C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+0175CE0ECBCC1BE41F14BEF3B3529CD9773387FC5E694FD279BFD6B80742457E C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+0175CE0ECBCC1BE41F14BEF3B3529CD9773387FC5E694FD279BFD6B80742457E C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+01FE6CA9CA382D8BE6D9810E5ACDDF86D2A1B36E00D2B5EC13D94FBF04DB9D17 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+0268F3E7AB170055406FC2A2B386326389FD6FDF11778388D47AF6BBD4A00DD0 C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+0268F3E7AB170055406FC2A2B386326389FD6FDF11778388D47AF6BBD4A00DD0 C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+0268F3E7AB170055406FC2A2B386326389FD6FDF11778388D47AF6BBD4A00DD0 C:\RH\OPS\PROOF_PACKS\DETECTION_ENGINEERING\PP-002_con…
+03337C1E6BBCB58DDF0C569976E4AB1CF5C3F39AF7A1CE1B95195C5BE7B1BFB2 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+03337C1E6BBCB58DDF0C569976E4AB1CF5C3F39AF7A1CE1B95195C5BE7B1BFB2 C:\RH\OPS\PUBLISH\GITHUB\repos\hawkinsops-soc-content\…
+
+
+Script hash rows: 0
+
+=== 5. Phase 04 Classification Results Verification ===
+Phase 04 Latest Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_04\run_02-10-2026_143430
+WARNING: classification node missing in phase 04 metrics. Available keys: item_count, low_conf_count, generated_at, phase, low_conf_threshold, roots
+
+path label confidence
+---- ----- ----------
+           0.5
+           0.85
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+           0.9
+
+
+Total classifications: 9685
+=== 6. Phase 05 Move Plan Verification ===
+Phase 05 Latest Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_05\run_02-10-2026_180228
+Total planned moves: 9685
+Sample planned moves:
+
+source destination action
+------ ----------- ------
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+
+
+Total collisions detected: 0
+=== 7. Phase 06 ACTUAL EXECUTION PROOF ===
+Phase 06 Latest Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_06\run_02-10-2026_181937
+=== PHASE 06 EXECUTION METRICS ===
+WARNING: moves node missing in phase 06 metrics.json
+WARNING: operations node missing in phase 06 metrics.json
+Total executed move records: 8347
+Sample executed moves with hash verification:
+
+source destination hash_before hash_after status
+------ ----------- ----------- ---------- ------
+                                          EXECUTED
+                                          SKIPPED_DEST_EXISTS
+                                          EXECUTED
+                                          EXECUTED
+                                          EXECUTED
+                                          EXECUTED
+                                          EXECUTED
+                                          EXECUTED
+                                          EXECUTED
+                                          EXECUTED
+
+
+PASS: All successful moves have matching hashes (integrity verified)
+Total errors during execution: 69
+Sample errors:
+
+source error_type error_message
+------ ---------- -------------
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+
+
+Rollback script exists: 6037 lines
+First 20 lines of rollback.ps1:
+# rollback.ps1 — Phase 06
+# Reverses executed moves in reverse order.
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+Write-Host 'Phase 06 rollback starting...'Move-Item -LiteralPath "C:\RH\OPS\STAGING\OPS__INBOX\rh_tree_full_02-07-2026.txt" -Destination "C:\RH\INBOX\STAGING\OPS__INBOX\rh_tree_full_02-07-2026.txt" -Force:$false
+Move-Item -LiteralPath "C:\RH\OPS\STAGING\OPS__INBOX\INBOX_MOVED_2026-02-07.txt" -Destination "C:\RH\INBOX\STAGING\OPS__INBOX\INBOX_MOVED_2026-02-07.txt" -Force:$false
+Move-Item -LiteralPath "C:\RH\INBOX\DESKTOP_SWEEP\SCREENSHOTS\Screenshots\Screenshot 2026-01-14 145942.png" -Destination "C:\RH\INBOX\SCREENSHOTS\Screenshots\Screenshot 2026-01-14 145942.png" -Force:$false
+Move-Item -LiteralPath "C:\RH\INBOX\DESKTOP_SWEEP\SCREENSHOTS\Screenshots\Screenshot 2026-01-14 123914.png" -Destination "C:\RH\INBOX\SCREENSHOTS\Screenshots\Screenshot 2026-01-14 123914.png" -Force:$false
+Move-Item -LiteralPath "C:\RH\INBOX\DESKTOP_SWEEP\SCREENSHOTS\Screenshots\Screenshot 2026-01-14 123907.png" -Destination "C:\RH\INBOX\SCREENSHOTS\Screenshots\Screenshot 2026-01-14 123907.png" -Force:$false
+Move-Item -LiteralPath "C:\RH\INBOX\DESKTOP_SWEEP\SCREENSHOTS\Screenshot_phase6b2_test_20260207_195534.png" -Destination "C:\RH\INBOX\SCREENSHOTS\Screenshot_phase6b2_test_20260207_195534.png" -Force:$false
+Move-Item -LiteralPath "C:\RH\TEMPORARY\phase05_low_confidence\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\PHASE4_typehardening.patch" -Destination "C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\PHASE4_typehardening.patch" -Force:$false
+Move-Item -LiteralPath "C:\RH\TEMPORARY\phase05_low_confidence\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Phase4_Common.ps1" -Destination "C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Phase4_Common.ps1" -Force:$false
+Move-Item -LiteralPath "C:\RH\TEMPORARY\phase05_low_confidence\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Find-WorkUnits_FIXED.ps1" -Destination "C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Find-WorkUnits_FIXED.ps1" -Force:$false
+Move-Item -LiteralPath "C:\RH\TEMPORARY\phase05_low_confidence\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Execute-Phase4_FIXED.ps1" -Destination "C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Execute-Phase4_FIXED.ps1" -Force:$false
+Move-Item -LiteralPath "C:\RH\TEMPORARY\phase05_low_confidence\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Classify-Units_FIXED.ps1" -Destination "C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Classify-Units_FIXED.ps1" -Force:$false
+Move-Item -LiteralPath "C:\RH\TEMPORARY\phase05_low_confidence\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Build-QuarantineInventory.ps1" -Destination "C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Build-QuarantineInventory.ps1" -Force:$false
+Move-Item -LiteralPath "C:\RH\TEMPORARY\phase05_low_confidence\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Build-MovePlan_FIXED.ps1" -Destination "C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\_PATCH_BACKUPS\phase4_20260206_231612\Build-MovePlan_FIXED.ps1" -Force:$false
+Move-Item -LiteralPath "C:\RH\TEMPORARY\phase05_low_confidence\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\UNSORTED\_PATCH_BACKUPS\phase4_20260206_231612\PHASE4_typehardening.patch" -Destination "C:\RH\INBOX\scratchpad\RH_MIGRATION_2026_copy_2026-02-08__002151\trash\UNSORTED\_PATCH_BACKUPS\phase4_20260206_231612\PHASE4_typehardening.patch" -Force:$false
+=== 8. Filesystem Before/After Comparison ===
+=== FILESYSTEM STRUCTURE CHANGES ===
+Before (Phase 00): 14660 folders
+After (Phase 06): 1 folders
+=== 9. Generate Verification Report ===
+# RH_MIGRATION_2026_V2 Verification Report
+Generated: 2026-02-10 18:40:01
+
+## Phase Status Summary
+
+RH_MIGRATION_2026_V2 — Status
+Root: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2
+
+Audit Phase 00
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_00\run_02-08-2026_140111
+PASS ✅ Phase 00 run is contract-complete
+Audit Phase 01
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_01\run_02-08-2026_153039
+PASS ✅ Phase 01 run is contract-complete
+Audit Phase 02
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_02\run_02-09-2026_055901
+PASS ✅ Phase 02 run is contract-complete
+Audit Phase 03
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_03\run_02-09-2026_XXXXXX
+PASS ✅ Phase 03 run is contract-complete
+Audit Phase 04
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_04\run_02-10-2026_143430
+PASS ✅ Phase 04 run is contract-complete
+Audit Phase 05
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_05\run_02-10-2026_180228
+PASS ✅ Phase 05 run is contract-complete
+Audit Phase 06
+Run: C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_06\run_02-10-2026_181937
+PASS ✅ Phase 06 run is contract-complete
+
+[32;1mPhase[0m[32;1m LatestRun            [0m[32;1m Status             [0m[32;1m Notes[0m
+[32;1m-----[0m [32;1m---------            [0m [32;1m------             [0m [32;1m-----[0m
+00    run_02-08-2026_140111 COMPLETE            
+01    run_02-08-2026_153039 COMPLETE            
+02    run_02-09-2026_055901 COMPLETE            
+03    run_02-09-2026_XXXXXX COMPLETE            
+04    run_02-10-2026_143430 COMPLETE            
+05    run_02-10-2026_180228 COMPLETE            
+06    run_02-10-2026_181937 RUN_OK_NOT_PROMOTED not_promoted
+07                          PENDING             no_runs
+08                          PENDING             no_runs
+
+
+
+## Phase 06 Execution Evidence
+- Files moved: N/A
+- Success rate: N/A
+- Hash verification: PASS
+- Rollback generated: True
+
+## Evidence Artifacts Located
+- Phase 00: True
+- Phase 02: True
+- Phase 04: True
+- Phase 05: True
+- Phase 06: True

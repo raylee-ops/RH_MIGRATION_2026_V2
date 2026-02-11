@@ -5,6 +5,7 @@ agent_assets/
 
 # Tool metadata
 .claude/
+.codex/
 
 # OS/tool noise
 .DS_Store
