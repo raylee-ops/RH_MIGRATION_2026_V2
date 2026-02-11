@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "date_source": "LastWriteTime",
+  "max_slug_length": 60,
+  "min_title_length": 3,
+  "scope": {
+    "include_roots": [
+      "C:\\RH\\OPS",
+      "C:\\RH\\INBOX",
+      "C:\\RH\\TEMPORARY"
+    ],
+    "exclude_roots": [
+      "C:\\RH\\VAULT",
+      "C:\\RH\\LIFE",
+      "C:\\LEGACY",
+      "C:\\Windows",
+      "C:\\Program Files",
+      "C:\\Users"
+    ],
+    "exclude_contains": [
+      "\\.git\\",
+      "\\OUTPUTS\\",
+      "\\PROOF_PACK\\",
+      "\\node_modules\\",
+      "\\__pycache__\\",
+      "\\.venv\\"
+    ],
+    "exclude_filenames": [
+      "thumbs.db",
+      "desktop.ini"
+    ],
+    "rename_extensions": [
+      ".md"
+    ],
+    "review_extensions": [
+      ".txt",
+      ".ps1",
+      ".py"
+    ]
+  },
+  "canonical_pattern": "^.+_\\d{2}-\\d{2}-\\d{4}\\.[^\\\\/]+$"
+}

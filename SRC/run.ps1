@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-  [Parameter(Mandatory)][ValidateSet('00','01','02','03','04','05','06','07','08')] [string]$Phase,
+  [Parameter(Mandatory)][ValidateSet('00','01','02','03','04','05','06','07','07b','08')] [string]$Phase,
   [Parameter(Mandatory)][ValidateSet('DryRun','Execute')] [string]$Mode,
   [string]$RunId
 )
