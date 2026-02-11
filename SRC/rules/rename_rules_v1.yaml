@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "date_source": "LastWriteTime",
+  "apply_if_no_date": false,
+  "scope": {
+    "include_roots": [
+      "C:\\RH\\OPS",
+      "C:\\RH\\INBOX",
+      "C:\\RH\\TEMPORARY"
+    ],
+    "exclude_roots": [
+      "C:\\RH\\VAULT",
+      "C:\\RH\\LIFE",
+      "C:\\LEGACY",
+      "C:\\Windows",
+      "C:\\Program Files",
+      "C:\\Users"
+    ],
+    "exclude_contains": [
+      "\\.git\\",
+      "\\OUTPUTS\\",
+      "\\PROOF_PACK\\",
+      "\\node_modules\\",
+      "\\__pycache__\\",
+      "\\.venv\\"
+    ],
+    "exclude_extensions": [
+      ".lnk",
+      ".url",
+      ".tmp"
+    ],
+    "exclude_filenames": [
+      "thumbs.db",
+      "desktop.ini"
+    ]
+  },
+  "sanitization": {
+    "replace_spaces_with": "_",
+    "collapse_underscores": true,
+    "strip_trailing_dots_spaces": true,
+    "illegal_char_replacement": "_"
+  },
+  "rules": [
+    {
+      "id": "already_canonical",
+      "type": "skip_if_matches",
+      "pattern": "^(?<base>.+)_(?<mm>\\d{2})-(?<dd>\\d{2})-(?<yyyy>\\d{4})(?<ext>\\.[^\\\\/]+)?$"
+    },
+    {
+      "id": "year_first_suffix",
+      "type": "rename_reformat_date",
+      "pattern": "^(?<base>.+)_(?<yyyy>\\d{4})-(?<mm>\\d{2})-(?<dd>\\d{2})(?<ext>\\.[^\\\\/]+)?$"
+    },
+    {
+      "id": "year_first_prefix",
+      "type": "rename_reformat_date",
+      "pattern": "^(?<yyyy>\\d{4})-(?<mm>\\d{2})-(?<dd>\\d{2})_(?<base>.+?)(?<ext>\\.[^\\\\/]+)?$"
+    },
+    {
+      "id": "date_slash_suffix",
+      "type": "rename_reformat_date",
+      "pattern": "^(?<base>.+)_(?<mm>\\d{1,2})[\\/\\.](?<dd>\\d{1,2})[\\/\\.](?<yyyy>\\d{4})(?<ext>\\.[^\\\\/]+)?$"
+    }
+  ]
+}
