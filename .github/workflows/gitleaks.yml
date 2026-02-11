@@ -5,6 +5,13 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+    paths-ignore:
+      - "**/*.md"
+      - "docs/**"
+      - "PROOF_PACK/**"
+      - "**/*.png"
+      - "**/*.jpg"
+      - "**/*.svg"
   workflow_dispatch:
 
 permissions:
@@ -29,10 +36,12 @@ jobs:
           tar -xzf "$RUNNER_TEMP/gitleaks.tgz" -C "$RUNNER_TEMP/bin" gitleaks
           chmod +x "$RUNNER_TEMP/bin/gitleaks"
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
-          gitleaks version
+          "$RUNNER_TEMP/bin/gitleaks" version
 
       - name: Run gitleaks (fail on findings)
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           mkdir -p OUTPUTS
