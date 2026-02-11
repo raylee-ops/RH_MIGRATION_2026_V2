@@ -34,7 +34,7 @@ jobs:
           tar -xzf "$RUNNER_TEMP/trivy.tgz" -C "$RUNNER_TEMP/bin" trivy
           chmod +x "$RUNNER_TEMP/bin/trivy"
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
-          trivy --version
+          "$RUNNER_TEMP/bin/trivy" --version
 
       - name: Run trivy filesystem scan (HIGH/CRITICAL fail)
         shell: bash
