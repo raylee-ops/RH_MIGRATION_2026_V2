@@ -1,0 +1,43 @@
+version: 1
+rules:
+  - id: R_PROJECT
+    bucket: PROJECT
+    confidence: 0.90
+    match:
+      any: ["\\OPS\\PROJECTS\\", "\\SRC\\", "\\TOOLS\\"]
+    reason_template: "Project structure path"
+
+  - id: R_NOTES
+    bucket: NOTES
+    confidence: 0.85
+    match:
+      ext: [".md", ".txt"]
+    reason_template: "Notes-like extension"
+
+  - id: R_EVIDENCE
+    bucket: EVIDENCE
+    confidence: 0.90
+    match:
+      any: ["\\OUTPUTS\\", "\\evidence\\"]
+    reason_template: "Evidence/output path"
+
+  - id: R_MEDIA
+    bucket: MEDIA
+    confidence: 0.85
+    match:
+      ext: [".png", ".jpg", ".jpeg", ".gif", ".webp", ".mp4", ".mov"]
+    reason_template: "Media extension"
+
+  - id: R_ARCHIVE
+    bucket: ARCHIVE
+    confidence: 0.85
+    match:
+      ext: [".zip", ".7z", ".rar"]
+    reason_template: "Archive extension"
+
+  - id: R_UNKNOWN_DEFAULT
+    bucket: UNKNOWN
+    confidence: 0.50
+    match:
+      any: ["*"]
+    reason_template: "Default bucket (no specific rule matched)"

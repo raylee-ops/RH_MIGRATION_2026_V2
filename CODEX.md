@@ -12,6 +12,8 @@ Codex: you only get one job: **don’t write to the wrong folder**.
 If you see this path, stop and refuse.
 
 ## Outputs contract
+- Default output target is the launch folder (current working directory where Codex was started) unless you explicitly request another path.
+- If multiple valid destinations exist, write to launch folder first, then optionally mirror elsewhere only if requested.
 - Generated run artifacts → `OUTPUTS\phase_XX\run_MM-DD-YYYY_HHMMSS\` (ignored by git)
 - Curated artifacts → `PROOF_PACK/` (committed)
 

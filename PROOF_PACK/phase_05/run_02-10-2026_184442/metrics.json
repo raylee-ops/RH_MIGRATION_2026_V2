@@ -1,0 +1,21 @@
+{
+  "started_utc": "2026-02-11T00:44:42.1244129Z",
+  "phase": "05",
+  "mode": "DryRun",
+  "phase05": {
+    "rows_review_collision": 1,
+    "rows_quarantine_plan": 2719,
+    "legacy_header_compatibility": true,
+    "rows_excluded": 1325,
+    "collisions": 1,
+    "low_confidence_threshold": 0.8,
+    "classification_csv": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2\\OUTPUTS\\phase_04\\run_02-10-2026_143430\\classification_results.csv",
+    "rows_move_plan": 5640,
+    "latest_phase04_run": "run_02-10-2026_143430",
+    "generated_utc": "2026-02-11T00:44:58.2468903Z",
+    "rows_total": 9685
+  },
+  "run_root": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2\\OUTPUTS\\phase_05\\run_02-10-2026_184442",
+  "repo_root": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2",
+  "run_id": "run_02-10-2026_184442"
+}

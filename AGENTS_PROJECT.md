@@ -14,6 +14,8 @@
   - `C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2`
 - AND this file exists:
   - `RH_MIGRATION_2026_V2.SENTINEL`
+- Output default:
+  - Write first to the folder the session was launched from (`Get-Location`), unless the operator explicitly asks for a different destination.
 
 ### 🚫 If you see this path anywhere, STOP:
 
