@@ -1,0 +1,27 @@
+version: 1
+description: "Semantic classification policy baseline for RH_MIGRATION_2026_V2"
+
+rules_source:
+  file: "SRC\\rules\\semantic_rules_v1.yaml"
+  mode: "authoritative"
+
+merge_policy:
+  strategy: "phase04_plus_semantic"
+  allow_override: true
+  require_reason: true
+
+confidence:
+  low_confidence_threshold: 0.80
+  review_min: 0.60
+  review_max: 0.79
+  auto_accept_min: 0.80
+
+safety:
+  no_delete: true
+  no_overwrite: true
+  dryrun_first: true
+  require_plan_csv: true
+
+notes:
+  - "This policy file is a contract placeholder and points to semantic_rules_v1.yaml for rule definitions."
+  - "It preserves current phase behavior while satisfying required config policy paths."

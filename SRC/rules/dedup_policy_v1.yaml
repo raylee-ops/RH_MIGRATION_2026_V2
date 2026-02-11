@@ -1,0 +1,33 @@
+version: 1
+description: "Deduplication policy baseline for RH_MIGRATION_2026_V2"
+
+principles:
+  no_delete: true
+  no_overwrite: true
+  dryrun_first: true
+  require_plan_csv: true
+  require_review_for_ambiguous: true
+
+identity:
+  primary_key: ["sha256"]
+  fallback_key: ["name", "size_bytes"]
+
+actions:
+  exact_duplicate_default: "REVIEW"
+  near_duplicate_default: "REVIEW"
+  collision_default: "REVIEW"
+  low_confidence_default: "REVIEW"
+
+confidence:
+  auto_action_min: 0.95
+  review_min: 0.80
+  review_max: 0.94
+  hold_max: 0.79
+
+destinations:
+  review_queue: "C:\\RH\\TEMPORARY"
+  duplicate_holding: "C:\\RH\\TEMPORARY"
+
+notes:
+  - "This is a minimal policy placeholder created to satisfy contract gate requirements."
+  - "Until phase-specific dedup logic is finalized, all duplicate decisions route to REVIEW."
