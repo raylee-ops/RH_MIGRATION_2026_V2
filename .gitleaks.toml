@@ -15,3 +15,10 @@ description = "Ignore agent work artifacts (manifests contain file path referenc
 paths = [
   '''^agent_assets/'''
 ]
+
+[[allowlists]]
+description = "False positives: key-dump.txt filename references in agent manifests"
+fingerprints = [
+  "57cf38d63b46e7afe0470464c54f8ced8fe35756:agent_assets/copy_manifest_02-11-2026.csv:generic-api-key:156",
+  "57cf38d63b46e7afe0470464c54f8ced8fe35756:agent_assets/copy_manifest_02-11-2026.csv:generic-api-key:160"
+]
