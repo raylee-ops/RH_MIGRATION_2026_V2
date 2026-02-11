@@ -5,6 +5,13 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+    paths-ignore:
+      - "**/*.md"
+      - "docs/**"
+      - "PROOF_PACK/**"
+      - "**/*.png"
+      - "**/*.jpg"
+      - "**/*.svg"
   workflow_dispatch:
 
 permissions:
