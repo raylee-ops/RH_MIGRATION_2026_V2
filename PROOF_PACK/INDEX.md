@@ -2,7 +2,7 @@
 
 **Purpose:** Track all promotions from OUTPUTS → PROOF_PACK
 **Maintained by:** `tools/promote_to_proof_pack.ps1` (auto-updated)
-**Last Updated:** 2026-02-09
+**Last Updated:** 2026-02-11
 
 ---
 
@@ -35,6 +35,7 @@
 ## Status Snapshots
 
 - [Phase Overview (02-11-2026)](status/phase_overview_02-11-2026.md)
+- [Phase Completion Chart (02-11-2026)](status/phase_completion_chart_02-11-2026.md)
 
 ---
 
