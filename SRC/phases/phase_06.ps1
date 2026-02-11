@@ -193,6 +193,7 @@ $planRows = New-Object System.Collections.Generic.List[object]
 
 $executed = 0
 $skipped = 0
+$skippedDestExists = 0
 $errors = 0
 $rowId = 0
 
@@ -238,8 +239,19 @@ foreach ($row in $rows) {
       throw "Source missing: $srcFull"
     }
 
+    # No overwrites: if destination exists, SKIP (idempotent behavior)
     if (Test-Path -LiteralPath $dstFull -PathType Leaf) {
-      throw "Destination exists (no overwrite): $dstFull"
+      $skippedDestExists++
+      $line = "`n$actionId,$execOp,`"$srcFull`",`"$dstFull`",`"$label`",`"$confidence`",`"$reason`",`"$notes`",SKIPPED_DEST_EXISTS,$((Get-Date).ToString('s'))"
+      Add-Content -LiteralPath $movesExecutedPath -Value $line -Encoding utf8
+      $planRows.Add([pscustomobject]@{
+        action_id = $actionId
+        op = 'SKIP'
+        src_path = $srcFull
+        dst_path = $dstFull
+        notes = "SKIPPED_DEST_EXISTS"
+      }) | Out-Null
+      continue
     }
 
     $dstDir = Split-Path -Path $dstFull -Parent
@@ -349,6 +361,7 @@ $metricsObject = @{
   plan_rows = $rows.Count
   executed_rows = $executed
   skipped_rows = $skipped
+  skipped_dest_exists = $skippedDestExists
   error_rows = $errors
   rollback_commands = $rollbackLines.Count
   generated_at = (Get-Date).ToString('o')
@@ -361,9 +374,10 @@ Completed: $(Get-Date -Format 'MM-dd-yyyy HH:mm:ss')
 Plan rows: $($rows.Count)
 Executed rows: $executed
 Skipped rows: $skipped
+Skipped (dest exists): $skippedDestExists
 Error rows: $errors
 Phase05 plan: $movePlanPath
 "@
 
-Write-RunLog -Path $runLogPath -Line "DONE executed=$executed skipped=$skipped errors=$errors mode=$Mode"
+Write-RunLog -Path $runLogPath -Line "DONE executed=$executed skipped=$skipped skipped_dest_exists=$skippedDestExists errors=$errors mode=$Mode"
 exit 0
