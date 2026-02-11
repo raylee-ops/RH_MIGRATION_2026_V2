@@ -2,7 +2,7 @@
 
 **Date:** 02-09-2026  
 **Scope:** This contract governs *all* agent work (Claude Code, Codex, manual runs) for this project.  
-**If anything else contradicts this file:** this file wins.
+**Instruction precedence in this directory:** `AGENTS.override.md` (if present) > this file > broader/global docs.
 
 ---
 

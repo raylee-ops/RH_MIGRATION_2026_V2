@@ -5,7 +5,7 @@ Codex: you only get one job: **don’t write to the wrong folder**.
 ## Hard requirements
 - Working directory MUST be: `C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2`
 - File MUST exist: `RH_MIGRATION_2026_V2.SENTINEL`
-- Read and obey: `AGENTS_PROJECT.md` + `project_config.json`
+- Read and obey (in this order): `AGENTS.override.md`, `AGENTS_PROJECT.md`, `project_config.json`
 
 ## Forbidden (archived V1)
 - `C:\RH\OPS\SYSTEM\migrations\RH_MIGRATION_2026`
