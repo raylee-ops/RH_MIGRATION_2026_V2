@@ -210,6 +210,10 @@ foreach ($row in $phase04Rows) {
   if ($sourcePath -like '*\.git\*') {
     $op = 'EXCLUDED'
     $reason = 'Excluded: .git internals'
+  # Exclude the project repo itself — never move our own files
+  } elseif (Test-IsUnderRoot -Path $sourcePath -Root $RepoRoot) {
+    $op = 'EXCLUDED'
+    $reason = "Excluded: project_repo:$RepoRoot"
   } else {
     $firstExcluded = $excludedRoots | Where-Object { Test-IsUnderRoot -Path $sourcePath -Root $_ } | Select-Object -First 1
     if ($firstExcluded) {

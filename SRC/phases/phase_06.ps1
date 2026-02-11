@@ -69,10 +69,16 @@ function Convert-OpForExecution([string]$OpRaw) {
   }
 }
 
-$allowedRoots = @(
+$allowedSrcRoots = @(
   'C:\RH\OPS',
   'C:\RH\INBOX',
   'C:\RH\TEMPORARY'
+)
+$allowedDstRoots = @(
+  'C:\RH\OPS',
+  'C:\RH\INBOX',
+  'C:\RH\TEMPORARY',
+  'C:\RH\ARCHIVE'
 )
 
 $excludedRoots = @(
@@ -230,9 +236,13 @@ foreach ($row in $rows) {
     $srcFull = [System.IO.Path]::GetFullPath($src)
     $dstFull = [System.IO.Path]::GetFullPath($dst)
 
-    Assert-UnderAnyRoot -Path $srcFull -Roots $allowedRoots -What 'src_path'
+    Assert-UnderAnyRoot -Path $srcFull -Roots $allowedSrcRoots -What 'src_path'
     Assert-NotUnderAnyRoot -Path $srcFull -Roots $excludedRoots -What 'src_path'
-    Assert-UnderAnyRoot -Path $dstFull -Roots $allowedRoots -What 'dst_path'
+    # Safety: never move files from the project repo itself
+    if (Test-IsUnderRoot -Path $srcFull -Root $RepoRoot) {
+      throw "Source is inside project repo (self-protection): $srcFull"
+    }
+    Assert-UnderAnyRoot -Path $dstFull -Roots $allowedDstRoots -What 'dst_path'
     Assert-NotUnderAnyRoot -Path $dstFull -Roots $excludedRoots -What 'dst_path'
 
     if (!(Test-Path -LiteralPath $srcFull -PathType Leaf)) {
@@ -317,7 +327,7 @@ Add-Content -LiteralPath $rollbackPath -Value "Write-Host 'Phase 06 rollback com
 
 if ($Mode -eq 'Execute') {
   "STATE TREE AFTER MOVES (allowed roots)" | Out-File -LiteralPath $stateTreePath -Encoding utf8 -NoNewline
-  foreach ($root in $allowedRoots) {
+  foreach ($root in $allowedDstRoots) {
     Add-Content -LiteralPath $stateTreePath -Value "`n`nROOT: $root" -Encoding utf8
     if (Test-Path -LiteralPath $root) {
       Get-ChildItem -LiteralPath $root -Recurse -File -ErrorAction SilentlyContinue |
