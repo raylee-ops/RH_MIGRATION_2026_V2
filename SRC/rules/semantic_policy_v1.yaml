@@ -1,0 +1,29 @@
+version: 1
+scope:
+  include_roots:
+    - "C:\\RH\\OPS"
+    - "C:\\RH\\INBOX"
+  exclude_roots:
+    - "C:\\RH\\VAULT"
+    - "C:\\RH\\LIFE"
+    - "C:\\RH\\VAULT_NEVER_SYNC"
+    - "C:\\RH\\ARCHIVE"
+    - "C:\\LEGACY"
+    - "C:\\Windows"
+    - "C:\\Program Files"
+    - "C:\\Program Files (x86)"
+    - "C:\\Users"
+  exclude_contains:
+    - "\\.git\\"
+    - "\\OUTPUTS\\"
+    - "\\PROOF_PACK\\"
+    - "\\agent_assets\\"
+    - "\\scratchpad\\"
+    - "\\STAGING\\"
+    - "\\DOWNLOADS\\"
+    - "\\node_modules\\"
+    - "\\__pycache__\\"
+    - "\\.venv\\"
+labels:
+  default_confidence: 0.50
+  review_threshold: 0.84
