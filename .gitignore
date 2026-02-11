@@ -1,6 +1,7 @@
 # Generated run artifacts (never treat as source)
 OUTPUTS/
 **/OUTPUTS/
+agent_assets/
 
 # Tool metadata
 .claude/
@@ -14,16 +15,6 @@ Thumbs.db
 *.key
 *.pem
 *.env
-# Generated run artifacts (never treat as source)
-OUTPUTS/
-**/OUTPUTS/
 
-# Tool metadata
-.claude/
-
-# Secrets
-*.token
-*.key
-*.pem
-*.env
+# Packages
 PACKAGES/

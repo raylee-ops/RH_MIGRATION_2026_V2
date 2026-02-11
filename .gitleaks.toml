@@ -21,3 +21,6 @@ description = "False positives: key-dump.txt filename references in agent manife
 regexes = [
   '''key-dump\.txt.*REDACTED'''
 ]
+stopwords = [
+  "REDACTED"
+]
