@@ -297,6 +297,9 @@ C:\RH\OPS\PROJECTS\RH_MIGRATION_2026_V2\OUTPUTS\phase_00\run_02-08-2026_140111\e
 **Proof Pack:**
 - `PROOF_PACK\` - Recruiter-ready curated evidence
 
+**Archived Diagnostics (non-featured):**
+- `docs\_scratch\` - One-off helper outputs retained for traceability only
+
 ---
 
 ## Validation
