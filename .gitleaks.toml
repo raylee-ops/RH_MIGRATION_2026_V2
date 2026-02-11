@@ -6,15 +6,12 @@ useDefault = true
 [[allowlists]]
 description = "Ignore generated output artifacts"
 paths = [
-  '''^OUTPUTS/''',
-  '''^PROOF_PACK/'''
+  '''OUTPUTS/''',
+  '''PROOF_PACK/'''
 ]
 
 [[allowlists]]
-description = "Ignore agent work artifacts (CSV manifests with file paths)"
+description = "Ignore agent work artifacts (CSV manifests contain file path references)"
 paths = [
-  '''^agent_assets/'''
-]
-regexes = [
-  '''key-dump\.txt".*?"[A-F0-9]{64}'''
+  '''agent_assets/copy_manifest_02-11-2026\.csv$'''
 ]
