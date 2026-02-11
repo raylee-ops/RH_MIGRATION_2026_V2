@@ -1,0 +1,11 @@
+{
+  "mode": "DryRun",
+  "executed_rows": 0,
+  "phase": "06",
+  "phase05_move_plan": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2\\OUTPUTS\\phase_05\\run_02-10-2026_171159\\evidence\\move_plan_02-10-2026_171200.csv",
+  "generated_at": "2026-02-10T17:28:49.7187266-06:00",
+  "skipped_rows": 9685,
+  "error_rows": 0,
+  "rollback_commands": 0,
+  "plan_rows": 9685
+}

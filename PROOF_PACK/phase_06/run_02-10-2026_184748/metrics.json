@@ -1,0 +1,12 @@
+{
+  "executed_rows": 6042,
+  "skipped_dest_exists": 2317,
+  "rollback_commands": 6042,
+  "mode": "Execute",
+  "generated_at": "2026-02-10T19:04:02.1376596-06:00",
+  "skipped_rows": 1326,
+  "phase": "06",
+  "plan_rows": 9685,
+  "phase05_move_plan": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2\\OUTPUTS\\phase_05\\run_02-10-2026_184442\\evidence\\move_plan_02-10-2026_184442.csv",
+  "error_rows": 0
+}

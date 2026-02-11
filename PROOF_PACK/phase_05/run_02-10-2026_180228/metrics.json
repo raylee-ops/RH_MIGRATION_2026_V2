@@ -1,0 +1,21 @@
+{
+  "run_root": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2\\OUTPUTS\\phase_05\\run_02-10-2026_180228",
+  "mode": "DryRun",
+  "repo_root": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2",
+  "started_utc": "2026-02-11T00:02:28.8049438Z",
+  "phase05": {
+    "rows_quarantine_plan": 2719,
+    "rows_move_plan": 5697,
+    "collisions": 0,
+    "legacy_header_compatibility": true,
+    "rows_excluded": 1269,
+    "low_confidence_threshold": 0.8,
+    "generated_utc": "2026-02-11T00:02:40.7235970Z",
+    "rows_review_collision": 0,
+    "classification_csv": "C:\\RH\\OPS\\PROJECTS\\RH_MIGRATION_2026_V2\\OUTPUTS\\phase_04\\run_02-10-2026_143430\\classification_results.csv",
+    "rows_total": 9685,
+    "latest_phase04_run": "run_02-10-2026_143430"
+  },
+  "phase": "05",
+  "run_id": "run_02-10-2026_180228"
+}
